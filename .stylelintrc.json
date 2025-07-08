@@ -1,0 +1,15 @@
+{
+  "extends": [
+    "stylelint-config-standard-scss",
+    "stylelint-config-css-modules"
+  ],
+  "rules": {
+    "selector-class-pattern": [".*", { "resolveNestedSelectors": true }],
+    "scss/at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": ["tailwind", "apply", "layer", "config"]
+      }
+    ]
+  }
+}
