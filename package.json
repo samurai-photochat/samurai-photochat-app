@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "test": "next test",
     "dev": "next dev --turbopack",
     "build:production": "next build --mode=production",
     "format": "prettier --write .",
