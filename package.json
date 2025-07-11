@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "test": "next test",
+    "test": "jest",
     "dev": "next dev --turbopack",
     "build:production": "next build --mode=production",
     "format": "prettier --write .",
@@ -28,6 +28,7 @@
     "eslint-config-next": "15.3.5",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.5.1",
+    "jest": "^30.0.4",
     "postcss": "^8.5.6",
     "postcss-scss": "^4.0.9",
     "prettier": "^3.6.2",
