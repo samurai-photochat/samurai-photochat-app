@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "build:production": "next build",
     "format": "prettier --write .",
     "lint:css": "stylelint '**/*.{css,scss}' --fix",
     "build": "next build",
