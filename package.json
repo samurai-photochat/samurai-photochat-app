@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build:production": "next build --mode=production",
     "format": "prettier --write .",
     "lint:css": "stylelint '**/*.{css,scss}' --fix",
     "build": "next build",
@@ -20,6 +19,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@jest/globals": "^30.0.4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
