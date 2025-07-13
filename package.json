@@ -9,7 +9,8 @@
     "lint:css": "stylelint '**/*.{css,scss}' --fix",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "next test"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.2",
