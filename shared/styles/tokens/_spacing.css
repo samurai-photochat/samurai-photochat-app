@@ -1,0 +1,31 @@
+:root {
+   /* Базовый spacing unit (рекомендуется 4px или 1rem) */
+   --space-unit: 1rem;
+
+   /* Spacing scale (адаптивная система отступов) */
+   --space-xxs: calc(0.25 * var(--space-unit));  /* 4px если --space-unit: 16px */
+   --space-xs:  calc(0.5 * var(--space-unit));   /* 8px */
+   --space-sm:  calc(0.75 * var(--space-unit));  /* 12px */
+   --space-md:  calc(1 * var(--space-unit));     /* 16px */
+   --space-lg:  calc(1.5 * var(--space-unit));   /* 24px */
+   --space-xl:  calc(2 * var(--space-unit));     /* 32px */
+   --space-xxl: calc(3 * var(--space-unit));     /* 48px */
+
+   /* Специальные значения из макета */
+   --container-padding: var(--space-md);
+   --section-gap: var(--space-xl);
+
+   /* Радиусы */
+   --radius-sm: 4px;
+   --radius-md: 8px;
+   --radius-lg: 16px;
+   --radius-full: 9999px;
+}
+
+/* Адаптивные изменения */
+@media (max-width: 768px) {
+   :root {
+      --space-unit: 0.75rem;
+      --container-padding: var(--space-sm);
+   }
+}
