@@ -1,111 +1,114 @@
 /* shared/styles/tokens/_typography.css */
 :root {
-   /* Вертикальный ритм */
-   --line-height-tight: 1.25;
-   --line-height-normal: 1.5;
+  /* Вертикальный ритм */
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
 
-   /* Буквенные интервалы */
-   --letter-spacing-normal: 0;
-   --letter-spacing-wide: 0.025em;
+  /* Буквенные интервалы */
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.025em;
 }
 
 /* Заголовки */
-h1, .h1 {
-   font-size: var(--text-3xl);
-   font-weight: var(--font-bold);
-   line-height: var(--line-height-tight);
-   margin-bottom: 1.5rem;
+h1,
+.h1 {
+  font-size: var(--text-3xl);
+  font-weight: var(--font-bold);
+  line-height: var(--line-height-tight);
+  margin-bottom: 1.5rem;
 }
 
-h2, .h2 {
-   font-size: var(--text-2xl);
-   font-weight: var(--font-bold);
-   line-height: var(--line-height-tight);
-   margin-bottom: 1rem;
+h2,
+.h2 {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-bold);
+  line-height: var(--line-height-tight);
+  margin-bottom: 1rem;
 }
 
-h3, .h3 {
-   font-size: var(--text-xl);
-   font-weight: var(--font-semibold);
-   line-height: var(--line-height-tight);
-   margin-bottom: 1rem;
+h3,
+.h3 {
+  font-size: var(--text-xl);
+  font-weight: var(--font-semibold);
+  line-height: var(--line-height-tight);
+  margin-bottom: 1rem;
 }
 
 /* Текстовые стили из макета */
 .bold-text-16 {
-   font-size: var(--text-md);
-   font-weight: var(--font-bold);
-   line-height: var(--line-height-normal);
+  font-size: var(--text-md);
+  font-weight: var(--font-bold);
+  line-height: var(--line-height-normal);
 }
 
 .bold-text-14 {
-   font-size: var(--text-sm);
-   font-weight: var(--font-bold);
-   line-height: var(--line-height-normal);
+  font-size: var(--text-sm);
+  font-weight: var(--font-bold);
+  line-height: var(--line-height-normal);
 }
 
 .regular-text-16 {
-   font-size: var(--text-md);
-   font-weight: var(--font-regular);
-   line-height: var(--line-height-normal);
+  font-size: var(--text-md);
+  font-weight: var(--font-regular);
+  line-height: var(--line-height-normal);
 }
 
 .regular-text-14 {
-   font-size: var(--text-sm);
-   font-weight: var(--font-regular);
-   line-height: var(--line-height-normal);
+  font-size: var(--text-sm);
+  font-weight: var(--font-regular);
+  line-height: var(--line-height-normal);
 }
 
 .medium-text-14 {
-   font-size: var(--text-sm);
-   font-weight: var(--font-medium);
-   line-height: var(--line-height-normal);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  line-height: var(--line-height-normal);
 }
 
 .semi-bold-small-text {
-   font-size: var(--text-xs);
-   font-weight: var(--font-semibold);
-   line-height: var(--line-height-normal);
+  font-size: var(--text-xs);
+  font-weight: var(--font-semibold);
+  line-height: var(--line-height-normal);
 }
 
 .large-text {
-   font-size: var(--text-lg);
-   line-height: var(--line-height-normal);
+  font-size: var(--text-lg);
+  line-height: var(--line-height-normal);
 }
 
 /* Стили адреса */
 .address-block {
-   font-style: normal;
-   font-size: var(--text-md);
-   line-height: var(--line-height-tight);
-   letter-spacing: var(--letter-spacing-wide);
+  font-style: normal;
+  font-size: var(--text-md);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-wide);
 }
 
 /* Стили ссылок */
 .regular-link {
-   font-size: var(--text-md);
-   font-weight: var(--font-regular);
-   text-decoration: underline;
-   color: inherit;
+  font-size: var(--text-md);
+  font-weight: var(--font-regular);
+  text-decoration: underline;
+  color: inherit;
 }
 
 .small-link {
-   font-size: var(--text-xs);
-   font-weight: var(--font-regular);
-   text-decoration: underline;
-   color: inherit;
+  font-size: var(--text-xs);
+  font-weight: var(--font-regular);
+  text-decoration: underline;
+  color: inherit;
 }
 
 /* Light текст */
 .text-light {
-   font-weight: var(--font-light);
+  font-weight: var(--font-light);
 }
 
 /* Адаптивность */
 @media (max-width: 768px) {
-   :root {
-      --text-3xl: 28px;
-      --text-2xl: 22px;
-      --text-xl: 18px;
-   }
+  :root {
+    --text-3xl: 28px;
+    --text-2xl: 22px;
+    --text-xl: 18px;
+  }
 }
