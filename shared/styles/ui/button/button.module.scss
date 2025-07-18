@@ -1,0 +1,117 @@
+.button {
+  all: unset;
+  cursor: pointer;
+  box-sizing: border-box;
+  color: inherit;
+  font-family: inherit;
+  padding: 6px 24px;
+  border: 2px solid transparent;
+  border-radius: 2px;
+  text-align: center;
+
+  &:focus-visible {
+    outline: 2px solid var(--color-info-500);
+  }
+}
+
+.primary {
+  background-color: var(--color-accent-500);
+  color: var(--color-light-100);
+
+  &:active {
+    background-color: var(--color-accent-700);
+    color: var(--color-light-500);
+  }
+
+  &:hover {
+    background-color: var(--color-accent-100);
+    color: var(--color-light-500);
+  }
+
+  &:focus {
+    border-color: var(--color-light-700);
+    background-color: var(--color-accent-500);
+    color: var(--color-light-100);
+  }
+
+  &:disabled {
+    background-color: var(--color-accent-900);
+    color: var(--color-light-900);
+  }
+}
+
+.secondary {
+  background-color: var(--color-dark-300);
+  color: var(--color-light-100);
+
+  &:active {
+    background-color: #212121;
+    color: var(--color-light-100);
+  }
+
+  &:hover {
+    background-color: var(--color-dark-100);
+    color: var(--color-light-100);
+  }
+
+  &:focus {
+    border-color: var(--color-light-300);
+    background-color: var(--color-dark-300);
+    color: var(--color-light-100);
+  }
+
+  &:disabled {
+    background-color: var(--color-dark-500);
+    color: var(--color-light-900);
+  }
+}
+
+.outlined {
+  color: var(--color-accent-500);
+  border: 1px solid var(--color-accent-500);
+
+  &:active {
+    border-color: var(--color-accent-700);
+    color: var(--color-accent-700);
+  }
+
+  &:hover {
+    border-color: var(--color-accent-100);
+    color: var(--color-accent-100);
+  }
+
+  &:focus {
+    border-color: 2px solid var(--color-accent-700);
+    color: var(--color-accent-700);
+  }
+
+  &:disabled {
+    border-color: var(--color-accent-900);
+    color: var(--color-accent-900);
+  }
+}
+
+.text {
+  color: var(--color-accent-500);
+
+  &:active {
+    color: var(--color-accent-700);
+  }
+
+  &:hover {
+    color: var(--color-accent-100);
+  }
+
+  &:focus {
+    border-color: var(--color-accent-700);
+    color: var(--color-accent-700);
+  }
+
+  &:disabled {
+    color: var(--color-accent-900);
+  }
+}
+
+.fullWidth {
+  width: 100%;
+}
