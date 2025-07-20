@@ -1,0 +1,56 @@
+.page {
+  padding: 24px 0;
+  background-color: var(--color-dark-700);
+  height: 100vh;
+}
+
+.form {
+  margin: auto;
+  padding: 24px;
+  max-width: 100%;
+  width: 378px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--color-light-900);
+  background-color: var(--color-dark-500);
+  border: 1px solid var(--color-dark-300);
+  border-radius: 2px;
+  gap: 24px;
+}
+
+.icon {
+  display: flex;
+
+  image {
+    width: 36px;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.label {
+  font-size: var(--text-sm);
+}
+
+.input {
+  background-color: inherit;
+  border: 1px solid var(--color-dark-100);
+  border-radius: 2px;
+  font-size: var(--text-md);
+  color: inherit;
+  padding: 6px 12px;
+}
+
+.input[data-invalid] {
+  border: 1px solid var(--color-danger-500);
+}
+
+.message {
+  color: var(--color-danger-500);
+  font-size: var(--text-sm);
+}
