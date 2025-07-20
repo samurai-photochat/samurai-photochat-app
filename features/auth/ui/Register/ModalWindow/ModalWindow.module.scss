@@ -1,0 +1,60 @@
+.fon {
+  position: absolute;
+  background-color: var(--color-dark-700);
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+
+.dialog {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 378px;
+  height: 228px;
+  box-sizing: border-box;
+  border: 1px solid rgb(76 76 76);
+  border-radius: 2px;
+  background: rgb(51 51 51);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 24px;
+  border-bottom: 1px solid #4c4c4c;
+  margin-bottom: 30px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  margin: 0 24px;
+}
+
+.button {
+  width: 96px;
+  height: 36px;
+}
+
+.svgButton {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+}
+
+.title {
+  color: white;
+  margin: 0;
+  align-content: center;
+}
+
+.text {
+  color: white;
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 18px;
+}
