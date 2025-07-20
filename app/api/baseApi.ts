@@ -6,10 +6,10 @@ export const baseApi = createApi({
   baseQuery: async (args, api, extraOptions) => {
     const result = await fetchBaseQuery({
       baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
-      prepareHeaders: (headers) => {
-        headers.set("API-KEY", process.env.NEXT_PUBLIC_API_KEY || "api-key-not-found")
-        headers.set("Authorization", `Bearer ${localStorage.getItem("auth-token")}`)
-      },
+      // prepareHeaders: (headers) => {
+      //   headers.set("API-KEY", process.env.NEXT_PUBLIC_API_KEY || "api-key-not-found")
+      //   headers.set("Authorization", `Bearer ${localStorage.getItem("auth-token")}`)
+      // },
     })(args, api, extraOptions)
     //Пока обработчика нет
     // handleError(api, result)
