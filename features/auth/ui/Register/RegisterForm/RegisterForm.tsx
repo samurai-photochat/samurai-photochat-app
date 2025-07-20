@@ -1,12 +1,13 @@
-import { Form } from "radix-ui"
-import s from "./page.module.css"
+"use client"
 import * as React from "react"
-import Image from "next/image"
-import googleIcon from "./google-icon.png"
-import gitHubIcon from "./github-icon.png"
+import { Form } from "radix-ui"
 import { Button } from "@radix-ui/themes"
+import Image from "next/image"
+import s from "./RegisterForm.module.scss"
+import googleIcon from "../../assets/img/google-icon.png"
+import gitHubIcon from "../../assets/img/github-icon.png"
 
-export default function RegistrationPage() {
+export const RegisterForm = () => {
   return (
     <div className={s.page}>
       <Form.Root className={s.form}>
