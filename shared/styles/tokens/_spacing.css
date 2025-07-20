@@ -23,7 +23,7 @@
 }
 
 /* Адаптивные изменения */
-@media (max-width: 768px) {
+@media (width <= 768px) {
   :root {
     --space-unit: 0.75rem;
     --container-padding: var(--space-sm);

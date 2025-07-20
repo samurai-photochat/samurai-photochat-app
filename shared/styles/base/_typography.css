@@ -105,7 +105,7 @@ h3,
 }
 
 /* Адаптивность */
-@media (max-width: 768px) {
+@media (width <= 768px) {
   :root {
     --text-3xl: 28px;
     --text-2xl: 22px;
