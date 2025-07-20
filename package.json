@@ -15,6 +15,7 @@
     "test:coverage": "jest --coverage"
   },
   "dependencies": {
+    "@radix-ui/themes": "^3.2.1",
     "@reduxjs/toolkit": "^2.8.2",
     "next": "15.3.5",
     "next-auth": "^4.24.11",
