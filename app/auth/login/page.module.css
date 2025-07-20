@@ -1,107 +1,107 @@
 .page {
-    padding: 24px 0;
-    background-color: var(--color-dark-700);
-    min-height: 100vh;
+  padding: 24px 0;
+  background-color: var(--color-dark-700);
+  min-height: 100vh;
 }
 
 .form {
-    margin: auto;
-    padding: 24px;
-    max-width: 100%;
-    width: 378px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: var(--color-light-900);
-    background-color: var(--color-dark-500);
-    border: 1px solid var(--color-dark-300);
-    border-radius: 2px;
-    gap: 24px;
+  margin: auto;
+  padding: 24px;
+  max-width: 100%;
+  width: 378px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--color-light-900);
+  background-color: var(--color-dark-500);
+  border: 1px solid var(--color-dark-300);
+  border-radius: 2px;
+  gap: 24px;
 }
 
 .h1 {
-    display: block;
-    font-size: 2em;
-    font-weight: bold;
-    color: var(--color-light-100);
+  display: block;
+  font-size: 2em;
+  font-weight: bold;
+  color: var(--color-light-100);
 }
 
 .iconRow {
-    display: flex;
-    gap: 60px;
-    justify-content: center;
+  display: flex;
+  gap: 60px;
+  justify-content: center;
 }
 
 .button {
-    max-width: 100%;
-    width: 330px;
-    height: 36px;
-    color: var(--color-light-100);
-    background-color: var(--color-accent-500);
-    border: none;
-    border-radius: 2px;
+  max-width: 100%;
+  width: 330px;
+  height: 36px;
+  color: var(--color-light-100);
+  background-color: var(--color-accent-500);
+  border: none;
+  border-radius: 2px;
 }
 
 .field {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .label {
-    font-size: var(--text-sm);
+  font-size: var(--text-sm);
 }
 
 .input {
-    padding: 6px 12px;
-    color: var(--color-light-900);
-    background-color: var(--color-dark-500);
-    border: 1px solid var(--color-dark-100);
-    border-radius: 2px;
-    font-size: var(--text-md);
+  padding: 6px 12px;
+  color: var(--color-light-900);
+  background-color: var(--color-dark-500);
+  border: 1px solid var(--color-dark-100);
+  border-radius: 2px;
+  font-size: var(--text-md);
 }
 
 .input:-webkit-autofill,
 .input:-webkit-autofill:hover,
 .input:-webkit-autofill:focus {
-    background-color: var(--color-dark-500) !important;
-    -webkit-text-fill-color: var(--color-light-900) !important;
-    font-size: var(--text-md) !important;
-    font-family: inherit !important;
-    font-weight: inherit !important;
-    line-height: inherit !important;
-    letter-spacing: inherit !important;
-    transition: background-color 9999s ease-in-out 0s;
+  background-color: var(--color-dark-500) !important;
+  -webkit-text-fill-color: var(--color-light-900) !important;
+  font-size: var(--text-md) !important;
+  font-family: inherit !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
+  letter-spacing: inherit !important;
+  transition: background-color 9999s ease-in-out 0s;
 }
 
 .input[data-invalid] {
-    border: 1px solid var(--color-danger-500);
-    outline: none;
+  border: 1px solid var(--color-danger-500);
+  outline: none;
 }
 
 .message {
-    font-size: var(--text-sm);
-    color: var(--color-danger-500);
+  font-size: var(--text-sm);
+  color: var(--color-danger-500);
 }
 
 .span {
-    display: block;
-    text-align: right;
-    width: 100%;
+  display: block;
+  text-align: right;
+  width: 100%;
 }
 
 .whiteText {
-    color: var(--color-light-100);
+  color: var(--color-light-100);
 }
 
 .a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .grayText {
-    color: var(--color-light-900);
+  color: var(--color-light-900);
 }
 
 .blueText {
-    color: var(--color-accent-500);
+  color: var(--color-accent-500);
 }
