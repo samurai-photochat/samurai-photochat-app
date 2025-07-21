@@ -8,7 +8,7 @@ export type ButtonProps<T extends ElementType = "button"> = {
   fullWidth?: boolean
 } & ComponentPropsWithoutRef<T>
 
-const Button = <T extends ElementType = "button">(props: ButtonProps<T>) => {
+export const Button = <T extends ElementType = "button">(props: ButtonProps<T>) => {
   const { variant = "primary", fullWidth, className, as: Component = "button", children, ...rest } = props
   return (
     <Component className={`${s.button} ${s[variant]} ${fullWidth ? s.fullWidth : ""} ${className}`} {...rest}>
