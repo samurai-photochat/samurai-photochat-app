@@ -11,7 +11,7 @@ export default function Home() {
     data: profileData,
     isLoading: isProfileLoading,
     error: profileError,
-  } = useGetUserProfileByIdQuery({ userId: totalCount ?? 0 }, { skip: totalCount === undefined })
+  } = useGetUserProfileByIdQuery({ userId: 1200 }, { skip: totalCount === undefined })
 
   if (isCountLoading) return <p>Загрузка количества пользователей...</p>
   if (isProfileLoading) return <p>Загрузка профиля последнего пользователя...</p>
