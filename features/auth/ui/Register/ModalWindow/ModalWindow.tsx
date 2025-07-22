@@ -1,6 +1,6 @@
 // "use client"
 import CloseIcon from "../../assets/svg/Close.svg"
-import Button from "@/shared/ui/button/ui/button"
+import Button from "@/shared/ui/button/button"
 import { Dialog } from "@radix-ui/react-dialog"
 import s from "./ModalWindow.module.scss"
 import Image from "next/image"
