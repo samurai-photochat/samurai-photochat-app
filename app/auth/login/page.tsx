@@ -1,8 +1,8 @@
 import s from "./page.module.css"
 import { Form } from "radix-ui"
 import Image from "next/image"
-import googleIcon from "@/shared/assets/img/google-icon.png"
-import githubIcon from "@/shared/assets/img/github-icon.png"
+import googleIcon from "./../registration/google-icon.png"
+import githubIcon from "./../registration/github-icon.png"
 import { Button } from "@radix-ui/themes"
 import * as React from "react"
 

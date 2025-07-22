@@ -1,6 +1,6 @@
 import Image, { StaticImageData } from "next/image"
 import s from "./InfoForm.module.scss"
-import Button from "@/shared/ui/button/button"
+import Button from "@/shared/ui/button/ui/button"
 
 type Props = {
   title: string

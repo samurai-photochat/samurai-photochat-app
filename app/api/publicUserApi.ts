@@ -20,7 +20,7 @@ type TotalCountResponse = {
 
 export type PublicProfileResponse = {
   id: number
-  userName: string | number
+  userName: string
   aboutMe: string
   avatars: {
     url: string
