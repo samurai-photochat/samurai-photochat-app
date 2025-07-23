@@ -1,8 +1,8 @@
 import Image, { StaticImageData } from "next/image"
-import s from "./InfoForm.module.scss"
-import Button from "@/shared/ui/button/ui/button"
+import s from "./InfoForm.module.css"
+import Button from "@/shared/ui/button/button"
 import { Form } from "radix-ui"
-import Checkbox from "@/shared/ui/checkbox/ui/checkbox"
+import Checkbox from "@/shared/ui/checkbox/checkbox"
 
 type Props = {
   title: string
@@ -38,9 +38,6 @@ export const InfoForm = ({ title, text, textBtn, isInput, img }: Props) => {
         </div>
       )}
       <Image className={s.img} src={img} alt="x" />
-      <div>
-        <Checkbox checked={false} onCheckedChange={() => {}} label={"blas"} />
-      </div>
     </div>
   )
 }

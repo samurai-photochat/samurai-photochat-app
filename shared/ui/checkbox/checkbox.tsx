@@ -1,26 +1,53 @@
-import React from "react"
+import React, { useState } from "react"
 import { Checkbox } from "radix-ui"
-import { CheckIcon } from "@radix-ui/react-icons"
-import { StaticImageData } from "next/image"
+import Image, { StaticImageData } from "next/image"
+import s from "./checkbox.module.css"
+import SelectedIcon from "./Property 1=Default Selected.svg"
+import UnSelectedIcon from "./Property 1=Default Unselected.svg"
+import DisabledSelectedIcon from "./Property 1=Disabled Selected.svg"
+import DisabledUnSelectedIcon from "./Property 1=Disabled Unselected.svg"
 
 type CheckboxProps = {
+  id: string
   checked: boolean
-  onCheckedChange: () => void
+  onChange: (checked: boolean) => void
+  disabled?: boolean
   label?: string
   Icon?: StaticImageData
 }
 
-const UniversalCheckbox = ({ checked, onCheckedChange, label }: CheckboxProps) => {
+// event: React.ChangeEvent<HTMLInputElement>
+const CustomCheckbox = ({ checked, onChange, label, disabled }: CheckboxProps) => {
+  // значение бокса
+  const [isChecked, setIsChecked] = useState<boolean>(checked)
+  // колбек для передачи значения бокса родителю
+  const handleCheckboxChange = () => {
+    const newChecked = !isChecked
+    setIsChecked(newChecked)
+    onChange(newChecked)
+  }
+  // нужный путь картинок в зависимости от значения disabled
+  const SelectedIcons = disabled ? DisabledSelectedIcon : SelectedIcon
+  const UnselectedIcons = disabled ? DisabledUnSelectedIcon : UnSelectedIcon
+
   return (
-    <div style={{ display: "flex", alignItems: "center" }}>
-      <Checkbox.Root checked={checked} onCheckedChange={onCheckedChange} style={{ width: "24px", height: "24px" }}>
-        <Checkbox.Indicator>
-          <CheckIcon />
-        </Checkbox.Indicator>
+    <div className={s.container}>
+      <Checkbox.Root
+        className={s.checkbox}
+        checked={isChecked}
+        onCheckedChange={handleCheckboxChange}
+        style={{ width: "24px", height: "24px" }}
+        disabled={disabled}
+      >
+        {isChecked ? (
+          <Image alt="icon" src={SelectedIcons} className={s.icon} fill={true} />
+        ) : (
+          <Image alt="icon" src={UnselectedIcons} className={s.icon} />
+        )}
       </Checkbox.Root>
-      <span style={{ marginLeft: "8px" }}>{label}</span>
+      <span className={s.span}>{label}</span>
     </div>
   )
 }
 
-export default UniversalCheckbox
+export default CustomCheckbox

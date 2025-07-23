@@ -1,50 +1,55 @@
 "use client"
+import SignUp from "@/widgets/auth/ui/Signup/Signup"
 import * as React from "react"
-import { ModalWindow } from "@/features/auth/ui/Register/ModalWindow/ModalWindow"
-import { RegisterForm } from "@/features/auth/ui/Register/RegisterForm/RegisterForm"
-import { InfoForm } from "@/features/auth/ui/Register/InfoForm/InfoForm"
-import EmailConfirmed from "@/features/auth/assets/svg/sign-up_bro.svg"
-import LinkExpired from "@/features/auth/assets/svg/rafiki.svg"
-import s from "./page.module.css"
+// import { ModalWindow } from "@/features/auth/ui/Register/ModalWindow/ModalWindow"
+// import { RegisterForm } from "@/features/auth/ui/Register/RegisterForm/RegisterForm"
+// import { InfoForm } from "@/features/auth/ui/Register/InfoForm/InfoForm"
+// import EmailConfirmed from "@/features/auth/assets/svg/sign-up_bro.svg"
+// import LinkExpired from "@/features/auth/assets/svg/rafiki.svg"
+// import s from "./page.module.css"
+// import CustomCheckbox from "@/shared/ui/checkbox/checkbox"
 
 export default function SignUpPage() {
-  // Отображение Модальнного окна
-  const [isModalOpen, setIsModalOpen] = React.useState(true)
-  // Закрытие модального окна
-  const closeModal = () => setIsModalOpen(true)
+  // Старый код
+  //  { // Отображение Модальнного окна
+  //   const [isModalOpen, setIsModalOpen] = React.useState(true)
+  //   // Закрытие модального окна
+  //   const closeModal = () => setIsModalOpen(true)
 
-  return (
-    <div className={s.page}>
-      {/* Модальное окно "Email sent" */}
+  //   return (
+  //     <div className={s.page}>
+  //       {/* Модальное окно "Email sent" */}
 
-      <ModalWindow
-        isOpen={isModalOpen}
-        title={"Email sent"}
-        text={"We have sent a link to confirm your email to epam@epam.com"}
-        isClose={closeModal}
-      />
+  //       {/* <ModalWindow
+  //         isOpen={isModalOpen}
+  //         title={"Email sent"}
+  //         text={"We have sent a link to confirm your email to epam@epam.com"}
+  //         isClose={closeModal}
+  //       /> */}
 
-      {/* <RegisterForm /> */}
+  //       {/* <RegisterForm /> */}
 
-      {/* Страница "Congratulations!" */}
+  //       {/* Страница "Congratulations!" */}
 
-      {/* <InfoForm
-        title={"Congratulations!"}
-        text={"Your email has been confirmed"}
-        img={EmailConfirmed}
-        textBtn={"Sing in"}
-        isInput={false}
-      /> */}
+  //       {/* <InfoForm
+  //         title={"Congratulations!"}
+  //         text={"Your email has been confirmed"}
+  //         img={EmailConfirmed}
+  //         textBtn={"Sing in"}
+  //         isInput={false}
+  //       /> */}
 
-      {/* Страница "Email verification link expired" */}
+  //       {/* Страница "Email verification link expired" */}
 
-      <InfoForm
-        title={"Email verification link expired"}
-        text={"Looks like the verification link has expired. Not to worry, we can send the link again"}
-        img={LinkExpired}
-        textBtn={"Resend verification link"}
-        isInput={true}
-      />
-    </div>
-  )
+  //       {/* <InfoForm
+  //         title={"Email verification link expired"}
+  //         text={"Looks like the verification link has expired. Not to worry, we can send the link again"}
+  //         img={LinkExpired}
+  //         textBtn={"Resend verification link"}
+  //         isInput={true}
+  //       /> */}
+  //     </div>
+  //   )
+  // }
+  return <SignUp />
 }
