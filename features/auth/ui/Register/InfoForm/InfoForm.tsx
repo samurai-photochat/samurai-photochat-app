@@ -1,6 +1,8 @@
 import Image, { StaticImageData } from "next/image"
 import s from "./InfoForm.module.scss"
 import Button from "@/shared/ui/button/ui/button"
+import { Form } from "radix-ui"
+import Checkbox from "@/shared/ui/checkbox/ui/checkbox"
 
 type Props = {
   title: string
@@ -12,18 +14,33 @@ type Props = {
 
 export const InfoForm = ({ title, text, textBtn, isInput, img }: Props) => {
   return (
-    <div className={s.form}>
+    <div className={s.container}>
       <h3 className={s.title}>{title}</h3>
-      <p className={s.text}>{text}</p>
-      {isInput && (
-        // заменить на компоненту
-        <form className={s.form}>
-          <label className={s.label}>Email</label>
-          <input className={s.input}></input>
-        </form>
+      <div className={s.text_container}>
+        <p>{text}</p>
+      </div>
+      {isInput ? (
+        <Form.Root className={s.form}>
+          <Form.Field className={s.field} name="email">
+            <Form.Label className={s.label}>Email</Form.Label>
+            <Form.Control asChild>
+              <input className={s.input} type="email" required />
+            </Form.Control>
+            <Form.Message className={s.message} match="valueMissing">
+              The email address is required
+            </Form.Message>
+          </Form.Field>
+          <Button>{textBtn}</Button>
+        </Form.Root>
+      ) : (
+        <div className={s.container_button}>
+          <Button>{textBtn}</Button>
+        </div>
       )}
-      <Button className={s.button}>{textBtn}</Button>
       <Image className={s.img} src={img} alt="x" />
+      <div>
+        <Checkbox checked={false} onCheckedChange={() => {}} label={"blas"} />
+      </div>
     </div>
   )
 }

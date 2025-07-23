@@ -7,20 +7,27 @@ import EmailConfirmed from "@/features/auth/assets/svg/sign-up_bro.svg"
 import LinkExpired from "@/features/auth/assets/svg/rafiki.svg"
 import s from "./page.module.css"
 
-export default function RegistrationPage() {
+export default function SignUpPage() {
+  // Отображение Модальнного окна
   const [isModalOpen, setIsModalOpen] = React.useState(true)
-
+  // Закрытие модального окна
   const closeModal = () => setIsModalOpen(true)
 
   return (
     <div className={s.page}>
-      {/* <ModalWindow
+      {/* Модальное окно "Email sent" */}
+
+      <ModalWindow
         isOpen={isModalOpen}
         title={"Email sent"}
         text={"We have sent a link to confirm your email to epam@epam.com"}
         isClose={closeModal}
-      /> */}
+      />
+
       {/* <RegisterForm /> */}
+
+      {/* Страница "Congratulations!" */}
+
       {/* <InfoForm
         title={"Congratulations!"}
         text={"Your email has been confirmed"}
@@ -28,6 +35,9 @@ export default function RegistrationPage() {
         textBtn={"Sing in"}
         isInput={false}
       /> */}
+
+      {/* Страница "Email verification link expired" */}
+
       <InfoForm
         title={"Email verification link expired"}
         text={"Looks like the verification link has expired. Not to worry, we can send the link again"}
