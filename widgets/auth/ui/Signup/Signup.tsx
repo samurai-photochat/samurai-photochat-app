@@ -2,9 +2,9 @@ import * as React from "react"
 import { ModalWindow } from "@/features/auth/ui/Register/ModalWindow/ModalWindow"
 import { RegisterForm } from "@/features/auth/ui/Register/RegisterForm/RegisterForm"
 import { InfoForm } from "@/features/auth/ui/Register/InfoForm/InfoForm"
-import EmailConfirmed from "@/features/auth/assets/svg/sign-up_bro.svg"
-import LinkExpired from "@/features/auth/assets/svg/rafiki.svg"
-import s from "./page.module.css"
+import EmailConfirmed from "@/shared/assets/svg/sign-up_bro.svg"
+import LinkExpired from "@/shared/assets/svg/rafiki.svg"
+import s from "./Signup.module.css"
 
 export default function SignUp() {
   // Отображение Модальнного окна

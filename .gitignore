@@ -2,8 +2,10 @@
 
 #IDE dependencies
 .idea
+.idea/
 /.idea
 .vscode
+.vscode/
 /.vscode
 
 # dependencies
@@ -38,6 +40,7 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # vercel
 .vercel

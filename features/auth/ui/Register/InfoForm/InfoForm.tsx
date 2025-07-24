@@ -2,7 +2,6 @@ import Image, { StaticImageData } from "next/image"
 import s from "./InfoForm.module.css"
 import Button from "@/shared/ui/button/button"
 import { Form } from "radix-ui"
-import Checkbox from "@/shared/ui/checkbox/checkbox"
 
 type Props = {
   title: string
