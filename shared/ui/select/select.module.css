@@ -1,0 +1,48 @@
+.selectTrigger {
+  width: 163px;
+  /* height: 36px; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  background-color: var(--color-dark-700);
+  color: var(--color-ligth-100);
+  border: 1px solid #ccc;
+  border-radius: 1px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.selectContent {
+  background: white;
+  border-radius: 1px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+}
+
+.selectViewport {
+  padding: 0px;
+}
+
+.selectItem {
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 163px;
+}
+
+.selectItem:hover {
+  background-color: #f5f5f5;
+}
+
+.selectIndicator {
+  margin-left: 8px;
+}
+
+.flagIcon {
+  margin-right: 5px;
+  vertical-align: middle;
+}
