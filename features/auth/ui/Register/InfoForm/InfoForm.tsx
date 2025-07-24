@@ -1,7 +1,6 @@
 import Image, { StaticImageData } from "next/image"
-import s from "./InfoForm.module.css"
+import s from "./InfoForm.module.scss"
 import Button from "@/shared/ui/button/button"
-import { Form } from "radix-ui"
 
 type Props = {
   title: string
@@ -13,29 +12,17 @@ type Props = {
 
 export const InfoForm = ({ title, text, textBtn, isInput, img }: Props) => {
   return (
-    <div className={s.container}>
+    <div className={s.form}>
       <h3 className={s.title}>{title}</h3>
-      <div className={s.text_container}>
-        <p>{text}</p>
-      </div>
-      {isInput ? (
-        <Form.Root className={s.form}>
-          <Form.Field className={s.field} name="email">
-            <Form.Label className={s.label}>Email</Form.Label>
-            <Form.Control asChild>
-              <input className={s.input} type="email" required />
-            </Form.Control>
-            <Form.Message className={s.message} match="valueMissing">
-              The email address is required
-            </Form.Message>
-          </Form.Field>
-          <Button>{textBtn}</Button>
-        </Form.Root>
-      ) : (
-        <div className={s.container_button}>
-          <Button>{textBtn}</Button>
-        </div>
+      <p className={s.text}>{text}</p>
+      {isInput && (
+        // заменить на компоненту
+        <form className={s.form}>
+          <label className={s.label}>Email</label>
+          <input className={s.input}></input>
+        </form>
       )}
+      <Button className={s.button}>{textBtn}</Button>
       <Image className={s.img} src={img} alt="x" />
     </div>
   )

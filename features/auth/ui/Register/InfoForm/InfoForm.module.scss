@@ -1,0 +1,35 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 35px;
+}
+
+.title {
+  color: white;
+  margin-bottom: 19px;
+}
+
+.text {
+  color: white;
+  margin-bottom: 54px;
+}
+
+.button {
+  margin-bottom: 72px;
+}
+
+.input {
+  margin-bottom: 24px;
+}
+
+.label {
+  color: white;
+  justify-content: start;
+}
+
+.img {
+  margin-top: 72px;
+  width: 432px;
+  height: 300px;
+}
