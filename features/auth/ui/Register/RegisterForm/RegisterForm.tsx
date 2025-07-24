@@ -3,9 +3,9 @@ import * as React from "react"
 import { Form } from "radix-ui"
 import { Button } from "@radix-ui/themes"
 import Image from "next/image"
-import s from "./RegisterForm.module.scss"
-import googleIcon from "../../assets/img/google-icon.png"
-import gitHubIcon from "../../assets/img/github-icon.png"
+import s from "./RegisterForm.module.css"
+import googleIcon from "@/shared/assets/img/google-icon.png"
+import gitHubIcon from "@/shared/assets/img/github-icon.png"
 
 export const RegisterForm = () => {
   return (

@@ -1,100 +1,101 @@
 .box {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 
-    &.disabled{
-        color: var(--color-dark-100);
-    }
+  &.disabled {
+    color: var(--color-dark-100);
+  }
 }
 
 .label {
-    font-size: var(--text-sm);
+  font-size: var(--text-sm);
 }
 
 .inputContainer {
-    position: relative;
-    display: flex;
+  position: relative;
+  display: flex;
 }
 
-.iconStart, .iconEnd{
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    color: inherit;
-    cursor: pointer;
+.iconStart,
+.iconEnd {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: inherit;
+  cursor: pointer;
 }
 
 .iconStart {
-    left: 12px;
+  left: 12px;
 }
 
 .iconEnd {
-    right: 12px;
+  right: 12px;
 }
 
 .input {
-    width: 100%;
-    height: 36px;
-    padding: 6px 12px;
-    font-size: var(--text-md);
-    background-color: inherit;
+  width: 100%;
+  height: 36px;
+  padding: 6px 12px;
+  font-size: var(--text-md);
+  background-color: inherit;
+  color: var(--color-light-900);
+  border: 1px solid var(--color-dark-100);
+  border-radius: 2px;
+  outline: 2px solid transparent;
+
+  &[data-icon*="start"] {
+    padding-left: 36px;
+  }
+
+  &[data-icon*="end"] {
+    padding-right: 36px;
+  }
+
+  &:hover {
+    border-color: var(--color-light-900);
     color: var(--color-light-900);
-    border: 1px solid var(--color-dark-100);
-    border-radius: 2px;
-    outline: 2px solid transparent;
 
-    &[data-icon*="start"] {
-        padding-left: 36px;
+    + .iconStart {
+      color: var(--color-light-900);
     }
+  }
 
-    &[data-icon*="end"] {
-        padding-right: 36px;
+  &:focus-visible {
+    outline-color: var(--color-accent-500);
+    border-color: transparent;
+  }
+
+  &:active {
+    outline-color: transparent;
+    border-color: var(--color-light-100);
+    background-color: var(--color-dark-500);
+    color: var(--color-light-100);
+
+    & + .iconStart {
+      color: var(--color-light-100);
     }
+  }
 
-    &:hover{
-        border-color: var(--color-light-900);
-        color: var(--color-light-900);
+  &.error {
+    background-color: var(--color-dark-500);
+    border-color: var(--color-danger-500);
+    color: var(--color-light-100);
 
-        + .iconStart {
-            color: var(--color-light-900);
-        }
+    & + .iconStart {
+      color: var(--color-light-100);
     }
+  }
 
-    &:focus-visible {
-        outline-color: var(--color-accent-500);
-        border-color: transparent;
-    }
-
-    &:active{
-        outline-color: transparent;
-        border-color: var(--color-light-100);
-        background-color: var(--color-dark-500);
-        color: var(--color-light-100);
-
-        & + .iconStart {
-            color: var(--color-light-100);
-        }
-    }
-
-    &.error{
-        background-color: var(--color-dark-500);
-        border-color: var(--color-danger-500);
-        color: var(--color-light-100);
-
-        & + .iconStart {
-            color: var(--color-light-100);
-        }
-    }
-
-    &:disabled{
-        border-color: var(--color-dark-100);
-    }
+  &:disabled {
+    border-color: var(--color-dark-100);
+  }
 }
 
-.errorMessage{
-    color: var(--color-danger-500);
-    font-size: var(--text-sm);
+.errorMessage {
+  color: var(--color-danger-500);
+  font-size: var(--text-sm);
 }
