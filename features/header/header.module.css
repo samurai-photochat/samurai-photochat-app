@@ -17,3 +17,11 @@
   margin-right: auto;
   margin-bottom: 0;
 }
+
+.menuButton {
+  margin-left: 36px;
+}
+
+.button:last-child {
+  margin-left: 24px;
+}
