@@ -1,3 +1,4 @@
+// "use client"
 import React from "react"
 import s from "./header.module.css"
 import SelectCountry from "@/shared/ui/select/select"

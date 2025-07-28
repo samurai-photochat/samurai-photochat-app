@@ -1,0 +1,30 @@
+.page {
+    background-color: var(--color-dark-700);
+    max-height: auto;
+    min-height: 100vh;
+}
+
+.button{
+    margin-top: 24px;
+    color:var(--color-light-100);
+}
+
+.main{
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+color: var(--color-light-100);
+margin: 23px 25vw 0 ;
+}
+
+.title {
+font-size: var(--text-3xl);
+}
+
+.text {
+    text-align: center;
+    line-height: 25px;
+    font-size: var(--text-sm);
+    font-weight: var(--font-regular);
+}

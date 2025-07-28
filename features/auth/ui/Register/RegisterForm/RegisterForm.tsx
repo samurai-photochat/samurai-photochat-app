@@ -68,7 +68,8 @@ export const RegisterForm = () => {
             <input type="checkbox" {...register("agree")} />
           </Form.Control>
           <Form.Label className={s.label} style={{ paddingLeft: "8px", fontSize: "var(--text-xs)" }}>
-            I agree to the <a href={""}>Terms of Service</a> and <a href={""}>Privacy Policy</a>
+            I agree to the <a href={"/auth/signup/TermsofService"}>Terms of Service</a> and{" "}
+            <a href={"/auth/signup/PrivacyPolicy"}>Privacy Policy</a>
           </Form.Label>
         </Form.Field>
         <Button variant={"primary"} fullWidth={true} disabled={isInvalid}>
