@@ -10,8 +10,13 @@ import { Button } from "@/shared/ui"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { SignUpInputs, signUpSchema } from "@/shared/lib/signUpSchema/signUpSchema"
+import { UserType } from "@/features/auth/api/authApi"
 
-export const RegisterForm = () => {
+type Props = {
+  submitAction: (user: UserType, reset: () => void) => void
+}
+
+export const RegisterForm = ({ submitAction }: Props) => {
   const {
     register,
     handleSubmit,
@@ -22,8 +27,8 @@ export const RegisterForm = () => {
     defaultValues: { userName: "", email: "", password: "", confirmPassword: "", agree: false },
   })
 
-  const onSubmit = () => {
-    reset()
+  const onSubmit = (data: SignUpInputs) => {
+    submitAction({ ...data, baseUrl: "http://localhost:3000/auth/signup" }, reset)
   }
 
   const isInvalid = Object.keys(errors).length !== 0
