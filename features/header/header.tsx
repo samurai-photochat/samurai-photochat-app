@@ -1,3 +1,4 @@
+// "use client"
 import React from "react"
 import s from "./header.module.css"
 import SelectCountry from "@/shared/ui/select/select"
@@ -20,7 +21,6 @@ export const Header = () => {
   // const isLoggendIn = useAppSelector(selectIsLoggedIn)
   // При необходмости вытащить параметр из Store используем selector напрямую(стока ниже!!!)
   const isLoggendIn = selectIsLoggedIn(store.getState())
-  console.log(isLoggendIn)
 
   return (
     <header className={s.header}>

@@ -8,16 +8,20 @@ export const appSlice = createSlice({
   },
   selectors: {
     selectThemeMode: (state) => state.themeMode,
+    selectError: (state) => state.error,
   },
   reducers: (create) => ({
     changeTheme: create.reducer<{ themeMode: string }>((state, action) => {
       state.themeMode = action.payload.themeMode
     }),
+    setAppError: create.reducer<{ error: string | null }>((state, action) => {
+      state.error = action.payload.error
+    }),
   }),
 })
 
-export const { changeTheme } = appSlice.actions
-export const { selectThemeMode } = appSlice.selectors
+export const { changeTheme, setAppError } = appSlice.actions
+export const { selectThemeMode, selectError } = appSlice.selectors
 export const appReducer = appSlice.reducer
 
 //types

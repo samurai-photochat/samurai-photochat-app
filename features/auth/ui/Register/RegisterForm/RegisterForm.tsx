@@ -10,8 +10,13 @@ import { Button } from "@/shared/ui"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { SignUpInputs, signUpSchema } from "@/shared/lib/signUpSchema/signUpSchema"
+import { UserType } from "@/features/auth/api/authApi"
 
-export const RegisterForm = () => {
+type Props = {
+  submitAction: (user: UserType, reset: () => void) => void
+}
+
+export const RegisterForm = ({ submitAction }: Props) => {
   const {
     register,
     handleSubmit,
@@ -22,8 +27,8 @@ export const RegisterForm = () => {
     defaultValues: { userName: "", email: "", password: "", confirmPassword: "", agree: false },
   })
 
-  const onSubmit = () => {
-    reset()
+  const onSubmit = (data: SignUpInputs) => {
+    submitAction({ ...data, baseUrl: "http://localhost:3000/auth/signup" }, reset)
   }
 
   const isInvalid = Object.keys(errors).length !== 0
@@ -68,7 +73,8 @@ export const RegisterForm = () => {
             <input type="checkbox" {...register("agree")} />
           </Form.Control>
           <Form.Label className={s.label} style={{ paddingLeft: "8px", fontSize: "var(--text-xs)" }}>
-            I agree to the <a href={""}>Terms of Service</a> and <a href={""}>Privacy Policy</a>
+            I agree to the <a href={"/auth/signup/TermsofService"}>Terms of Service</a> and{" "}
+            <a href={"/auth/signup/PrivacyPolicy"}>Privacy Policy</a>
           </Form.Label>
         </Form.Field>
         <Button variant={"primary"} fullWidth={true} disabled={isInvalid}>

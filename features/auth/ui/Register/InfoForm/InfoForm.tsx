@@ -2,6 +2,10 @@ import Image, { StaticImageData } from "next/image"
 import s from "./InfoForm.module.css"
 import Button from "@/shared/ui/button/button"
 import { Form } from "radix-ui"
+import { TextField } from "@/shared/ui/text-field/text-field"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { SignUpInputs, signUpSchema } from "@/shared/lib/signUpSchema/signUpSchema"
 
 type Props = {
   title: string
@@ -12,6 +16,21 @@ type Props = {
 }
 
 export const InfoForm = ({ title, text, textBtn, isInput, img }: Props) => {
+  // Валидация React-hook-form
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<Partial<SignUpInputs>>({
+    resolver: zodResolver(signUpSchema.partial()),
+    defaultValues: { email: "" },
+  })
+
+  const onSubmit = () => {
+    reset()
+  }
+
   return (
     <div className={s.container}>
       <h3 className={s.title}>{title}</h3>
@@ -19,16 +38,14 @@ export const InfoForm = ({ title, text, textBtn, isInput, img }: Props) => {
         <p>{text}</p>
       </div>
       {isInput ? (
-        <Form.Root className={s.form}>
-          <Form.Field className={s.field} name="email">
-            <Form.Label className={s.label}>Email</Form.Label>
-            <Form.Control asChild>
-              <input className={s.input} type="email" required />
-            </Form.Control>
-            <Form.Message className={s.message} match="valueMissing">
-              The email address is required
-            </Form.Message>
-          </Form.Field>
+        <Form.Root className={s.form} onSubmit={handleSubmit(onSubmit)}>
+          <TextField
+            label={"Email"}
+            type={"text"}
+            {...register("email")}
+            errorMessage={errors.email?.message}
+            // className={s.field} доделать
+          />
           <Button>{textBtn}</Button>
         </Form.Root>
       ) : (
