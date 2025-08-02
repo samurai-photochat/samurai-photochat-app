@@ -18,6 +18,7 @@ export default function SignUp() {
   //   password: "Ghjnjnbg123!",
   //   baseUrl: "http://localhost:3000",
   // }
+
   // колбек для передачи в кнопку
   // const handler = (user: UserType) => {
   //   registerUser(user)

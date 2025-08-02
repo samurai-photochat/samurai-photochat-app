@@ -18,17 +18,16 @@
 }
 
 .block {
-display: flex;
-align-items: center;
-justify-content: space-between;
-
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .text {
   color: var(--color-light-100);
   font-weight: var(--font-regular);
   font-size: var(--text-md);
-  margin:0 24px;
+  margin: 0 24px;
 }
 
 .button {
@@ -46,8 +45,9 @@ justify-content: space-between;
   }
 
   &:active {
-  box-shadow: inset 2px 2px 5px var(--color-dark-900), inset -2px -2px 5px var(--color-light-300); 
-  transform: translateY(2px); 
+    box-shadow:
+      inset 2px 2px 5px var(--color-dark-900),
+      inset -2px -2px 5px var(--color-light-300);
+    transform: translateY(2px);
   }
-  
 }
