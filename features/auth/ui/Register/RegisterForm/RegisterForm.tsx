@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { SignUpInputs, signUpSchema } from "@/shared/lib/signUpSchema/signUpSchema"
 import { UserType } from "@/features/auth/api/authApi"
+import { useState } from "react"
 
 type Props = {
   submitAction: (user: UserType, reset: () => void) => void
@@ -27,8 +28,13 @@ export const RegisterForm = ({ submitAction }: Props) => {
     defaultValues: { userName: "", email: "", password: "", confirmPassword: "", agree: false },
   })
 
+  const [passwordType, setPasswordType] = useState("password")
+
   const onSubmit = (data: SignUpInputs) => {
-    submitAction({ ...data, baseUrl: "http://localhost:3000/auth/signup" }, reset)
+    submitAction({ ...data, baseUrl: "http://localhost:3000/auth/signup" }, () => {
+      reset()
+      setPasswordType("password")
+    })
   }
 
   const isInvalid = Object.keys(errors).length !== 0
@@ -54,18 +60,22 @@ export const RegisterForm = ({ submitAction }: Props) => {
             <Image src={gitHubIcon} alt={"github-icon"} />
           </a>
         </div>
-        <TextField label={"Username"} type={"text"} errorMessage={errors.userName?.message} {...register("userName")} />
-        <TextField label={"Email"} type={"text"} errorMessage={errors.email?.message} {...register("email")} />
+        <TextField label={"Username"} errorMessage={errors.userName?.message} {...register("userName")} />
+        <TextField label={"Email"} errorMessage={errors.email?.message} {...register("email")} />
         <TextField
+          type={passwordType}
+          password
           label={"Password"}
-          type={"password"}
           errorMessage={errors.password?.message}
+          iconAction={() => setPasswordType(passwordType === "password" ? "text" : "password")}
           {...register("password")}
         />
         <TextField
+          type={passwordType}
+          password
           label={"Password confirmation"}
           errorMessage={errors.confirmPassword?.message}
-          type={"password"}
+          iconAction={() => setPasswordType(passwordType === "password" ? "text" : "password")}
           {...register("confirmPassword")}
         />
         <Form.Field className={s.field} name="agree" style={{ flexDirection: "row" }}>
