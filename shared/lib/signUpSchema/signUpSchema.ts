@@ -13,7 +13,7 @@ export const signUpSchema = z
       .string()
       .min(1, "Password is required")
       .regex(
-        /^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z])[-_A-Za-z0-9!"#$%&'()*+,./:;<=>?@[\]\\^{|}~]+$/,
+        /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!"#$%&'()*+,-.\/:;<=>?@[\]^_`{|}~])[A-Za-z0-9!"#$%&'()*+,-.\/:;<=>?@[\]^_`{|}~]+$/,
         "Password must contain 0-9, a-z, A-Z, ! \" # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ { | } ~"
       )
       .min(6, "Minimum number of characters 6")
