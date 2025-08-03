@@ -13,9 +13,10 @@ type Props = {
   textBtn: string
   img: StaticImageData
   isInput: boolean
+  href?: string
 }
 
-export const InfoForm = ({ title, text, textBtn, isInput, img }: Props) => {
+export const InfoForm = ({ title, text, textBtn, isInput, img, href }: Props) => {
   // Валидация React-hook-form
   const {
     register,
@@ -50,7 +51,9 @@ export const InfoForm = ({ title, text, textBtn, isInput, img }: Props) => {
         </Form.Root>
       ) : (
         <div className={s.container_button}>
-          <Button>{textBtn}</Button>
+          <Button as={"a"} href={href}>
+            {textBtn}
+          </Button>
         </div>
       )}
       <Image className={s.img} src={img} alt="x" />

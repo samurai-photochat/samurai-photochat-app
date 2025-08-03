@@ -1,19 +1,22 @@
 import { baseApi } from "@/app/api/baseApi"
 import { ApiErrorResultDto, MeViewDto } from "./authApi.types"
-
+// тип user
 export type UserType = {
   userName: string
   email: string
   password: string
   baseUrl: string
 }
+// тип кода из query
 export type ConfirmationType = {
   confirmationCode: string
 }
+// тип для запроса при истекшей ссылке
 export type ResendingEmailType = {
   email: string
   baseUrl: string
 }
+const baseUrl = "https://inctagram.work/api/v1/"
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => {
@@ -30,7 +33,7 @@ export const authApi = baseApi.injectEndpoints({
         query: (user) => {
           return {
             method: "POST",
-            url: "/auth/registration",
+            url: baseUrl + "auth/registration",
             body: user,
           }
         },
@@ -39,7 +42,7 @@ export const authApi = baseApi.injectEndpoints({
         query: (confirmCode) => {
           return {
             method: "POST",
-            url: "/auth/registration-confirmation",
+            url: baseUrl + "auth/registration-confirmation",
             body: confirmCode,
           }
         },
@@ -48,7 +51,7 @@ export const authApi = baseApi.injectEndpoints({
         query: (confirmCode) => {
           return {
             method: "POST",
-            url: "/auth/registration-email-resending",
+            url: baseUrl + "auth/registration-email-resending",
             body: confirmCode,
           }
         },

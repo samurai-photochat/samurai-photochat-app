@@ -3,7 +3,7 @@
 import { useAppDispatch } from "@/app/hooks/useAppDispatch"
 import { useAppSelector } from "@/app/hooks/useAppSelector"
 import { selectError, setAppError } from "@/app/model/appSlice"
-import { Dialog, DialogContent, DialogDescription, DialogClose } from "@radix-ui/react-dialog"
+import { Dialog, DialogContent, DialogDescription, DialogClose, DialogTitle } from "@radix-ui/react-dialog"
 import s from "./alert.module.css"
 import Image from "next/image"
 import Close from "@/shared/assets/svg/Close.svg"
@@ -18,15 +18,16 @@ export const Alert = () => {
   const handleClose = () => {
     dispatch(setAppError({ error: null }))
     // обнуление сообщений
-    // dispatch
+    // dispatch...
   }
 
   const className = s.container + (error ? " " + s.error : "")
 
   return (
-    <Dialog open={!!(error || massage)}>
+    <Dialog open={!!(error || massage)} onOpenChange={handleClose}>
       <DialogContent className={className}>
         <div className={s.block}>
+          <DialogTitle />
           <DialogDescription className={s.text}>{error || massage}</DialogDescription>
           <DialogClose onClick={handleClose} className={s.button}>
             <Image src={Close} alt={"закрыть"} />
