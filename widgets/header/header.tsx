@@ -6,8 +6,8 @@ import SelectCountry from "@/shared/ui/select/select"
 // import outlineBell from "@/shared/assets/svg/outlineBell.svg"
 import Button from "@/shared/ui/button/button"
 // import { useAppSelector } from "@/app/hooks/useAppSelector"
-import { store } from "@/app/store"
-import { selectIsLoggedIn } from "@/entities/user/userSlice"
+import { store } from "@/app/store/store"
+// import { selectIsLoggedIn } from "@/entities/user/userSlice"
 // import { useAppDispatch } from "@/app/hooks/useAppDispatch"
 
 const Path = {
@@ -20,7 +20,7 @@ export const Header = () => {
   //использование useAppSelector можно только на клиентских компонентах
   // const isLoggendIn = useAppSelector(selectIsLoggedIn)
   // При необходмости вытащить параметр из Store используем selector напрямую(стока ниже!!!)
-  const isLoggendIn = selectIsLoggedIn(store.getState())
+  const isLoggendIn = false
 
   return (
     <header className={s.header}>

@@ -1,5 +1,6 @@
 .selectTrigger {
   width: 163px;
+
   /* height: 36px; */
   display: flex;
   align-items: center;
@@ -16,12 +17,12 @@
 .selectContent {
   background: white;
   border-radius: 1px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
   z-index: 999;
 }
 
 .selectViewport {
-  padding: 0px;
+  padding: 0;
 }
 
 .selectItem {

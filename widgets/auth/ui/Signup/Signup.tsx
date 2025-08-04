@@ -1,5 +1,5 @@
 import * as React from "react"
-// import { ModalWindow } from "@/features/auth/ui/Register/ModalWindow/ModalWindow"
+import { ModalWindow } from "@/features/auth/ui/Register/ModalWindow/ModalWindow"
 import { RegisterForm } from "@/features/auth/ui/Register/RegisterForm/RegisterForm"
 // import { InfoForm } from "@/features/auth/ui/Register/InfoForm/InfoForm"
 // import EmailConfirmed from "@/shared/assets/svg/sign-up_bro.svg"
