@@ -9,18 +9,26 @@ import * as React from "react"
 import { useForm } from "react-hook-form"
 import { LoginInputs, loginSchema } from "@/shared/lib/signUpSchema/loginSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useState } from "react"
+import { TextField } from "@/shared/ui/text-field/text-field"
 
-export default function LoginForm() {
+type Props = {
+  submitAction: ({ email, password }: { email: string; password: string }, reset: () => void) => void
+}
+
+export default function LoginForm({ submitAction }: Props) {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<LoginInputs>({
     resolver: zodResolver(loginSchema),
     defaultValues: { email: "", password: "" },
   })
-  const onSubmit = () => {
-    console.log("Form submitted")
+  const [passwordType, setPasswordType] = useState("password")
+  const onSubmit = (data: LoginInputs) => {
+    submitAction(data, reset)
   }
   const providers = [
     { name: "Google", icon: googleIcon, href: "" },
@@ -44,11 +52,17 @@ export default function LoginForm() {
           </Form.Control>
           {errors.email && <div className={s.message}>{errors.email.message}</div>}
         </Form.Field>
-
         <Form.Field name="password" className={s.field}>
           <Form.Label className={s.label}>Password</Form.Label>
           <Form.Control asChild>
-            <input type="password" className={s.input} {...register("password")} />
+            <TextField
+              type={passwordType}
+              password
+              label={undefined}
+              errorMessage={errors.password?.message}
+              iconAction={() => setPasswordType(passwordType === "password" ? "text" : "password")}
+              {...register("password")}
+            />
           </Form.Control>
           {errors.password && <div className={s.message}>{errors.password.message}</div>}
         </Form.Field>

@@ -28,8 +28,17 @@ export const authApi = baseApi.injectEndpoints({
           }
         },
       }),
+      login: builder.mutation<BaseResponse, { email: string; password: string }>({
+        query: (credentials) => {
+          return {
+            method: "POST",
+            url: "auth/login",
+            body: credentials,
+          }
+        },
+      }),
     }
   },
 })
 
-export const { useRegistrationMutation, useMeQuery } = authApi
+export const { useRegistrationMutation, useLoginMutation, useMeQuery } = authApi
