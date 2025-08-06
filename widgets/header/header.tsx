@@ -34,7 +34,7 @@ export const Header = () => {
       </p>
       {!isLoggendIn && (
         <div className={s.menuButton}>
-          <Button as={"a"} href={Path.login} variant="text" className={s.button}>
+          <Button as={"a"} href={Path.login} fullWidth variant="text" className={s.button}>
             Log in
           </Button>
           <Button className={s.button} as={"a"} href={Path.Signup} variant="primary">

@@ -1,0 +1,21 @@
+.profile {
+  display: flex;
+}
+.sidebar {
+  padding: 20px;
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  line-height: var(--line-height-normal);
+  background-color: var(--color-dark-700);
+}
+
+.item {
+  list-style-type: none;
+  border: 1px solid red;
+  margin-bottom: 5px;
+}
+
+.sidebarBtn {
+  color: green;
+  display: flex;
+}
