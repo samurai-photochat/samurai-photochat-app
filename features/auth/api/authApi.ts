@@ -16,7 +16,6 @@ export type ResendingEmailType = {
   email: string
   baseUrl: string
 }
-const baseUrl = "https://inctagram.work/api/v1/"
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => {
@@ -33,7 +32,7 @@ export const authApi = baseApi.injectEndpoints({
         query: (user) => {
           return {
             method: "POST",
-            url: baseUrl + "auth/registration",
+            url: "auth/registration",
             body: user,
           }
         },
@@ -42,7 +41,7 @@ export const authApi = baseApi.injectEndpoints({
         query: (confirmCode) => {
           return {
             method: "POST",
-            url: baseUrl + "auth/registration-confirmation",
+            url: "auth/registration-confirmation",
             body: confirmCode,
           }
         },
@@ -51,7 +50,7 @@ export const authApi = baseApi.injectEndpoints({
         query: (confirmCode) => {
           return {
             method: "POST",
-            url: baseUrl + "auth/registration-email-resending",
+            url: "auth/registration-email-resending",
             body: confirmCode,
           }
         },
