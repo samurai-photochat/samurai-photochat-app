@@ -1,4 +1,4 @@
-import LoginForm from "@/features/auth/ui/Login/LoginForm"
+import Login from "@/widgets/auth/ui/Login/Login";
 export default function LoginPage() {
-  return <LoginForm />
+  return <Login />
 }
