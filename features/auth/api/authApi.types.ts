@@ -1,13 +1,13 @@
 // me
-export type Response = {
+export type MeViewDto = {
   userId: number
   userName: string
   email: string
   isBlocked: boolean
 }
 
-// registration
-export type BaseResponse = {
+// registration, confirmation, resending
+export type ApiErrorResultDto = {
   statusCode: number
   messages: Array<Massage>
   error: string
