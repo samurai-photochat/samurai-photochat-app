@@ -7,12 +7,11 @@ import googleIcon from "@/shared/assets/img/google-icon.png"
 import gitHubIcon from "@/shared/assets/img/github-icon.png"
 import { TextField } from "@/shared/ui/text-field/text-field"
 import { Button } from "@/shared/ui"
-import { Controller, useForm } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { SignUpInputs, signUpSchema } from "@/shared/lib/signUpSchema/signUpSchema"
 import { UserType } from "@/features/auth/api/authApi"
 import { useState } from "react"
-import Checkbox from "@/shared/ui/checkbox/checkbox"
 
 type Props = {
   submitAction: (user: UserType, reset: () => void) => void
@@ -23,7 +22,6 @@ export const RegisterForm = ({ submitAction }: Props) => {
     register,
     handleSubmit,
     reset,
-    control,
     formState: { errors },
   } = useForm<SignUpInputs>({
     resolver: zodResolver(signUpSchema),
@@ -80,26 +78,15 @@ export const RegisterForm = ({ submitAction }: Props) => {
           iconAction={() => setPasswordType(passwordType === "password" ? "text" : "password")}
           {...register("confirmPassword")}
         />
-        <div className={s.checkboxContainer}>
-          <Controller
-            name={"agree"}
-            control={control}
-            render={({ field }) => <Checkbox {...field} checked={field.value} />}
-          />
-          <span>
+        <Form.Field className={s.field} name="agree" style={{ flexDirection: "row" }}>
+          <Form.Control asChild>
+            <input type="checkbox" {...register("agree")} />
+          </Form.Control>
+          <Form.Label className={s.label} style={{ paddingLeft: "8px", fontSize: "var(--text-xs)" }}>
             I agree to the <a href={"/auth/signup/TermsofService"}>Terms of Service</a> and{" "}
             <a href={"/auth/signup/PrivacyPolicy"}>Privacy Policy</a>
-          </span>
-        </div>
-        {/*<Form.Field className={s.field} name="agree" style={{ flexDirection: "row" }}>*/}
-        {/*  <Form.Control asChild>*/}
-        {/*    <input type="checkbox" {...register("agree")} />*/}
-        {/*  </Form.Control>*/}
-        {/*  <Form.Label className={s.label} style={{ paddingLeft: "8px", fontSize: "var(--text-xs)" }}>*/}
-        {/*    I agree to the <a href={"/auth/signup/TermsofService"}>Terms of Service</a> and{" "}*/}
-        {/*    <a href={"/auth/signup/PrivacyPolicy"}>Privacy Policy</a>*/}
-        {/*  </Form.Label>*/}
-        {/*</Form.Field>*/}
+          </Form.Label>
+        </Form.Field>
         <Button variant={"primary"} fullWidth={true} disabled={isInvalid}>
           Sign Up
         </Button>
