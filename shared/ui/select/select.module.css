@@ -1,12 +1,13 @@
 .selectTrigger {
   width: 163px;
+
   /* height: 36px; */
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 5px;
   background-color: var(--color-dark-700);
-  color: var(--color-ligth-100);
+  color: var(--color-light-100);
   border: 1px solid #ccc;
   border-radius: 1px;
   font-size: 16px;
@@ -16,12 +17,12 @@
 .selectContent {
   background: white;
   border-radius: 1px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
   z-index: 999;
 }
 
 .selectViewport {
-  padding: 0px;
+  padding: 0;
 }
 
 .selectItem {

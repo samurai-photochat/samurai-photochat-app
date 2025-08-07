@@ -11,7 +11,6 @@ type TextFieldProps = {
   password?: boolean
   errorMessage?: string | undefined
   iconAction?: () => void
-  className?: string
 } & ComponentProps<"input">
 
 export const TextField = ({
@@ -19,10 +18,9 @@ export const TextField = ({
   search,
   password,
   type = password ? "password" : "text",
-  disabled = false,
+  disabled,
   errorMessage,
   iconAction,
-  className,
   ...rest
 }: TextFieldProps) => {
   const dataIconStart = search ? "start" : ""
@@ -32,12 +30,12 @@ export const TextField = ({
 
   return (
     <div className={s.box + (disabled ? " " + s.disabled : "")}>
-      {label && <label className={s.label + (disabled ? " " + s.disabled : "")}>{label}</label>}
+      {label && <label className={s.label}>{label}</label>}
       <div className={s.inputContainer}>
         {search && <span className={s.iconStart}>{<SearchIcon />}</span>}
         <input
           type={type}
-          className={s.input + (className ? " " + className : "") + (error ? " " + s.error : "")}
+          className={s.input + (error ? " " + s.error : "")}
           disabled={disabled}
           data-icon={dataIcon}
           {...rest}
