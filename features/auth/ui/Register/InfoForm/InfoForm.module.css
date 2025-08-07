@@ -40,20 +40,7 @@
   flex-direction: column;
   width: 100%;
   margin-bottom: 24px;
-}
-
-.label {
-  font-size: var(--text-sm);
-  color: var(--color-light-900);
-}
-
-.input {
-  background-color: inherit;
-  border: 1px solid var(--color-dark-100);
-  border-radius: 2px;
-  font-size: var(--text-md);
-  color: var(--color-light-900);
-  height: 36px;
+  color: var(--color-light-900)
 }
 
 .message {

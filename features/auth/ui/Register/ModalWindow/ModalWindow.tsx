@@ -26,7 +26,9 @@ export const ModalWindow = ({ title, text, isClose, isOpen }: Props) => {
           </div>
           <div className={s.main}>
             <p className={s.text}>{text}</p>
-            <Button className={s.button}>ОК</Button>
+            <Button className={s.button} onClick={isClose}>
+              ОК
+            </Button>
           </div>
         </div>
       </Dialog>
