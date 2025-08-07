@@ -1,7 +1,5 @@
 "use client"
 import * as React from "react"
-import { ModalWindow } from "@/features/auth/ui/Register/ModalWindow/ModalWindow"
-import { RegisterForm } from "@/features/auth/ui/Register/RegisterForm/RegisterForm"
 import { useConfirmationMutation, useRegistrationMutation, UserType } from "@/features/auth/api/authApi"
 import { useAppDispatch } from "@/app/hooks/useAppDispatch"
 import { setAppError } from "@/app/model/appSlice"
@@ -9,6 +7,7 @@ import { ApiErrorResultDto } from "@/features/auth/api/authApi.types"
 import { useSearchParams } from "next/navigation"
 import { Confirmation } from "@/widgets/auth/ui/Confirmation/Confirmation"
 import s from "./page.module.css"
+import { Registration } from "@/widgets/auth/ui/Registration/Registration"
 
 function SignUpPage() {
   const [registerUser] = useRegistrationMutation()
@@ -66,19 +65,10 @@ function SignUpPage() {
     <div className={s.page}>
       {/* В зависимости от наличия query отображаем тот или иной компонент */}
       {!code ? (
-        <>
-          {/* Надо создать отдельный виджет => соответственно, и часть логики */}
-          <RegisterForm submitAction={submitAction} />
-          <ModalWindow
-            isOpen={isModalClose}
-            title={"Email sent"}
-            text={`We have sent a link to confirm your email to ${user?.email}`}
-            isClose={closeModal}
-          />
-        </>
+        <Registration isOpen={isModalClose} submitAction={submitAction} email={user?.email} isClose={closeModal} />
       ) : (
         // В зависимости от  действительности ссылки, будет отображаться нужная фича
-        <Confirmation islinkExpiration={islinkExpiration} />
+        <Confirmation islinkExpiration={!islinkExpiration} />
       )}
     </div>
   )

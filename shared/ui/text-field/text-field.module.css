@@ -9,7 +9,12 @@
 }
 
 .label {
+  color: var(--color-light-900);
   font-size: var(--text-sm);
+
+  &.disabled {
+    color: var(--color-dark-100);
+  }
 }
 
 .inputContainer {
@@ -33,6 +38,7 @@
 }
 
 .iconEnd {
+  color: var(--color-light-100);
   right: 12px;
 }
 
@@ -91,7 +97,12 @@
   }
 
   &:disabled {
+    color: var(--color-dark-100);
     border-color: var(--color-dark-100);
+  }
+
+  + .iconEnd{
+    color: var(--color-dark-100);
   }
 }
 
