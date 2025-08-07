@@ -68,7 +68,7 @@ function SignUpPage() {
         <Registration isOpen={isModalClose} submitAction={submitAction} email={user?.email} isClose={closeModal} />
       ) : (
         // В зависимости от  действительности ссылки, будет отображаться нужная фича
-        <Confirmation islinkExpiration={islinkExpiration} />
+        <Confirmation islinkExpiration={!islinkExpiration} />
       )}
     </div>
   )
