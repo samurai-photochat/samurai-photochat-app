@@ -1,17 +1,26 @@
 import { baseApi } from "@/app/api/baseApi"
-import { BaseResponse, Response } from "./authApi.types"
-
+import { ApiErrorResultDto, MeViewDto } from "./authApi.types"
+// тип user
 export type UserType = {
   userName: string
   email: string
   password: string
   baseUrl: string
 }
+// тип кода из query
+export type ConfirmationType = {
+  confirmationCode: string
+}
+// тип для запроса при истекшей ссылке
+export type ResendingEmailType = {
+  email: string
+  baseUrl: string
+}
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => {
     return {
-      me: builder.query<Response, void>({
+      me: builder.query<MeViewDto, void>({
         query: () => {
           return {
             method: "GET",
@@ -19,7 +28,7 @@ export const authApi = baseApi.injectEndpoints({
           }
         },
       }),
-      registration: builder.mutation<BaseResponse, UserType>({
+      registration: builder.mutation<ApiErrorResultDto, UserType>({
         query: (user) => {
           return {
             method: "POST",
@@ -28,12 +37,21 @@ export const authApi = baseApi.injectEndpoints({
           }
         },
       }),
-      login: builder.mutation<BaseResponse, { email: string; password: string }>({
-        query: (credentials) => {
+      confirmation: builder.mutation<ApiErrorResultDto, ConfirmationType>({
+        query: (confirmCode) => {
           return {
             method: "POST",
-            url: "auth/login",
-            body: credentials,
+            url: "auth/registration-confirmation",
+            body: confirmCode,
+          }
+        },
+      }),
+      emailResending: builder.mutation<ApiErrorResultDto, ResendingEmailType>({
+        query: (confirmCode) => {
+          return {
+            method: "POST",
+            url: "auth/registration-email-resending",
+            body: confirmCode,
           }
         },
       }),
@@ -41,4 +59,4 @@ export const authApi = baseApi.injectEndpoints({
   },
 })
 
-export const { useRegistrationMutation, useLoginMutation, useMeQuery } = authApi
+export const { useMeQuery, useRegistrationMutation, useConfirmationMutation, useEmailResendingMutation } = authApi

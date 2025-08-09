@@ -6,7 +6,21 @@
 }
 
 .button {
+  margin-left: 64px;
+  display: flex;
+  width: 180px;
   color: var(--color-light-100);
+  padding: 0;
+}
+
+.img {
+  width: 24px;
+  height: 24px;
+  margin-right: 12px;
+}
+
+.btn_text {
+  font-size: var(--text-sm);
 }
 
 .main {

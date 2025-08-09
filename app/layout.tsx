@@ -32,7 +32,7 @@ export default function RootLayout({
           <Header />
           {children}
           {/* Alert для вывода ошибок */}
-          {/* <Alert /> */}
+          <Alert />
         </StoreProvider>
       </body>
     </html>
