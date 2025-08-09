@@ -1,6 +1,7 @@
 "use client"
 
 import { useGetTotalCountRegisteredUsersQuery, useGetUserProfileByIdQuery } from "@/app/api/publicUserApi"
+import Sidebar from "@/widgets/sidebar/sidebar"
 
 export default function Home() {
   const { data: totalCountData, isLoading: isCountLoading } = useGetTotalCountRegisteredUsersQuery()
@@ -18,10 +19,13 @@ export default function Home() {
   if (profileError) return <p>Ошибка при загрузке профиля</p>
 
   return (
-    <div>
-      <h1>Непобедимые самураи</h1>
-      <h2>Всего пользователей зарегистрировано: {totalCount}</h2>
-      <h2>Имя последнего зарегистрировавшегося пользователя: {profileData?.userName}</h2>
+    <div style={{ display: "flex" }}>
+      <Sidebar />
+      <div>
+        <h1>Непобедимые самураи</h1>
+        <h2>Всего пользователей зарегистрировано: {totalCount}</h2>
+        <h2>Имя последнего зарегистрировавшегося пользователя: {profileData?.userName}</h2>
+      </div>
     </div>
   )
 }
