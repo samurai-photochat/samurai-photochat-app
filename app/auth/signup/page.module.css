@@ -1,5 +1,11 @@
 .page {
-  padding: 24px 0;
   background-color: var(--color-dark-700);
-  height: 100vh;
+  min-height: 100vh;
+  padding: 24px 0;
+}
+
+@media (width <= 600px){
+  .page{
+    padding: 0;
+  }
 }
