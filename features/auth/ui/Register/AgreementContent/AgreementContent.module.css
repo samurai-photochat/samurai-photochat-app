@@ -1,12 +1,14 @@
 .page {
   background-color: var(--color-dark-700);
-  max-height: auto;
   min-height: 100vh;
-  padding-top: 24px;
+}
+
+.wrapper{
+  position: relative;
+  padding: 24px 64px;
 }
 
 .button {
-  margin-left: 64px;
   display: flex;
   width: 180px;
   color: var(--color-light-100);
@@ -29,11 +31,15 @@
   align-items: center;
   justify-content: center;
   color: var(--color-light-100);
-  margin: 23px 25vw 0;
+  margin: 0 auto;
+  padding-top: 23px;
+  width: 958px;
+  max-width: 100%;
 }
 
 .title {
   font-size: var(--text-3xl);
+  margin-bottom: 20px;
 }
 
 .text {
@@ -41,4 +47,29 @@
   line-height: 25px;
   font-size: var(--text-sm);
   font-weight: var(--font-regular);
+}
+
+@media (width <= 600px) {
+  .title {
+    font-size: var(--text-lg);
+    margin-bottom: 14px;
+  }
+
+  .wrapper{
+    padding: 16px;
+  }
+
+  .btn_text{
+    display: none;
+  }
+
+  .button{
+    position: absolute;
+
+  }
+
+  .main{
+    padding-top: 0;
+  }
+
 }

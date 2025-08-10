@@ -11,14 +11,16 @@ type Props = {
 export const AgreementContent = ({ title, children }: Props) => {
   return (
     <div className={s.page}>
-      <Button as="a" href={"/auth/signup"} className={s.button} variant="text">
-        <Image src={Back} alt="back" className={s.img} />
-        <p className={s.btn_text}>Back to Sign Up</p>
-      </Button>
-      <main className={s.main}>
-        <h1 className={s.title}>{title}</h1>
-        <text className={s.text}>{children}</text>
-      </main>
+      <div className={s.wrapper}>
+        <Button as="a" href={"/auth/signup"} className={s.button} variant="text">
+          <Image src={Back} alt="back" className={s.img} />
+          <p className={s.btn_text}>Back to Sign Up</p>
+        </Button>
+        <main className={s.main}>
+          <h1 className={s.title}>{title}</h1>
+          <text className={s.text}>{children}</text>
+        </main>
+      </div>
     </div>
   )
 }
