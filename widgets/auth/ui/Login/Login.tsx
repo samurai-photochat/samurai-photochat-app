@@ -2,7 +2,7 @@
 import { useLoginMutation } from "@/features/auth/api/authApi"
 import { setAppError } from "@/app/model/appSlice"
 import LoginForm from "@/features/auth/ui/Login/LoginForm"
-import { useAppDispatch } from "@/app/hooks/useAppDispatch";
+import { useAppDispatch } from "@/app/hooks/useAppDispatch"
 
 export default function Login() {
   const [loginUser] = useLoginMutation()

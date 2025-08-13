@@ -35,12 +35,12 @@
   margin-bottom: 36px;
 }
 
-.field {
+.text_form{
   display: flex;
   flex-direction: column;
   width: 100%;
   margin-bottom: 24px;
-  color: var(--color-light-900)
+  color: var(--color-light-900);
 }
 
 .message {

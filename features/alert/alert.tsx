@@ -22,7 +22,6 @@ export const Alert = () => {
   }
 
   const className = s.container + (error ? " " + s.error : "")
-
   return (
     <Dialog open={!!(error || massage)} onOpenChange={handleClose}>
       <DialogContent className={className}>
