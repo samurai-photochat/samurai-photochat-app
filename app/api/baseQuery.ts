@@ -1,4 +1,4 @@
-import { BaseQueryFn, FetchArgs, fetchBaseQuery } from "@reduxjs/toolkit/query"
+import { BaseQueryFn, FetchArgs, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query/react"
 import LocalStorage from "@/shared/utils/localStorage/localStorage"
 
