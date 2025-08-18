@@ -1,17 +1,27 @@
 "use client"
-import { useLoginMutation } from "@/features/auth/api/authApi"
+import { LoginType, useLoginMutation } from "@/features/auth/api/authApi"
 import { setAppError } from "@/app/model/appSlice"
 import LoginForm from "@/features/auth/ui/Login/LoginForm"
-import { useAppDispatch } from "@/app/hooks/useAppDispatch";
+import { useAppDispatch } from "@/app/hooks/useAppDispatch"
+
+import { useRouter } from "next/navigation"
+import LocalStorage from "@/shared/utils/localStorage/localStorage"
 
 export default function Login() {
-  const [loginUser] = useLoginMutation()
+  const [loginUser, { isError }] = useLoginMutation()
   const dispatch = useAppDispatch()
-  const submitAction = ({ email, password }: { email: string; password: string }, reset: () => void) => {
-    loginUser({ email, password })
-      .then((res) => {
-        if (res.error) {
-          throw res.error
+  const router = useRouter()
+  const submitAction = (data: LoginType, reset: () => void) => {
+    loginUser(data)
+      .unwrap()
+      .then((res: { accessToken: string }) => {
+        if (res) {
+          LocalStorage.setToken(res.accessToken)
+          router.push("/")
+        }
+
+        if (isError) {
+          throw new Error()
         }
         reset()
       })
