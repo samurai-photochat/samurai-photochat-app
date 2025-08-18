@@ -7,6 +7,11 @@ export type UserType = {
   password: string
   baseUrl: string
 }
+
+export type LoginType = {
+  email: string
+  password: string
+}
 // тип кода из query
 export type ConfirmationType = {
   confirmationCode: string
@@ -55,8 +60,32 @@ export const authApi = baseApi.injectEndpoints({
           }
         },
       }),
+      login: builder.mutation<{ accessToken: string }, LoginType>({
+        query: (arg) => {
+          return {
+            method: "POST",
+            url: "auth/login",
+            body: arg,
+          }
+        },
+      }),
+      logout: builder.mutation<{ success: boolean }, void>({
+        query: () => {
+          return {
+            method: "POST",
+            url: "auth/logout",
+          }
+        },
+      }),
     }
   },
 })
 
-export const { useMeQuery, useRegistrationMutation, useConfirmationMutation, useEmailResendingMutation } = authApi
+export const {
+  useMeQuery,
+  useRegistrationMutation,
+  useConfirmationMutation,
+  useEmailResendingMutation,
+  useLoginMutation,
+  useLogoutMutation,
+} = authApi

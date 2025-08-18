@@ -1,4 +1,4 @@
-// "use client"
+"use client"
 import React from "react"
 import s from "./header.module.css"
 import SelectCountry from "@/shared/ui/select/select"
@@ -7,6 +7,7 @@ import SelectCountry from "@/shared/ui/select/select"
 import Button from "@/shared/ui/button/button"
 // import { useAppSelector } from "@/app/hooks/useAppSelector"
 import { store } from "@/app/store/store"
+import { useMeQuery } from "@/features/auth/api/authApi"
 // import { selectIsLoggedIn } from "@/entities/user/userSlice"
 // import { useAppDispatch } from "@/app/hooks/useAppDispatch"
 
@@ -20,7 +21,8 @@ export const Header = () => {
   //использование useAppSelector можно только на клиентских компонентах
   // const isLoggendIn = useAppSelector(selectIsLoggedIn)
   // При необходмости вытащить параметр из Store используем selector напрямую(стока ниже!!!)
-  const isLoggendIn = false
+  const { data: user, isError } = useMeQuery()
+  const isLoggedIn = !!user && !isError
 
   return (
     <header className={s.header}>
@@ -32,7 +34,7 @@ export const Header = () => {
       <p>
         <SelectCountry />
       </p>
-      {!isLoggendIn && (
+      {!isLoggedIn && (
         <div className={s.menuButton}>
           <Button as={"a"} href={Path.login} fullWidth variant="text" className={s.button}>
             Log in
