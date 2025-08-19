@@ -5,10 +5,12 @@ export const appSlice = createSlice({
   initialState: {
     themeMode: "dark", //заглушка
     error: null as Error,
+    isLoggedIn: false,
   },
   selectors: {
     selectThemeMode: (state) => state.themeMode,
     selectError: (state) => state.error,
+    selectIsLoggedIn: (state) => state.isLoggedIn,
   },
   reducers: (create) => ({
     changeTheme: create.reducer<{ themeMode: string }>((state, action) => {
@@ -17,11 +19,14 @@ export const appSlice = createSlice({
     setAppError: create.reducer<{ error: string | null }>((state, action) => {
       state.error = action.payload.error
     }),
+    setIsLoggedIn: create.reducer<{ isLoggedIn: boolean }>((state, action) => {
+      state.isLoggedIn = action.payload.isLoggedIn
+    }),
   }),
 })
 
-export const { changeTheme, setAppError } = appSlice.actions
-export const { selectThemeMode, selectError } = appSlice.selectors
+export const { changeTheme, setAppError, setIsLoggedIn } = appSlice.actions
+export const { selectThemeMode, selectError, selectIsLoggedIn } = appSlice.selectors
 export const appReducer = appSlice.reducer
 
 //types
