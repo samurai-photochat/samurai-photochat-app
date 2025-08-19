@@ -4,8 +4,8 @@
   padding: 24px 0;
 }
 
-@media (width <= 600px){
-  .page{
+@media (width <= 600px) {
+  .page {
     padding: 0;
   }
 }

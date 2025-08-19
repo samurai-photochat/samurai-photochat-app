@@ -57,7 +57,7 @@ export const InfoForm = ({ title, text, textBtn, isInput, img, href, handleClick
             type={"text"}
             {...register("email")}
             errorMessage={errors.email?.message}
-            className={s.field}
+            className={s.text_form}
           />
           <Button>{textBtn}</Button>
         </Form.Root>
