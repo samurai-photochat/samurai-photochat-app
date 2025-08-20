@@ -1,11 +1,11 @@
-.page {
+.SignUpContent {
   background-color: var(--color-dark-700);
   min-height: 100vh;
   padding: 24px 0;
 }
 
 @media (width <= 600px) {
-  .page {
+  .SignUpContent {
     padding: 0;
   }
 }

@@ -19,7 +19,6 @@ type CountryCode = keyof typeof countries
 
 export default function SelectCountry() {
   const [value, setValue] = React.useState<CountryCode>("Russian")
-  console.log("Выбранная страна:", value)
 
   return (
     <Select.Root value={value} onValueChange={(val) => setValue(val as CountryCode)}>
