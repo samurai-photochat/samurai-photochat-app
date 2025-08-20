@@ -20,7 +20,6 @@ export default function Home() {
   if (isLoading) return <div>...LoadingSpinner</div>
 
   const isLoggedIn = !!user && !isError
-  console.log(isLoggedIn)
 
   if (isCountLoading) return <p>Загрузка количества пользователей...</p>
   if (isProfileLoading) return <p>Загрузка профиля последнего пользователя...</p>
