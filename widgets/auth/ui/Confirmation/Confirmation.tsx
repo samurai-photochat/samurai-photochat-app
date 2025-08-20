@@ -6,10 +6,12 @@ import { ResendingEmailType, useEmailResendingMutation } from "@/features/auth/a
 import { useAppDispatch } from "@/app/hooks/useAppDispatch"
 import { setAppError } from "@/app/model/appSlice"
 import { ApiErrorResultDto } from "@/features/auth/api/authApi.types"
+
 type Props = {
   islinkExpiration: boolean | null
+  value?: unknown
 }
-export const Confirmation = ({ islinkExpiration }: Props) => {
+export const Confirmation = ({ islinkExpiration, value }: Props) => {
   const dispatch = useAppDispatch()
   // достаем запрос
   const [emailResending] = useEmailResendingMutation()
@@ -40,6 +42,7 @@ export const Confirmation = ({ islinkExpiration }: Props) => {
           textBtn={"Resend verification link"}
           isInput={true}
           handleClick={buttonHandler}
+          value={value}
         />
       ) : (
         <InfoForm
