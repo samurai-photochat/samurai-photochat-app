@@ -1,0 +1,10 @@
+.profile {
+  display: flex;
+}
+
+.content {
+  background-color: var(--color-dark-700);
+  color: var(--color-accent-700);
+  width: 100%;
+  text-align: center;
+}

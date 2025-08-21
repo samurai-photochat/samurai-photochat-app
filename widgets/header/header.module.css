@@ -1,0 +1,27 @@
+.header {
+  background-color: var(--color-dark-700);
+  color: var(--color-light-100);
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  padding: 0 60px;
+  border-bottom: 1px var(--color-dark-100) solid;
+}
+
+.bell {
+  margin-right: 45px;
+}
+
+.logoText {
+  margin-right: auto;
+  margin-bottom: 0;
+}
+
+.menuButton {
+  margin-left: 36px;
+}
+
+.button:last-child {
+  margin-left: 24px;
+}

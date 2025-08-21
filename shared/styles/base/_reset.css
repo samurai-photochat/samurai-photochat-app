@@ -8,13 +8,13 @@
 
 html {
   scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
   min-height: 100vh;
   line-height: 1.5;
-  text-rendering: optimizeSpeed;
+  text-rendering: optimizespeed;
 }
 
 button,
