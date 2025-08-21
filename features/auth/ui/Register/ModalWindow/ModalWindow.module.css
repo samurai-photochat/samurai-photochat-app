@@ -1,10 +1,7 @@
 .fon {
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: fixed;
+  inset: 0;
   background-color: var(--color-dark-700);
-  height: 100%;
-  width: 100%;
   z-index: 1;
 }
 
@@ -31,6 +28,17 @@
   margin-bottom: 30px;
 }
 
+.title {
+  margin: 0;
+  align-content: center;
+}
+
+.svgButton {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+}
+
 .main {
   display: flex;
   flex-direction: column;
@@ -43,19 +51,46 @@
   height: 36px;
 }
 
-.svgButton {
-  width: 24px;
-  height: 24px;
-  padding: 0;
-}
-
-.title {
-  margin: 0;
-  align-content: center;
-}
-
 .text {
+  font-family: var( --font-sans);
   font-size: var(--text-md);
   font-weight: var(--font-regular);
   margin-bottom: 18px;
 }
+
+
+@media(width <= 900){
+  .dialog {
+    width: 350px;
+    height: 230px;
+  };
+
+  .main {
+    justify-content: center;
+align-items: center;
+  };
+
+  .button {
+width: 306px;
+height: 48px;
+}
+}
+
+@media(width <= 360){
+  .dialog {
+    width: 330px;
+    height: 240px;
+  };
+
+  .main {
+    justify-content: center;
+align-items: center;
+  }
+
+.button {
+width: 306px;
+height: 48px;
+}
+  
+}
+

@@ -4,15 +4,28 @@ import Button from "@/shared/ui/button/button"
 import { Dialog } from "@radix-ui/react-dialog"
 import s from "./ModalWindow.module.css"
 import Image from "next/image"
+import { useEffect } from "react"
 
 type Props = {
   isOpen: boolean
-  isClose: () => void
   title: string
   text: string
+  isClose: () => void
 }
 
-export const ModalWindow = ({ title, text, isClose, isOpen }: Props) => {
+export const ModalWindow = ({ isOpen, title, text, isClose }: Props) => {
+  useEffect(() => {
+    if (!isOpen) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "auto"
+    }
+
+    return () => {
+      document.body.style.overflow = "auto"
+    }
+  }, [isOpen])
+
   if (isOpen) return null
   return (
     <div className={s.fon}>

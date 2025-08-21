@@ -18,10 +18,11 @@ type Props = {
   img: StaticImageData
   isInput: boolean
   href?: string
+  value?: unknown
   handleClick?: (prov: ResendingEmailType, reset: () => void) => void
 }
 
-export const InfoForm = ({ title, text, textBtn, isInput, img, href, handleClick }: Props) => {
+export const InfoForm = ({ title, text, textBtn, isInput, img, href, handleClick, value }: Props) => {
   const dispatch = useAppDispatch()
   // Валидация React-hook-form
   const {
@@ -31,7 +32,7 @@ export const InfoForm = ({ title, text, textBtn, isInput, img, href, handleClick
     formState: { errors },
   } = useForm<Partial<SignUpInputs>>({
     resolver: zodResolver(signUpSchema.partial()),
-    defaultValues: { email: "" },
+    defaultValues: { email: `${value}` },
   })
 
   const onSubmit = (data: Partial<SignUpInputs>) => {
@@ -46,9 +47,11 @@ export const InfoForm = ({ title, text, textBtn, isInput, img, href, handleClick
 
   return (
     <div className={s.container}>
-      <h3 className={s.title}>{title}</h3>
       <div className={s.text_container}>
-        <p>{text}</p>
+        <h3 className={s.title}>{title}</h3>
+        <div className={s.text}>
+          <p>{text}</p>
+        </div>
       </div>
       {isInput ? (
         <Form.Root className={s.form} onSubmit={handleSubmit(onSubmit)}>
@@ -59,11 +62,13 @@ export const InfoForm = ({ title, text, textBtn, isInput, img, href, handleClick
             errorMessage={errors.email?.message}
             className={s.text_form}
           />
-          <Button>{textBtn}</Button>
+          <div className={s.container_button}>
+            <Button className={s.button}>{textBtn}</Button>
+          </div>
         </Form.Root>
       ) : (
         <div className={s.container_button}>
-          <Button as={"a"} href={href}>
+          <Button as={"a"} href={href} className={s.button}>
             {textBtn}
           </Button>
         </div>
