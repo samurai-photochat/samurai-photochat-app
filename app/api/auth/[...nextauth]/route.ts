@@ -7,12 +7,12 @@ const handler = NextAuth({
   // Список провайдеров, через которые можно входить в систему
   providers: [
     GitHubProvider({
-      clientId: process.env.GITHUB_ID!, // из .env.local
-      clientSecret: process.env.GITHUB_SECRET!, // из .env.local
+      clientId: process.env.GITHUB_ID!, // из .env.production.local
+      clientSecret: process.env.GITHUB_SECRET!, // из .env.production.local
     }),
     GoogleProvider({
-      clientId: process.env.GOOGLE_ID!, // из .env.local
-      clientSecret: process.env.GOOGLE_SECRET!, // из .env.local
+      clientId: process.env.GOOGLE_ID!, // из .env.production.local
+      clientSecret: process.env.GOOGLE_SECRET!, // из .env.production.local
     }),
   ],
 
@@ -21,7 +21,7 @@ const handler = NextAuth({
     signIn: "/auth/login", // маршрут до нашей страницы с кнопками "Войти через Google/GitHub"
   },
 
-  // Секрет для шифрования JWT и защиты cookies (обязательно задать в .env)
+  // Секрет для шифрования JWT и защиты cookies (обязательно задать в .env.production)
   secret: process.env.NEXTAUTH_SECRET,
 })
 

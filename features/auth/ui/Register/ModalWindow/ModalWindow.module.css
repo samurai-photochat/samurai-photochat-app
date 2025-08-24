@@ -52,45 +52,42 @@
 }
 
 .text {
-  font-family: var( --font-sans);
+  font-family: var(--font-sans);
   font-size: var(--text-md);
   font-weight: var(--font-regular);
   margin-bottom: 18px;
 }
 
-
-@media(width <= 900){
+@media (width <= 900) {
   .dialog {
     width: 350px;
     height: 230px;
-  };
+  }
 
   .main {
     justify-content: center;
-align-items: center;
-  };
+    align-items: center;
+  }
 
   .button {
-width: 306px;
-height: 48px;
-}
+    width: 306px;
+    height: 48px;
+  }
 }
 
-@media(width <= 360){
+@media (width <= 360) {
   .dialog {
     width: 330px;
     height: 240px;
-  };
+  }
 
   .main {
     justify-content: center;
-align-items: center;
+    align-items: center;
   }
 
-.button {
-width: 306px;
-height: 48px;
+  .button {
+    width: 306px;
+    height: 48px;
+  }
 }
-  
-}
-
