@@ -33,7 +33,7 @@ export const RegisterForm = ({ submitAction }: Props) => {
   const [passwordType, setPasswordType] = useState("password")
 
   const onSubmit = (data: SignUpInputs) => {
-    submitAction({ ...data, baseUrl: "http://localhost:3000/auth/signup" }, () => {
+    submitAction({ ...data, baseUrl: window.location.href }, () => {
       reset()
       setPasswordType("password")
     })
