@@ -1,0 +1,28 @@
+.userInfoContainer {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+  gap: 2.5rem;
+  padding: 2rem 0;
+}
+
+.avatarWrapper {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.detailsWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  min-height: 0;
+
+}

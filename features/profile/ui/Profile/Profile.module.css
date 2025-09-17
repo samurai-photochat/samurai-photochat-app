@@ -4,7 +4,7 @@
 
 .content {
   background-color: var(--color-dark-700);
-  color: var(--color-accent-700);
+  color: var(--color-light-100);
   width: 100%;
   text-align: center;
 }

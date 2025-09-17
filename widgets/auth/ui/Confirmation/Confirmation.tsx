@@ -51,7 +51,7 @@ export const Confirmation = ({ islinkExpiration, value }: Props) => {
           img={EmailConfirmed}
           textBtn={"Sing in"}
           isInput={false}
-          href={"/auth/login"}
+          href={"/auth/signin"}
         />
       )}
     </>

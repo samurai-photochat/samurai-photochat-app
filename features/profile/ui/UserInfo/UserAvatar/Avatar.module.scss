@@ -1,0 +1,17 @@
+.avatarRoot {
+  color: white;
+  background-color: #0a6638;
+}
+
+.avatar {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #222;
+  color: #fff;
+  font-size: 2rem;
+}

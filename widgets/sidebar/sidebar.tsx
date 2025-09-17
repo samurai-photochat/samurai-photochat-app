@@ -18,8 +18,7 @@ import { setAppError } from "@/app/model/appSlice"
 
 export default function Sidebar() {
   const [logoutUser] = useLogoutMutation()
-  const { refetch } = useMeQuery()
-
+  const { refetch, data: user } = useMeQuery()
   const dispatch = useAppDispatch()
 
   const logoutHandler = () => {
@@ -49,7 +48,7 @@ export default function Sidebar() {
           </Button>
         </li>
         <li className={s.item}>
-          <Button variant="text" as="a" href="#" className={s.sidebarBtn}>
+          <Button variant="text" as="a" href={`/profile/${user?.userId}`} className={s.sidebarBtn}>
             <PersonIcon />
             My Profile
           </Button>

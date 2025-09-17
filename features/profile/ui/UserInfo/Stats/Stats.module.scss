@@ -1,0 +1,21 @@
+.profileStats {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.statsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.statsCount {
+  padding: 1rem;
+}
+
+.statsLabel {
+  //padding: 1rem;
+}

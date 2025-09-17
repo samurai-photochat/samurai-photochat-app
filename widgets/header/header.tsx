@@ -12,7 +12,7 @@ import { useMeQuery } from "@/features/auth/api/authApi"
 // import { useAppDispatch } from "@/app/hooks/useAppDispatch"
 
 const Path = {
-  login: "/auth/login",
+  login: "/auth/signin",
   Signup: "/auth/signup",
 }
 

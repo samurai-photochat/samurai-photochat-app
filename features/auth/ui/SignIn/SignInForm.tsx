@@ -16,7 +16,7 @@ type Props = {
   submitAction: ({ email, password }: { email: string; password: string }, reset: () => void) => void
 }
 
-export default function LoginForm({ submitAction }: Props) {
+export default function SignInForm({ submitAction }: Props) {
   const {
     register,
     handleSubmit,
