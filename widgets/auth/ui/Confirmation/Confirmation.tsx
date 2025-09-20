@@ -3,7 +3,7 @@ import EmailConfirmed from "@/shared/assets/svg/sign-up_bro.svg"
 import LinkExpired from "@/shared/assets/svg/rafiki.svg"
 import { InfoForm } from "@/features/auth/ui/Register/InfoForm/InfoForm"
 import { ResendingEmailType, useEmailResendingMutation } from "@/features/auth/api/authApi"
-import { useAppDispatch } from "@/app/hooks/useAppDispatch"
+import { useAppDispatch } from "@/shared/hooks/useAppDispatch"
 import { setAppError } from "@/app/model/appSlice"
 import { ApiErrorResultDto } from "@/features/auth/api/authApi.types"
 

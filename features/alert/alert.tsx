@@ -1,7 +1,7 @@
 "use client"
 
-import { useAppDispatch } from "@/app/hooks/useAppDispatch"
-import { useAppSelector } from "@/app/hooks/useAppSelector"
+import { useAppDispatch } from "@/shared/hooks/useAppDispatch"
+import { useAppSelector } from "@/shared/hooks/useAppSelector"
 import { selectError, setAppError } from "@/app/model/appSlice"
 import { Dialog, DialogContent, DialogDescription, DialogClose, DialogTitle } from "@radix-ui/react-dialog"
 import s from "./alert.module.css"

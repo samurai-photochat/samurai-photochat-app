@@ -2,7 +2,7 @@
 import { LoginType, useLoginMutation } from "@/features/auth/api/authApi"
 import { setAppError } from "@/app/model/appSlice"
 import LoginForm from "@/features/auth/ui/Login/LoginForm"
-import { useAppDispatch } from "@/app/hooks/useAppDispatch"
+import { useAppDispatch } from "@/shared/hooks/useAppDispatch"
 
 import { useRouter } from "next/navigation"
 import LocalStorage from "@/shared/utils/localStorage/localStorage"

@@ -13,7 +13,7 @@ import { Button } from "@/shared/ui"
 import s from "./sidebar.module.css"
 import { useLogoutMutation, useMeQuery } from "@/features/auth/api/authApi"
 import LocalStorage from "@/shared/utils/localStorage/localStorage"
-import { useAppDispatch } from "@/app/hooks/useAppDispatch"
+import { useAppDispatch } from "@/shared/hooks/useAppDispatch"
 import { setAppError } from "@/app/model/appSlice"
 
 export default function Sidebar() {

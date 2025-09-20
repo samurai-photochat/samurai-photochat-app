@@ -9,7 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { SignUpInputs, signUpSchema } from "@/shared/lib/signUpSchema/signUpSchema"
 import { ResendingEmailType } from "@/features/auth/api/authApi"
 import { setAppError } from "@/app/model/appSlice"
-import { useAppDispatch } from "@/app/hooks/useAppDispatch"
+import { useAppDispatch } from "@/shared/hooks/useAppDispatch"
 
 type Props = {
   title: string
