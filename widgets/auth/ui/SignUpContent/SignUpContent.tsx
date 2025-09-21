@@ -12,10 +12,9 @@ import { Confirmation } from "@/widgets/auth/ui/Confirmation/Confirmation"
 import s from "./signUpContent.module.css"
 
 export function SignUpContent() {
-  const [registerUser] = useRegistrationMutation()
+  const [registerUser, { isLoading }] = useRegistrationMutation()
   const [confirmation] = useConfirmationMutation()
   const [isModalClose, setIsModalClose] = React.useState<boolean>(true)
-  // действительность ссылки на email
   const [islinkExpiration, setIslinkExpiration] = React.useState<boolean | null>(null)
   const [user, setUser] = React.useState<UserType | null>(null)
   const dispatch = useAppDispatch()
@@ -65,7 +64,7 @@ export function SignUpContent() {
     <div className={s.SignUpContent}>
       {!codeParams ? (
         <>
-          <RegisterForm submitAction={submitAction} />
+          <RegisterForm submitAction={submitAction} isLoading={isLoading} />
           <ModalWindow
             isOpen={isModalClose}
             title={"Email sent"}

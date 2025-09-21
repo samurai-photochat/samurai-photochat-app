@@ -1,10 +1,7 @@
 "use client"
 import * as React from "react"
 import { Form } from "radix-ui"
-import Image from "next/image"
 import s from "./RegisterForm.module.css"
-import googleIcon from "@/shared/assets/img/google-icon.png"
-import gitHubIcon from "@/shared/assets/img/github-icon.png"
 import { TextField } from "@/shared/ui/text-field/text-field"
 import { Button } from "@/shared/ui"
 import { Controller, useForm } from "react-hook-form"
@@ -13,12 +10,16 @@ import { SignUpInputs, signUpSchema } from "@/shared/lib/signUpSchema/signUpSche
 import { UserType } from "@/features/auth/api/authApi"
 import { useState } from "react"
 import Checkbox from "@/shared/ui/checkbox/checkbox"
+import { SocialLinks } from "@/features/auth/ui/SocialLinks"
 
 type Props = {
   submitAction: (user: UserType, reset: () => void) => void
+  isLoading: boolean
 }
 
-export const RegisterForm = ({ submitAction }: Props) => {
+export const RegisterForm = ({ submitAction, isLoading }: Props) => {
+  const [isSocialLoading, setIsSocialLoading] = useState(false)
+  const disableAll = isSocialLoading || isLoading || false
   const {
     register,
     handleSubmit,
@@ -44,16 +45,14 @@ export const RegisterForm = ({ submitAction }: Props) => {
   return (
     <Form.Root className={s.form} onSubmit={handleSubmit(onSubmit)}>
       <h1 className={s.pageTitle}>Sign Up</h1>
-      <div className={s.iconContainer}>
-        <a href={""} className={s.icon}>
-          <Image src={googleIcon} alt={"google-icon"} />
-        </a>
-        <a href={""} className={s.icon}>
-          <Image src={gitHubIcon} alt={"github-icon"} />
-        </a>
-      </div>
-      <TextField label={"Username"} errorMessage={errors.userName?.message} {...register("userName")} />
-      <TextField label={"Email"} errorMessage={errors.email?.message} {...register("email")} />
+      <SocialLinks isDisabled={disableAll} onStartLoading={() => setIsSocialLoading(true)} />
+      <TextField
+        label={"Username"}
+        errorMessage={errors.userName?.message}
+        {...register("userName")}
+        disabled={disableAll}
+      />
+      <TextField label={"Email"} errorMessage={errors.email?.message} {...register("email")} disabled={disableAll} />
       <TextField
         type={passwordType}
         password
@@ -61,6 +60,7 @@ export const RegisterForm = ({ submitAction }: Props) => {
         errorMessage={errors.password?.message}
         iconAction={() => setPasswordType(passwordType === "password" ? "text" : "password")}
         {...register("password")}
+        disabled={disableAll}
       />
       <TextField
         type={passwordType}
@@ -69,9 +69,15 @@ export const RegisterForm = ({ submitAction }: Props) => {
         errorMessage={errors.confirmPassword?.message}
         iconAction={() => setPasswordType(passwordType === "password" ? "text" : "password")}
         {...register("confirmPassword")}
+        disabled={disableAll}
       />
       <div className={s.checkboxContainer}>
-        <Controller render={({ field }) => <Checkbox {...field} />} name={"agree"} control={control} />
+        <Controller
+          render={({ field }) => <Checkbox {...field} />}
+          name={"agree"}
+          control={control}
+          disabled={disableAll}
+        />
         <span className={s.label}>
           I agree to the <a href={"/auth/signup/TermsofService"}>Terms of Service</a> and{" "}
           <a href={"/auth/signup/PrivacyPolicy"}>Privacy Policy</a>

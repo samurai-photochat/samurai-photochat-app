@@ -1,9 +1,6 @@
 "use client"
 import s from "./LoginForm.module.css"
 import { Form } from "radix-ui"
-import Image from "next/image"
-import googleIcon from "@/shared/assets/img/google-icon.png"
-import githubIcon from "@/shared/assets/img/github-icon.png"
 import { Button } from "@radix-ui/themes"
 import * as React from "react"
 import { useForm } from "react-hook-form"
@@ -11,12 +8,16 @@ import { LoginInputs, loginSchema } from "@/shared/lib/signUpSchema/loginSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useState } from "react"
 import { TextField } from "@/shared/ui/text-field/text-field"
+import { SocialLinks } from "@/features/auth/ui/SocialLinks"
 
 type Props = {
   submitAction: ({ email, password }: { email: string; password: string }, reset: () => void) => void
+  isLoading?: boolean
 }
 
-export default function LoginForm({ submitAction }: Props) {
+export default function LoginForm({ submitAction, isLoading }: Props) {
+  const [isSocialLoading, setIsSocialLoading] = useState(false)
+  const disableAll = isSocialLoading || isLoading || false
   const {
     register,
     handleSubmit,
@@ -30,21 +31,12 @@ export default function LoginForm({ submitAction }: Props) {
   const onSubmit = (data: LoginInputs) => {
     submitAction(data, reset)
   }
-  const providers = [
-    { name: "Google", icon: googleIcon, href: "" },
-    { name: "GitHub", icon: githubIcon, href: "" },
-  ]
+
   return (
     <div className={s.page}>
       <Form.Root className={s.form} onSubmit={handleSubmit(onSubmit)}>
         <h1 className={s.h1}>Sign In</h1>
-        <div className={s.iconRow}>
-          {providers.map(({ name, icon, href }) => (
-            <a key={name} href={href}>
-              <Image src={icon} alt={name} />
-            </a>
-          ))}
-        </div>
+        <SocialLinks isDisabled={disableAll} onStartLoading={() => setIsSocialLoading(true)} />
         <Form.Field name="email" className={s.field}>
           <Form.Label className={s.label}>Email</Form.Label>
           <Form.Control asChild>
