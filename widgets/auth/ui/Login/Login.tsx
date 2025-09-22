@@ -5,7 +5,6 @@ import { setAppError } from "@/app/model/appSlice"
 import LoginForm from "@/features/auth/ui/Login/LoginForm"
 import { useAppDispatch } from "@/shared/hooks/useAppDispatch"
 import { useRouter } from "next/navigation"
-import LocalStorage from "@/shared/utils/localStorage/localStorage"
 
 export default function Login() {
   const [loginUser, { isError, isLoading }] = useLoginMutation()
@@ -16,7 +15,6 @@ export default function Login() {
       .unwrap()
       .then((res: { accessToken: string }) => {
         if (res) {
-          LocalStorage.setToken(res.accessToken)
           router.push("/")
         }
 

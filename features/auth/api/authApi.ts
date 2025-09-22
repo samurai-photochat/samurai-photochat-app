@@ -59,6 +59,17 @@ export const authApi = baseApi.injectEndpoints({
         },
       }),
       login: builder.mutation<LoginResponse, LoginRequest>({
+        async onQueryStarted(_, { dispatch, queryFulfilled }) {
+          const { data } = await queryFulfilled
+          if (!data) return
+
+          LocalStorage.setToken(data.accessToken)
+          dispatch(setToken(data.accessToken))
+          dispatch(authApi.util.invalidateTags(["User"]))
+
+          const meResult = await dispatch(authApi.endpoints.me.initiate())
+          if ("data" in meResult && meResult.data) dispatch(setCurrentUser(meResult.data))
+        },
         query: (arg) => {
           return {
             method: "POST",
