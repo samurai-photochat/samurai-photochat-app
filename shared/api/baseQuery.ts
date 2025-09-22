@@ -14,6 +14,7 @@ const createBaseQuery = () =>
       return headers
     },
   })
+
 export const baseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
   args,
   api,

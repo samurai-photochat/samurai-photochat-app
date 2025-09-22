@@ -1,48 +1,46 @@
-import { baseApi } from "@/app/api/baseApi"
-import { ApiErrorResultDto, MeViewDto } from "./authApi.types"
-// тип user
-export type UserType = {
-  userName: string
-  email: string
-  password: string
-  baseUrl: string
-}
-
-export type LoginType = {
-  email: string
-  password: string
-}
-// тип кода из query
-export type ConfirmationType = {
-  confirmationCode: string
-}
-// тип для запроса при истекшей ссылке
-export type ResendingEmailType = {
-  email: string
-  baseUrl: string
-}
+import { baseApi } from "@/shared/api/baseApi"
+import {
+  BaseApiResponse,
+  ConfirmationRequest,
+  GoogleLoginRequest,
+  LoginRequest,
+  LoginResponse,
+  MeResponse,
+  RefreshTokenResponse,
+  RegisterRequest,
+  ResendingEmailRequest,
+} from "./authApi.types"
+import LocalStorage from "@/shared/utils/localStorage/localStorage"
+import { setCurrentUser, setToken } from "@/features/auth/model/authSlice"
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => {
     return {
-      me: builder.query<MeViewDto, void>({
+      refreshToken: builder.mutation<RefreshTokenResponse, void>({
+        query: () => ({
+          url: "/auth/update-tokens",
+          method: "POST",
+        }),
+      }),
+      me: builder.query<MeResponse, void>({
         query: () => {
           return {
             method: "GET",
             url: "/auth/me",
           }
         },
+        providesTags: ["User"],
       }),
-      registration: builder.mutation<ApiErrorResultDto, UserType>({
-        query: (user) => {
+      registration: builder.mutation<BaseApiResponse, RegisterRequest>({
+        query: (body) => {
           return {
-            method: "POST",
             url: "auth/registration",
-            body: user,
+            method: "POST",
+            body,
           }
         },
       }),
-      confirmation: builder.mutation<ApiErrorResultDto, ConfirmationType>({
+      confirmation: builder.mutation<BaseApiResponse, ConfirmationRequest>({
         query: (confirmCode) => {
           return {
             method: "POST",
@@ -51,7 +49,7 @@ export const authApi = baseApi.injectEndpoints({
           }
         },
       }),
-      emailResending: builder.mutation<ApiErrorResultDto, ResendingEmailType>({
+      emailResending: builder.mutation<BaseApiResponse, ResendingEmailRequest>({
         query: (confirmCode) => {
           return {
             method: "POST",
@@ -60,7 +58,7 @@ export const authApi = baseApi.injectEndpoints({
           }
         },
       }),
-      login: builder.mutation<{ accessToken: string }, LoginType>({
+      login: builder.mutation<LoginResponse, LoginRequest>({
         query: (arg) => {
           return {
             method: "POST",
@@ -77,6 +75,36 @@ export const authApi = baseApi.injectEndpoints({
           }
         },
       }),
+      googleLogin: builder.mutation<LoginResponse, GoogleLoginRequest>({
+        async onQueryStarted(_, { dispatch, queryFulfilled }) {
+          try {
+            const { data } = await queryFulfilled
+            if (!data?.accessToken) {
+              console.error("No access token received")
+            }
+            LocalStorage.setToken(data.accessToken)
+            dispatch(setToken(data.accessToken))
+
+            const meResult = await dispatch(authApi.endpoints.me.initiate())
+            if ("data" in meResult && meResult.data) {
+              dispatch(setCurrentUser(meResult.data))
+            }
+            dispatch(authApi.util.invalidateTags(["User"]))
+          } catch (error) {
+            console.error("Google login failed:", error)
+          }
+        },
+        query: (body) => {
+          return {
+            url: "/auth/google/login",
+            method: "POST",
+            body: {
+              code: body.code,
+              redirectUrl: body.redirectUrl,
+            },
+          }
+        },
+      }),
     }
   },
 })
@@ -88,4 +116,5 @@ export const {
   useEmailResendingMutation,
   useLoginMutation,
   useLogoutMutation,
+  useRefreshTokenMutation,
 } = authApi

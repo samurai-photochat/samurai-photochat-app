@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit"
 import { setupListeners } from "@reduxjs/toolkit/query"
-import { baseApi } from "@/app/api/baseApi"
+import { baseApi } from "@/shared/api/baseApi"
 import { appReducer, appSlice } from "@/app/model/appSlice"
 import { authReducer, authSlice } from "@/features/auth/model/authSlice"
 

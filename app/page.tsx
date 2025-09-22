@@ -1,6 +1,6 @@
 "use client"
 
-import { useGetTotalCountRegisteredUsersQuery, useGetUserProfileByIdQuery } from "@/app/api/publicUserApi"
+import { useGetTotalCountRegisteredUsersQuery, useGetUserProfileByIdQuery } from "@/shared/api/publicUserApi"
 import { useMeQuery } from "@/features/auth/api/authApi"
 import Sidebar from "@/widgets/sidebar/sidebar"
 

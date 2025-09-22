@@ -3,10 +3,11 @@
 import * as React from "react"
 import { ModalWindow } from "@/features/auth/ui/Register/ModalWindow/ModalWindow"
 import { RegisterForm } from "@/features/auth/ui/Register/RegisterForm/RegisterForm"
-import { useConfirmationMutation, useRegistrationMutation, UserType } from "@/features/auth/api/authApi"
+import { useConfirmationMutation, useRegistrationMutation } from "@/features/auth/api/authApi"
+import { RegisterRequest } from "@/features/auth/api/authApi.types"
 import { useAppDispatch } from "@/shared/hooks/useAppDispatch"
 import { setAppError } from "@/app/model/appSlice"
-import { ApiErrorResultDto } from "@/features/auth/api/authApi.types"
+import { BaseApiResponse } from "@/features/auth/api/authApi.types"
 import { useSearchParams } from "next/navigation"
 import { Confirmation } from "@/widgets/auth/ui/Confirmation/Confirmation"
 import s from "./signUpContent.module.css"
@@ -16,7 +17,7 @@ export function SignUpContent() {
   const [confirmation] = useConfirmationMutation()
   const [isModalClose, setIsModalClose] = React.useState<boolean>(true)
   const [islinkExpiration, setIslinkExpiration] = React.useState<boolean | null>(null)
-  const [user, setUser] = React.useState<UserType | null>(null)
+  const [user, setUser] = React.useState<RegisterRequest | null>(null)
   const dispatch = useAppDispatch()
   const searchParams = useSearchParams()
   const codeParams = searchParams.get("code")
@@ -27,7 +28,7 @@ export function SignUpContent() {
         .then((res) => {
           if (res.error) {
             if ("data" in res.error && res.error.data) {
-              const errorData = res.error.data as ApiErrorResultDto
+              const errorData = res.error.data as BaseApiResponse
               dispatch(setAppError({ error: errorData.messages[0].message }))
               setIslinkExpiration(true)
             }
@@ -39,14 +40,14 @@ export function SignUpContent() {
     }
   }, [codeParams, confirmation, dispatch])
 
-  const submitAction = (user: UserType, reset: () => void) => {
+  const submitAction = (user: RegisterRequest, reset: () => void) => {
     setUser(user)
     registerUser(user)
       .then((res) => {
         // обработка ошибки и передача в стейт error
         if (res.error) {
           if ("data" in res.error && res.error.data) {
-            const errorData = res.error.data as ApiErrorResultDto
+            const errorData = res.error.data as BaseApiResponse
             dispatch(setAppError({ error: errorData.messages[0].message }))
           }
         } else {

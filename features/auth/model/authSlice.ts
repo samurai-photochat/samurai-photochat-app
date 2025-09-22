@@ -1,8 +1,11 @@
 import { AppRootState } from "@/app/store/store"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { MeResponse } from "@/features/auth/api/authApi.types"
 
 const initialState: AuthState = {
   token: null,
+
+  currentUser: null,
 }
 
 export const authSlice = createSlice({
@@ -15,17 +18,23 @@ export const authSlice = createSlice({
     clearToken: (state) => {
       state.token = null
     },
+    setCurrentUser: (state, action: PayloadAction<MeResponse>) => {
+      state.currentUser = action.payload
+    },
   },
 })
 
-export const { setToken, clearToken } = authSlice.actions
+export const { setToken, clearToken, setCurrentUser } = authSlice.actions
 export const authReducer = authSlice.reducer
 
 export const selectToken = (state: AppRootState) => state.auth.token
-export const selectIsAuthenticated = (state: AppRootState) => Boolean(state.auth.token)
+export const selectCurrentUser = (state: AppRootState) => state.auth.currentUser
+export const selectCurrentUserId = (state: AppRootState) => state.auth.currentUser?.userId
 
 //types
 
 type AuthState = {
   token: string | null
+
+  currentUser: MeResponse | null
 }

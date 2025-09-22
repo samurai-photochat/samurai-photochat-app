@@ -1,9 +1,9 @@
 import { createApi } from "@reduxjs/toolkit/query/react"
-import { baseQuery } from "@/app/api/baseQuery"
+import { baseQuery } from "@/shared/api/baseQuery"
 
 export const baseApi = createApi({
   reducerPath: "baseApi",
-  tagTypes: ["Auth"],
+  tagTypes: ["Auth", "User"],
   baseQuery: baseQuery,
   endpoints: () => ({}),
 })

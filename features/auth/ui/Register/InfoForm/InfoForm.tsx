@@ -7,7 +7,7 @@ import { TextField } from "@/shared/ui/text-field/text-field"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { SignUpInputs, signUpSchema } from "@/shared/lib/signUpSchema/signUpSchema"
-import { ResendingEmailType } from "@/features/auth/api/authApi"
+import { ResendingEmailRequest } from "@/features/auth/api/authApi.types"
 import { setAppError } from "@/app/model/appSlice"
 import { useAppDispatch } from "@/shared/hooks/useAppDispatch"
 
@@ -19,10 +19,10 @@ type Props = {
   isInput: boolean
   href?: string
   value?: unknown
-  handleClick?: (prov: ResendingEmailType, reset: () => void) => void
+  handleClickAction?: (prov: ResendingEmailRequest, reset: () => void) => void
 }
 
-export const InfoForm = ({ title, text, textBtn, isInput, img, href, handleClick, value }: Props) => {
+export const InfoForm = ({ title, text, textBtn, isInput, img, href, handleClickAction, value }: Props) => {
   const dispatch = useAppDispatch()
   // Валидация React-hook-form
   const {
@@ -38,8 +38,7 @@ export const InfoForm = ({ title, text, textBtn, isInput, img, href, handleClick
   const onSubmit = (data: Partial<SignUpInputs>) => {
     const email = data.email as string
     if (email !== undefined) {
-      // @ts-expect-error
-      handleClick({ email, baseUrl: "http://localhost:3000/auth/signup" }, reset)
+      handleClickAction?.({ email, baseUrl: "http://localhost:3000/auth/signup" }, reset)
     } else {
       dispatch(setAppError({ error: "Email is required" }))
     }

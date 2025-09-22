@@ -7,13 +7,13 @@ import { Button } from "@/shared/ui"
 import { Controller, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { SignUpInputs, signUpSchema } from "@/shared/lib/signUpSchema/signUpSchema"
-import { UserType } from "@/features/auth/api/authApi"
+import { RegisterRequest } from "@/features/auth/api/authApi.types"
 import { useState } from "react"
 import Checkbox from "@/shared/ui/checkbox/checkbox"
 import { SocialLinks } from "@/features/auth/ui/SocialLinks"
 
 type Props = {
-  submitAction: (user: UserType, reset: () => void) => void
+  submitAction: (user: RegisterRequest, reset: () => void) => void
   isLoading: boolean
 }
 

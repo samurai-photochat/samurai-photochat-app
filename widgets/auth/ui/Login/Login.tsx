@@ -1,17 +1,17 @@
 "use client"
-import { LoginType, useLoginMutation } from "@/features/auth/api/authApi"
+import { useLoginMutation } from "@/features/auth/api/authApi"
+import { LoginRequest } from "@/features/auth/api/authApi.types"
 import { setAppError } from "@/app/model/appSlice"
 import LoginForm from "@/features/auth/ui/Login/LoginForm"
 import { useAppDispatch } from "@/shared/hooks/useAppDispatch"
-
 import { useRouter } from "next/navigation"
 import LocalStorage from "@/shared/utils/localStorage/localStorage"
 
 export default function Login() {
-  const [loginUser, { isError }] = useLoginMutation()
+  const [loginUser, { isError, isLoading }] = useLoginMutation()
   const dispatch = useAppDispatch()
   const router = useRouter()
-  const submitAction = (data: LoginType, reset: () => void) => {
+  const submitAction = (data: LoginRequest, reset: () => void) => {
     loginUser(data)
       .unwrap()
       .then((res: { accessToken: string }) => {
@@ -29,5 +29,5 @@ export default function Login() {
         dispatch(setAppError(err?.data?.messages[0]?.message))
       })
   }
-  return <LoginForm submitAction={submitAction} />
+  return <LoginForm submitAction={submitAction} isLoading={isLoading} />
 }
