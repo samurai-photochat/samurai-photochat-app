@@ -1,5 +1,5 @@
 import { Post } from "@/features/posts/api/postsApi.types"
-import { baseApi } from "@/app/api/baseApi"
+import { baseApi } from "@/shared/api/baseApi"
 
 export const postsApi = baseApi.injectEndpoints({
   overrideExisting: true,

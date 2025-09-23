@@ -11,7 +11,7 @@ const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "https://samurai-phot
 const frontendUrl =
   typeof window !== "undefined" && window.location.hostname === "localhost"
     ? "http://localhost:3000"
-    : "https://samurai-photochat.ru/api/v1"
+    : "https://samurai-photochat.ru"
 
 type SocialLinksProps = {
   isDisabled: boolean
@@ -44,6 +44,7 @@ export const SocialLinks = ({ isDisabled, onStartLoading }: SocialLinksProps) =>
   return (
     <div className={s.iconsContainer}>
       <Button
+        type="button"
         variant="icon"
         onClick={handleGithubLogin}
         className={`${s.iconBtn} ${isDisabled ? s.disabled : ""}`}
@@ -52,6 +53,7 @@ export const SocialLinks = ({ isDisabled, onStartLoading }: SocialLinksProps) =>
         <FaGithub className={s.icon} />
       </Button>
       <Button
+        type="button"
         variant="icon"
         onClick={handleGoogleLogin}
         className={`${s.iconBtn} ${isDisabled ? s.disabled : ""}`}

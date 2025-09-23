@@ -11,7 +11,7 @@ import {
   ResendingEmailRequest,
 } from "./authApi.types"
 import LocalStorage from "@/shared/utils/localStorage/localStorage"
-import { setCurrentUser, setToken } from "@/features/auth/model/authSlice"
+import { clearToken, setCurrentUser, setToken } from "@/features/auth/model/authSlice"
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => {
@@ -60,15 +60,19 @@ export const authApi = baseApi.injectEndpoints({
       }),
       login: builder.mutation<LoginResponse, LoginRequest>({
         async onQueryStarted(_, { dispatch, queryFulfilled }) {
-          const { data } = await queryFulfilled
-          if (!data) return
+          try {
+            const { data } = await queryFulfilled
+            if (!data) return
 
-          LocalStorage.setToken(data.accessToken)
-          dispatch(setToken(data.accessToken))
-          dispatch(authApi.util.invalidateTags(["User"]))
+            LocalStorage.setToken(data.accessToken)
+            dispatch(setToken(data.accessToken))
+            dispatch(authApi.util.invalidateTags(["User"]))
 
-          const meResult = await dispatch(authApi.endpoints.me.initiate())
-          if ("data" in meResult && meResult.data) dispatch(setCurrentUser(meResult.data))
+            const meResult = await dispatch(authApi.endpoints.me.initiate())
+            if ("data" in meResult && meResult.data) dispatch(setCurrentUser(meResult.data))
+          } catch (error) {
+            console.error("Login failed:", error)
+          }
         },
         query: (arg) => {
           return {
@@ -78,13 +82,26 @@ export const authApi = baseApi.injectEndpoints({
           }
         },
       }),
-      logout: builder.mutation<{ success: boolean }, void>({
+      logout: builder.mutation<void, void>({
+        async onQueryStarted(_, { dispatch, queryFulfilled }) {
+          try {
+            await queryFulfilled
+
+            LocalStorage.removeToken()
+
+            dispatch(clearToken())
+            dispatch(authApi.util.resetApiState())
+          } catch (error) {
+            console.error("Logout failed:", error)
+          }
+        },
         query: () => {
           return {
             method: "POST",
             url: "auth/logout",
           }
         },
+        invalidatesTags: ["User"],
       }),
       googleLogin: builder.mutation<LoginResponse, GoogleLoginRequest>({
         async onQueryStarted(_, { dispatch, queryFulfilled }) {
@@ -122,10 +139,12 @@ export const authApi = baseApi.injectEndpoints({
 
 export const {
   useMeQuery,
+  useLazyMeQuery,
   useRegistrationMutation,
   useConfirmationMutation,
   useEmailResendingMutation,
   useLoginMutation,
   useLogoutMutation,
   useRefreshTokenMutation,
+  useGoogleLoginMutation,
 } = authApi
