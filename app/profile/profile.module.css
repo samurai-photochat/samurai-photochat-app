@@ -8,3 +8,16 @@
   width: 100%;
   text-align: center;
 }
+
+.list {
+  list-style-type: none;
+
+  & li {
+    width: 150px;
+    cursor: pointer;
+
+    &:hover {
+      border: 1px solid blue;
+    }
+  }
+}

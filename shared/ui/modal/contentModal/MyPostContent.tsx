@@ -9,17 +9,30 @@ import photoLike1 from "@/shared/assets/img/posts/photoLike1.png"
 import photoLike2 from "@/shared/assets/img/posts/photoLike2.png"
 
 import "./MyPostContent.css"
+import { useGetPostQuery } from "@/features/posts/api/postsApi"
 
-export function MyPostContent() {
+type PostIdType = {
+  postId: number
+}
+export function MyPostContent({ postId }: PostIdType) {
+  const { data, isLoading } = useGetPostQuery(postId)
+
+  console.log(data)
+
+  const formattedDate = data?.updatedAt ? new Date(data.updatedAt).toLocaleDateString() : null
+
+  if (isLoading) {
+    return <p>LOADING...</p>
+  }
   return (
     <div className="container">
       <div className="photoPanel">
-        <Image src={bigPhoto} alt="ManPhoto" />
+        <img src={data?.images[0].url} alt="ManPhoto" />
       </div>
       <div className="right-panel">
         <div className="posts-header">
-          <Image src={postPhoto} alt="Avatar" className="post-avatar" />
-          <p className="h3">UserName</p>
+          <img src={data?.images[0].url} alt="Avatar" className="post-avatar" />
+          <p className="h3">{data?.userName}</p>
         </div>
 
         <div className="posts-list regular-text-14">
@@ -42,7 +55,7 @@ export function MyPostContent() {
                 sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
               </p>
 
-              <span className="post-time">14:46</span>
+              <span className="post-time">{formattedDate}</span>
             </div>
           </div>
           <div className="post">
