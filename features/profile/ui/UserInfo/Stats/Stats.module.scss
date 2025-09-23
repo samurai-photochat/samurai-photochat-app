@@ -2,7 +2,8 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 1rem;
+  gap: clamp(0.5rem, 4vw, 3rem);
+  font-family: 'Inter', sans-serif;
 }
 
 .statsContainer {
@@ -13,9 +14,9 @@
 }
 
 .statsCount {
-  padding: 1rem;
+  padding: clamp(0.3rem, 1.5vw, 1rem);
 }
 
-.statsLabel {
-  //padding: 1rem;
+.statsLabel, .statsCount {
+  font-size: clamp(0.75rem, 1.8vw, 0.9rem);
 }

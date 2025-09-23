@@ -1,9 +1,9 @@
 import s from "./Stats.module.scss"
 
 type StatsProps = {
-  following: number
-  followers: number
-  publications: number
+  following: number | undefined
+  followers: number | undefined
+  publications: number | undefined
 }
 
 export const Stats = ({ following, followers, publications }: StatsProps) => {

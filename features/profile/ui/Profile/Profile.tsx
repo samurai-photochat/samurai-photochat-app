@@ -1,9 +1,10 @@
+"use client"
 import { useParams } from "next/navigation"
 import { useGetUserProfileByIdQuery } from "@/app/api/publicUserApi"
 import { useMeQuery } from "@/features/auth/api/authApi"
-import s from "./Profile.module.css"
+import s from "./Profile.module.scss"
 import Sidebar from "@/widgets/sidebar/sidebar"
-import { ProfileSettingsButton, UserInfo } from "@/features/profile/ui"
+import { UserInfo } from "@/features/profile/ui"
 import { PostsGrid } from "@/features/posts/ui"
 
 export const Profile = () => {
@@ -21,12 +22,8 @@ export const Profile = () => {
           aboutMe={profileData?.aboutMe}
           avatars={profileData?.avatars}
           userMetadata={profileData?.userMetadata}
+          isOwner={isOwner}
         />
-        {isOwner && (
-          <div>
-            <ProfileSettingsButton />
-          </div>
-        )}
         <PostsGrid isOwner={isOwner} userId={userId} />
       </div>
     </div>

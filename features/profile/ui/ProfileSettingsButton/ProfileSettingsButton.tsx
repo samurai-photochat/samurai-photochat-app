@@ -1,7 +1,5 @@
-import { Button } from "@/shared/ui";
-
+import { Button } from "@/shared/ui"
+import s from "./ProfileSettingsButton.module.scss"
 export const ProfileSettingsButton = () => {
-  return (
-    <Button>Profile Settings</Button>
-  )
+  return <Button className={s.settingsButton}>Profile Settings</Button>
 }

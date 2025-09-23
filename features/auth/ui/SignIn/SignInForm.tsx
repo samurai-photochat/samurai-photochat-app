@@ -1,5 +1,5 @@
 "use client"
-import s from "./LoginForm.module.css"
+import s from "./LoginForm.module.scss"
 import { Form } from "radix-ui"
 import Image from "next/image"
 import googleIcon from "@/shared/assets/img/google-icon.png"

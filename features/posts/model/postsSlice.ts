@@ -1,16 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-const initialState: PostsState = {
-
-}
+const initialState: PostsState = {}
 
 export const postsSlice = createSlice({
   name: "posts",
   initialState,
-  reducers: {
-  }
+  reducers: {},
 })
 
-type PostsState = {
-
-}
+type PostsState = {}

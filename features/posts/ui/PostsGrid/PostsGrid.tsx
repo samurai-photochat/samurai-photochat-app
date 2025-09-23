@@ -1,9 +1,8 @@
+"use client"
 import { useGetUserPostsInfiniteQuery } from "@/features/posts/api/postsApi"
 import { useCallback, useEffect, useRef } from "react"
 import Image from "next/image"
 import s from "./PostsGrid.module.scss"
-import { Loader } from "@/shared/ui/loader/Loader"
-
 type PostsGridProps = {
   isOwner: boolean
   userId: number
@@ -49,11 +48,11 @@ export const PostsGrid = ({ isOwner, userId }: PostsGridProps) => {
     <div className={s.grid}>
       {visiblePosts.map((post) => (
         <div key={post.id}>
-          <Image src={post.images[0]?.url} alt={post.description} />
+          <Image className={s.postImage} src={post.images[0]?.url} alt={post.description} />
         </div>
       ))}
       <div ref={loadRef} style={{ height: 1 }} />
-      {isFetchingNextPage && <div>Loading</div>}
+      {isFetchingNextPage && <div>Loading...</div>}
     </div>
   )
 }
