@@ -1,4 +1,4 @@
-import { GetUserPostsRequest, GetUserPostsResponse, Post } from "@/features/posts/api/postsApi.types"
+import { Post, UserPostsPaginationRequest, UserPostsPaginationResponse } from "@/features/posts/api/postsApi.types"
 import { baseApi } from "@/app/api/baseApi"
 
 export const postsApi = baseApi.injectEndpoints({
@@ -8,8 +8,11 @@ export const postsApi = baseApi.injectEndpoints({
         url: `/posts/id/${postId}`,
       }),
     }),
-    
-    getUserPosts: builder.infiniteQuery<GetUserPostsResponse, GetUserPostsRequest, string | undefined>({
+    getUserPostsPagination: builder.infiniteQuery<
+      UserPostsPaginationResponse,
+      UserPostsPaginationRequest,
+      string | undefined
+    >({
       infiniteQueryOptions: {
         initialPageParam: undefined,
         getNextPageParam: (lastPage) => {
@@ -32,4 +35,4 @@ export const postsApi = baseApi.injectEndpoints({
   }),
 })
 
-export const { useGetUserPostsInfiniteQuery, useGetPostByIdQuery } = postsApi
+export const { useGetUserPostsPaginationInfiniteQuery, useGetPostByIdQuery } = postsApi

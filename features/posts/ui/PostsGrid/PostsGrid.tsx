@@ -1,5 +1,5 @@
 "use client"
-import { useGetUserPostsInfiniteQuery } from "@/features/posts/api/postsApi"
+import { useGetUserPostsPaginationInfiniteQuery } from "@/features/posts/api/postsApi"
 import { useCallback, useEffect, useRef } from "react"
 import Image from "next/image"
 import s from "./PostsGrid.module.scss"
@@ -9,7 +9,9 @@ type PostsGridProps = {
 }
 
 export const PostsGrid = ({ isOwner, userId }: PostsGridProps) => {
-  const { data, isFetching, isFetchingNextPage, fetchNextPage, hasNextPage } = useGetUserPostsInfiniteQuery({ userId })
+  const { data, isFetching, isFetchingNextPage, fetchNextPage, hasNextPage } = useGetUserPostsPaginationInfiniteQuery({
+    userId,
+  })
   const loadRef = useRef<HTMLDivElement>(null)
   const posts = data?.pages.flatMap((page) => page.items) ?? []
 

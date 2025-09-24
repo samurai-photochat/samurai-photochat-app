@@ -28,7 +28,7 @@ export type Owner = {
   lastName: string
 }
 
-export type GetUserPostsRequest = {
+export type UserPostsPaginationRequest = {
   userId: number
   endCursorPostId?: number
   pageSize?: number
@@ -36,25 +36,10 @@ export type GetUserPostsRequest = {
   sortDirection?: SortDirection
 }
 
-export type GetPostsRequest = {
-  param: string
-  pageSize?: number
-  pageNumber?: number
-  sortBy?: string
-  sortDirection?: SortDirection
-}
-
-export type GetUserPostsResponse = {
+export type UserPostsPaginationResponse = {
   totalCount: number
   pageSize: number
   totalUsers: number
-  items: Post[]
-}
-
-export type GetPostsResponse = {
-  pageSize: number
-  totalCount: number
-  notReadCount: number
   items: Post[]
 }
 
