@@ -5,7 +5,7 @@
   padding: clamp(1rem, 3vw, 2.5rem) 0;
   box-sizing: border-box;
   color: var(--color-light-100);
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .header {
@@ -44,17 +44,20 @@
 .actionBtn {
   margin-left: auto;
   background: transparent;
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   color: var(--color-light-100);
   padding: 0.45rem 0.85rem;
   border-radius: 6px;
   font-size: 0.9rem;
   cursor: pointer;
-  transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
+  transition:
+    background 160ms ease,
+    color 160ms ease,
+    border-color 160ms ease;
 }
 .actionBtn:hover {
-  background: rgba(255,255,255,0.03);
-  border-color: rgba(255,255,255,0.14);
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.14);
 }
 
 .statsRow {

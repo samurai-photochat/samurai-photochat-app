@@ -3,7 +3,7 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: clamp(0.5rem, 4vw, 3rem);
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .statsContainer {
@@ -17,6 +17,7 @@
   padding: clamp(0.3rem, 1.5vw, 1rem);
 }
 
-.statsLabel, .statsCount {
+.statsLabel,
+.statsCount {
   font-size: clamp(0.75rem, 1.8vw, 0.9rem);
 }

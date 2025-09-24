@@ -8,7 +8,7 @@ import Button from "@/shared/ui/button/button"
 // import { useAppSelector } from "@/app/hooks/useAppSelector"
 import { store } from "@/app/store/store"
 import { useMeQuery } from "@/features/auth/api/authApi"
-import { PATH } from "@/shared/config/routes";
+import { PATH } from "@/shared/config/routes"
 // import { selectIsLoggedIn } from "@/entities/user/userSlice"
 // import { useAppDispatch } from "@/app/hooks/useAppDispatch"
 

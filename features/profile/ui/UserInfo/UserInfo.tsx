@@ -21,13 +21,7 @@ type UserProfileProps = {
   isOwner?: boolean
 }
 
-export const UserInfo = ({
-                              username,
-                              aboutMe,
-                              avatars,
-                              userMetadata,
-                              isOwner,
-                            }: UserProfileProps) => {
+export const UserInfo = ({ username, aboutMe, avatars, userMetadata, isOwner }: UserProfileProps) => {
   const avatarUrl = avatars && avatars.length > 0 ? avatars[0].url || "" : ""
 
   return (
