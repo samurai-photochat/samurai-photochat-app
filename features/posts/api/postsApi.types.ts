@@ -3,18 +3,18 @@ export type Post = {
   userName: string
   description: string
   location: string
-  images: PostImage[]
+  images: Image[]
   createdAt: string
   updatedAt: string
   ownerId: number
   avatarOwner: string
-  owner: PostOwner
+  owner: Owner
   likesCount: number
   isLiked: boolean
   avatarWhoLikes: boolean
 }
 
-export type PostImage = {
+export type Image = {
   url: string
   width: number
   height: number
@@ -23,7 +23,7 @@ export type PostImage = {
   uploadId: string
 }
 
-export type PostOwner = {
+export type Owner = {
   firstName: string
   lastName: string
 }

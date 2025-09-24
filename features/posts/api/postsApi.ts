@@ -1,8 +1,14 @@
-import { GetUserPostsRequest, GetUserPostsResponse } from "@/features/posts/api/postsApi.types"
+import { GetUserPostsRequest, GetUserPostsResponse, Post } from "@/features/posts/api/postsApi.types"
 import { baseApi } from "@/app/api/baseApi"
 
 export const postsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    getPostById: builder.query<Post, number>({
+      query: (postId) => ({
+        url: `/posts/id/${postId}`,
+      }),
+    }),
+    
     getUserPosts: builder.infiniteQuery<GetUserPostsResponse, GetUserPostsRequest, string | undefined>({
       infiniteQueryOptions: {
         initialPageParam: undefined,
@@ -26,4 +32,4 @@ export const postsApi = baseApi.injectEndpoints({
   }),
 })
 
-export const { useGetUserPostsInfiniteQuery } = postsApi
+export const { useGetUserPostsInfiniteQuery, useGetPostByIdQuery } = postsApi

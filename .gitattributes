@@ -1,0 +1,16 @@
+# Всегда использовать LF в репозитории
+* text=auto eol=lf
+
+# Для бинарников не трогаем EOL
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.mp4 binary
+*.mov binary
+*.zip binary
+*.gz binary
+*.exe binary
+*.dll binary
