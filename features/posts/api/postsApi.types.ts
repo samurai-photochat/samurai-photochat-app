@@ -1,17 +1,3 @@
-export type Image = {
-  url: string
-  width: number
-  height: number
-  fileSize: number
-  createdAt: string
-  uploadId: string
-}
-
-type Owner = {
-  firstName: string
-  lastName: string
-}
-
 export type Post = {
   id: number
   userName: string
@@ -27,3 +13,49 @@ export type Post = {
   isLiked: boolean
   avatarWhoLikes: boolean
 }
+
+export type Image = {
+  url: string
+  width: number
+  height: number
+  fileSize: number
+  createdAt: string
+  uploadId: string
+}
+
+export type Owner = {
+  firstName: string
+  lastName: string
+}
+
+export type GetUserPostsRequest = {
+  userId: number
+  endCursorPostId?: number
+  pageSize?: number
+  sortBy?: string
+  sortDirection?: SortDirection
+}
+
+export type GetPostsRequest = {
+  param: string
+  pageSize?: number
+  pageNumber?: number
+  sortBy?: string
+  sortDirection?: SortDirection
+}
+
+export type GetUserPostsResponse = {
+  totalCount: number
+  pageSize: number
+  totalUsers: number
+  items: Post[]
+}
+
+export type GetPostsResponse = {
+  pageSize: number
+  totalCount: number
+  notReadCount: number
+  items: Post[]
+}
+
+export type SortDirection = "asc" | "desc"

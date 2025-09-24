@@ -15,11 +15,11 @@ import { useLogoutMutation, useMeQuery } from "@/features/auth/api/authApi"
 import LocalStorage from "@/shared/utils/localStorage/localStorage"
 import { useAppDispatch } from "@/app/hooks/useAppDispatch"
 import { setAppError } from "@/app/model/appSlice"
+import { PATH } from "@/shared/config/routes"
 
 export default function Sidebar() {
   const [logoutUser] = useLogoutMutation()
-  const { refetch } = useMeQuery()
-
+  const { refetch, data: user } = useMeQuery()
   const dispatch = useAppDispatch()
 
   const logoutHandler = () => {
@@ -49,7 +49,7 @@ export default function Sidebar() {
           </Button>
         </li>
         <li className={s.item}>
-          <Button variant="text" as="a" href="#" className={s.sidebarBtn}>
+          <Button variant="text" as="a" href={`${PATH.USER.PROFILE}/${user?.userId}`} className={s.sidebarBtn}>
             <PersonIcon />
             My Profile
           </Button>
