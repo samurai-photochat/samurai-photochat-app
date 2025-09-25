@@ -4,12 +4,12 @@ pipeline {
     agent any
     environment {
         ENV_TYPE = "production"
-        PORT = 4018
-        NAMESPACE = "samurai-photochat-ru"
+        PORT = 4020
+        NAMESPACE = "it-incta-ru"
         REGISTRY_HOSTNAME = "samuraiphotochat"
         REGISTRY = "registry.hub.docker.com"
-        PROJECT = "next-frontend"
-        DEPLOYMENT_NAME = "next-frontend-deployment"
+        PROJECT = "it-incta"
+        DEPLOYMENT_NAME = "it-incta-deployment"
         IMAGE_NAME = "${env.BUILD_ID}_${env.ENV_TYPE}_${env.GIT_COMMIT}"
         DOCKER_BUILD_NAME = "${env.REGISTRY_HOSTNAME}/${env.PROJECT}:${env.IMAGE_NAME}"
     }
@@ -47,7 +47,7 @@ pipeline {
              steps {
                  echo "Push image started..."
                      script {
-                          docker.withRegistry("https://${env.REGISTRY}", 'samurai-photochat-ru') {
+                          docker.withRegistry("https://${env.REGISTRY}", 'it-incta-ru') {
                             app.push("${env.IMAGE_NAME}")
                         }
                      }
