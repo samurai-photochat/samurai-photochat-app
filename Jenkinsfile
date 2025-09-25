@@ -4,12 +4,12 @@ pipeline {
     agent any
     environment {
         ENV_TYPE = "production"
-        PORT = 3945
+        PORT = 4018
         NAMESPACE = "samurai-photochat-ru"
         REGISTRY_HOSTNAME = "samuraiphotochat"
         REGISTRY = "registry.hub.docker.com"
-        PROJECT = "samurai-photochat"
-        DEPLOYMENT_NAME = "samurai-photochat-deployment"
+        PROJECT = "next-frontend"
+        DEPLOYMENT_NAME = "next-frontend-deployment"
         IMAGE_NAME = "${env.BUILD_ID}_${env.ENV_TYPE}_${env.GIT_COMMIT}"
         DOCKER_BUILD_NAME = "${env.REGISTRY_HOSTNAME}/${env.PROJECT}:${env.IMAGE_NAME}"
     }
