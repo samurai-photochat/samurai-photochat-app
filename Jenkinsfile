@@ -4,7 +4,7 @@ pipeline {
     agent any
     environment {
         ENV_TYPE = "production"
-        PORT = 4022
+        PORT = 4026
         NAMESPACE = "it-chat-ru"
         REGISTRY_HOSTNAME = "samuraiphotochat"
         REGISTRY = "registry.hub.docker.com"
