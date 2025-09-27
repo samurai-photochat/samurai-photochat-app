@@ -48,7 +48,12 @@ export type LoginResponse = {
   accessToken: string
 }
 
-export type GoogleLoginRequest = {
-  redirectUrl: string
+// Google OAuth types
+export type GoogleOAuthRequest = {
   code: string
+  redirectUrl: string
+}
+
+export type GoogleOAuthResponse = {
+  accessToken: string
 }

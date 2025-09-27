@@ -2,9 +2,13 @@
 
 import { useGetTotalCountRegisteredUsersQuery, useGetUserProfileByIdQuery } from "@/shared/api/publicUserApi"
 import { useMeQuery } from "@/features/auth/api/authApi"
+import { useGitHubCallback } from "@/features/auth/hooks/useGitHubCallback"
 import Sidebar from "@/widgets/sidebar/sidebar"
 
 export default function Home() {
+  // Обработка callback от GitHub OAuth
+  useGitHubCallback()
+
   const { data: totalCountData, isLoading: isCountLoading } = useGetTotalCountRegisteredUsersQuery()
 
   const { data: user, isError, isLoading } = useMeQuery()
