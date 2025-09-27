@@ -1,0 +1,22 @@
+.githubButton {
+  margin: 16px 0;
+  border: 1px solid #d0d7de;
+  background-color: #24292e;
+  color: #ffffff;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.githubButton:hover {
+  background-color: #1c2128;
+}
+
+.buttonContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.githubIcon {
+  flex-shrink: 0;
+}

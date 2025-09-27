@@ -1,0 +1,22 @@
+.googleButton {
+  margin: 16px 0;
+  border: 1px solid #dadce0;
+  background-color: #fff;
+  color: #3c4043;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.googleButton:hover {
+  background-color: #f8f9fa;
+}
+
+.buttonContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.googleIcon {
+  flex-shrink: 0;
+}
