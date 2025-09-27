@@ -11,27 +11,24 @@ import {
 } from "@/shared/assets/icons/components"
 import { Button } from "@/shared/ui"
 import s from "./sidebar.module.css"
-import { useLogoutMutation, useMeQuery } from "@/features/auth/api/authApi"
-import LocalStorage from "@/shared/utils/localStorage/localStorage"
+import { useLogoutMutation } from "@/features/auth/api/authApi"
 import { useAppDispatch } from "@/shared/hooks/useAppDispatch"
 import { setAppError } from "@/app/model/appSlice"
+import { clearToken, clearCurrentUser } from "@/features/auth/model/authSlice"
+import LocalStorage from "@/shared/utils/localStorage/localStorage"
 
 export default function Sidebar() {
   const [logoutUser] = useLogoutMutation()
-  const { refetch } = useMeQuery()
-
   const dispatch = useAppDispatch()
 
-  const logoutHandler = () => {
-    logoutUser()
-      .unwrap()
-      .then(() => {
-        LocalStorage.removeToken()
-        refetch()
-      })
-      .catch((err) => {
-        dispatch(setAppError(err?.data?.messages?.[0]?.message || "Ошибка при выходе из аккаунта"))
-      })
+  const handleLogout = async () => {
+    try {
+      await logoutUser().unwrap()
+    } catch (error) {
+      console.error("Server logout failed:", error)
+    } finally {
+      window.location.href = "/auth/login"
+    }
   }
 
   return (
@@ -79,7 +76,7 @@ export default function Sidebar() {
           </Button>
         </li>
         <li className={s.item}>
-          <Button variant="text" className={s.sidebarBtn} onClick={logoutHandler}>
+          <Button variant="text" className={s.sidebarBtn} onClick={handleLogout}>
             <LogOutIcon />
             Log Out
           </Button>

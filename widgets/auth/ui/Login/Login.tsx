@@ -8,13 +8,13 @@ import { useRouter } from "next/navigation"
 import { Loader } from "@/shared/ui/loader"
 import { useState } from "react"
 import { PATH } from "@/shared/config/routes"
+import { useAppSelector } from "@/shared/hooks/useAppSelector"
 
 export default function Login() {
   const [loginUser, { isError, isLoading }] = useLoginMutation()
-  const { data: userData, isLoading: isUserLoading } = useMeQuery()
+  const currentUser = useAppSelector((state) => state.auth.currentUser)
   const dispatch = useAppDispatch()
 
-  const [isRedirecting, setIsRedirecting] = useState(false)
 
   const router = useRouter()
 
@@ -29,16 +29,13 @@ export default function Login() {
         reset()
       })
       .catch((err) => {
-        setIsRedirecting(false)
         dispatch(setAppError(err?.data?.messages[0]?.message))
       })
   }
 
-  if (isRedirecting || isUserLoading) return <Loader />
 
-  if (userData) {
+  if (currentUser) {
     router.push(PATH.ROOT)
-    return <Loader />
   }
 
   return <LoginForm submitAction={submitAction} isLoading={isLoading} />

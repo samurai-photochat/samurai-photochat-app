@@ -21,10 +21,13 @@ export const authSlice = createSlice({
     setCurrentUser: (state, action: PayloadAction<MeResponse>) => {
       state.currentUser = action.payload
     },
+    clearCurrentUser: (state) => {
+      state.currentUser = null
+    },
   },
 })
 
-export const { setToken, clearToken, setCurrentUser } = authSlice.actions
+export const { setToken, clearToken, setCurrentUser, clearCurrentUser } = authSlice.actions
 export const authReducer = authSlice.reducer
 
 export const selectToken = (state: AppRootState) => state.auth.token
@@ -35,6 +38,5 @@ export const selectCurrentUserId = (state: AppRootState) => state.auth.currentUs
 
 type AuthState = {
   token: string | null
-
   currentUser: MeResponse | null
 }

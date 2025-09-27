@@ -8,8 +8,7 @@ import { LoginInputs, loginSchema } from "@/shared/lib/signUpSchema/loginSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useState } from "react"
 import { TextField } from "@/shared/ui/text-field/text-field"
-import { GoogleOAuthButton } from "@/features/auth/ui/GoogleOAuthButton"
-import { GitHubOAuthButton } from "@/features/auth/ui/GitHubOAuthButton"
+import { SocialLinks } from "../socialLinks"
 
 type Props = {
   submitAction: ({ email, password }: { email: string; password: string }, reset: () => void) => void
@@ -36,6 +35,7 @@ export default function LoginForm({ submitAction, isLoading }: Props) {
     <div className={s.page}>
       <Form.Root className={s.form} onSubmit={handleSubmit(onSubmit)}>
         <h1 className={s.h1}>Sign In</h1>
+        <SocialLinks />
         <Form.Field name="email" className={s.field}>
           <Form.Label className={s.label}>Email</Form.Label>
           <Form.Control asChild>
@@ -65,8 +65,6 @@ export default function LoginForm({ submitAction, isLoading }: Props) {
         <Button type={"submit"} className={s.button} variant={"classic"}>
           Sign In
         </Button>
-        <GoogleOAuthButton text="Войти через Google" />
-        <GitHubOAuthButton text="Войти через GitHub" />
         <span className={s.whiteText}>{`Don't have an account?`}</span>
         <a className={`${s.a} ${s.blueText}`} href={""}>
           Sign Up

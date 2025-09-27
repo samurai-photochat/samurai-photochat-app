@@ -4,6 +4,7 @@ import "./globals.css"
 import { ReduxProvider } from "@/app/providers/ReduxProvider"
 import { Header } from "@/widgets/header/header"
 import { Alert } from "@/features/alert/alert"
+import { GoogleOAuthProvider } from "@react-oauth/google"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,15 +26,19 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const googleClientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || ""
+
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <ReduxProvider>
-          <Header />
-          {children}
-          {/* Alert для вывода ошибок */}
-          <Alert />
-        </ReduxProvider>
+        <GoogleOAuthProvider clientId={googleClientId}>
+          <ReduxProvider>
+            <Header />
+            {children}
+            {/* Alert для вывода ошибок */}
+            <Alert />
+          </ReduxProvider>
+        </GoogleOAuthProvider>
       </body>
     </html>
   )

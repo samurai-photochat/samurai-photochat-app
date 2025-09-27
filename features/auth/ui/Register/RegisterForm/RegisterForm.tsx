@@ -10,8 +10,7 @@ import { SignUpInputs, signUpSchema } from "@/shared/lib/signUpSchema/signUpSche
 import { RegisterRequest } from "@/features/auth/api/authApi.types"
 import { useState } from "react"
 import Checkbox from "@/shared/ui/checkbox/checkbox"
-import { GoogleOAuthButton } from "@/features/auth/ui/GoogleOAuthButton"
-import { GitHubOAuthButton } from "@/features/auth/ui/GitHubOAuthButton"
+import { SocialLinks } from "../../socialLinks"
 
 type Props = {
   submitAction: (user: RegisterRequest, reset: () => void) => void
@@ -45,6 +44,7 @@ export const RegisterForm = ({ submitAction, isLoading }: Props) => {
   return (
     <Form.Root className={s.form} onSubmit={handleSubmit(onSubmit)}>
       <h1 className={s.pageTitle}>Sign Up</h1>
+      <SocialLinks />
       <TextField
         label={"Username"}
         errorMessage={errors.userName?.message}
@@ -85,8 +85,6 @@ export const RegisterForm = ({ submitAction, isLoading }: Props) => {
       <Button variant={"primary"} fullWidth={true} disabled={isInvalid}>
         Sign Up
       </Button>
-      <GoogleOAuthButton text="Зарегистрироваться через Google" />
-      <GitHubOAuthButton text="Зарегистрироваться через GitHub" />
       <span style={{ color: "var(--color-light-100)" }}>Do you have an account?</span>
       <Button variant={"text"} as={"a"} href={""}>
         Sign In

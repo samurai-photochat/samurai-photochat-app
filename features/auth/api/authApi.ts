@@ -12,7 +12,7 @@ import {
   ResendingEmailRequest,
 } from "./authApi.types"
 import LocalStorage from "@/shared/utils/localStorage/localStorage"
-import { clearToken, setCurrentUser, setToken } from "@/features/auth/model/authSlice"
+import { clearToken, clearCurrentUser, setCurrentUser, setToken } from "@/features/auth/model/authSlice"
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => {
@@ -24,6 +24,16 @@ export const authApi = baseApi.injectEndpoints({
         }),
       }),
       me: builder.query<MeResponse, void>({
+        async onQueryStarted(_, { dispatch, queryFulfilled }) {
+          try {
+            const { data } = await queryFulfilled
+            if (!data) return
+            const currentUser: MeResponse = { ...data }
+            dispatch(setCurrentUser(currentUser))
+          } catch (error) {
+            console.error("Failed to fetch user data:", error)
+          }
+        },
         query: () => {
           return {
             method: "GET",
@@ -87,13 +97,16 @@ export const authApi = baseApi.injectEndpoints({
         async onQueryStarted(_, { dispatch, queryFulfilled }) {
           try {
             await queryFulfilled
-
-            LocalStorage.removeToken()
-
-            dispatch(clearToken())
-            dispatch(authApi.util.resetApiState())
           } catch (error) {
-            console.error("Logout failed:", error)
+            console.error("Logout failed on server:", error)
+            // Не выбрасываем ошибку дальше, чтобы позволить компонентам
+            // обрабатывать очистку состояния самостоятельно
+          } finally {
+            // Всегда очищаем локальное состояние, даже если сервер вернул ошибку
+            LocalStorage.removeToken()
+            dispatch(clearToken())
+            dispatch(clearCurrentUser())
+            dispatch(authApi.util.resetApiState())
           }
         },
         query: () => {

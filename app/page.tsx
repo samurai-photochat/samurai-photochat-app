@@ -1,9 +1,9 @@
 "use client"
 
 import { useGetTotalCountRegisteredUsersQuery, useGetUserProfileByIdQuery } from "@/shared/api/publicUserApi"
-import { useMeQuery } from "@/features/auth/api/authApi"
 import { useGitHubCallback } from "@/features/auth/hooks/useGitHubCallback"
 import Sidebar from "@/widgets/sidebar/sidebar"
+import { useAppSelector } from "@/shared/hooks/useAppSelector"
 
 export default function Home() {
   // Обработка callback от GitHub OAuth
@@ -11,7 +11,7 @@ export default function Home() {
 
   const { data: totalCountData, isLoading: isCountLoading } = useGetTotalCountRegisteredUsersQuery()
 
-  const { data: user, isError, isLoading } = useMeQuery()
+  const currentUser = useAppSelector((state) => state.auth.currentUser)
 
   const totalCount = totalCountData?.totalCount
 
@@ -21,9 +21,7 @@ export default function Home() {
     error: profileError,
   } = useGetUserProfileByIdQuery({ userId: 1200 }, { skip: totalCount === undefined })
 
-  if (isLoading) return <div>...LoadingSpinner</div>
-
-  const isLoggedIn = !!user && !isError
+  const isLoggedIn = !!currentUser
 
   if (isCountLoading) return <p>Загрузка количества пользователей...</p>
   if (isProfileLoading) return <p>Загрузка профиля последнего пользователя...</p>

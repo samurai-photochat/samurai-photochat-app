@@ -57,3 +57,9 @@ export type GoogleOAuthRequest = {
 export type GoogleOAuthResponse = {
   accessToken: string
 }
+
+// GitHub OAuth types
+export type GitHubOAuthRequest = {
+  code: string
+  redirectUrl: string
+}
