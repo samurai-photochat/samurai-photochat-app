@@ -21,6 +21,29 @@ export function MyPostContent({ postId }: PostIdType) {
 
   const formattedDate = data?.updatedAt ? new Date(data.updatedAt).toLocaleDateString() : null
 
+  const comments = [
+    {
+      photo: postPhoto,
+      time: "2 hours ago",
+      showAnswers: false,
+    },
+    {
+      photo: postPhoto3,
+      time: formattedDate,
+      showAnswers: false,
+    },
+    {
+      photo: postPhoto1,
+      time: "2 hours ago",
+      showAnswers: true,
+    },
+    {
+      photo: postPhoto2,
+      time: "14:46",
+      showAnswers: false,
+    },
+  ]
+
   if (isLoading) {
     return <p>LOADING...</p>
   }
@@ -36,52 +59,25 @@ export function MyPostContent({ postId }: PostIdType) {
         </div>
 
         <div className="posts-list regular-text-14">
-          <div className="post">
-            <Image src={postPhoto} alt="Avatar" className="post-avatar" />
-            <div className="post-content">
-              <p className="post-text">
-                <span className="bold-text-14">UserName</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-              <span className="post-time">2 hours ago</span>
-            </div>
-          </div>
+          {comments.map((comment, index) => (
+            <div key={index} className="post">
+              <Image src={comment.photo} alt="Avatar" className="post-avatar" />
+              <div className="post-content">
+                <p className="post-text">
+                  <span className="bold-text-14">UserName</span> Lorem ipsum dolor sit amet, consectetur adipiscing
+                  elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </p>
 
-          <div className="post">
-            <Image src={postPhoto3} alt="Avatar" className="post-avatar" />
-            <div className="post-content">
-              <p className="post-text">
-                <span className="bold-text-14">UserName</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
+                <span className="post-time">{comment.time}</span>
 
-              <span className="post-time">{formattedDate}</span>
+                {comment.showAnswers && (
+                  <p>
+                    <span className="post-time">---- View Answers (1)</span>
+                  </p>
+                )}
+              </div>
             </div>
-          </div>
-          <div className="post">
-            <Image src={postPhoto1} alt="Avatar" className="post-avatar" />
-            <div className="post-content">
-              <p className="post-text">
-                <span className="bold-text-14">UserName</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-              <span className="post-time">2 hours ago</span>
-              <p>
-                <span className="post-time">---- View Answers (1)</span>
-              </p>
-            </div>
-          </div>
-          <div className="post">
-            <Image src={postPhoto2} alt="Avatar" className="post-avatar" />
-            <div className="post-content">
-              <p className="post-text">
-                <span className="bold-text-14">UserName</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-
-              <span className="post-time">14:46</span>
-            </div>
-          </div>
+          ))}
         </div>
 
         <div className="posts-footer">

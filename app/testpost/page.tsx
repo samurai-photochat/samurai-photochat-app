@@ -1,10 +1,10 @@
 "use client"
 
-import s from "./profile.module.css"
+import s from "./testpost.module.css"
 import { Modal } from "@/shared/ui/modal/Modal"
 import { useState } from "react"
 import { MyPostContent } from "@/shared/ui/modal/contentModal/MyPostContent"
-import { useGetAllPostsQuery, useGetPostQuery } from "@/features/posts/api/postsApi"
+import { useGetAllPostsQuery } from "@/features/posts/api/postsApi"
 
 export default function Profile() {
   const [showModal, setShowModal] = useState(false)
@@ -35,9 +35,10 @@ export default function Profile() {
   return (
     <div className={s.profile}>
       <div className={s.content}>
-        <h2>Content</h2>
-        <button onClick={openModalHandler}>open</button>
-        <button onClick={() => console.log("posts")}>get posts</button>
+        <h2 onClick={openModalHandler}>
+          <span>Content</span>
+        </h2>
+
         <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
           {isLoading ? (
             <p>Loading...</p>
