@@ -2,7 +2,8 @@ import { baseApi } from "@/shared/api/baseApi"
 import {
   BaseApiResponse,
   ConfirmationRequest,
-  GoogleLoginRequest,
+  GoogleOAuthRequest,
+  GoogleOAuthResponse,
   LoginRequest,
   LoginResponse,
   MeResponse,
@@ -103,33 +104,27 @@ export const authApi = baseApi.injectEndpoints({
         },
         invalidatesTags: ["User"],
       }),
-      googleLogin: builder.mutation<LoginResponse, GoogleLoginRequest>({
+      googleOAuth: builder.mutation<GoogleOAuthResponse, GoogleOAuthRequest>({
         async onQueryStarted(_, { dispatch, queryFulfilled }) {
           try {
             const { data } = await queryFulfilled
-            if (!data?.accessToken) {
-              console.error("No access token received")
-            }
+            if (!data) return
+
             LocalStorage.setToken(data.accessToken)
             dispatch(setToken(data.accessToken))
+            dispatch(authApi.util.invalidateTags(["User"]))
 
             const meResult = await dispatch(authApi.endpoints.me.initiate())
-            if ("data" in meResult && meResult.data) {
-              dispatch(setCurrentUser(meResult.data))
-            }
-            dispatch(authApi.util.invalidateTags(["User"]))
+            if ("data" in meResult && meResult.data) dispatch(setCurrentUser(meResult.data))
           } catch (error) {
-            console.error("Google login failed:", error)
+            console.error("Google OAuth failed:", error)
           }
         },
-        query: (body) => {
+        query: (arg) => {
           return {
-            url: "/auth/google/login",
             method: "POST",
-            body: {
-              code: body.code,
-              redirectUrl: body.redirectUrl,
-            },
+            url: "auth/google/login",
+            body: arg,
           }
         },
       }),
@@ -146,5 +141,5 @@ export const {
   useLoginMutation,
   useLogoutMutation,
   useRefreshTokenMutation,
-  useGoogleLoginMutation,
+  useGoogleOAuthMutation,
 } = authApi
