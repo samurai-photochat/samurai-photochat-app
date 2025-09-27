@@ -21,7 +21,7 @@ import { PATH } from "@/shared/config/routes"
 
 export default function Sidebar() {
   const [logoutUser] = useLogoutMutation()
-  const { refetch } = useMeQuery()
+  const { refetch, data: user } = useMeQuery()
 
   const [isModalClose, setIsModalClose] = useState<boolean>(true)
 
@@ -67,7 +67,7 @@ export default function Sidebar() {
             </Button>
           </li>
           <li className={s.item}>
-            <Button variant="text" as="a" href="#" className={s.sidebarBtn}>
+            <Button variant="text" as="a" href={`${PATH.USER.PROFILE}/${user?.userId}`} className={s.sidebarBtn}>
               <PersonIcon />
               My Profile
             </Button>
