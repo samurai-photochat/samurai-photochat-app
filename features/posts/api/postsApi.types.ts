@@ -44,3 +44,10 @@ export type UserPostsPaginationResponse = {
 }
 
 export type SortDirection = "asc" | "desc"
+
+export type AllPostsType = {
+  pageSize: number
+  totalCount: number
+  notReadCount: number
+  items: Post[]
+}

@@ -1,7 +1,11 @@
-import { Post, UserPostsPaginationRequest, UserPostsPaginationResponse } from "@/features/posts/api/postsApi.types"
+import {
+  Post,
+  UserPostsPaginationRequest,
+  UserPostsPaginationResponse,
+  AllPostsType,
+} from "@/features/posts/api/postsApi.types"
 
 import { baseApi } from "@/app/api/baseApi"
-import { AllPostsType, PostType } from "./postsApi.type"
 
 type paramsPostsType = {
   param: string
@@ -18,7 +22,7 @@ export const postsApi = baseApi.injectEndpoints({
         url: `/posts/id/${postId}`,
       }),
     }),
-    getPost: builder.query<PostType, number>({
+    getPost: builder.query<Post, number>({
       query: (postId: number) => {
         return {
           method: "GET",
