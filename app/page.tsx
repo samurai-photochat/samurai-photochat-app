@@ -30,7 +30,6 @@ export default function Home() {
   return (
     <div style={{ display: "flex" }}>
       {isLoggedIn && <Sidebar />}
-
       <div>
         <h1>Непобедимые самураи</h1>
 

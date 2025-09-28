@@ -3,7 +3,7 @@ export const PATH = {
 
   AUTH: {
     REGISTRATION: "/auth/registration",
-    LOGIN: "/auth/login",
+    LOGIN: "/auth/signin",
     PRIVACY_POLICY: "/auth/privacy-policy",
     TERMS_OF_SERVICE: "/auth/terms-of-service",
     EMAIL_CONFIRMED: "/auth/email-confirmed",

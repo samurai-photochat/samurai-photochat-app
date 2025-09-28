@@ -1,5 +1,5 @@
 "use client"
-import s from "./LoginForm.module.css"
+import s from "./LoginForm.module.scss"
 import { Form } from "radix-ui"
 import { Button } from "@radix-ui/themes"
 import * as React from "react"
@@ -15,7 +15,7 @@ type Props = {
   isLoading?: boolean
 }
 
-export default function LoginForm({ submitAction, isLoading }: Props) {
+export default function SignInForm({ submitAction, isLoading }: Props) {
   const disableAll = isLoading || false
   const {
     register,

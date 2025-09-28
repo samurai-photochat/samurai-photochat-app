@@ -4,15 +4,15 @@ import { LoginRequest } from "@/features/auth/api/authApi.types"
 import { setAppError } from "@/app/model/appSlice"
 import LoginForm from "@/features/auth/ui/Login/LoginForm"
 import { useAppDispatch } from "@/shared/hooks/useAppDispatch"
+
 import { useRouter } from "next/navigation"
 import { Loader } from "@/shared/ui/loader"
 import { useState } from "react"
 import { PATH } from "@/shared/config/routes"
 import { useAppSelector } from "@/shared/hooks/useAppSelector"
 
-export default function Login() {
-  const [loginUser, { isError, isLoading }] = useLoginMutation()
-  const currentUser = useAppSelector((state) => state.auth.currentUser)
+export function SignIn() {
+  const [loginUser, { isError }] = useLoginMutation()
   const dispatch = useAppDispatch()
 
 
@@ -32,11 +32,5 @@ export default function Login() {
         dispatch(setAppError(err?.data?.messages[0]?.message))
       })
   }
-
-
-  if (currentUser) {
-    router.push(PATH.ROOT)
-  }
-
-  return <LoginForm submitAction={submitAction} isLoading={isLoading} />
+  return <SignInForm submitAction={submitAction} />
 }
