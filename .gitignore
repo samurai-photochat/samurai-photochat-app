@@ -7,6 +7,10 @@
 .vscode
 .vscode/
 /.vscode
+.cursor
+.cursor/
+/.cursor
+
 
 # dependencies
 /node_modules
