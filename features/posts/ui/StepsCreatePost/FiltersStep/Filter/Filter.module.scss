@@ -1,0 +1,18 @@
+.filter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 108px;
+  height: 150px;
+}
+
+.img {
+  width: 108px;
+  height: 108px;
+  margin-bottom: 6px;
+}
+
+.title {
+  color: var(--color-light-100);
+}
