@@ -1,13 +1,14 @@
-import Image from "next/image"
+"use client"
 import voidImage from "@/shared/assets/svg/voidImage.svg"
-import Button from "@/shared/ui/button/button"
-import s from "./AddFotoStep.module.scss"
+import Image from "next/image"
+import { Button } from "@/shared/ui"
+import s from "./UploadingPhotoModal.module.css"
 
-type PropsOne = {
-  handle: (e: React.ChangeEvent<HTMLInputElement> | null) => void
+type Props = {
+  setFilesData: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-export const AddFotoStep = ({ handle }: PropsOne) => {
+export const UploadingPhotoModal = ({ setFilesData }: Props) => {
   return (
     <>
       <div className={s.imageWrapper}>
@@ -15,7 +16,7 @@ export const AddFotoStep = ({ handle }: PropsOne) => {
       </div>
       <div className={s.buttonsContainer}>
         <Button className={s.button} variant={"primary"}>
-          <input accept={"image/png, image/jpeg, image/jpg"} type="file" onChange={(e) => handle(e)} />
+          <input accept={"image/png, image/jpeg, image/jpg"} type="file" onChange={(e) => setFilesData(e)} />
           Open from Computer
         </Button>
         <Button className={s.button} variant={"outlined"}>
