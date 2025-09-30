@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useRef, useState } from "react"
+import { ReactNode, useRef, useState } from "react"
 import s from "./CroppingButton.module.css"
 import { useOutsideClick } from "@/app/hooks/useOutsideClick"
 
