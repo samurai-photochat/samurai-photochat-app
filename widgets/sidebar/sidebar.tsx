@@ -17,10 +17,12 @@ import { setAppError } from "@/app/model/appSlice"
 import { clearToken, clearCurrentUser } from "@/features/auth/model/authSlice"
 import LocalStorage from "@/shared/utils/localStorage/localStorage"
 import { PATH } from "@/shared/config/routes"
+import { Breakpoints, useBreakpoint } from "@/shared/hooks/useBreakpoint"
 
 export default function Sidebar() {
   const [logoutUser] = useLogoutMutation()
   const dispatch = useAppDispatch()
+  const isNarrow = useBreakpoint(Breakpoints.narrow)
 
   const handleLogout = async () => {
     try {
@@ -64,24 +66,28 @@ export default function Sidebar() {
             Search
           </Button>
         </li>
-        <li className={s.item}>
-          <Button variant="text" className={s.sidebarBtn}>
-            <TrendingUpIcon />
-            Statistics
-          </Button>
-        </li>
-        <li className={s.item}>
-          <Button variant="text" className={s.sidebarBtn}>
-            <BookmarkIcon />
-            Favorites
-          </Button>
-        </li>
-        <li className={s.item}>
-          <Button variant="text" className={s.sidebarBtn} onClick={handleLogout}>
-            <LogOutIcon />
-            Log Out
-          </Button>
-        </li>
+        {!isNarrow && (
+          <>
+            <li className={s.item}>
+              <Button variant="text" className={s.sidebarBtn}>
+                <TrendingUpIcon />
+                Statistics
+              </Button>
+            </li>
+            <li className={s.item}>
+              <Button variant="text" className={s.sidebarBtn}>
+                <BookmarkIcon />
+                Favorites
+              </Button>
+            </li>
+            <li className={s.item}>
+              <Button variant="text" className={s.sidebarBtn} onClick={logoutHandler}>
+                <LogOutIcon />
+                Log Out
+              </Button>
+            </li>
+          </>
+        )}
       </ul>
     </div>
   )
