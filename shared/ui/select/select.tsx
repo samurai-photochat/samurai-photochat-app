@@ -24,7 +24,7 @@ export default function SelectCountry() {
     <Select.Root value={value} onValueChange={(val) => setValue(val as CountryCode)}>
       <Select.Trigger className={style.selectTrigger} aria-label={value}>
         <Image src={countries[value].src} alt={value} width={20} height={20} className={style.flagIcon} />
-        {value}
+        <span className={style.selectLabel}>{value}</span>
         <Select.Icon>
           <Image src={arrowDown.src} alt="bell" width={24} height={24} />
         </Select.Icon>
