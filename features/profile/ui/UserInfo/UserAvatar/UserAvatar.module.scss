@@ -1,0 +1,13 @@
+.avatar {
+  left: 0.7em;
+  width: clamp(72px, 15vw, 234px);
+  height: clamp(72px, 15vw, 228px);
+  border-radius: 50%;
+  object-fit: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #222;
+  color: #fff;
+  font-size: 2rem;
+}

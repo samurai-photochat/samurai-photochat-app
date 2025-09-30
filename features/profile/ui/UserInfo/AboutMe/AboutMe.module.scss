@@ -1,0 +1,29 @@
+.aboutMe {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  overflow: hidden;
+  p {
+    margin: 0;
+    line-height: 1.6;
+    text-align: left;
+    font-size: clamp(0.85rem, 1.6vw, 1rem);
+    hyphens: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .aboutMe p {
+    font-size: clamp(0.78rem, 2.2vw, 0.95rem);
+    line-height: 1.5;
+  }
+}
+
+@media (max-width: 360px) {
+  .aboutMe p {
+    font-size: clamp(0.7rem, 3.2vw, 0.85rem);
+    line-height: 1.4;
+  }
+}

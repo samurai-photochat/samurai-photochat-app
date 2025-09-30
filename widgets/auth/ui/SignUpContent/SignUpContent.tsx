@@ -62,7 +62,7 @@ export function SignUpContent() {
   const closeModal = () => setIsModalClose(true)
 
   return (
-    <div className={s.page}>
+    <div className={s.SignUpContent}>
       {!codeParams ? (
         <>
           <RegisterForm submitAction={submitAction} />

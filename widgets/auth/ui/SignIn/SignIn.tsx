@@ -1,13 +1,13 @@
 "use client"
 import { LoginType, useLoginMutation } from "@/features/auth/api/authApi"
 import { setAppError } from "@/app/model/appSlice"
-import LoginForm from "@/features/auth/ui/Login/LoginForm"
 import { useAppDispatch } from "@/app/hooks/useAppDispatch"
 
 import { useRouter } from "next/navigation"
 import LocalStorage from "@/shared/utils/localStorage/localStorage"
+import SignInForm from "@/features/auth/ui/SignIn/SignInForm"
 
-export default function Login() {
+export function SignIn() {
   const [loginUser, { isError }] = useLoginMutation()
   const dispatch = useAppDispatch()
   const router = useRouter()
@@ -29,5 +29,5 @@ export default function Login() {
         dispatch(setAppError(err?.data?.messages[0]?.message))
       })
   }
-  return <LoginForm submitAction={submitAction} />
+  return <SignInForm submitAction={submitAction} />
 }
