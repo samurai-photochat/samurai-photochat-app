@@ -4,18 +4,6 @@
   height: 504px;
 }
 
-.canvas {
-  width: 100%;
-  height: 100%;
-  touch-action: none;
-  /*object-fit: cover;*/
-  object-fit: scale-down;
-
-  &.active {
-    opacity: 1;
-  }
-}
-
 .buttonsContainer {
   padding: 12px;
   bottom: 0;
@@ -26,5 +14,9 @@
 
   :last-child {
     margin-left: auto;
+  }
+
+  > button {
+    color: var(--color-accent-500);
   }
 }

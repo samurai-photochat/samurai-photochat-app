@@ -23,7 +23,6 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.60.0",
-    "react-photo-editor": "^3.0.0",
     "react-redux": "^9.2.0",
     "react-toastify": "^11.0.5",
     "redux": "^5.0.1",

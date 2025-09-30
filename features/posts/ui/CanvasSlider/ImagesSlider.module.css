@@ -1,0 +1,26 @@
+.container {
+    position: relative;
+    width: 490px;
+    height: 503px;
+}
+
+.imageWrapper {
+    > *{
+        width: 490px;
+        height: 503px;
+        touch-action: none;
+        object-fit: scale-down;
+    }
+}
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    width: 48px;
+    height: 48px;
+    z-index: 10;
+    border: none;
+    border-radius: 2px;
+    background-color: #33333380;
+    transform: translateY(-50%);
+}

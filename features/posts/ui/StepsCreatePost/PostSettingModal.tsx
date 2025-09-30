@@ -3,14 +3,15 @@ import Image from "next/image"
 import Button from "@/shared/ui/button/button"
 import CloseIcon from "@/shared/assets/svg/Close.svg"
 import ArrowBackIcon from "@/shared/assets/svg/arrow-back.svg"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { AddFotoStep } from "./AddFotoStep/AddFotoStep"
 import { CroppingStep } from "./CroppingStep/CroppingStep"
 import { FilterStep } from "./FiltersStep/FiltersStep"
 import s from "./PostSettingModal.module.scss"
 import { PublicationStep } from "./PublicationStep/PublicationStep"
 import { useAppDispatch } from "@/app/hooks/useAppDispatch"
-import { addFileAC } from "@/features/posts/model/postsSlice"
+import { addImageAC, selectImages } from "@/features/posts/model/postsSlice"
+import { useAppSelector } from "@/app/hooks/useAppSelector"
 // Шаги добавления поста
 const steps = [
   { key: 0, label: "Add_Photo" },
@@ -29,13 +30,14 @@ export const PostSettingModal = () => {
   //   Шаг настройки поста
   const [currentStep, setCurrentStep] = useState(0)
   const dispatch = useAppDispatch()
+  const images = useAppSelector(selectImages)
   //   длина массива шагов
   const totalSteps = steps.length
 
   const setFilesData = (e: React.ChangeEvent<HTMLInputElement> | null) => {
     if (e?.target?.files && e.target.files.length > 0) {
       const file = e.target.files[0]
-      dispatch(addFileAC({ file }))
+      dispatch(addImageAC({ file }))
       setCurrentStep(1)
     }
   }
@@ -67,7 +69,7 @@ export const PostSettingModal = () => {
       case 1:
         return <CroppingStep />
       case 2:
-        return <FilterStep photo={"url"} />
+        return <FilterStep />
       case 3:
         return <PublicationStep />
       // case 4:
@@ -77,10 +79,16 @@ export const PostSettingModal = () => {
     }
   }
   //  открытие окна, под вопросом
-  const isOpenHandel = () => {
-    setCurrentStep(0)
-    setIsOpen(true)
-  }
+  // const isOpenHandel = () => {
+  //   setCurrentStep(0)
+  //   setIsOpen(true)
+  // }
+
+  useEffect(() => {
+    if (images.length === 0) {
+      setCurrentStep(0)
+    }
+  }, [images])
 
   return (
     isOpen && (

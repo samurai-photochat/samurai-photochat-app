@@ -1,4 +1,4 @@
-import { CroppingButton } from "@/features/posts/ui/CreatePostWindow/CroppingButton/CroppingButton"
+import { CroppingButton } from "@/features/posts/CroppingButton/CroppingButton"
 import s from "./ResizingButton.module.css"
 import { ImageOutlineIcon } from "@/shared/assets/icons/components/ImageOutlineIcon"
 import { OneByOneModeIcon } from "@/shared/assets/icons/components/OneByOneModeIcon"

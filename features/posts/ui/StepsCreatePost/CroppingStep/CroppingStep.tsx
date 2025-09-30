@@ -1,134 +1,74 @@
 "use client"
 import { useRef, useState } from "react"
 import s from "./CroppingStep.module.scss"
-import { ResizingButton } from "@/features/posts/ui/CreatePostWindow/CroppingButton/ResizingButton/ResizingButton"
-import { ZoomingButton } from "@/features/posts/ui/CreatePostWindow/CroppingButton/ZoomingButton/ZoomingButton"
-import { LoadingButton } from "@/features/posts/ui/CreatePostWindow/CroppingButton/LoadingButton/LoadingButton"
-import { CanvasEditor } from "@/features/posts/ui/CreatePostWindow/CanvasEditor/CanvasEditor"
+import { ResizingButton } from "@/features/posts/CroppingButton/ResizingButton/ResizingButton"
+import { ZoomingButton } from "@/features/posts/CroppingButton/ZoomingButton/ZoomingButton"
+import { LoadingButton } from "@/features/posts/CroppingButton/LoadingButton/LoadingButton"
 import { useAppSelector } from "@/app/hooks/useAppSelector"
-import { addFileAC, changeImageAC, selectFiles, selectImages } from "@/features/posts/model/postsSlice"
+import { addImageAC, changeImageAC, deleteImageAC, selectImages } from "@/features/posts/model/postsSlice"
 import { useAppDispatch } from "@/app/hooks/useAppDispatch"
+import { setAppError } from "@/app/model/appSlice"
+import { ImagesSlider } from "@/features/posts/ui/CanvasSlider/ImagesSlider"
+import { CanvasEditor } from "@/features/posts/ui/CanvasEditor/CanvasEditor"
 
 export type CanvasImage = {
   file: File
   imageSrc: string
-  brightness: number
-  contrast: number
-  saturate: number
-  grayscale: number
+  filter: string
   zoom: number
   scale: number
   preview: string
 }
 
 export const CroppingStep = () => {
-  const files = useAppSelector(selectFiles)
   const images = useAppSelector(selectImages)
   const ref = useRef<HTMLHeadingElement | null>(null)
 
-  const defaultScale = 490 / 504 // ref.current ? ref.current?.offsetWidth / ref.current?.offsetHeight : 1
-  const [currentIndex, setCurrentIndex] = useState<number>(0)
-
-  const [brightness, setBrightness] = useState(100)
-  const [contrast, setContrast] = useState(100)
-  const [saturate, setSaturate] = useState(100)
-  const [grayscale, setGrayscale] = useState(0)
-  const [zoom, setZoom] = useState(1)
-  const [scale, setScale] = useState(defaultScale)
-
-  const [preview, setPreview] = useState("")
+  const defaultScale = ref.current ? ref.current?.offsetWidth / ref.current?.offsetHeight : 1
+  const [position, setPosition] = useState(0)
+  const currentImage = images[position]
 
   const dispatch = useAppDispatch()
 
-  const setFilesData = (e: React.ChangeEvent<HTMLInputElement> | null) => {
+  const addImage = (e: React.ChangeEvent<HTMLInputElement> | null) => {
     if (e?.target?.files && e.target.files.length > 0) {
-      dispatch(addFileAC({ file: e.target.files[0] }))
+      if (images.length === 10) {
+        dispatch(setAppError({ error: "You can only upload up to 10 photos" }))
+      } else dispatch(addImageAC({ file: e.target.files[0] }))
+      e.target.value = ""
     }
   }
 
-  const changeImage = (index: number, newImage: Partial<CanvasImage>) => {
-    dispatch(changeImageAC({ index, newImage }))
+  const changeImage = (index: number, image: Partial<CanvasImage>) => {
+    dispatch(changeImageAC({ index, image }))
   }
 
-  const saveCurrentImage = () => {
-    const newImage = {
-      //imageSrc: preview,
-      brightness,
-      contrast,
-      saturate,
-      grayscale,
-      zoom,
-      scale,
-      preview,
-    } as Partial<CanvasImage>
-    changeImage(currentIndex, newImage)
+  const setZoom = (zoom: number) => {
+    changeImage(position, { zoom })
   }
 
-  const downloadAllImages = () => {
-    images.forEach((image) => {
-      if (image.file) {
-        const link = document.createElement("a")
-        link.download = image.file.name
-        link.href = image.preview
-        link.click()
-      }
-    })
+  const setScale = (scale: number) => {
+    changeImage(position, { scale })
   }
-  const setFilters = (index: number) => {
-    const image = images[index]
-    setBrightness(image.brightness)
-    setContrast(image.contrast)
-    setSaturate(image.saturate)
-    setGrayscale(image.grayscale)
-    setZoom(image.zoom)
-    setScale(image.scale)
+
+  const setPreview = (preview: string) => {
+    changeImage(position, { preview })
   }
-  const setCurrentImage = (index: number) => {
-    if (index !== currentIndex) {
-      saveCurrentImage()
-      setFilters(index)
-      setCurrentIndex(index)
-    }
+
+  const deleteImage = (index: number) => {
+    dispatch(deleteImageAC({ index }))
   }
   return (
     <div ref={ref} className={s.content}>
-      {/*<button style={{ position: "absolute" }} onClick={downloadAllImages}>*/}
-      {/*  +*/}
-      {/*</button>*/}
-      {currentIndex > 0 && (
-        <button
-          style={{ position: "absolute", left: "0", top: "50%", width: "20px", zIndex: 100 }}
-          onClick={() => {
-            setCurrentImage(currentIndex - 1)
-          }}
-        >
-          &#8592;
-        </button>
-      )}
-      {currentIndex < images.length - 1 && (
-        <button
-          style={{ position: "absolute", right: "0", top: "50%", width: "20px", zIndex: 100 }}
-          onClick={() => {
-            setCurrentImage(currentIndex + 1)
-          }}
-        >
-          &#8594;
-        </button>
-      )}
       {images.length > 0 && (
         <>
-          <CanvasEditor
-            file={images[currentIndex].file}
-            imageSrc={images[currentIndex].imageSrc}
-            scale={scale}
-            className={s.canvas}
-            zoom={zoom}
-            setPreview={setPreview}
-          />
+          <ImagesSlider images={images} position={position} setPosition={setPosition}>
+            <CanvasEditor image={currentImage} className={s.canvas} setPreview={setPreview} />
+          </ImagesSlider>
           <div className={s.buttonsContainer}>
             <ResizingButton setScale={setScale} defaultScale={defaultScale} />
-            <ZoomingButton zoom={zoom} setZoom={setZoom} />
-            <LoadingButton setCurentImage={setCurrentImage} />
+            <ZoomingButton zoom={currentImage.zoom} setZoom={setZoom} />
+            <LoadingButton images={images} deleteImage={deleteImage} addImage={addImage} />
           </div>
         </>
       )}
