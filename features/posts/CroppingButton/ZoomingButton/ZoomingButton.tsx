@@ -1,5 +1,5 @@
 import s from "./ZoomingButton.module.css"
-import { CroppingButton } from "@/features/posts/ui/CreatePostWindow/CroppingButton/CroppingButton"
+import { CroppingButton } from "@/features/posts/CroppingButton/CroppingButton"
 import { MaximizeOutlineIcon } from "@/shared/assets/icons/components/MaximizeOutlineIcon"
 
 type Props = {

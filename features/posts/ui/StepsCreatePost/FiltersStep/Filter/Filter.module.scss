@@ -4,13 +4,17 @@
   justify-content: center;
   flex-direction: column;
   width: 108px;
-  height: 150px;
+  height: 140px;
 }
 
 .img {
+  border: none;
+  background: transparent;
   width: 108px;
   height: 108px;
   margin-bottom: 6px;
+  object-fit: scale-down;
+  cursor: pointer;
 }
 
 .title {

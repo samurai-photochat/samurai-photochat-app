@@ -1,6 +1,7 @@
 .window {
   margin: auto;
-  width: 492px;
+  min-width: 492px;
+  width: min-content;
   max-width: 100%;
   border: 1px solid var(--color-dark-100);
   background-color: var(--color-dark-300);
