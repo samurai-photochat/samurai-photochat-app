@@ -9,6 +9,8 @@ import { CroppingStep } from "./CroppingStep/CroppingStep"
 import { FilterStep } from "./FiltersStep/FiltersStep"
 import s from "./PostSettingModal.module.scss"
 import { PublicationStep } from "./PublicationStep/PublicationStep"
+import { useAppDispatch } from "@/app/hooks/useAppDispatch"
+import { addFileAC } from "@/features/posts/model/postsSlice"
 // Шаги добавления поста
 const steps = [
   { key: 0, label: "Add_Photo" },
@@ -26,23 +28,23 @@ export const PostSettingModal = () => {
   const [isOpen, setIsOpen] = useState(true)
   //   Шаг настройки поста
   const [currentStep, setCurrentStep] = useState(0)
-  //   сохранения фото
-  const [file, setFile] = useState<File>()
+  const dispatch = useAppDispatch()
   //   длина массива шагов
   const totalSteps = steps.length
 
-  const setFileData = (e: React.ChangeEvent<HTMLInputElement> | null) => {
+  const setFilesData = (e: React.ChangeEvent<HTMLInputElement> | null) => {
     if (e?.target?.files && e.target.files.length > 0) {
-      setFile(e.target.files[0])
+      const file = e.target.files[0]
+      dispatch(addFileAC({ file }))
       setCurrentStep(1)
     }
   }
 
   // создание URl
-  let url = null
-  if (file !== undefined) {
-    url = URL.createObjectURL(file)
-  }
+  // let url = null
+  // if (file !== undefined) {
+  //   url = URL.createObjectURL(file)
+  // }
   //   закрытие окна
   const isClose = () => setIsOpen(false)
   // переход на след. шаг
@@ -61,11 +63,11 @@ export const PostSettingModal = () => {
   const renderStep = () => {
     switch (currentStep) {
       case 0:
-        return <AddFotoStep handle={(e) => setFileData(e)} />
+        return <AddFotoStep handle={setFilesData} />
       case 1:
         return <CroppingStep />
       case 2:
-        return <FilterStep photo={url} />
+        return <FilterStep photo={"url"} />
       case 3:
         return <PublicationStep />
       // case 4:

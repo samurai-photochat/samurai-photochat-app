@@ -1,34 +1,37 @@
 "use client"
 import { useRef, useState } from "react"
-import s from "./CroppingStep.module.scss"
+import s from "./CroppingPhotoModal.module.css"
 import { ResizingButton } from "@/features/posts/ui/CreatePostWindow/CroppingButton/ResizingButton/ResizingButton"
 import { ZoomingButton } from "@/features/posts/ui/CreatePostWindow/CroppingButton/ZoomingButton/ZoomingButton"
 import { LoadingButton } from "@/features/posts/ui/CreatePostWindow/CroppingButton/LoadingButton/LoadingButton"
 import { CanvasEditor } from "@/features/posts/ui/CreatePostWindow/CanvasEditor/CanvasEditor"
-import { useAppSelector } from "@/app/hooks/useAppSelector"
-import { addFileAC, changeImageAC, selectFiles, selectImages } from "@/features/posts/model/postsSlice"
-import { useAppDispatch } from "@/app/hooks/useAppDispatch"
+
+type Props = {
+  files: File[]
+  images: CanvasImage[]
+  setFilesData: (e: React.ChangeEvent<HTMLInputElement> | null) => void
+  changeImage: (index: number, image: Partial<CanvasImage>) => void
+}
 
 export type CanvasImage = {
   file: File
-  imageSrc: string
+  imageUrl: string
   brightness: number
   contrast: number
   saturate: number
   grayscale: number
   zoom: number
   scale: number
-  preview: string
 }
 
-export const CroppingStep = () => {
-  const files = useAppSelector(selectFiles)
-  const images = useAppSelector(selectImages)
+export const CroppingPhotoModal = ({ files, images, setFilesData, changeImage }: Props) => {
   const ref = useRef<HTMLHeadingElement | null>(null)
+  const canvasRef = useRef<HTMLCanvasElement | null>(null)
 
   const defaultScale = 490 / 504 // ref.current ? ref.current?.offsetWidth / ref.current?.offsetHeight : 1
   const [currentIndex, setCurrentIndex] = useState<number>(0)
 
+  const [imageUrl, setImageUrl] = useState("")
   const [brightness, setBrightness] = useState(100)
   const [contrast, setContrast] = useState(100)
   const [saturate, setSaturate] = useState(100)
@@ -36,40 +39,18 @@ export const CroppingStep = () => {
   const [zoom, setZoom] = useState(1)
   const [scale, setScale] = useState(defaultScale)
 
-  const [preview, setPreview] = useState("")
-
-  const dispatch = useAppDispatch()
-
-  const setFilesData = (e: React.ChangeEvent<HTMLInputElement> | null) => {
-    if (e?.target?.files && e.target.files.length > 0) {
-      dispatch(addFileAC({ file: e.target.files[0] }))
-    }
-  }
-
-  const changeImage = (index: number, newImage: Partial<CanvasImage>) => {
-    dispatch(changeImageAC({ index, newImage }))
-  }
-
   const saveCurrentImage = () => {
-    const newImage = {
-      //imageSrc: preview,
-      brightness,
-      contrast,
-      saturate,
-      grayscale,
-      zoom,
-      scale,
-      preview,
-    } as Partial<CanvasImage>
+    const newImage = { imageUrl, brightness, contrast, saturate, grayscale, zoom, scale } as Partial<CanvasImage>
     changeImage(currentIndex, newImage)
   }
 
   const downloadAllImages = () => {
-    images.forEach((image) => {
-      if (image.file) {
+    images.forEach((_image, i) => {
+      const canvas = canvasRef.current
+      if (canvas && files[i]) {
         const link = document.createElement("a")
-        link.download = image.file.name
-        link.href = image.preview
+        link.download = files[i].name
+        link.href = canvas.toDataURL(files[i]?.type)
         link.click()
       }
     })
@@ -92,9 +73,9 @@ export const CroppingStep = () => {
   }
   return (
     <div ref={ref} className={s.content}>
-      {/*<button style={{ position: "absolute" }} onClick={downloadAllImages}>*/}
-      {/*  +*/}
-      {/*</button>*/}
+      <button style={{ position: "absolute" }} onClick={downloadAllImages}>
+        +
+      </button>
       {currentIndex > 0 && (
         <button
           style={{ position: "absolute", left: "0", top: "50%", width: "20px", zIndex: 100 }}
@@ -118,17 +99,24 @@ export const CroppingStep = () => {
       {images.length > 0 && (
         <>
           <CanvasEditor
+            canvasRef={canvasRef}
             file={images[currentIndex].file}
-            imageSrc={images[currentIndex].imageSrc}
             scale={scale}
             className={s.canvas}
             zoom={zoom}
-            setPreview={setPreview}
+            setImageUrl={setImageUrl}
           />
           <div className={s.buttonsContainer}>
             <ResizingButton setScale={setScale} defaultScale={defaultScale} />
             <ZoomingButton zoom={zoom} setZoom={setZoom} />
-            <LoadingButton setCurentImage={setCurrentImage} />
+            <LoadingButton files={files} setCurentImage={setCurrentImage} />
+            <input
+              style={{ position: "absolute", right: "-100px" }}
+              accept={"image/png, image/jpeg, image/jpg"}
+              type="file"
+              multiple
+              onChange={(e) => setFilesData(e)}
+            />
           </div>
         </>
       )}
