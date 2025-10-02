@@ -7,13 +7,13 @@ import photoLike1 from "@/shared/assets/img/posts/photoLike1.png"
 import photoLike2 from "@/shared/assets/img/posts/photoLike2.png"
 
 import "./PostContent.css"
-import { useGetPostQuery } from "@/features/posts/api/postsApi"
+import { useGetPostByIdQuery } from "@/features/posts/api/postsApi"
 
 type PostIdType = {
   postId: number
 }
 export function PostContent({ postId }: PostIdType) {
-  const { data, isLoading } = useGetPostQuery(postId)
+  const { data, isLoading } = useGetPostByIdQuery(postId)
 
   console.log(data)
 

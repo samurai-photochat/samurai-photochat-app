@@ -2,18 +2,11 @@ import {
   Post,
   UserPostsPaginationRequest,
   UserPostsPaginationResponse,
-  AllPostsType,
+  PostsByParamsResponse,
+  PostsQueryParams,
 } from "@/features/posts/api/postsApi.types"
 
 import { baseApi } from "@/app/api/baseApi"
-
-type paramsPostsType = {
-  param: string
-  pageSize?: number
-  pageNumber?: number
-  sortBy?: string
-  sortDirection?: "asc" | "desc"
-}
 
 export const postsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -22,21 +15,19 @@ export const postsApi = baseApi.injectEndpoints({
         url: `/posts/id/${postId}`,
       }),
     }),
-    getPost: builder.query<Post, number>({
-      query: (postId: number) => {
-        return {
-          method: "GET",
-          url: `/posts/id/${postId}`,
-        }
-      },
-    }),
-    getAllPosts: builder.query<AllPostsType, paramsPostsType>({
+    getPostsByParams: builder.query<PostsByParamsResponse, PostsQueryParams>({
       query: (arg) => {
-        const { param, ...options } = arg
+        const { param, pageSize, pageNumber, sortBy, sortDirection } = arg
+        const params = new URLSearchParams()
+
+        if (pageSize) params.set("pageSize", pageSize.toString())
+        if (pageNumber) params.set("pageNumber", pageNumber.toString())
+        if (sortBy) params.set("sortBy", sortBy)
+        if (sortDirection) params.set("sortDirection", sortDirection)
+
         return {
-          method: "GET",
           url: `/posts/${param}`,
-          options,
+          params,
         }
       },
     }),
@@ -67,5 +58,4 @@ export const postsApi = baseApi.injectEndpoints({
   }),
 })
 
-export const { useGetUserPostsPaginationInfiniteQuery, useGetPostByIdQuery, useGetPostQuery, useGetAllPostsQuery } =
-  postsApi
+export const { useGetUserPostsPaginationInfiniteQuery, useGetPostByIdQuery, useGetPostsByParamsQuery } = postsApi

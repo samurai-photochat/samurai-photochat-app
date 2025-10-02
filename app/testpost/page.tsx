@@ -1,63 +1,66 @@
 "use client"
 
-import s from "./testpost.module.css"
-import { Modal } from "@/features/posts/ui/PostModal/Modal/Modal"
 import { useState } from "react"
-import { PostContent } from "@/features/posts/ui/PostModal/Post/PostContent"
-import { useGetAllPostsQuery } from "@/features/posts/api/postsApi"
+import s from "./testpost.module.css"
+import { useGetPostsByParamsQuery } from "@/features/posts/api/postsApi"
+import { PostModal } from "@/features/posts/ui/PostModal/PostModal"
+import Image from "next/image"
 
 export default function Profile() {
   const [showModal, setShowModal] = useState(false)
-  const [showPostId, setShowPostId] = useState(1111)
-  //8339
-  //sonyhero klonirovan89
-  const { data: posts, isError, isLoading } = useGetAllPostsQuery({ param: "klonirovan89", pageSize: 8 })
-  console.log(posts)
+  const [selectedPostId, setSelectedPostId] = useState<number | null>(null)
+
+  // Загрузка данных постов
+  const {
+    data: posts,
+    isError,
+    isLoading,
+  } = useGetPostsByParamsQuery({
+    param: "klonirovan89",
+    pageSize: 8,
+  })
+
+  const openPost = (postId: number) => {
+    setSelectedPostId(postId)
+    setShowModal(true)
+  }
+
+  const closeModal = () => {
+    setShowModal(false)
+  }
+
   if (isError) {
     return <p>Error!</p>
   }
 
-  const openModalHandler = () => {
-    setShowModal(true)
+  if (isLoading) {
+    return <p>Loading...</p>
   }
-
-  const closeModalHandler = () => {
-    setShowModal(false)
-  }
-
-  const openPost = (id: number) => {
-    openModalHandler()
-    setShowPostId(id)
-  }
-
-  console.log(showPostId)
 
   return (
     <div className={s.profile}>
       <div className={s.content}>
-        <h2 onClick={openModalHandler}>
+        <h2>
           <span>Content</span>
         </h2>
 
         <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
-          {isLoading ? (
-            <p>Loading...</p>
-          ) : (
-            posts?.items.map((p) => {
-              return (
-                <ul key={p.id} className={s.list}>
-                  <li onClick={() => openPost(p.id)}>
-                    <img src={p?.images[0].url} alt="avatar" />
-                    <p>{new Date(p.updatedAt).toLocaleDateString()}</p>
-                  </li>
-                </ul>
-              )
-            })
-          )}
+          {posts?.items.map((post) => (
+            <ul key={post.id} className={s.list}>
+              <li onClick={() => openPost(post.id)}>
+                <Image
+                  src={post.images[0].url}
+                  alt="avatar"
+                  width={post.images[0].width}
+                  height={post.images[0].height}
+                />
+                <p>{new Date(post.updatedAt).toLocaleDateString()}</p>
+              </li>
+            </ul>
+          ))}
         </div>
-        <Modal open={showModal} onClose={closeModalHandler}>
-          <PostContent postId={showPostId} />
-        </Modal>
+
+        <PostModal isOpen={showModal} postId={selectedPostId} onClose={closeModal} />
       </div>
     </div>
   )
