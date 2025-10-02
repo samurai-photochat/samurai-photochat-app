@@ -7,14 +7,22 @@
   justify-content: end;
   padding: 0 60px;
   border-bottom: 1px var(--color-dark-100) solid;
+  gap: 12px;
 }
 
 .bell {
   margin-right: 45px;
 }
 
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .logoText {
   margin-right: auto;
+  font-size: clamp(var(--text-xl), 2.4vw, 28px);
   margin-bottom: 0;
 }
 
@@ -24,4 +32,15 @@
 
 .button:last-child {
   margin-left: 24px;
+}
+
+.selectWrapper {
+  margin-right: 10px;
+}
+
+@media (max-width: 600px) {
+  .header {
+    padding: 0 12px;
+    justify-content: space-between;
+  }
 }
