@@ -47,68 +47,6 @@ export default function Sidebar() {
   }
 
   return (
-<<<<<<< HEAD
-    <>
-      <ModalWindow
-        isOpen={isModalClose}
-        title={""}
-        text={`Are you really want to log out of your account "___email___"?`}
-        isClose={modalCloseHandler}
-      />
-
-      <div className={`${s.sidebar} regular-text-14`}>
-        <ul className={s.list}>
-          <li className={s.item}>
-            <Button variant="text" className={s.sidebarBtn}>
-              <HomeIcon />
-              Feed
-            </Button>
-          </li>
-          <li className={s.item}>
-            <Button variant="text" className={s.sidebarBtn}>
-              <PlusSquareIcon /> Create
-            </Button>
-          </li>
-          <li className={s.item}>
-            <Button variant="text" as="a" href={`${PATH.USER.PROFILE}/${user?.userId}`} className={s.sidebarBtn}>
-              <PersonIcon />
-              My Profile
-            </Button>
-          </li>
-          <li className={s.item}>
-            <Button variant="text" className={s.sidebarBtn}>
-              <MessageCircleIcon />
-              Messenger
-            </Button>
-          </li>
-          <li className={s.item}>
-            <Button variant="text" className={s.sidebarBtn}>
-              <SearchIcon />
-              Search
-            </Button>
-          </li>
-          <li className={s.item}>
-            <Button variant="text" className={s.sidebarBtn}>
-              <TrendingUpIcon />
-              Statistics
-            </Button>
-          </li>
-          <li className={s.item}>
-            <Button variant="text" className={s.sidebarBtn}>
-              <BookmarkIcon />
-              Favorites
-            </Button>
-          </li>
-          <li className={s.item}>
-            <Button variant="text" className={s.sidebarBtn} onClick={() => setIsModalClose(false)}>
-              <LogOutIcon />
-              Log Out
-            </Button>
-          </li>
-        </ul>
-      </div>
-    </>
-=======
     <div className={`${s.sidebar} regular-text-14`}>
       <ul className={s.list}>
         <li className={s.item}>
@@ -164,6 +102,5 @@ export default function Sidebar() {
         )}
       </ul>
     </div>
->>>>>>> origin/dev
   )
 }
