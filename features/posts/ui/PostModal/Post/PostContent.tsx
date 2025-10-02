@@ -1,6 +1,4 @@
 import Image from "next/image"
-import bigPhoto from "@/shared/assets/img/posts/bigPhoto.png"
-import palmaPhoto from "@/shared/assets/img/posts/palmaPhoto.png"
 import postPhoto from "@/shared/assets/img/posts/bigPhoto.png"
 import postPhoto1 from "@/shared/assets/img/posts/postPhoto1.png"
 import postPhoto2 from "@/shared/assets/img/posts/postPhoto2.png"
@@ -8,13 +6,13 @@ import postPhoto3 from "@/shared/assets/img/posts/postPhoto3.png"
 import photoLike1 from "@/shared/assets/img/posts/photoLike1.png"
 import photoLike2 from "@/shared/assets/img/posts/photoLike2.png"
 
-import "./MyPostContent.css"
+import "./PostContent.css"
 import { useGetPostQuery } from "@/features/posts/api/postsApi"
 
 type PostIdType = {
   postId: number
 }
-export function MyPostContent({ postId }: PostIdType) {
+export function PostContent({ postId }: PostIdType) {
   const { data, isLoading } = useGetPostQuery(postId)
 
   console.log(data)
@@ -86,7 +84,7 @@ export function MyPostContent({ postId }: PostIdType) {
             <Image src={photoLike2} alt="PhotoLike" className="post-photolike" />
             <Image src={postPhoto} alt="PhotoLike" className="post-photolike" />
 
-            <p className="posts-counter h3">2 243 "Like"</p>
+            <p className="posts-counter h3">2 243 </p>
           </div>
           <p className="post-time">July 3, 2025</p>
         </div>

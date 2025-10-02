@@ -1,9 +1,9 @@
 "use client"
 
 import s from "./testpost.module.css"
-import { Modal } from "@/shared/ui/modal/Modal"
+import { Modal } from "@/features/posts/ui/PostModal/Modal/Modal"
 import { useState } from "react"
-import { MyPostContent } from "@/shared/ui/modal/contentModal/MyPostContent"
+import { PostContent } from "@/features/posts/ui/PostModal/Post/PostContent"
 import { useGetAllPostsQuery } from "@/features/posts/api/postsApi"
 
 export default function Profile() {
@@ -56,7 +56,7 @@ export default function Profile() {
           )}
         </div>
         <Modal open={showModal} onClose={closeModalHandler}>
-          <MyPostContent postId={showPostId} />
+          <PostContent postId={showPostId} />
         </Modal>
       </div>
     </div>
