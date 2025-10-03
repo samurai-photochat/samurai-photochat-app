@@ -1,92 +1,120 @@
 import Image from "next/image"
-import postPhoto from "@/shared/assets/img/posts/bigPhoto.png"
-import postPhoto1 from "@/shared/assets/img/posts/postPhoto1.png"
-import postPhoto2 from "@/shared/assets/img/posts/postPhoto2.png"
-import postPhoto3 from "@/shared/assets/img/posts/postPhoto3.png"
-import photoLike1 from "@/shared/assets/img/posts/photoLike1.png"
-import photoLike2 from "@/shared/assets/img/posts/photoLike2.png"
-
 import "./PostContent.css"
 import { useGetPostByIdQuery } from "@/features/posts/api/postsApi"
 
 type PostIdType = {
   postId: number
 }
+
+// Функция для форматирования времени "X минут назад"
+const getTimeAgo = (date: string): string => {
+  const now = new Date()
+  const postDate = new Date(date)
+  const diffInMs = now.getTime() - postDate.getTime()
+  const diffInMinutes = Math.floor(diffInMs / (1000 * 60))
+  const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60))
+  const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24))
+
+  if (diffInMinutes < 1) return "только что"
+  if (diffInMinutes < 60) return `${diffInMinutes} мин назад`
+  if (diffInHours < 24) return `${diffInHours} ч назад`
+  if (diffInDays < 7) return `${diffInDays} дн назад`
+
+  return postDate.toLocaleDateString("ru-RU", { day: "numeric", month: "long", year: "numeric" })
+}
+
 export function PostContent({ postId }: PostIdType) {
-  const { data, isLoading } = useGetPostByIdQuery(postId)
-
-  console.log(data)
-
-  const formattedDate = data?.updatedAt ? new Date(data.updatedAt).toLocaleDateString() : null
-
-  const comments = [
-    {
-      photo: postPhoto,
-      time: "2 hours ago",
-      showAnswers: false,
-    },
-    {
-      photo: postPhoto3,
-      time: formattedDate,
-      showAnswers: false,
-    },
-    {
-      photo: postPhoto1,
-      time: "2 hours ago",
-      showAnswers: true,
-    },
-    {
-      photo: postPhoto2,
-      time: "14:46",
-      showAnswers: false,
-    },
-  ]
+  const { data, isLoading, error } = useGetPostByIdQuery(postId)
 
   if (isLoading) {
-    return <p>LOADING...</p>
+    return (
+      <div className="container">
+        <p className="h3" style={{ padding: "20px", textAlign: "center" }}>
+          Загрузка...
+        </p>
+      </div>
+    )
   }
+
+  if (error || !data) {
+    return (
+      <div className="container">
+        <p className="h3" style={{ padding: "20px", textAlign: "center", color: "red" }}>
+          Ошибка загрузки поста
+        </p>
+      </div>
+    )
+  }
+
+  const formattedDate = getTimeAgo(data.createdAt)
+  const fullDate = new Date(data.createdAt).toLocaleDateString("ru-RU", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  })
+
   return (
     <div className="container">
       <div className="photoPanel">
-        <img src={data?.images[0].url} alt="ManPhoto" />
+        {data.images && data.images.length > 0 && (
+          <Image
+            src={data.images[0].url}
+            alt={data.description || "Post image"}
+            width={data.images[0].width}
+            height={data.images[0].height}
+            style={{ width: "100%", height: "auto" }}
+          />
+        )}
       </div>
       <div className="right-panel">
+        {/* Заголовок с аватаром и именем */}
         <div className="posts-header">
-          <img src={data?.images[0].url} alt="Avatar" className="post-avatar" />
-          <p className="h3">{data?.userName}</p>
+          {data.avatarOwner ? (
+            <Image
+              src={data.avatarOwner}
+              alt={data.userName}
+              className="post-avatar"
+              width={32}
+              height={32}
+              style={{ borderRadius: "50%" }}
+            />
+          ) : (
+            <div className="post-avatar" style={{ width: "32px", height: "32px", background: "#ccc" }} />
+          )}
+          <p className="h3">{data.userName}</p>
         </div>
 
+        {/* Описание поста */}
         <div className="posts-list regular-text-14">
-          {comments.map((comment, index) => (
-            <div key={index} className="post">
-              <Image src={comment.photo} alt="Avatar" className="post-avatar" />
-              <div className="post-content">
-                <p className="post-text">
-                  <span className="bold-text-14">UserName</span> Lorem ipsum dolor sit amet, consectetur adipiscing
-                  elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </p>
-
-                <span className="post-time">{comment.time}</span>
-
-                {comment.showAnswers && (
-                  <p>
-                    <span className="post-time">---- View Answers (1)</span>
-                  </p>
-                )}
-              </div>
+          <div className="post">
+            {data.avatarOwner && (
+              <Image
+                src={data.avatarOwner}
+                alt={data.userName}
+                className="post-avatar"
+                width={32}
+                height={32}
+                style={{ borderRadius: "50%" }}
+              />
+            )}
+            <div className="post-content">
+              <p className="post-text">
+                <span className="bold-text-14">{data.userName}</span> {data.description || "Без описания"}
+              </p>
+              <span className="post-time">{formattedDate}</span>
             </div>
-          ))}
+          </div>
         </div>
 
+        {/* Футер с лайками и датой */}
         <div className="posts-footer">
           <div className="posts-like">
-            <Image src={photoLike1} alt="PhotoLike" className="post-photolike first" />
-            <Image src={photoLike2} alt="PhotoLike" className="post-photolike" />
-            <Image src={postPhoto} alt="PhotoLike" className="post-photolike" />
-
-            <p className="posts-counter h3">2 243 </p>
+            <p className="posts-counter h3">{data.likesCount.toLocaleString("ru-RU")} </p>
+            <span className="regular-text-14" style={{ marginLeft: "4px" }}>
+              {data.likesCount === 1 ? "лайк" : "лайков"}
+            </span>
           </div>
-          <p className="post-time">July 3, 2025</p>
+          <p className="post-time">{fullDate}</p>
         </div>
       </div>
     </div>
