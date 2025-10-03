@@ -59,3 +59,12 @@ export type PostsQueryParams = {
   sortBy?: string
   sortDirection?: SortDirection
 }
+
+export type AllPostsRequest = {
+  endCursorPostId?: string
+  pageSize?: number
+  sortBy?: string
+  sortDirection?: SortDirection
+}
+
+export type AllPostsResponse = PaginationResponse

@@ -11,6 +11,9 @@
 .cursor/
 /.cursor
 .taskmaster
+.playwright
+.playwright/
+/.playwright
 
 # dependencies
 /node_modules

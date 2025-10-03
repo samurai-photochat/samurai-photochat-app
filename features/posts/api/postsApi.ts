@@ -4,6 +4,8 @@ import {
   UserPostsPaginationResponse,
   PostsByParamsResponse,
   PostsQueryParams,
+  AllPostsRequest,
+  AllPostsResponse,
 } from "@/features/posts/api/postsApi.types"
 
 import { baseApi } from "@/app/api/baseApi"
@@ -55,7 +57,25 @@ export const postsApi = baseApi.injectEndpoints({
         }
       },
     }),
+    getAllPosts: builder.query<AllPostsResponse, AllPostsRequest>({
+      query: (arg) => {
+        const { endCursorPostId = "", pageSize = 5, sortBy, sortDirection } = arg
+        const params = new URLSearchParams()
+        params.set("pageSize", pageSize.toString())
+        if (sortBy) params.set("sortBy", sortBy)
+        if (sortDirection) params.set("sortDirection", sortDirection)
+        return {
+          url: `posts/all/${endCursorPostId}`,
+          params,
+        }
+      },
+    }),
   }),
 })
 
-export const { useGetUserPostsPaginationInfiniteQuery, useGetPostByIdQuery, useGetPostsByParamsQuery } = postsApi
+export const {
+  useGetUserPostsPaginationInfiniteQuery,
+  useGetPostByIdQuery,
+  useGetPostsByParamsQuery,
+  useGetAllPostsQuery,
+} = postsApi

@@ -6,10 +6,13 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "???", // следует указать ХОСТ
-        pathname: "///", // путь к картинкам ( часть после Хоста)
+        hostname: "staging-it-incubator.s3.eu-central-1.amazonaws.com",
+        pathname: "/trainee-instagram-api/**",
       },
     ],
+    formats: ["image/webp"],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
 }
 
