@@ -9,46 +9,37 @@ import {
   BookmarkIcon,
   LogOutIcon,
 } from "@/shared/assets/icons/components"
-import { useState } from "react"
-import { ModalWindow } from "@/features/auth/ui/Register/ModalWindow/ModalWindow"
 import { Button } from "@/shared/ui"
 import s from "./sidebar.module.css"
-import { useLogoutMutation, useMeQuery } from "@/features/auth/api/authApi"
-import LocalStorage from "@/shared/utils/localStorage/localStorage"
-import { useAppDispatch } from "@/app/hooks/useAppDispatch"
-import { setAppError } from "@/app/model/appSlice"
+import { useLogoutMutation } from "@/features/auth/api/authApi"
 import { PATH } from "@/shared/config/routes"
 import { Breakpoints, useBreakpoint } from "@/shared/hooks/useBreakpoint"
 import { PostSettingModal } from "@/features/posts/ui/StepsCreatePost/PostSettingModal"
 import { useState } from "react"
+import { useSelector } from "react-redux"
+import { selectCurrentUser } from "@/features/auth/model/authSlice"
 
 export default function Sidebar() {
   const [logoutUser] = useLogoutMutation()
-  const { refetch, data: user } = useMeQuery()
 
-  const [isModalClose, setIsModalClose] = useState<boolean>(true)
-
-  const dispatch = useAppDispatch()
   const [isOpenPostSettingModal, setIsOpenPostSettingModal] = useState<boolean>(false)
   const isNarrow = useBreakpoint(Breakpoints.narrow)
 
-  const logoutHandler = () => {
-    logoutUser()
-      .unwrap()
-      .then(() => {
-        LocalStorage.removeToken()
-        refetch()
-      })
-      .catch((err) => {
-        dispatch(setAppError(err?.data?.messages?.[0]?.message || "Ошибка при выходе из аккаунта"))
-      })
+  const logoutHandler = async () => {
+    try {
+      await logoutUser().unwrap()
+    } catch {
+      console.error("Unable to logout")
+    } finally {
+      window.localStorage.href(PATH.AUTH.LOGOUT)
+    }
   }
 
-  const modalCloseHandler = () => {
-    logoutHandler()
-    setIsModalClose(true)
-  }
+  const user = useSelector(selectCurrentUser)
 
+  if (!user) {
+    return null
+  }
   return (
     <div className={`${s.sidebar} regular-text-14`}>
       <ul className={s.list}>

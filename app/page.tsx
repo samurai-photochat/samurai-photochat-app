@@ -12,7 +12,7 @@ export default function Home() {
 
   const totalCount = totalCountData?.totalCount
 
-  if (isLoading) return <div>...LoadingSpinner</div>
+  if (isLoading) return <div style={{ color: "var(--color-light-100)" }}>...LoadingSpinner</div>
 
   const isLoggedIn = !!user && !isError
 
