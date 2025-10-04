@@ -1,4 +1,4 @@
-import IconWrapper from "@/shared/assets/icons/IconWrapper"
+import IconWrapper from "@/shared/assets/icons/components/IconWrapper"
 
 export const PlusSquareIcon = () => {
   return (
