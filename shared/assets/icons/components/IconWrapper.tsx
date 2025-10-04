@@ -5,7 +5,7 @@ type Props = {
 }
 
 const IconWrapper = ({ icon }: Props) => {
-  return <span>{icon}</span>
+  return <span style={{ margin: 0 }}>{icon}</span>
 }
 
 export default IconWrapper

@@ -1,11 +1,14 @@
 import {
   Post,
-  UserPostsPaginationRequest,
-  UserPostsPaginationResponse,
   PostsByParamsResponse,
   PostsQueryParams,
   AllPostsRequest,
   AllPostsResponse,
+  CreatePostRequest,
+  UploadImagesRequest,
+  UploadImagesResponse,
+  UserPostsPaginationRequest,
+  UserPostsPaginationResponse,
 } from "@/features/posts/api/postsApi.types"
 
 import { baseApi } from "@/app/api/baseApi"
@@ -70,12 +73,38 @@ export const postsApi = baseApi.injectEndpoints({
         }
       },
     }),
+    createPost: builder.mutation<Post, CreatePostRequest>({
+      query: (body) => {
+        return {
+          url: `posts`,
+          method: "POST",
+          body,
+        }
+      },
+    }),
+    uploadImages: builder.mutation<UploadImagesResponse, UploadImagesRequest>({
+      query: (formData) => {
+        return {
+          url: `posts/image`,
+          method: "POST",
+          body: formData,
+        }
+      },
+    }),
+    deletePost: builder.mutation<Post, { postId: number }>({
+      query: ({ postId }) => ({
+        url: `posts/${postId}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 })
 
 export const {
-  useGetUserPostsPaginationInfiniteQuery,
-  useGetPostByIdQuery,
   useGetPostsByParamsQuery,
   useGetAllPostsQuery,
+  useGetUserPostsPaginationInfiniteQuery,
+  useGetPostByIdQuery,
+  useCreatePostMutation,
+  useUploadImagesMutation,
 } = postsApi

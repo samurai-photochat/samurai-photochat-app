@@ -19,6 +19,8 @@ import { useAppDispatch } from "@/app/hooks/useAppDispatch"
 import { setAppError } from "@/app/model/appSlice"
 import { PATH } from "@/shared/config/routes"
 import { Breakpoints, useBreakpoint } from "@/shared/hooks/useBreakpoint"
+import { PostSettingModal } from "@/features/posts/ui/StepsCreatePost/PostSettingModal"
+import { useState } from "react"
 
 export default function Sidebar() {
   const [logoutUser] = useLogoutMutation()
@@ -27,6 +29,7 @@ export default function Sidebar() {
   const [isModalClose, setIsModalClose] = useState<boolean>(true)
 
   const dispatch = useAppDispatch()
+  const [isOpenPostSettingModal, setIsOpenPostSettingModal] = useState<boolean>(false)
   const isNarrow = useBreakpoint(Breakpoints.narrow)
 
   const logoutHandler = () => {
@@ -56,7 +59,13 @@ export default function Sidebar() {
           </Button>
         </li>
         <li className={s.item}>
-          <Button variant="text" className={s.sidebarBtn}>
+          <Button
+            variant="text"
+            className={s.sidebarBtn}
+            onClick={() => {
+              setIsOpenPostSettingModal(true)
+            }}
+          >
             <PlusSquareIcon /> Create
           </Button>
         </li>
@@ -101,6 +110,10 @@ export default function Sidebar() {
           </>
         )}
       </ul>
+      <PostSettingModal
+        isOpenPostSettingModal={isOpenPostSettingModal}
+        setIsOpenPostSettingModalAction={setIsOpenPostSettingModal}
+      />
     </div>
   )
 }

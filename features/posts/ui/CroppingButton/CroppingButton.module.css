@@ -1,0 +1,25 @@
+.container {
+  position: relative;
+}
+
+.button {
+  width: 36px;
+  height: 36px;
+  background: var(--color-dark-500);
+  border: none;
+  border-radius: 2px;
+  opacity: 0.8;
+  color: var(--color-light-100);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  cursor: pointer;
+}
+
+.hidden {
+  position: absolute;
+  bottom: calc(100% + 2px);
+  opacity: 0.8;
+  background-color: var(--color-dark-500);
+}

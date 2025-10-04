@@ -68,3 +68,16 @@ export type AllPostsRequest = {
 }
 
 export type AllPostsResponse = PaginationResponse
+export type CreatePostRequest = {
+  description: string
+  childrenMetadata: {
+    uploadId: string
+  }[]
+}
+
+export type UploadImagesRequest = FormData
+
+export type UploadImagesResponse = {
+  images: Image[]
+}
+
