@@ -15,15 +15,17 @@ import { useLogoutMutation, useMeQuery } from "@/features/auth/api/authApi"
 import LocalStorage from "@/shared/utils/localStorage/localStorage"
 import { useAppDispatch } from "@/app/hooks/useAppDispatch"
 import { setAppError } from "@/app/model/appSlice"
+import { PATH } from "@/shared/config/routes"
+import { Breakpoints, useBreakpoint } from "@/shared/hooks/useBreakpoint"
 import { PostSettingModal } from "@/features/posts/ui/StepsCreatePost/PostSettingModal"
 import { useState } from "react"
 
 export default function Sidebar() {
   const [logoutUser] = useLogoutMutation()
-  const { refetch } = useMeQuery()
-
+  const { refetch, data: user } = useMeQuery()
   const dispatch = useAppDispatch()
   const [isOpenPostSettingModal, setIsOpenPostSettingModal] = useState<boolean>(false)
+  const isNarrow = useBreakpoint(Breakpoints.narrow)
 
   const logoutHandler = () => {
     logoutUser()
@@ -58,7 +60,7 @@ export default function Sidebar() {
           </Button>
         </li>
         <li className={s.item}>
-          <Button variant="text" as="a" href="#" className={s.sidebarBtn}>
+          <Button variant="text" as="a" href={`${PATH.USER.PROFILE}/${user?.userId}`} className={s.sidebarBtn}>
             <PersonIcon />
             My Profile
           </Button>
@@ -75,24 +77,28 @@ export default function Sidebar() {
             Search
           </Button>
         </li>
-        <li className={s.item}>
-          <Button variant="text" className={s.sidebarBtn}>
-            <TrendingUpIcon />
-            Statistics
-          </Button>
-        </li>
-        <li className={s.item}>
-          <Button variant="text" className={s.sidebarBtn}>
-            <BookmarkIcon />
-            Favorites
-          </Button>
-        </li>
-        <li className={s.item}>
-          <Button variant="text" className={s.sidebarBtn} onClick={logoutHandler}>
-            <LogOutIcon />
-            Log Out
-          </Button>
-        </li>
+        {!isNarrow && (
+          <>
+            <li className={s.item}>
+              <Button variant="text" className={s.sidebarBtn}>
+                <TrendingUpIcon />
+                Statistics
+              </Button>
+            </li>
+            <li className={s.item}>
+              <Button variant="text" className={s.sidebarBtn}>
+                <BookmarkIcon />
+                Favorites
+              </Button>
+            </li>
+            <li className={s.item}>
+              <Button variant="text" className={s.sidebarBtn} onClick={logoutHandler}>
+                <LogOutIcon />
+                Log Out
+              </Button>
+            </li>
+          </>
+        )}
       </ul>
       <PostSettingModal
         isOpenPostSettingModal={isOpenPostSettingModal}

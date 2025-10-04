@@ -1,5 +1,5 @@
 "use client"
-import s from "./LoginForm.module.css"
+import s from "./LoginForm.module.scss"
 import { Form } from "radix-ui"
 import Image from "next/image"
 import googleIcon from "@/shared/assets/img/google-icon.png"
@@ -16,7 +16,7 @@ type Props = {
   submitAction: ({ email, password }: { email: string; password: string }, reset: () => void) => void
 }
 
-export default function LoginForm({ submitAction }: Props) {
+export default function SignInForm({ submitAction }: Props) {
   const {
     register,
     handleSubmit,

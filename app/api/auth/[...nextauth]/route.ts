@@ -18,7 +18,7 @@ const handler = NextAuth({
 
   // Указываем путь к кастомной странице входа (по умолчанию /api/auth/signin)
   pages: {
-    signIn: "/auth/login", // маршрут до нашей страницы с кнопками "Войти через Google/GitHub"
+    signIn: "/auth/signin", // маршрут до нашей страницы с кнопками "Войти через Google/GitHub"
   },
 
   // Секрет для шифрования JWT и защиты cookies (обязательно задать в .env.production)

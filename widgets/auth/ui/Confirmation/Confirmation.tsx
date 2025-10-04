@@ -6,6 +6,7 @@ import { ResendingEmailType, useEmailResendingMutation } from "@/features/auth/a
 import { useAppDispatch } from "@/app/hooks/useAppDispatch"
 import { setAppError } from "@/app/model/appSlice"
 import { ApiErrorResultDto } from "@/features/auth/api/authApi.types"
+import { PATH } from "@/shared/config/routes"
 
 type Props = {
   islinkExpiration: boolean | null
@@ -51,7 +52,7 @@ export const Confirmation = ({ islinkExpiration, value }: Props) => {
           img={EmailConfirmed}
           textBtn={"Sing in"}
           isInput={false}
-          href={"/auth/login"}
+          href={`${PATH.AUTH.LOGIN}`}
         />
       )}
     </>
