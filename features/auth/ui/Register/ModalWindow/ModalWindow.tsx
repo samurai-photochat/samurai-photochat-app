@@ -4,18 +4,21 @@ import Button from "@/shared/ui/button/button"
 import { Dialog } from "@radix-ui/react-dialog"
 import s from "./ModalWindow.module.css"
 import Image from "next/image"
-import { useEffect } from "react"
+import { ReactNode, useEffect } from "react"
 
 type Props = {
+  isFon?: boolean
   isOpen: boolean
   title: string
-  text: string
+  children: ReactNode
   isClose: () => void
 }
 
-export const ModalWindow = ({ isOpen, title, text, isClose }: Props) => {
+export const ModalWindow = ({ isOpen, title, isClose, children, isFon }: Props) => {
+  // проверка наличие фона в пропсах
+  const fon = isFon ?? false
   useEffect(() => {
-    if (!isOpen) {
+    if (isOpen) {
       document.body.style.overflow = "hidden"
     } else {
       document.body.style.overflow = "auto"
@@ -26,9 +29,10 @@ export const ModalWindow = ({ isOpen, title, text, isClose }: Props) => {
     }
   }, [isOpen])
 
-  if (isOpen) return null
+  if (!isOpen) return null
   return (
-    <div className={s.fon}>
+    <>
+      <div className={fon ? s.fon : s.noFon} />
       <Dialog>
         <div className={s.dialog}>
           <div className={s.header}>
@@ -37,14 +41,9 @@ export const ModalWindow = ({ isOpen, title, text, isClose }: Props) => {
               <Image src={CloseIcon} alt="закрыть" />
             </Button>
           </div>
-          <div className={s.main}>
-            <p className={s.text}>{text}</p>
-            <Button className={s.button} onClick={isClose}>
-              ОК
-            </Button>
-          </div>
+          <div className={s.main}>{children}</div>
         </div>
       </Dialog>
-    </div>
+    </>
   )
 }

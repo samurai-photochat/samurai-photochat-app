@@ -9,8 +9,8 @@
 }
 
 .imageList {
-    display: grid;
-    grid-gap: 10px;
+  display: grid;
+  grid-gap: 10px;
 }
 
 .image {
@@ -32,13 +32,13 @@
 /* } */
 
 .closeButton {
-    position: absolute;
-    top: 2px;
-    right: 2px;
-    width: 12px;
-    height: 12px;
-    border: none;
-    background-color: var(--color-dark-500);
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 12px;
+  height: 12px;
+  border: none;
+  background-color: var(--color-dark-500);
 }
 
 .canvas {
