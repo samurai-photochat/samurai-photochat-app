@@ -1,11 +1,16 @@
 import {
-  CreatePostRequest,
   Post,
+  PostsByParamsResponse,
+  PostsQueryParams,
+  AllPostsRequest,
+  AllPostsResponse,
+  CreatePostRequest,
   UploadImagesRequest,
   UploadImagesResponse,
   UserPostsPaginationRequest,
   UserPostsPaginationResponse,
 } from "@/features/posts/api/postsApi.types"
+
 import { baseApi } from "@/app/api/baseApi"
 
 export const postsApi = baseApi.injectEndpoints({
@@ -14,6 +19,22 @@ export const postsApi = baseApi.injectEndpoints({
       query: (postId) => ({
         url: `/posts/id/${postId}`,
       }),
+    }),
+    getPostsByParams: builder.query<PostsByParamsResponse, PostsQueryParams>({
+      query: (arg) => {
+        const { param, pageSize, pageNumber, sortBy, sortDirection } = arg
+        const params = new URLSearchParams()
+
+        if (pageSize) params.set("pageSize", pageSize.toString())
+        if (pageNumber) params.set("pageNumber", pageNumber.toString())
+        if (sortBy) params.set("sortBy", sortBy)
+        if (sortDirection) params.set("sortDirection", sortDirection)
+
+        return {
+          url: `/posts/${param}`,
+          params,
+        }
+      },
     }),
     getUserPostsPagination: builder.infiniteQuery<
       UserPostsPaginationResponse,
@@ -35,6 +56,19 @@ export const postsApi = baseApi.injectEndpoints({
         if (sortDirection) params.set("sortDirection", sortDirection.toString())
         return {
           url: `posts/user/${userId}/${endCursorPostId ?? ""}`,
+          params,
+        }
+      },
+    }),
+    getAllPosts: builder.query<AllPostsResponse, AllPostsRequest>({
+      query: (arg) => {
+        const { endCursorPostId = "", pageSize = 5, sortBy, sortDirection } = arg
+        const params = new URLSearchParams()
+        params.set("pageSize", pageSize.toString())
+        if (sortBy) params.set("sortBy", sortBy)
+        if (sortDirection) params.set("sortDirection", sortDirection)
+        return {
+          url: `posts/all/${endCursorPostId}`,
           params,
         }
       },
@@ -67,9 +101,10 @@ export const postsApi = baseApi.injectEndpoints({
 })
 
 export const {
+  useGetPostsByParamsQuery,
+  useGetAllPostsQuery,
   useGetUserPostsPaginationInfiniteQuery,
   useGetPostByIdQuery,
   useCreatePostMutation,
-  useDeletePostMutation,
   useUploadImagesMutation,
 } = postsApi

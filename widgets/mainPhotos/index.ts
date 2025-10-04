@@ -1,0 +1,1 @@
+export { MainPhotos } from "./MainPhotos"

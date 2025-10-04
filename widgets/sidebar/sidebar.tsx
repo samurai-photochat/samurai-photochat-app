@@ -9,6 +9,8 @@ import {
   BookmarkIcon,
   LogOutIcon,
 } from "@/shared/assets/icons/components"
+import { useState } from "react"
+import { ModalWindow } from "@/features/auth/ui/Register/ModalWindow/ModalWindow"
 import { Button } from "@/shared/ui"
 import s from "./sidebar.module.css"
 import { useLogoutMutation, useMeQuery } from "@/features/auth/api/authApi"
@@ -23,6 +25,9 @@ import { useState } from "react"
 export default function Sidebar() {
   const [logoutUser] = useLogoutMutation()
   const { refetch, data: user } = useMeQuery()
+
+  const [isModalClose, setIsModalClose] = useState<boolean>(true)
+
   const dispatch = useAppDispatch()
   const [isOpenPostSettingModal, setIsOpenPostSettingModal] = useState<boolean>(false)
   const isNarrow = useBreakpoint(Breakpoints.narrow)
@@ -37,6 +42,11 @@ export default function Sidebar() {
       .catch((err) => {
         dispatch(setAppError(err?.data?.messages?.[0]?.message || "Ошибка при выходе из аккаунта"))
       })
+  }
+
+  const modalCloseHandler = () => {
+    logoutHandler()
+    setIsModalClose(true)
   }
 
   return (
