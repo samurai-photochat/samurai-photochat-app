@@ -9,7 +9,8 @@ import { setAppError } from "@/app/model/appSlice"
 import { ApiErrorResultDto } from "@/features/auth/api/authApi.types"
 import { useSearchParams } from "next/navigation"
 import { Confirmation } from "@/widgets/auth/ui/Confirmation/Confirmation"
-import s from "./signUpContent.module.css"
+import Button from "@/shared/ui/button/button"
+import s from "./signUpContent.module.scss"
 
 export function SignUpContent() {
   const [registerUser] = useRegistrationMutation()
@@ -66,12 +67,12 @@ export function SignUpContent() {
       {!codeParams ? (
         <>
           <RegisterForm submitAction={submitAction} />
-          <ModalWindow
-            isOpen={isModalClose}
-            title={"Email sent"}
-            text={`We have sent a link to confirm your email to ${user?.email}`}
-            isClose={closeModal}
-          />
+          <ModalWindow isOpen={isModalClose} title={"Email sent"} isClose={closeModal}>
+            <p className={s.text}>{`We have sent a link to confirm your email to ${user?.email}`}</p>
+            <Button className={s.button} onClick={closeModal}>
+              ОК
+            </Button>
+          </ModalWindow>
         </>
       ) : (
         // В зависимости от  действительности ссылки, будет отображаться нужная фича
