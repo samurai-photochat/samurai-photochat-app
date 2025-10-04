@@ -1,25 +1,23 @@
 import { useAppSelector } from "@/app/hooks/useAppSelector"
 import { useState } from "react"
 import { selectImages } from "@/features/posts/model/postsSlice"
-// import { useAppDispatch } from "@/app/hooks/useAppDispatch"
-import { ImagesSlider } from "@/features/posts/ui/CanvasSlider/ImagesSlider"
-import { CanvasEditor } from "@/features/posts/ui/CanvasEditor/CanvasEditor"
+import { ImagesSlider } from "@/features/posts/ui/ImagesSlider/ImagesSlider"
 import s from "./PublicationStep.module.scss"
-import Image from "next/image"
+import NextImage from "next/image"
 import Pin from "@/shared/assets/svg/pin.svg"
 import { Textarea } from "@/shared/ui/textarea/textarea"
 
-export const PublicationStep = () => {
+type Props = {
+  description: string
+  setDescription: (description: string) => void
+}
+
+export const PublicationStep = ({ description, setDescription }: Props) => {
   const images = useAppSelector(selectImages)
   const [position, setPosition] = useState(0)
-  const currentImage = images[position]
-
-  // const dispatch = useAppDispatch()
   return (
-    <div className={s.content}>
-      <ImagesSlider images={images} position={position} setPosition={setPosition}>
-        <CanvasEditor image={currentImage} />
-      </ImagesSlider>
+    <div className={s.content} style={{ position: "relative" }}>
+      <ImagesSlider images={images} position={position} setPosition={setPosition} />
       <div className={s.PublicationBlock}>
         <div className={s.topContentWrap}>
           <div className={s.headerBlock}>
@@ -30,15 +28,15 @@ export const PublicationStep = () => {
             <label htmlFor="message" className={s.label}>
               Add publication descriptions
             </label>
-            <Textarea max={500} started="" />
+            <Textarea max={500} text={description} setText={setDescription} />
           </div>
         </div>
         <div className={s.bottomContentWrap}>
           <div className={s.inputLocationWrap}>
             <label className={s.label}>Add location</label>
-            <input className={s.locationInput} value={"New York"} />
+            {/*<input className={s.locationInput} value={"New York"} />*/}
             <span className={s.span}>
-              <Image src={Pin} alt="x" />
+              <NextImage src={Pin} alt="x" />
             </span>
           </div>
           <div className={s.locationWrap}>

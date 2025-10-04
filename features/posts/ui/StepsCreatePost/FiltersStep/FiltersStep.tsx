@@ -2,9 +2,8 @@ import { Filter } from "./Filter/Filter"
 import s from "./FiltersStep.module.scss"
 import { useAppSelector } from "@/app/hooks/useAppSelector"
 import { changeImageAC, selectImages } from "@/features/posts/model/postsSlice"
-import { CanvasEditor } from "@/features/posts/ui/CanvasEditor/CanvasEditor"
 import { useState } from "react"
-import { ImagesSlider } from "@/features/posts/ui/CanvasSlider/ImagesSlider"
+import { ImagesSlider } from "@/features/posts/ui/ImagesSlider/ImagesSlider"
 import { useAppDispatch } from "@/app/hooks/useAppDispatch"
 
 export type FilterTemplate = {
@@ -33,9 +32,7 @@ export const FilterStep = () => {
 
   return (
     <div className={s.content}>
-      <ImagesSlider images={images} position={position} setPosition={setPosition}>
-        <CanvasEditor image={currentImage} />
-      </ImagesSlider>
+      <ImagesSlider images={images} position={position} setPosition={setPosition} />
       <div className={s.filtersBlock}>
         {filterTemplates.map((filterTemplate) => {
           const filter = filterTemplate.filter
@@ -46,8 +43,8 @@ export const FilterStep = () => {
             <Filter
               key={filterTemplate.id}
               filterTemplate={filterTemplate}
-              img={currentImage.imageSrc}
-              aspectRatio={currentImage.scale}
+              img={currentImage.src}
+              //aspectRatio={currentImage.scale}
               onClick={setFilter}
             />
           )

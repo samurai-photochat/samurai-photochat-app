@@ -102,7 +102,7 @@ export default function Sidebar() {
       </ul>
       <PostSettingModal
         isOpenPostSettingModal={isOpenPostSettingModal}
-        setIsOpenPostSettingModal={setIsOpenPostSettingModal}
+        setIsOpenPostSettingModalAction={setIsOpenPostSettingModal}
       />
     </div>
   )

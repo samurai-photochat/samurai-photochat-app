@@ -42,7 +42,7 @@ export const Confirmation = ({ islinkExpiration, value }: Props) => {
           img={LinkExpired}
           textBtn={"Resend verification link"}
           isInput={true}
-          handleClick={buttonHandler}
+          handleClickAction={buttonHandler}
           value={value}
         />
       ) : (

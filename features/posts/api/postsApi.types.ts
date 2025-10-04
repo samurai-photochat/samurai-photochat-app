@@ -43,4 +43,17 @@ export type UserPostsPaginationResponse = {
   items: Post[]
 }
 
+export type CreatePostRequest = {
+  description: string
+  childrenMetadata: {
+    uploadId: string
+  }[]
+}
+
+export type UploadImagesRequest = FormData
+
+export type UploadImagesResponse = {
+  images: Image[]
+}
+
 export type SortDirection = "asc" | "desc"

@@ -2,15 +2,20 @@
   position: relative;
   width: 490px;
   height: 503px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .imageWrapper {
-  > * {
-    width: 490px;
-    height: 503px;
-    touch-action: none;
-    object-fit: scale-down;
-  }
+  overflow: hidden;
+}
+
+.image {
+  max-width: 492px;
+  max-height: 503px;
+  touch-action: none;
+  object-fit: cover;
 }
 
 .arrow {

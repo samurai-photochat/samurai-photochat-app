@@ -3,10 +3,11 @@ import s from "./textarea.module.scss"
 
 type Props = {
   max: number
-  started: string
+  text: string
+  setText: (text: string) => void
 }
-export const Textarea = ({ max, started }: Props) => {
-  const [text, setText] = useState(started)
+export const Textarea = ({ max, text, setText }: Props) => {
+  // const [text, setText] = useState(started)
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const next = e.currentTarget.value
@@ -20,7 +21,7 @@ export const Textarea = ({ max, started }: Props) => {
     <div className={s.content}>
       <textarea
         value={text}
-        placeholder={started}
+        // placeholder={started}
         onChange={handleChange}
         id="message"
         name="message"
