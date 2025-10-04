@@ -152,7 +152,7 @@ export const PostSettingModal = ({ isOpenPostSettingModal, setIsOpenPostSettingM
       case 0:
         return <AddFotoStep handle={addImage} openDraft={openDraft} />
       case 1:
-        return <CroppingStep addImage={addImage} />
+        return <CroppingStep addImageAction={addImage} />
       case 2:
         return <FilterStep />
       case 3:

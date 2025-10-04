@@ -19,10 +19,10 @@ export type CanvasImage = {
 }
 
 type Props = {
-  addImage: (e: React.ChangeEvent<HTMLInputElement> | null) => void
+  addImageAction: (e: React.ChangeEvent<HTMLInputElement> | null) => void
 }
 
-export const CroppingStep = ({ addImage }: Props) => {
+export const CroppingStep = ({ addImageAction }: Props) => {
   const images = useAppSelector(selectImages)
   const ref = useRef<HTMLHeadingElement | null>(null)
 
@@ -67,7 +67,7 @@ export const CroppingStep = ({ addImage }: Props) => {
           <div className={s.buttonsContainer}>
             <ResizingButton setScale={setScale} defaultScale={defaultScale} />
             <ZoomingButton zoom={currentImage.zoom} setZoom={setZoom} />
-            <LoadingButton images={images} deleteImageAction={deleteImage} addImageAction={addImage} />
+            <LoadingButton images={images} deleteImageAction={deleteImage} addImageAction={addImageAction} />
           </div>
         </>
       )}
