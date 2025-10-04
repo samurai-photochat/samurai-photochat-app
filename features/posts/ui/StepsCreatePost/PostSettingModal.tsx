@@ -5,13 +5,14 @@ import CloseIcon from "@/shared/assets/svg/Close.svg"
 import ArrowBackIcon from "@/shared/assets/svg/arrow-back.svg"
 import { useEffect, useState } from "react"
 import { AddFotoStep } from "./AddFotoStep/AddFotoStep"
-import { CroppingStep } from "./CroppingStep/CroppingStep"
+import { CanvasImage, CroppingStep } from "./CroppingStep/CroppingStep"
 import { FilterStep } from "./FiltersStep/FiltersStep"
 import s from "./PostSettingModal.module.scss"
 import { PublicationStep } from "./PublicationStep/PublicationStep"
 import { useAppDispatch } from "@/app/hooks/useAppDispatch"
 import { addImageAC, selectImages } from "@/features/posts/model/postsSlice"
 import { useAppSelector } from "@/app/hooks/useAppSelector"
+
 // Шаги добавления поста
 const steps = [
   { key: 0, label: "Add_Photo" },
@@ -19,9 +20,6 @@ const steps = [
   { key: 2, label: "Filters" },
   { key: 3, label: "Publication" },
 ]
-// type Props = {
-//   handler: (isOpen: boolean) => boolean
-// }
 
 // Компонент модального окна для добавления поста
 export const PostSettingModal = () => {
@@ -34,10 +32,21 @@ export const PostSettingModal = () => {
   //   длина массива шагов
   const totalSteps = steps.length
 
-  const setFilesData = (e: React.ChangeEvent<HTMLInputElement> | null) => {
+  const addImage = (e: React.ChangeEvent<HTMLInputElement> | null) => {
     if (e?.target?.files && e.target.files.length > 0) {
       const file = e.target.files[0]
-      dispatch(addImageAC({ file }))
+
+      const src = URL.createObjectURL(file)
+
+      const image: CanvasImage = {
+        file,
+        src,
+        filter: "",
+        zoom: 1,
+        scale: 490 / 504,
+        preview: "",
+      }
+      dispatch(addImageAC({ image }))
       setCurrentStep(1)
     }
   }
@@ -65,9 +74,9 @@ export const PostSettingModal = () => {
   const renderStep = () => {
     switch (currentStep) {
       case 0:
-        return <AddFotoStep handle={setFilesData} />
+        return <AddFotoStep handle={addImage} openDraft={goNextStep} />
       case 1:
-        return <CroppingStep />
+        return <CroppingStep addImage={addImage} />
       case 2:
         return <FilterStep />
       case 3:
@@ -92,27 +101,29 @@ export const PostSettingModal = () => {
 
   return (
     isOpen && (
-      <div className={s.window}>
-        {currentStep === 0 ? (
-          <div className={s.header}>
-            <h3 className={s.title}>Add Photo</h3>
-            <Button variant="text" className={s.svgButton} onClick={isClose}>
-              <Image src={CloseIcon} alt="закрыть" />
-            </Button>
-          </div>
-        ) : (
-          <div className={s.header}>
-            <Button variant="text" className={s.svgButton} onClick={goBackStep}>
-              <Image src={ArrowBackIcon} alt="закрыть" />
-            </Button>
-            <h3 className={s.title}>{steps.find((obj) => obj.key === currentStep)?.label}</h3>
-            <Button variant="text" className={s.svgButton} onClick={goNextStep}>
-              {/* <Image src={CloseIcon} alt="закрыть" /> */}
-              Next
-            </Button>
-          </div>
-        )}
-        <div className={s.content}>{renderStep()}</div>
+      <div className={s.background}>
+        <div className={s.window}>
+          {currentStep === 0 ? (
+            <div className={s.header}>
+              <h3 className={s.title}>Add Photo</h3>
+              <Button variant="text" className={s.svgButton} onClick={isClose}>
+                <Image src={CloseIcon} alt="закрыть" />
+              </Button>
+            </div>
+          ) : (
+            <div className={s.header}>
+              <Button variant="text" className={s.svgButton} onClick={goBackStep}>
+                <Image src={ArrowBackIcon} alt="закрыть" />
+              </Button>
+              <h3 className={s.title}>{steps.find((obj) => obj.key === currentStep)?.label}</h3>
+              <Button variant="text" className={s.svgButton} onClick={goNextStep}>
+                {/* <Image src={CloseIcon} alt="закрыть" /> */}
+                Next
+              </Button>
+            </div>
+          )}
+          <div className={s.content}>{renderStep()}</div>
+        </div>
       </div>
     )
   )
