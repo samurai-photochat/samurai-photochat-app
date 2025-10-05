@@ -1,6 +1,7 @@
 import { BaseQueryFn, FetchArgs, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query/react"
 import LocalStorage from "@/shared/utils/localStorage/localStorage"
+import { handleError } from "@/app/utils/handleError"
 
 const createBaseQuery = () =>
   fetchBaseQuery({
@@ -19,5 +20,7 @@ export const baseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryE
   api,
   extraOptions
 ) => {
-  return createBaseQuery()(args, api, extraOptions)
+  const result = await createBaseQuery()(args, api, extraOptions)
+  handleError(api, result)
+  return result
 }

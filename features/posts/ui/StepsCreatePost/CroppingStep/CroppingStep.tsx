@@ -7,11 +7,11 @@ import { LoadingButton } from "@/features/posts/ui/CroppingButton/LoadingButton/
 import { useAppSelector } from "@/app/hooks/useAppSelector"
 import { changeImageAC, deleteImageAC, selectImages } from "@/features/posts/model/postsSlice"
 import { useAppDispatch } from "@/app/hooks/useAppDispatch"
-import { ImagesSlider } from "@/features/posts/ui/ImagesSlider/ImagesSlider"
+import { ImagesSlider } from "@/shared/ui/ImagesSlider/ImagesSlider"
 
 export type CanvasImage = {
   file: File
-  src: string
+  url: string
   filter: string
   zoom: number
   scale: number
@@ -31,15 +31,6 @@ export const CroppingStep = ({ addImageAction }: Props) => {
   const currentImage = images[position]
 
   const dispatch = useAppDispatch()
-
-  // const addImage = (e: React.ChangeEvent<HTMLInputElement> | null) => {
-  //   if (e?.target?.files && e.target.files.length > 0) {
-  //     if (images.length === 10) {
-  //       dispatch(setAppError({ error: "You can only upload up to 10 photos" }))
-  //     } else dispatch(addImageAC({ file: e.target.files[0] }))
-  //     e.target.value = ""
-  //   }
-  // }
 
   const changeImage = (index: number, image: Partial<CanvasImage>) => {
     dispatch(changeImageAC({ index, image }))
@@ -63,7 +54,7 @@ export const CroppingStep = ({ addImageAction }: Props) => {
     <div ref={ref} className={s.content}>
       {images.length > 0 && (
         <>
-          <ImagesSlider images={images} position={position} setPosition={setPosition} />
+          <ImagesSlider images={images} startPosition={position} action={setPosition} />
           <div className={s.buttonsContainer}>
             <ResizingButton setScale={setScale} defaultScale={defaultScale} />
             <ZoomingButton zoom={currentImage.zoom} setZoom={setZoom} />

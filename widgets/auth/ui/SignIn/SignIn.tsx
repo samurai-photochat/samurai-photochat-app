@@ -1,33 +1,20 @@
 "use client"
 import { LoginType, useLoginMutation } from "@/features/auth/api/authApi"
-import { setAppError } from "@/app/model/appSlice"
-import { useAppDispatch } from "@/app/hooks/useAppDispatch"
 
 import { useRouter } from "next/navigation"
 import LocalStorage from "@/shared/utils/localStorage/localStorage"
 import SignInForm from "@/features/auth/ui/SignIn/SignInForm"
 
 export function SignIn() {
-  const [loginUser, { isError }] = useLoginMutation()
-  const dispatch = useAppDispatch()
+  const [loginUser] = useLoginMutation()
   const router = useRouter()
-  const submitAction = (data: LoginType, reset: () => void) => {
-    loginUser(data)
-      .unwrap()
-      .then((res: { accessToken: string }) => {
-        if (res) {
-          LocalStorage.setToken(res.accessToken)
-          router.push("/")
-        }
-
-        if (isError) {
-          throw new Error()
-        }
-        reset()
-      })
-      .catch((err) => {
-        dispatch(setAppError(err?.data?.messages[0]?.message))
-      })
+  const submitAction = async (loginData: LoginType, reset: () => void) => {
+    const { data } = await loginUser(loginData)
+    if (data) {
+      LocalStorage.setToken(data.accessToken)
+      router.push("/")
+    }
+    reset()
   }
   return <SignInForm submitAction={submitAction} />
 }

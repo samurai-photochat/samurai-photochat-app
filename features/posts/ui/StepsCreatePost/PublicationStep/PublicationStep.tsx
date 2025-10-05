@@ -1,7 +1,7 @@
 import { useAppSelector } from "@/app/hooks/useAppSelector"
 import { useState } from "react"
 import { selectImages } from "@/features/posts/model/postsSlice"
-import { ImagesSlider } from "@/features/posts/ui/ImagesSlider/ImagesSlider"
+import { ImagesSlider } from "@/shared/ui/ImagesSlider/ImagesSlider"
 import s from "./PublicationStep.module.scss"
 import NextImage from "next/image"
 import Pin from "@/shared/assets/svg/pin.svg"
@@ -17,7 +17,7 @@ export const PublicationStep = ({ description, setDescription }: Props) => {
   const [position, setPosition] = useState(0)
   return (
     <div className={s.content} style={{ position: "relative" }}>
-      <ImagesSlider images={images} position={position} setPosition={setPosition} />
+      <ImagesSlider images={images} startPosition={position} action={setPosition} />
       <div className={s.PublicationBlock}>
         <div className={s.topContentWrap}>
           <div className={s.headerBlock}>

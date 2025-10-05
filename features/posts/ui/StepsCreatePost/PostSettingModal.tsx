@@ -14,8 +14,6 @@ import { useAppSelector } from "@/app/hooks/useAppSelector"
 import { ModalWindow } from "@/features/auth/ui/Register/ModalWindow/ModalWindow"
 import { useOutsideClick } from "@/app/hooks/useOutsideClick"
 import s from "./PostSettingModal.module.scss"
-import { BaseApiResponse } from "@/features/auth/api/authApi.types"
-import { setAppError } from "@/app/model/appSlice"
 import { useCreatePostMutation, useUploadImagesMutation } from "@/features/posts/api/postsApi"
 
 // Шаги добавления поста
@@ -53,9 +51,9 @@ export const PostSettingModal = ({ isOpenPostSettingModal, setIsOpenPostSettingM
     },
   })
 
-  const [createPost] = useCreatePostMutation()
+  const [createPost, { isLoading: isLoadingCreate }] = useCreatePostMutation()
 
-  const [uploadImage] = useUploadImagesMutation()
+  const [uploadImage, { isLoading: isLoadingImage }] = useUploadImagesMutation()
 
   const [description, setDescription] = useState("")
 
@@ -87,7 +85,7 @@ export const PostSettingModal = ({ isOpenPostSettingModal, setIsOpenPostSettingM
 
       const image: CanvasImage = {
         file,
-        src,
+        url: src,
         filter: "",
         zoom: 1,
         scale: 490 / 504,
@@ -101,36 +99,25 @@ export const PostSettingModal = ({ isOpenPostSettingModal, setIsOpenPostSettingM
   const createPostHandler = async () => {
     const formData = new FormData()
     images.forEach((image) => formData.append("file", image.file))
-    uploadImage(formData)
-      .then((imageRes) => {
-        if (imageRes.error) {
-          if ("data" in imageRes.error && imageRes.error.data) {
-            const errorData = imageRes.error.data as BaseApiResponse
-            dispatch(setAppError({ error: errorData.messages[0].message }))
+    uploadImage(formData).then((imageRes) => {
+      if (!imageRes.error) {
+        createPost({
+          description,
+          childrenMetadata: imageRes.data.images.map((image) => {
+            return {
+              uploadId: image.uploadId,
+            }
+          }),
+        }).then((res) => {
+          if (!res.error) {
+            dispatch(addPostAC({ post: res.data }))
+            dispatch(clearImagesAC())
+            closeModal()
+            setIsOpenPostSettingModalAction(false)
           }
-        } else {
-          createPost({
-            description,
-            childrenMetadata: imageRes.data.images.map((image) => {
-              return {
-                uploadId: image.uploadId,
-              }
-            }),
-          })
-            .then((res) => {
-              if (res.error) {
-                if ("data" in res.error && res.error.data) {
-                  const errorData = res.error.data as BaseApiResponse
-                  dispatch(setAppError({ error: errorData.messages[0].message }))
-                }
-              } else {
-                dispatch(addPostAC({ post: res.data }))
-              }
-            })
-            .catch((err) => dispatch(setAppError({ error: err?.data?.messages[0]?.message })))
-        }
-      })
-      .catch((err) => dispatch(setAppError({ error: err?.data?.messages[0]?.message })))
+        })
+      }
+    })
   }
 
   // Работа с Steps
@@ -168,11 +155,11 @@ export const PostSettingModal = ({ isOpenPostSettingModal, setIsOpenPostSettingM
 
   const setFilters = () => {
     images.forEach((image, index) => {
-      const { file, src, zoom, scale, filter } = image
+      const { file, url, zoom, scale, filter } = image
       const canvas = canvasRef.current
       const context = canvas?.getContext("2d")
       const imgElement = new Image()
-      imgElement.src = src
+      imgElement.src = url
       if (canvas && context) {
         const zoomedWidth = imgElement.width * zoom
         const zoomedHeight = imgElement.height * zoom
@@ -255,7 +242,12 @@ export const PostSettingModal = ({ isOpenPostSettingModal, setIsOpenPostSettingM
               </Button>
               <h3 className={s.title}>{steps.find((obj) => obj.key === currentStep)?.label}</h3>
               {currentStep === steps.length - 1 ? (
-                <Button variant="text" className={s.svgButton} onClick={createPostHandler}>
+                <Button
+                  variant="text"
+                  className={s.svgButton}
+                  onClick={createPostHandler}
+                  disabled={isLoadingCreate || isLoadingImage}
+                >
                   Publish
                 </Button>
               ) : (

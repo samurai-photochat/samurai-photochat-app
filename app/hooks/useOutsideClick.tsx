@@ -10,7 +10,7 @@ export const useOutsideClick = ({ ref, action }: Props) => {
      * Alert if clicked on outside of element
      */
     const handleClickOutside = (event: MouseEvent) => {
-      if (ref.current && !ref.current.contains(event.target as Element)) {
+      if (event.button === 0 && ref.current && !ref.current.contains(event.target as Element)) {
         action()
       }
     }
