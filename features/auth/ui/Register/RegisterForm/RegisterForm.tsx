@@ -13,6 +13,7 @@ import { SignUpInputs, signUpSchema } from "@/shared/lib/signUpSchema/signUpSche
 import { UserType } from "@/features/auth/api/authApi"
 import { useState } from "react"
 import Checkbox from "@/shared/ui/checkbox/checkbox"
+import { Path } from "@/widgets/header/header"
 
 type Props = {
   submitAction: (user: UserType, reset: () => void) => void
@@ -81,7 +82,7 @@ export const RegisterForm = ({ submitAction }: Props) => {
         Sign Up
       </Button>
       <span style={{ color: "var(--color-light-100)" }}>Do you have an account?</span>
-      <Button variant={"text"} as={"a"} href={""}>
+      <Button variant={"text"} as={"a"} href={Path.login}>
         Sign In
       </Button>
     </Form.Root>

@@ -8,11 +8,11 @@ import { PATH } from "@/shared/config/routes"
 import { Breakpoints, useBreakpoint } from "@/shared/hooks/useBreakpoint"
 import { BookmarkIcon, LogOutIcon, TrendingUpIcon } from "@/shared/assets/icons/components"
 import { DropdownMenu } from "@/shared/ui/DropdownMenu"
-import { Settings } from "@/shared/assets/icons/components/Settings";
+import { Settings } from "@/shared/assets/icons/components/Settings"
 // import { selectIsLoggedIn } from "@/entities/user/userSlice"
 // import { useAppDispatch } from "@/app/hooks/useAppDispatch"
 
-const Path = {
+export const Path = {
   login: PATH.AUTH.LOGIN,
   Signup: PATH.AUTH.REGISTRATION,
 }
