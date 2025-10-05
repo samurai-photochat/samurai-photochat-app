@@ -2,10 +2,10 @@
 import EmailConfirmed from "@/shared/assets/svg/sign-up_bro.svg"
 import LinkExpired from "@/shared/assets/svg/rafiki.svg"
 import { InfoForm } from "@/features/auth/ui/Register/InfoForm/InfoForm"
-import { ResendingEmailType, useEmailResendingMutation } from "@/features/auth/api/authApi"
+import { ResendingEmailRequest, useEmailResendingMutation } from "@/features/auth/api/authApi"
 import { useAppDispatch } from "@/app/hooks/useAppDispatch"
 import { setAppError } from "@/app/model/appSlice"
-import { ApiErrorResultDto } from "@/features/auth/api/authApi.types"
+import { BaseApiResponse } from "@/features/auth/api/authApi.types"
 import { PATH } from "@/shared/config/routes"
 
 type Props = {
@@ -17,13 +17,13 @@ export const Confirmation = ({ islinkExpiration, value }: Props) => {
   // достаем запрос
   const [emailResending] = useEmailResendingMutation()
   // отработка запроса при нажатии на кнопку
-  const buttonHandler = (prov: ResendingEmailType, reset: () => void) => {
+  const buttonHandler = (prov: ResendingEmailRequest, reset: () => void) => {
     reset()
     emailResending(prov)
       .then((res) => {
         if (res.error) {
           if ("data" in res.error && res.error.data) {
-            const errorData = res.error.data as ApiErrorResultDto
+            const errorData = res.error.data as BaseApiResponse
             dispatch(setAppError({ error: errorData.messages[0].message }))
           }
         }

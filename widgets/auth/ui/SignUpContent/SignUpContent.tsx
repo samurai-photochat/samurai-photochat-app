@@ -6,7 +6,7 @@ import { RegisterForm } from "@/features/auth/ui/Register/RegisterForm/RegisterF
 import { useConfirmationMutation, useRegistrationMutation, UserType } from "@/features/auth/api/authApi"
 import { useAppDispatch } from "@/app/hooks/useAppDispatch"
 import { setAppError } from "@/app/model/appSlice"
-import { ApiErrorResultDto } from "@/features/auth/api/authApi.types"
+import { BaseApiResponse } from "@/features/auth/api/authApi.types"
 import { useSearchParams } from "next/navigation"
 import { Confirmation } from "@/widgets/auth/ui/Confirmation/Confirmation"
 import Button from "@/shared/ui/button/button"
@@ -29,7 +29,7 @@ export function SignUpContent() {
         .then((res) => {
           if (res.error) {
             if ("data" in res.error && res.error.data) {
-              const errorData = res.error.data as ApiErrorResultDto
+              const errorData = res.error.data as BaseApiResponse
               dispatch(setAppError({ error: errorData.messages[0].message }))
               setIslinkExpiration(true)
             }
@@ -48,7 +48,7 @@ export function SignUpContent() {
         // обработка ошибки и передача в стейт error
         if (res.error) {
           if ("data" in res.error && res.error.data) {
-            const errorData = res.error.data as ApiErrorResultDto
+            const errorData = res.error.data as BaseApiResponse
             dispatch(setAppError({ error: errorData.messages[0].message }))
           }
         } else {

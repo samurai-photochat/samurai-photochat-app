@@ -14,7 +14,7 @@ import { useAppSelector } from "@/app/hooks/useAppSelector"
 import { ModalWindow } from "@/features/auth/ui/Register/ModalWindow/ModalWindow"
 import { useOutsideClick } from "@/app/hooks/useOutsideClick"
 import s from "./PostSettingModal.module.scss"
-import { ApiErrorResultDto } from "@/features/auth/api/authApi.types"
+import { BaseApiResponse } from "@/features/auth/api/authApi.types"
 import { setAppError } from "@/app/model/appSlice"
 import { useCreatePostMutation, useUploadImagesMutation } from "@/features/posts/api/postsApi"
 
@@ -105,7 +105,7 @@ export const PostSettingModal = ({ isOpenPostSettingModal, setIsOpenPostSettingM
       .then((imageRes) => {
         if (imageRes.error) {
           if ("data" in imageRes.error && imageRes.error.data) {
-            const errorData = imageRes.error.data as ApiErrorResultDto
+            const errorData = imageRes.error.data as BaseApiResponse
             dispatch(setAppError({ error: errorData.messages[0].message }))
           }
         } else {
@@ -120,7 +120,7 @@ export const PostSettingModal = ({ isOpenPostSettingModal, setIsOpenPostSettingM
             .then((res) => {
               if (res.error) {
                 if ("data" in res.error && res.error.data) {
-                  const errorData = res.error.data as ApiErrorResultDto
+                  const errorData = res.error.data as BaseApiResponse
                   dispatch(setAppError({ error: errorData.messages[0].message }))
                 }
               } else {

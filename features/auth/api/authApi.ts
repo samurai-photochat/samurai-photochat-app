@@ -156,3 +156,5 @@ export const {
   useRefreshTokenMutation,
   useGoogleOAuthMutation,
 } = authApi
+
+export type { ResendingEmailRequest, RegisterRequest as UserType, LoginRequest as LoginType } from "./authApi.types"

@@ -7,7 +7,7 @@ import { TextField } from "@/shared/ui/text-field/text-field"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { SignUpInputs, signUpSchema } from "@/shared/lib/signUpSchema/signUpSchema"
-import { ResendingEmailType } from "@/features/auth/api/authApi"
+import { ResendingEmailRequest } from "@/features/auth/api/authApi"
 import { setAppError } from "@/app/model/appSlice"
 import { useAppDispatch } from "@/app/hooks/useAppDispatch"
 
@@ -19,7 +19,7 @@ type Props = {
   isInput: boolean
   href?: string
   value?: unknown
-  handleClickAction?: (prov: ResendingEmailType, reset: () => void) => void
+  handleClickAction?: (prov: ResendingEmailRequest, reset: () => void) => void
 }
 
 export const InfoForm = ({ title, text, textBtn, isInput, img, href, handleClickAction, value }: Props) => {
