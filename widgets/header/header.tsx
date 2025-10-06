@@ -12,11 +12,6 @@ import { Settings } from "@/shared/assets/icons/components/Settings"
 // import { selectIsLoggedIn } from "@/entities/user/userSlice"
 // import { useAppDispatch } from "@/app/hooks/useAppDispatch"
 
-export const Path = {
-  login: PATH.AUTH.LOGIN,
-  Signup: PATH.AUTH.REGISTRATION,
-}
-
 export const Header = () => {
   // const dispatch = useAppDispatch()
   //использование useAppSelector можно только на клиентских компонентах
@@ -62,10 +57,10 @@ export const Header = () => {
         ) : (
           !isLoggedIn && (
             <div className={s.menuButton}>
-              <Button as={"a"} href={Path.login} fullWidth variant="text" className={s.button}>
+              <Button as={"a"} href={PATH.AUTH.LOGIN} fullWidth variant="text" className={s.button}>
                 Log in
               </Button>
-              <Button className={s.button} as={"a"} href={Path.Signup} variant="primary">
+              <Button className={s.button} as={"a"} href={PATH.AUTH.REGISTRATION} variant="primary">
                 Sign up
               </Button>
             </div>

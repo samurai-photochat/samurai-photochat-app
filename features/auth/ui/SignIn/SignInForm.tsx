@@ -12,13 +12,14 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useState } from "react"
 import { TextField } from "@/shared/ui/text-field/text-field"
 import { Button } from "@/shared/ui"
-import { Path } from "@/widgets/header/header"
+import { PATH } from "@/shared/config/routes"
 
 type Props = {
   submitAction: ({ email, password }: { email: string; password: string }, reset: () => void) => void
+  error?: string
 }
 
-export default function SignInForm({ submitAction }: Props) {
+export default function SignInForm({ submitAction, error = "" }: Props) {
   const {
     register,
     handleSubmit,
@@ -52,7 +53,7 @@ export default function SignInForm({ submitAction }: Props) {
           type={passwordType}
           password
           label={"Password"}
-          errorMessage={errors.password?.message}
+          errorMessage={errors.password?.message || error}
           iconAction={() => setPasswordType(passwordType === "password" ? "text" : "password")}
           {...register("password")}
         />
@@ -65,7 +66,7 @@ export default function SignInForm({ submitAction }: Props) {
           Sign In
         </Button>
         <span className={s.whiteText}>{`Don't have an account?`}</span>
-        <Button as={"a"} variant={"text"} href={Path.Signup}>
+        <Button as={"a"} variant={"text"} href={PATH.AUTH.REGISTRATION}>
           Sign Up
         </Button>
       </Form.Root>
