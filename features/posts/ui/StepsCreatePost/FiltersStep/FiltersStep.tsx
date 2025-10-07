@@ -3,7 +3,7 @@ import s from "./FiltersStep.module.scss"
 import { useAppSelector } from "@/app/hooks/useAppSelector"
 import { changeImageAC, selectImages } from "@/features/posts/model/postsSlice"
 import { useState } from "react"
-import { ImagesSlider } from "@/features/posts/ui/ImagesSlider/ImagesSlider"
+import { ImagesSlider } from "@/shared/ui/ImagesSlider/ImagesSlider"
 import { useAppDispatch } from "@/app/hooks/useAppDispatch"
 
 export type FilterTemplate = {
@@ -32,7 +32,7 @@ export const FilterStep = () => {
 
   return (
     <div className={s.content}>
-      <ImagesSlider images={images} position={position} setPosition={setPosition} />
+      <ImagesSlider images={images} startPosition={position} action={setPosition} />
       <div className={s.filtersBlock}>
         {filterTemplates.map((filterTemplate) => {
           const filter = filterTemplate.filter
@@ -43,7 +43,7 @@ export const FilterStep = () => {
             <Filter
               key={filterTemplate.id}
               filterTemplate={filterTemplate}
-              img={currentImage.src}
+              img={currentImage.url}
               //aspectRatio={currentImage.scale}
               onClick={setFilter}
             />

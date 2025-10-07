@@ -8,11 +8,11 @@ export type MeResponse = {
 // registration, confirmation, resending
 export type BaseApiResponse = {
   statusCode: number
-  messages: Array<Massage>
+  messages: Array<Message> | string
   error: string
 }
 
-export type Massage = {
+export type Message = {
   message: string
   field: string
 }

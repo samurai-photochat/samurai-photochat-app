@@ -31,7 +31,7 @@ export const authApi = baseApi.injectEndpoints({
             const currentUser: MeResponse = { ...data }
             dispatch(setCurrentUser(currentUser))
           } catch (error) {
-            console.error("Failed to fetch user data:", error)
+            console.log("Failed to fetch user data:", error)
           }
         },
         query: () => {
@@ -93,7 +93,7 @@ export const authApi = baseApi.injectEndpoints({
           }
         },
       }),
-      logout: builder.mutation<void, void>({
+      logout: builder.mutation<BaseApiResponse, void>({
         async onQueryStarted(_, { dispatch, queryFulfilled }) {
           try {
             await queryFulfilled

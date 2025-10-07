@@ -26,13 +26,8 @@ export default function Sidebar() {
   const isNarrow = useBreakpoint(Breakpoints.narrow)
 
   const logoutHandler = async () => {
-    try {
-      await logoutUser().unwrap()
-    } catch {
-      console.error("Unable to logout")
-    } finally {
-      window.localStorage.href(PATH.AUTH.LOGOUT)
-    }
+    await logoutUser()
+    window.localStorage.href = PATH.AUTH.LOGOUT
   }
 
   const user = useSelector(selectCurrentUser)

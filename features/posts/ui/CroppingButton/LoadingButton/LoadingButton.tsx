@@ -29,7 +29,7 @@ export const LoadingButton = ({ images, deleteImageAction, addImageAction }: Pro
                   key={i}
                   className={s.image}
                   style={{
-                    backgroundImage: `url(${image.src})`,
+                    backgroundImage: `url(${image.url})`,
                     backgroundSize: "cover",
                     backgroundRepeat: "no-repeat",
                     backgroundPosition: "center",
