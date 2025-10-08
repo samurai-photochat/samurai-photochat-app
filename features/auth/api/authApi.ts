@@ -141,6 +141,16 @@ export const authApi = baseApi.injectEndpoints({
           }
         },
       }),
+      forgotPassword: builder.mutation<void, { email: string; baseUrl: string }>({
+        query: (body) => ({
+          url: "auth/password-recovery",
+          method: "POST",
+          body: {
+            ...body,
+            recaptcha: "test-recaptcha-token",
+          },
+        }),
+      }),
     }
   },
 })
@@ -155,6 +165,7 @@ export const {
   useLogoutMutation,
   useRefreshTokenMutation,
   useGoogleOAuthMutation,
+  useForgotPasswordMutation,
 } = authApi
 
 export type { ResendingEmailRequest, RegisterRequest as UserType, LoginRequest as LoginType } from "./authApi.types"

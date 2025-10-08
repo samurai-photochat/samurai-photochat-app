@@ -2,7 +2,7 @@
 import Image, { StaticImageData } from "next/image"
 import s from "./InfoForm.module.css"
 import Button from "@/shared/ui/button/button"
-import { Form } from "radix-ui"
+import * as Form from "@radix-ui/react-form"
 import { TextField } from "@/shared/ui/text-field/text-field"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"

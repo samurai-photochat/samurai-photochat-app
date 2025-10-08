@@ -1,6 +1,6 @@
 "use client"
 import s from "./LoginForm.module.scss"
-import { Form } from "radix-ui"
+import * as Form from "@radix-ui/react-form"
 import Image from "next/image"
 import googleIcon from "@/shared/assets/img/google-icon.png"
 import githubIcon from "@/shared/assets/img/github-icon.png"
@@ -58,7 +58,7 @@ export default function SignInForm({ submitAction, error = "" }: Props) {
           {...register("password")}
         />
         <span className={s.span}>
-          <a href={""} className={`${s.span} ${s.grayText} ${s.a}`}>
+          <a href={PATH.AUTH.FORGOT_PASSWORD} className={`${s.span} ${s.grayText} ${s.a}`}>
             Forgot Password
           </a>
         </span>

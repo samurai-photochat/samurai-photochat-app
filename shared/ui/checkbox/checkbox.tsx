@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Checkbox } from "radix-ui"
+import * as Checkbox from "@radix-ui/react-checkbox"
 import Image from "next/image"
 import s from "./checkbox.module.css"
 import SelectedIcon from "@/shared/assets/svg/checkbox/Property 1=Default Selected.svg"

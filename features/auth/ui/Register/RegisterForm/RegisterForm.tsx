@@ -1,6 +1,6 @@
 "use client"
 import * as React from "react"
-import { Form } from "radix-ui"
+import * as Form from "@radix-ui/react-form"
 import Image from "next/image"
 import s from "./RegisterForm.module.css"
 import googleIcon from "@/shared/assets/img/google-icon.png"

@@ -1,4 +1,5 @@
-import { Dialog } from "radix-ui"
+import * as Dialog from "@radix-ui/react-dialog"
+
 import Image from "next/image"
 import CloseIcon from "@/shared/assets/svg/Close.svg"
 

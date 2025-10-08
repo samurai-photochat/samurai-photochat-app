@@ -10,6 +10,7 @@ export const PATH = {
     EMAIL_CONFIRMED: "/auth/email-confirmed",
     GOOGLE: "/auth/google",
     GITHUB: "/auth/github",
+    FORGOT_PASSWORD: "/auth/forgot-password",
   },
 
   USER: {
