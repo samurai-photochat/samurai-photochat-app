@@ -10,7 +10,7 @@
   outline: 2px solid transparent;
 
   &:disabled {
-      cursor: not-allowed;
+    cursor: not-allowed;
   }
 }
 

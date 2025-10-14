@@ -80,4 +80,3 @@ export type UploadImagesRequest = FormData
 export type UploadImagesResponse = {
   images: Image[]
 }
-
