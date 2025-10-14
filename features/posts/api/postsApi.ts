@@ -39,23 +39,23 @@ export const postsApi = baseApi.injectEndpoints({
     getUserPostsPagination: builder.infiniteQuery<
       UserPostsPaginationResponse,
       UserPostsPaginationRequest,
-      string | undefined
+      number | undefined
     >({
       infiniteQueryOptions: {
         initialPageParam: undefined,
         getNextPageParam: (lastPage) => {
           const lastPost = lastPage.items[lastPage.items.length - 1]
-          return lastPost ? lastPost.id.toString() : undefined
+          return lastPost ? lastPost.id : undefined
         },
       },
-      query: (arg) => {
-        const { userId, endCursorPostId, pageSize = 8, sortBy, sortDirection } = arg.queryArg
+      query: ({ queryArg, pageParam }) => {
+        const { userId, pageSize = 8, sortBy, sortDirection } = queryArg
         const params = new URLSearchParams()
         params.set("pageSize", pageSize.toString())
         if (sortBy) params.set("sortBy", sortBy.toString())
         if (sortDirection) params.set("sortDirection", sortDirection.toString())
         return {
-          url: `posts/user/${userId}/${endCursorPostId ?? ""}`,
+          url: `posts/user/${userId}/${pageParam ?? ""}`,
           params,
         }
       },
