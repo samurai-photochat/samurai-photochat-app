@@ -9,13 +9,14 @@ type Props = {
   images: CanvasImage[] | Image[]
   startPosition?: number
   action: (index: number) => void
+  className?: string
 }
 
-export const ImagesSlider = ({ images, startPosition = 0, action }: Props) => {
+export const ImagesSlider = ({ images, startPosition = 0, action, className }: Props) => {
   const currentImage = images[startPosition]
   const { url } = currentImage
   return (
-    <div className={s.container}>
+    <div className={s.container + className ? " " + className : ""}>
       {startPosition > 0 && (
         <button
           className={s.arrow}
@@ -58,7 +59,7 @@ export const ImagesSlider = ({ images, startPosition = 0, action }: Props) => {
         />
       </div>
       {images.length > 1 && (
-        <div className={s.circlesContainer}>
+        <div className={s.circlesContainer} onClick={() => {}}>
           {images.map((_image, i) => (
             <div key={i} className={s.circle + (startPosition === i ? " " + s.active : "")}></div>
           ))}

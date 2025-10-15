@@ -111,3 +111,44 @@
 .posts-counter {
   padding: 0 12px;
 }
+
+.label {
+    color: var(--color-light-900);
+}
+
+.textarea-block {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+}
+
+.menu {
+    cursor: pointer;
+    position: absolute;
+    right: 12px;
+}
+
+.editButton {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    padding: 6px 12px
+}
+
+.text {
+    font-family: var(--font-sans);
+    font-size: var(--text-md);
+    font-weight: var(--font-regular);
+}
+
+.button-box {
+    padding: 18px 0 0;
+    display: flex;
+    gap: 24px;
+    justify-content: end;
+}
+
+.modal-button{
+    width: 96px;
+}

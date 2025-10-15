@@ -1,7 +1,5 @@
 .container {
   position: relative;
-  width: 492px;
-  height: 504px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,8 +10,6 @@
 }
 
 .image {
-  max-width: 492px;
-  max-height: 504px;
   touch-action: none;
   object-fit: cover;
 }

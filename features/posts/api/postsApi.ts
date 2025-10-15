@@ -9,6 +9,7 @@ import {
   UploadImagesResponse,
   UserPostsPaginationRequest,
   UserPostsPaginationResponse,
+  UpdatePostRequest,
 } from "@/features/posts/api/postsApi.types"
 
 import { baseApi } from "@/app/api/baseApi"
@@ -97,6 +98,13 @@ export const postsApi = baseApi.injectEndpoints({
         method: "DELETE",
       }),
     }),
+    updatePost: builder.mutation<Post, UpdatePostRequest>({
+      query: ({ postId, description }) => ({
+        url: `posts/${postId}`,
+        method: "PUT",
+        body: { description },
+      }),
+    }),
   }),
 })
 
@@ -107,4 +115,5 @@ export const {
   useGetPostByIdQuery,
   useCreatePostMutation,
   useUploadImagesMutation,
+  useUpdatePostMutation,
 } = postsApi

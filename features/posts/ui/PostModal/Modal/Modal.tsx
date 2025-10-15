@@ -11,7 +11,7 @@ type Props = {
 } & ComponentPropsWithoutRef<"div">
 
 export const Modal = ({ open, onClose, children, ...rest }: Props) => (
-  <Dialog.Root open={open} onOpenChange={onClose} {...rest}>
+  <Dialog.Root open={open} {...rest}>
     <Dialog.Portal>
       <Dialog.Overlay className={styles.Overlay} />
       <Dialog.Content className={styles.Content}>
@@ -20,7 +20,7 @@ export const Modal = ({ open, onClose, children, ...rest }: Props) => (
 
         {children}
         <Dialog.Close asChild>
-          <button className={styles.IconButton} aria-label="Close">
+          <button className={styles.IconButton} aria-label="Close" onClick={onClose}>
             <Image src={CloseIcon} alt="Close" />
           </button>
         </Dialog.Close>
