@@ -6,6 +6,7 @@ import { ReactNode, useMemo } from "react"
 
 import { PostModalContextProvider } from "../context/PostModalContext"
 import { PostModalBody } from "./PostModalBody"
+import { CloseOutline } from "@/shared/assets/icons/components"
 
 import s from "./PostModal.module.scss"
 
@@ -29,9 +30,11 @@ export const PostModal = ({ isOpen, postId, onClose }: PostModalProps) => {
       <Dialog.Root open={isOpen} onOpenChange={(next) => !next && onClose()}>
         <Dialog.Portal>
           <Dialog.Overlay className={s.overlay} />
-          <Dialog.Content className={s.content}>
-            <Dialog.Close className={s.closeButton} aria-label="Закрыть" />
-            {content}
+          <Dialog.Content className={s.contentWrapper}>
+            <Dialog.Close className={s.closeButton} aria-label="Закрыть">
+              <CloseOutline />
+            </Dialog.Close>
+            <div className={s.content}>{content}</div>
           </Dialog.Content>
         </Dialog.Portal>
       </Dialog.Root>
