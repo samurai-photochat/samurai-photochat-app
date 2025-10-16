@@ -1,1 +1,1 @@
-export { PostModal } from "./PostModal"
+export * from "./ui/PostModal"
