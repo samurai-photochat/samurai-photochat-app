@@ -62,8 +62,8 @@ export const PostsGrid = ({ isOwner, userId }: PostsGridProps) => {
             className={s.postImage}
             src={post.images[0]?.url}
             alt={post.description}
-            width={400}
-            height={400}
+            width={post.images[0].width}
+            height={post.images[0].height}
             onClick={() => handleOpenPost(post.id)}
           />
         </div>
