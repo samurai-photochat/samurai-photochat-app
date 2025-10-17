@@ -19,7 +19,7 @@ export default function Home() {
   if (isCountLoading) return <p>Загрузка количества пользователей...</p>
 
   return (
-    <div>
+    <div style={{}}>
       {isLoggedIn && <Sidebar />}
       <div style={{ padding: "20px", margin: "0 auto" }}>
         <h2 style={{ color: "var(--color-light-100)" }}>Всего пользователей зарегистрировано: {totalCount}</h2>

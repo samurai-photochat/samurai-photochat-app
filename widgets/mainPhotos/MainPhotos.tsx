@@ -3,8 +3,8 @@
 import { useState } from "react"
 import { useGetAllPostsQuery } from "@/features/posts/api/postsApi"
 import Image from "next/image"
-import { PostModal } from "@/features/posts/ui/PostModal/PostModal"
 import styles from "./MainPhotos.module.scss"
+import { PostModal } from "@/features/posts/ui/PostModal"
 
 // Функция для форматирования времени "X минут назад"
 const getTimeAgo = (date: string): string => {
@@ -54,7 +54,7 @@ export const MainPhotos = () => {
     <>
       <div className={styles.container}>
         <div className={styles.grid}>
-          {postsData.items.slice(0, 5).map((post) => (
+          {postsData.items.slice(0, 4).map((post) => (
             <div key={post.id} className={styles.card} onClick={() => handleOpenPost(post.id)}>
               {/* Фото поста */}
               {post.images && post.images.length > 0 && (
