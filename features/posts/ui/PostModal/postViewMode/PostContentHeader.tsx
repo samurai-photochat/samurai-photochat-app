@@ -1,9 +1,11 @@
 import Image from "next/image"
+import { useCallback } from "react"
 
 import { Post } from "@/features/posts/api/postsApi.types"
 import { DropdownMenu } from "@/shared/ui/DropdownMenu"
 
 import s from "../ui/PostModal.module.scss"
+import { usePostDropdownMenuActions } from "@/features/posts/ui/PostModal/hooks"
 
 type PostContentHeaderProps = {
   post: Post
@@ -12,12 +14,25 @@ type PostContentHeaderProps = {
 }
 
 export const PostContentHeader = ({ post, isOwnPost, isAuth }: PostContentHeaderProps) => {
-  const menuItems = isOwnPost
-    ? [
-        { key: "edit", label: "Edit Post", onSelect: () => {} },
-        { key: "delete", label: "Delete Post", onSelect: () => {} },
-      ]
-    : [{ key: "copy", label: "Copy Link", onSelect: () => {} }]
+  const handleCopyLink = useCallback(() => {
+    const link = `${window.location.origin}/posts/${post.id}`
+    console.log("Ссылка скопирована:", link)
+    alert("Copy")
+  }, [post.id])
+
+  // Коллбэк подписки/отписки (заглушка, добавь реальную логику)
+  const handleToggleFollow = () => {
+    console.log("Отписка от пользователя или Подписка на пользователя")
+    alert("Follow")
+  }
+
+  // Получаем пункты меню из хука
+  const menuItems = usePostDropdownMenuActions({
+    isOwnPost,
+    onCopyLink: handleCopyLink,
+    onToggleFollow: handleToggleFollow,
+  })
+
   return (
     <div className={s.header}>
       <div className={s.ownerInfo}>
