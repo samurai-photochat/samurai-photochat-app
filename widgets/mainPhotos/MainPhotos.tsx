@@ -54,7 +54,7 @@ export const MainPhotos = () => {
     <>
       <div className={styles.container}>
         <div className={styles.grid}>
-          {postsData.items.slice(0, 5).map((post) => (
+          {postsData.items.slice(0, 4).map((post) => (
             <div key={post.id} className={styles.card} onClick={() => handleOpenPost(post.id)}>
               {/* Фото поста */}
               {post.images && post.images.length > 0 && (

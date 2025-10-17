@@ -1,8 +1,9 @@
 "use client"
 import { useGetUserPostsPaginationInfiniteQuery } from "@/features/posts/api/postsApi"
-import { useCallback, useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import s from "./PostsGrid.module.scss"
+import { PostModal } from "@/features/posts/ui"
 type PostsGridProps = {
   isOwner: boolean
   userId: number
@@ -12,6 +13,19 @@ export const PostsGrid = ({ isOwner, userId }: PostsGridProps) => {
   const { data, isFetching, isFetchingNextPage, fetchNextPage, hasNextPage } = useGetUserPostsPaginationInfiniteQuery({
     userId,
   })
+
+  const [selectedPostId, setSelectedPostId] = useState<number | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const handleOpenPost = (postId: number) => {
+    setSelectedPostId(postId)
+    setIsModalOpen(true)
+  }
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+    setSelectedPostId(null)
+  }
+
   const loadRef = useRef<HTMLDivElement>(null)
   const posts = data?.pages.flatMap((page) => page.items) ?? []
   useEffect(() => {
@@ -44,9 +58,17 @@ export const PostsGrid = ({ isOwner, userId }: PostsGridProps) => {
     <div className={s.grid}>
       {visiblePosts.map((post) => (
         <div key={post.id}>
-          <Image className={s.postImage} src={post.images[0]?.url} alt={post.description} />
+          <Image
+            className={s.postImage}
+            src={post.images[0]?.url}
+            alt={post.description}
+            width={400}
+            height={400}
+            onClick={() => handleOpenPost(post.id)}
+          />
         </div>
       ))}
+      <PostModal isOpen={isModalOpen} postId={selectedPostId} onClose={handleCloseModal} />
       <div ref={loadRef} style={{ height: 1 }} />
       {isFetchingNextPage && <div>Loading...</div>}
     </div>

@@ -8,16 +8,16 @@ import s from "../ui/PostModal.module.scss"
 type PostContentHeaderProps = {
   post: Post
   isOwnPost: boolean
+  isAuth: boolean
 }
 
-export const PostContentHeader = ({ post, isOwnPost }: PostContentHeaderProps) => {
+export const PostContentHeader = ({ post, isOwnPost, isAuth }: PostContentHeaderProps) => {
   const menuItems = isOwnPost
     ? [
-        { key: "edit", label: "Редактировать", onSelect: () => {} },
-        { key: "delete", label: "Удалить", onSelect: () => {} },
+        { key: "edit", label: "Edit Post", onSelect: () => {} },
+        { key: "delete", label: "Delete Post", onSelect: () => {} },
       ]
-    : [{ key: "copy", label: "Скопировать ссылку", onSelect: () => {} }]
-
+    : [{ key: "copy", label: "Copy Link", onSelect: () => {} }]
   return (
     <div className={s.header}>
       <div className={s.ownerInfo}>
@@ -28,7 +28,7 @@ export const PostContentHeader = ({ post, isOwnPost }: PostContentHeaderProps) =
         )}
         <span>{post.userName}</span>
       </div>
-      <DropdownMenu align="end" sideOffset={8} items={menuItems} />
+      {isAuth && <DropdownMenu align="end" sideOffset={8} items={menuItems} />}
     </div>
   )
 }

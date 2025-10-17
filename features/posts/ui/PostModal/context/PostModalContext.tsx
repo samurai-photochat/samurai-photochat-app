@@ -19,6 +19,7 @@ type PostModalContextValue = {
   isOwnPost: boolean
   isLoading: boolean
   onClose: () => void
+  isAuth: boolean
 }
 
 /**
@@ -77,8 +78,6 @@ export const PostModalContextProvider = ({ postId, isOpen, children, onDismiss }
   })
   // Получаем данные текущего пользователя для проверки владения постом
   const { data: me } = useMeQuery()
-
-  // Эффект для активации загрузки данных при открытии модального окна
   useEffect(() => {
     if (isOpen && actualPostId) {
       setShouldFetch(true)
@@ -102,6 +101,12 @@ export const PostModalContextProvider = ({ postId, isOpen, children, onDismiss }
     return post.ownerId === me.userId
   }, [post, me])
 
+  const isAuth = useMemo(() => {
+    if (!me) {
+      return false
+    }
+    return !!me
+  }, [me])
   /**
    * Обработчик закрытия модального окна
    * Удаляет параметр postId из URL и вызывает callback onDismiss
@@ -127,8 +132,9 @@ export const PostModalContextProvider = ({ postId, isOpen, children, onDismiss }
       isOwnPost,
       isLoading: isLoading || isFetching, // Объединяем оба флага загрузки
       onClose: handleClose,
+      isAuth,
     }),
-    [post, isOpen, isOwnPost, handleClose, isLoading, isFetching]
+    [post, isOpen, isOwnPost, handleClose, isLoading, isFetching, isAuth]
   )
 
   return <PostModalContext.Provider value={value}>{children}</PostModalContext.Provider>

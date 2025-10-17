@@ -8,12 +8,13 @@ import s from "../ui/PostModal.module.scss"
 type PostContentProps = {
   post: Post
   isOwnPost: boolean
+  isAuth: boolean
 }
 
-export const PostContent = ({ post, isOwnPost }: PostContentProps) => {
+export const PostContent = ({ post, isOwnPost, isAuth }: PostContentProps) => {
   return (
     <div className={s.mainContentWrapper}>
-      <PostContentHeader post={post} isOwnPost={isOwnPost} />
+      <PostContentHeader post={post} isOwnPost={isOwnPost} isAuth={isAuth} />
       <hr style={{ borderColor: "var(--color-dark-100)", width: "100%" }} />
       <div className={s.scrollArea}>
         <p>{post.description || "Без описания"}</p>
