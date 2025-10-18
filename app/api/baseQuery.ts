@@ -3,14 +3,16 @@ import { FetchBaseQueryError } from "@reduxjs/toolkit/query/react"
 import LocalStorage from "@/shared/utils/localStorage/localStorage"
 import { handleError } from "@/app/utils/handleError"
 
-const createBaseQuery = () =>
+const createBaseQuery = (skipAuth?: boolean) =>
   fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL,
     credentials: "include",
     prepareHeaders: (headers) => {
-      const token = LocalStorage.getToken()
-      if (token) {
-        headers.set("Authorization", `Bearer ${token}`)
+      if (!skipAuth) {
+        const token = LocalStorage.getToken()
+        if (token) {
+          headers.set("Authorization", `Bearer ${token}`)
+        }
       }
       return headers
     },
@@ -20,7 +22,8 @@ export const baseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryE
   api,
   extraOptions
 ) => {
-  const result = await createBaseQuery()(args, api, extraOptions)
+  const skipAuth = (extraOptions as any)?.skipAuth
+  const result = await createBaseQuery(skipAuth)(args, api, extraOptions)
   handleError(api, result)
   return result
 }

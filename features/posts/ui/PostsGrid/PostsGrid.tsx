@@ -13,6 +13,19 @@ export const PostsGrid = ({ isOwner, userId }: PostsGridProps) => {
   const { data, isFetching, isFetchingNextPage, fetchNextPage, hasNextPage } = useGetUserPostsPaginationInfiniteQuery({
     userId,
   })
+
+  const [selectedPostId, setSelectedPostId] = useState<number | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const handleOpenPost = (postId: number) => {
+    setSelectedPostId(postId)
+    setIsModalOpen(true)
+  }
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+    setSelectedPostId(null)
+  }
+
   const loadRef = useRef<HTMLDivElement>(null)
   const posts = data?.pages.flatMap((page) => page.items) ?? []
   useEffect(() => {
@@ -41,33 +54,23 @@ export const PostsGrid = ({ isOwner, userId }: PostsGridProps) => {
     return () => observer.disconnect()
   }, [isOwner, hasNextPage, isFetchingNextPage, isFetching, fetchNextPage])
   const visiblePosts = isOwner ? posts : posts.slice(0, 8)
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [selectedPostId, setSelectedPostId] = useState<number | null>(null)
-  const handleOpenPost = (postId: number) => {
-    setSelectedPostId(postId)
-    setIsModalOpen(true)
-  }
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false)
-    setSelectedPostId(null)
-  }
   return (
     <div className={s.grid}>
       {visiblePosts.map((post) => (
-        <div key={post.id} onClick={() => handleOpenPost(post.id)}>
+        <div key={post.id}>
           <Image
-            width={post.images[0].width}
-            height={post.images[0].height}
             className={s.postImage}
             src={post.images[0]?.url}
             alt={post.description}
+            width={post.images[0].width}
+            height={post.images[0].height}
+            onClick={() => handleOpenPost(post.id)}
           />
         </div>
       ))}
+      <PostModal isOpen={isModalOpen} postId={selectedPostId} onClose={handleCloseModal} />
       <div ref={loadRef} style={{ height: 1 }} />
       {isFetchingNextPage && <div>Loading...</div>}
-      <PostModal isOpen={isModalOpen} postId={selectedPostId} onClose={handleCloseModal} />
     </div>
   )
 }

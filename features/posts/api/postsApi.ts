@@ -73,6 +73,7 @@ export const postsApi = baseApi.injectEndpoints({
           params,
         }
       },
+      extraOptions: { skipAuth: true },
     }),
     createPost: builder.mutation<Post, CreatePostRequest>({
       query: (body) => {
