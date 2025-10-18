@@ -4,6 +4,11 @@ import { PostContentHeader } from "./PostContentHeader"
 import { PostFooter } from "./PostFooter"
 
 import s from "../ui/PostModal.module.scss"
+import { Button } from "@/shared/ui"
+import { ModalWindow } from "@/features/auth/ui/Register/ModalWindow/ModalWindow"
+import React from "react"
+import { useDeletePostMutation } from "@/features/posts/api/postsApi"
+import { usePostModalContext } from "@/features/posts/ui/PostModal/context/PostModalContext"
 
 type PostContentProps = {
   post: Post
@@ -12,6 +17,14 @@ type PostContentProps = {
 }
 
 export const PostContent = ({ post, isOwnPost, isAuth }: PostContentProps) => {
+  const [deletePost, { isLoading: isDeletePostLoading }] = useDeletePostMutation()
+
+  const { deleteMode, setDeleteMode } = usePostModalContext()
+
+  const deletePostHandler = async () => {
+    await deletePost({ postId: post.id })
+  }
+
   return (
     <div className={s.mainContentWrapper}>
       <PostContentHeader post={post} isOwnPost={isOwnPost} isAuth={isAuth} />
@@ -23,6 +36,29 @@ export const PostContent = ({ post, isOwnPost, isAuth }: PostContentProps) => {
         </div>
       </div>
       <PostFooter post={post} />
+      <ModalWindow isOpen={deleteMode} title={"Close"} isClose={() => setDeleteMode(false)}>
+        <p className={s.text}>Are you sure you want to delete this post?</p>
+        <div className={s.buttonBox}>
+          <Button
+            variant="outlined"
+            className={s.modalButton}
+            onClick={async () => {
+              await deletePostHandler()
+            }}
+            disabled={isDeletePostLoading}
+          >
+            Yes
+          </Button>
+          <Button
+            className={s.modalButton}
+            onClick={() => {
+              setDeleteMode(false)
+            }}
+          >
+            No
+          </Button>
+        </div>
+      </ModalWindow>
     </div>
   )
 }

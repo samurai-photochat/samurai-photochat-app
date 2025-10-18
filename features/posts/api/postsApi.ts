@@ -117,4 +117,5 @@ export const {
   useCreatePostMutation,
   useUploadImagesMutation,
   useUpdatePostMutation,
+  useDeletePostMutation,
 } = postsApi

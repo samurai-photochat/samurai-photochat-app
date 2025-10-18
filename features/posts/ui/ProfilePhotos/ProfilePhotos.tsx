@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import { PostModal } from "@/features/posts/ui/PostModal/PostModal"
+import { PostModal } from "@/features/posts/ui/PostModal"
 import styles from "./MainPhotos.module.scss"
 import { Post } from "@/features/posts/api/postsApi.types"
 

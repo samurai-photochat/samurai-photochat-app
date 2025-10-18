@@ -27,12 +27,15 @@ export const PostModal = ({ isOpen, postId, onClose }: PostModalProps) => {
 
   return (
     <PostModalContextProvider postId={postId} isOpen={isOpen} onDismiss={onClose}>
-      <Dialog.Root open={isOpen} onOpenChange={(next) => !next && onClose()}>
+      <Dialog.Root open={isOpen}>
+        {/*onOpenChange={(next) => !next && onClose()}>*/}
         <Dialog.Portal>
           <Dialog.Overlay className={s.overlay} />
           <Dialog.Content className={s.contentWrapper}>
             <Dialog.Close className={s.closeButton} aria-label="Закрыть">
-              <CloseOutline />
+              <div onClick={onClose}>
+                <CloseOutline />
+              </div>
             </Dialog.Close>
             <div className={s.content}>{content}</div>
           </Dialog.Content>

@@ -20,6 +20,12 @@ type PostModalContextValue = {
   isLoading: boolean
   onClose: () => void
   isAuth: boolean
+  editMode: boolean
+  setEditMode: (value: boolean) => void
+  deleteMode: boolean
+  setDeleteMode: (value: boolean) => void
+  title: string
+  setTitle: (value: string) => void
 }
 
 /**
@@ -63,6 +69,9 @@ export const PostModalContextProvider = ({ postId, isOpen, children, onDismiss }
   const searchParams = useSearchParams()
   // Флаг для контроля момента начала загрузки данных поста
   const [shouldFetch, setShouldFetch] = useState(false)
+  const [editMode, setEditMode] = useState(false)
+  const [deleteMode, setDeleteMode] = useState(false)
+  const [title, setTitle] = useState("")
 
   // Определяем актуальный ID поста: из пропсов или из URL параметров
   const actualPostId = postId ?? Number(searchParams.get("postId")) ?? null
@@ -133,8 +142,27 @@ export const PostModalContextProvider = ({ postId, isOpen, children, onDismiss }
       isLoading: isLoading || isFetching, // Объединяем оба флага загрузки
       onClose: handleClose,
       isAuth,
+      editMode,
+      setEditMode,
+      title,
+      setTitle,
+      deleteMode,
+      setDeleteMode,
     }),
-    [post, isOpen, isOwnPost, handleClose, isLoading, isFetching, isAuth]
+    [
+      post,
+      isOpen,
+      isOwnPost,
+      handleClose,
+      isLoading,
+      isFetching,
+      isAuth,
+      editMode,
+      setEditMode,
+      title,
+      deleteMode,
+      setDeleteMode,
+    ]
   )
 
   return <PostModalContext.Provider value={value}>{children}</PostModalContext.Provider>
