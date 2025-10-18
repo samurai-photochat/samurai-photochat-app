@@ -1,10 +1,7 @@
-"use client"
-
-import { useState } from "react"
-import { useGetAllPostsQuery } from "@/features/posts/api/postsApi"
 import Image from "next/image"
 import styles from "./MainPhotos.module.scss"
-import { PostModal } from "@/features/posts/ui/PostModal"
+import { MainPhotosClient } from "./MainPhotosClient"
+import { AllPostsResponse } from "@/features/posts/api/postsApi.types"
 
 // Функция для форматирования времени "X минут назад"
 const getTimeAgo = (date: string): string => {
@@ -23,39 +20,25 @@ const getTimeAgo = (date: string): string => {
   return postDate.toLocaleDateString("ru-RU", { day: "numeric", month: "short" })
 }
 
-export const MainPhotos = () => {
-  const { data: postsData, isLoading: isPostsLoading, error: postsError } = useGetAllPostsQuery({ pageSize: 5 })
-  const [selectedPostId, setSelectedPostId] = useState<number | null>(null)
-  const [isModalOpen, setIsModalOpen] = useState(false)
+type MainPhotosProps = {
+  initialPosts: AllPostsResponse
+}
 
-  const handleOpenPost = (postId: number) => {
-    setSelectedPostId(postId)
-    setIsModalOpen(true)
-  }
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false)
-    setSelectedPostId(null)
-  }
-
-  if (isPostsLoading) {
-    return <p>Загрузка постов...</p>
-  }
-
-  if (postsError) {
-    return <p>Ошибка при загрузке постов</p>
-  }
-
-  if (!postsData?.items || postsData.items.length === 0) {
+/**
+ * Серверный компонент для отображения последних постов на главной странице
+ * Данные получаются через ISR на сервере
+ */
+export const MainPhotos = ({ initialPosts }: MainPhotosProps) => {
+  if (!initialPosts?.items || initialPosts.items.length === 0) {
     return <p>Постов пока нет</p>
   }
 
   return (
-    <>
+    <MainPhotosClient>
       <div className={styles.container}>
         <div className={styles.grid}>
-          {postsData.items.slice(0, 4).map((post) => (
-            <div key={post.id} className={styles.card} onClick={() => handleOpenPost(post.id)}>
+          {initialPosts.items.slice(0, 4).map((post) => (
+            <div key={post.id} className={styles.card} data-post-id={post.id}>
               {/* Фото поста */}
               {post.images && post.images.length > 0 && (
                 <div className={styles.imageWrapper}>
@@ -95,9 +78,6 @@ export const MainPhotos = () => {
           ))}
         </div>
       </div>
-
-      {/* Модальное окно с постом */}
-      <PostModal isOpen={isModalOpen} postId={selectedPostId} onClose={handleCloseModal} />
-    </>
+    </MainPhotosClient>
   )
 }
