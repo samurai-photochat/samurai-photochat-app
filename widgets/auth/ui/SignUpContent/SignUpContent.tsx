@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { Suspense } from "react"
 import { ModalWindow } from "@/features/auth/ui/Register/ModalWindow/ModalWindow"
 import { RegisterForm } from "@/features/auth/ui/Register/RegisterForm/RegisterForm"
 import { useConfirmationMutation, useRegistrationMutation, UserType } from "@/features/auth/api/authApi"
@@ -10,7 +11,7 @@ import { Confirmation } from "@/widgets/auth/ui/Confirmation/Confirmation"
 import Button from "@/shared/ui/button/button"
 import s from "./signUpContent.module.scss"
 
-export function SignUpContent() {
+function SignUpContentInner() {
   const [registerUser] = useRegistrationMutation()
   const [confirmation] = useConfirmationMutation()
   const [isModalClose, setIsModalClose] = React.useState<boolean>(true)
@@ -62,5 +63,13 @@ export function SignUpContent() {
         <Confirmation islinkExpiration={islinkExpiration} />
       )}
     </div>
+  )
+}
+
+export function SignUpContent() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SignUpContentInner />
+    </Suspense>
   )
 }

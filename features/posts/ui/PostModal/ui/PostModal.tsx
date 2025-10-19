@@ -2,7 +2,7 @@
 
 import * as Dialog from "@radix-ui/react-dialog"
 
-import { ReactNode, useMemo } from "react"
+import { ReactNode, useMemo, Suspense } from "react"
 
 import { PostModalContextProvider } from "../context/PostModalContext"
 import { PostModalBody } from "./PostModalBody"
@@ -26,18 +26,20 @@ export const PostModal = ({ isOpen, postId, onClose }: PostModalProps) => {
   }, [isOpen, postId])
 
   return (
-    <PostModalContextProvider postId={postId} isOpen={isOpen} onDismiss={onClose}>
-      <Dialog.Root open={isOpen} onOpenChange={(next) => !next && onClose()}>
-        <Dialog.Portal>
-          <Dialog.Overlay className={s.overlay} />
-          <Dialog.Content className={s.contentWrapper}>
-            <Dialog.Close className={s.closeButton} aria-label="Закрыть">
-              <CloseOutline />
-            </Dialog.Close>
-            <div className={s.content}>{content}</div>
-          </Dialog.Content>
-        </Dialog.Portal>
-      </Dialog.Root>
-    </PostModalContextProvider>
+    <Suspense fallback={<div>Loading...</div>}>
+      <PostModalContextProvider postId={postId} isOpen={isOpen} onDismiss={onClose}>
+        <Dialog.Root open={isOpen} onOpenChange={(next) => !next && onClose()}>
+          <Dialog.Portal>
+            <Dialog.Overlay className={s.overlay} />
+            <Dialog.Content className={s.contentWrapper}>
+              <Dialog.Close className={s.closeButton} aria-label="Закрыть">
+                <CloseOutline />
+              </Dialog.Close>
+              <div className={s.content}>{content}</div>
+            </Dialog.Content>
+          </Dialog.Portal>
+        </Dialog.Root>
+      </PostModalContextProvider>
+    </Suspense>
   )
 }
