@@ -5,7 +5,7 @@ import { PostContent } from "../postViewMode/PostContent"
 import { usePostModalContext } from "../context/PostModalContext"
 
 import s from "./PostModal.module.scss"
-import { PostEditModalContent } from "@/features/posts/ui/PostModal/postEditModalContent/PostEditModalContent"
+import { PostEditModalContent } from "@/features/posts/ui/PostModal/postEditMode/PostEditModalContent"
 import { useEffect, useRef, useState } from "react"
 import { useOutsideClick } from "@/app/hooks/useOutsideClick"
 
