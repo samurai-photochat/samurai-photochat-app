@@ -24,22 +24,25 @@ export const PostModal = ({ isOpen, postId, onClose }: PostModalProps) => {
 
     return <PostModalBody />
   }, [isOpen, postId])
-
+  //todo: Сделать закрытие модалки по клику за область
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <PostModalContextProvider postId={postId} isOpen={isOpen} onDismiss={onClose}>
-        <Dialog.Root open={isOpen} onOpenChange={(next) => !next && onClose()}>
-          <Dialog.Portal>
-            <Dialog.Overlay className={s.overlay} />
-            <Dialog.Content className={s.contentWrapper}>
-              <Dialog.Close className={s.closeButton} aria-label="Закрыть">
+  <Suspense fallback={<div>Loading...</div>}>
+    <PostModalContextProvider postId={postId} isOpen={isOpen} onDismiss={onClose}>
+      <Dialog.Root open={isOpen}>
+        {/*onOpenChange={(next) => !next && onClose()}>*/}
+        <Dialog.Portal>
+          <Dialog.Overlay className={s.overlay} />
+          <Dialog.Content className={s.contentWrapper}>
+            <Dialog.Close className={s.closeButton} aria-label="Закрыть">
+              <div onClick={onClose}>
                 <CloseOutline />
-              </Dialog.Close>
-              <div className={s.content}>{content}</div>
-            </Dialog.Content>
-          </Dialog.Portal>
-        </Dialog.Root>
-      </PostModalContextProvider>
-    </Suspense>
+              </div>
+            </Dialog.Close>
+            <div className={s.content}>{content}</div>
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
+    </PostModalContextProvider>
+  </Suspense>
   )
 }

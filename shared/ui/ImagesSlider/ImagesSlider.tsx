@@ -9,13 +9,14 @@ type Props = {
   images: CanvasImage[] | Image[]
   startPosition?: number
   action: (index: number) => void
+  className?: string
 }
 
-export const ImagesSlider = ({ images, startPosition = 0, action }: Props) => {
+export const ImagesSlider = ({ images, startPosition = 0, action, className = "" }: Props) => {
   const currentImage = images[startPosition]
   const { url } = currentImage
   return (
-    <div className={s.container}>
+    <div className={s.container + (className ? " " + className : "")}>
       {startPosition > 0 && (
         <button
           className={s.arrow}
@@ -42,23 +43,29 @@ export const ImagesSlider = ({ images, startPosition = 0, action }: Props) => {
         <NextImage
           src={url}
           alt={``}
-          layout="responsive"
-          width={0}
-          height={0}
+          width={1000}
+          height={1000}
           style={
             "zoom" in currentImage
               ? {
                   aspectRatio: currentImage.scale,
                   filter: currentImage.filter,
                   scale: currentImage.zoom,
+                  width: "100%",
+                  maxWidth: "490px",
+                  maxHeight: "504px",
+                  height: "auto",
                 }
-              : {}
+              : {
+                  width: "490px",
+                  height: "564px",
+                }
           }
           className={s.image}
         />
       </div>
       {images.length > 1 && (
-        <div className={s.circlesContainer}>
+        <div className={s.circlesContainer} onClick={() => {}}>
           {images.map((_image, i) => (
             <div key={i} className={s.circle + (startPosition === i ? " " + s.active : "")}></div>
           ))}

@@ -9,6 +9,7 @@ import {
   UploadImagesResponse,
   UserPostsPaginationRequest,
   UserPostsPaginationResponse,
+  UpdatePostRequest,
 } from "@/features/posts/api/postsApi.types"
 
 import { baseApi } from "@/app/api/baseApi"
@@ -19,6 +20,7 @@ export const postsApi = baseApi.injectEndpoints({
       query: (postId) => ({
         url: `/posts/id/${postId}`,
       }),
+      providesTags: (_result, _error, postId) => [{ type: "Post", id: postId }],
     }),
     getPostsByParams: builder.query<PostsByParamsResponse, PostsQueryParams>({
       query: (arg) => {
@@ -59,6 +61,7 @@ export const postsApi = baseApi.injectEndpoints({
           params,
         }
       },
+      providesTags: (_result, _error, arg) => [{ type: "Post", id: `USER_${arg.userId}` }],
     }),
     getAllPosts: builder.query<AllPostsResponse, AllPostsRequest>({
       query: (arg) => {
@@ -73,6 +76,7 @@ export const postsApi = baseApi.injectEndpoints({
         }
       },
       extraOptions: { skipAuth: true },
+      providesTags: ["Post"],
     }),
     createPost: builder.mutation<Post, CreatePostRequest>({
       query: (body) => {
@@ -82,6 +86,7 @@ export const postsApi = baseApi.injectEndpoints({
           body,
         }
       },
+      invalidatesTags: ["Post"], // Инвалидируем все списки постов после создания
     }),
     uploadImages: builder.mutation<UploadImagesResponse, UploadImagesRequest>({
       query: (formData) => {
@@ -92,11 +97,26 @@ export const postsApi = baseApi.injectEndpoints({
         }
       },
     }),
-    deletePost: builder.mutation<Post, { postId: number }>({
+    deletePost: builder.mutation<Post, { postId: number; userId?: number }>({
       query: ({ postId }) => ({
         url: `posts/${postId}`,
         method: "DELETE",
       }),
+      invalidatesTags: (result, error, { postId, userId }) => [
+        "Post", // Инвалидируем все запросы getAllPosts
+        { type: "Post", id: postId },
+        ...(userId ? [{ type: "Post" as const, id: `USER_${userId}` }] : []), // Инвалидируем getUserPostsPagination для конкретного пользователя
+      ],
+    }),
+    updatePost: builder.mutation<Post, UpdatePostRequest>({
+      query: ({ postId, description }) => ({
+        url: `posts/${postId}`,
+        method: "PUT",
+        body: { description },
+      }),
+      invalidatesTags: (result, error, { postId }) => [
+        { type: "Post", id: postId }, // Инвалидируем конкретный пост после обновления
+      ],
     }),
   }),
 })
@@ -108,4 +128,6 @@ export const {
   useGetPostByIdQuery,
   useCreatePostMutation,
   useUploadImagesMutation,
+  useUpdatePostMutation,
+  useDeletePostMutation,
 } = postsApi
