@@ -8,29 +8,22 @@ import { Button } from "@/shared/ui"
 import { ModalWindow } from "@/features/auth/ui/Register/ModalWindow/ModalWindow"
 import React from "react"
 import { useDeletePostMutation } from "@/features/posts/api/postsApi"
-import { usePostModalContext } from "@/features/posts/ui/PostModal/context/PostModalContext"
 
 type PostContentProps = {
   post: Post
   isOwnPost: boolean
   isAuth: boolean
+  deleteMode: boolean
+  setDeleteMode: (value: boolean) => void
+  onClose: () => void
 }
 
-export const PostContent = ({ post, isOwnPost, isAuth }: PostContentProps) => {
+export const PostContent = ({ post, isOwnPost, isAuth, onClose, setDeleteMode, deleteMode }: PostContentProps) => {
   const [deletePost, { isLoading: isDeletePostLoading }] = useDeletePostMutation()
 
-  const { deleteMode, setDeleteMode, onClose } = usePostModalContext()
-
   const deletePostHandler = async () => {
-    try {
-      await deletePost({ postId: post.id, userId: post.ownerId }).unwrap()
-      setDeleteMode(false)
-      // Закрываем модальное окно после успешного удаления
-      onClose()
-    } catch (error) {
-      // Ошибка будет обработана через RTK Query middleware и отправлена в toast
-      console.error("Failed to delete post:", error)
-    }
+    onClose()
+    await deletePost({ postId: post.id, userId: post.ownerId })
   }
 
   return (

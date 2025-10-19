@@ -64,6 +64,7 @@ export const usePostModalContext = () => {
  * Провайдер контекста модального окна поста
  * Управляет состоянием модального окна, загрузкой данных поста и синхронизацией с URL
  */
+//todo: сделать закрытие мадалки после успешного удаления и без ошибок
 export const PostModalContextProvider = ({ postId, isOpen, children, onDismiss }: PostModalProviderProps) => {
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -90,6 +91,7 @@ export const PostModalContextProvider = ({ postId, isOpen, children, onDismiss }
   useEffect(() => {
     if (isOpen && actualPostId) {
       setShouldFetch(true)
+      debugger
     }
   }, [isOpen, actualPostId])
 

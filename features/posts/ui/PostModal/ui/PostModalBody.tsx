@@ -10,7 +10,19 @@ import { useEffect, useRef, useState } from "react"
 import { useOutsideClick } from "@/app/hooks/useOutsideClick"
 
 export const PostModalBody = () => {
-  const { post, isOwnPost, isLoading, isAuth, editMode, title, setEditMode, setTitle } = usePostModalContext()
+  const {
+    post,
+    isOwnPost,
+    isLoading,
+    isAuth,
+    editMode,
+    title,
+    setEditMode,
+    setTitle,
+    deleteMode,
+    onClose,
+    setDeleteMode,
+  } = usePostModalContext()
 
   const ref = useRef<HTMLDivElement | null>(null)
   const [exitModal, setExitModal] = useState(false)
@@ -50,7 +62,14 @@ export const PostModalBody = () => {
           {editMode ? (
             <PostEditModeContent post={post} openModal={exitModal} closeModal={() => setExitModal(false)} />
           ) : (
-            <PostContent post={post} isOwnPost={isOwnPost} isAuth={isAuth} />
+            <PostContent
+              post={post}
+              isOwnPost={isOwnPost}
+              isAuth={isAuth}
+              deleteMode={deleteMode}
+              setDeleteMode={setDeleteMode}
+              onClose={onClose}
+            />
           )}
         </div>
       </div>
