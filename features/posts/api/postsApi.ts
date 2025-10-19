@@ -104,7 +104,7 @@ export const postsApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: (result, error, { postId, userId }) => [
         "Post", // Инвалидируем все запросы getAllPosts
-        { type: "Post", id: postId }, // Инвалидируем конкретный пост getPostById
+        { type: "Post", id: postId },
         ...(userId ? [{ type: "Post" as const, id: `USER_${userId}` }] : []), // Инвалидируем getUserPostsPagination для конкретного пользователя
       ],
     }),

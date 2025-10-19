@@ -5,7 +5,7 @@ import { useUpdatePostMutation } from "@/features/posts/api/postsApi"
 import React, { useEffect, useState } from "react"
 import { ModalWindow } from "@/features/auth/ui/Register/ModalWindow/ModalWindow"
 import { usePostModalContext } from "@/features/posts/ui/PostModal/context/PostModalContext"
-import s from "./PostEditModalContent.module.scss"
+import s from "./PostEditModeContent.module.scss"
 import { PostContentHeader } from "@/features/posts/ui/PostModal/postViewMode"
 
 type Props = {
@@ -14,7 +14,7 @@ type Props = {
   closeModal: () => void
 }
 
-export const PostEditModalContent = ({ post, openModal, closeModal }: Props) => {
+export const PostEditModeContent = ({ post, openModal, closeModal }: Props) => {
   const [text, setText] = useState(post.description)
   const [updatePost, { isLoading: isUpdatePostLoading }] = useUpdatePostMutation()
   const { setEditMode, setTitle } = usePostModalContext()

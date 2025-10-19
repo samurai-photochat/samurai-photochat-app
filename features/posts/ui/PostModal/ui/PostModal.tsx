@@ -24,7 +24,7 @@ export const PostModal = ({ isOpen, postId, onClose }: PostModalProps) => {
 
     return <PostModalBody />
   }, [isOpen, postId])
-
+  //todo: Сделать закрытие модалки по клику за область
   return (
     <PostModalContextProvider postId={postId} isOpen={isOpen} onDismiss={onClose}>
       <Dialog.Root open={isOpen}>

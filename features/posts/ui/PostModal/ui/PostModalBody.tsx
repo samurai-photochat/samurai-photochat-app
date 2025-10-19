@@ -5,7 +5,7 @@ import { PostContent } from "../postViewMode/PostContent"
 import { usePostModalContext } from "../context/PostModalContext"
 
 import s from "./PostModal.module.scss"
-import { PostEditModalContent } from "@/features/posts/ui/PostModal/postEditMode/PostEditModalContent"
+import { PostEditModeContent } from "@/features/posts/ui/PostModal/postEditMode/PostEditModeContent"
 import { useEffect, useRef, useState } from "react"
 import { useOutsideClick } from "@/app/hooks/useOutsideClick"
 
@@ -48,7 +48,7 @@ export const PostModalBody = () => {
         <PostModalImageSlider />
         <div className={s.mainContentWrapper}>
           {editMode ? (
-            <PostEditModalContent post={post} openModal={exitModal} closeModal={() => setExitModal(false)} />
+            <PostEditModeContent post={post} openModal={exitModal} closeModal={() => setExitModal(false)} />
           ) : (
             <PostContent post={post} isOwnPost={isOwnPost} isAuth={isAuth} />
           )}
