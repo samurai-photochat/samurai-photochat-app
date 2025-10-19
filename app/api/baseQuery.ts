@@ -17,12 +17,16 @@ const createBaseQuery = (skipAuth?: boolean) =>
       return headers
     },
   })
-export const baseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
+interface ExtraOptions {
+  skipAuth?: boolean
+}
+
+export const baseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError, ExtraOptions> = async (
   args,
   api,
   extraOptions
 ) => {
-  const skipAuth = (extraOptions as any)?.skipAuth
+  const skipAuth = extraOptions?.skipAuth
   const result = await createBaseQuery(skipAuth)(args, api, extraOptions)
   handleError(api, result)
   return result
