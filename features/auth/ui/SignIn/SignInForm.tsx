@@ -4,19 +4,22 @@ import { Form } from "radix-ui"
 import Image from "next/image"
 import googleIcon from "@/shared/assets/img/google-icon.png"
 import githubIcon from "@/shared/assets/img/github-icon.png"
-import { Button } from "@radix-ui/themes"
+// import { Button } from "@radix-ui/themes"
 import * as React from "react"
 import { useForm } from "react-hook-form"
 import { LoginInputs, loginSchema } from "@/shared/lib/signUpSchema/loginSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useState } from "react"
 import { TextField } from "@/shared/ui/text-field/text-field"
+import { Button } from "@/shared/ui"
+import { PATH } from "@/shared/config/routes"
 
 type Props = {
   submitAction: ({ email, password }: { email: string; password: string }, reset: () => void) => void
+  error?: string
 }
 
-export default function SignInForm({ submitAction }: Props) {
+export default function SignInForm({ submitAction, error = "" }: Props) {
   const {
     register,
     handleSubmit,
@@ -45,39 +48,27 @@ export default function SignInForm({ submitAction }: Props) {
             </a>
           ))}
         </div>
-        <Form.Field name="email" className={s.field}>
-          <Form.Label className={s.label}>Email</Form.Label>
-          <Form.Control asChild>
-            <input type="email" className={s.input} {...register("email")} />
-          </Form.Control>
-          {errors.email && <div className={s.message}>{errors.email.message}</div>}
-        </Form.Field>
-        <Form.Field name="password" className={s.field}>
-          <Form.Label className={s.label}>Password</Form.Label>
-          <Form.Control asChild>
-            <TextField
-              type={passwordType}
-              password
-              label={undefined}
-              errorMessage={errors.password?.message}
-              iconAction={() => setPasswordType(passwordType === "password" ? "text" : "password")}
-              {...register("password")}
-            />
-          </Form.Control>
-          {errors.password && <div className={s.message}>{errors.password.message}</div>}
-        </Form.Field>
+        <TextField label={"Email"} errorMessage={errors.email?.message} {...register("email")} />
+        <TextField
+          type={passwordType}
+          password
+          label={"Password"}
+          errorMessage={errors.password?.message || error}
+          iconAction={() => setPasswordType(passwordType === "password" ? "text" : "password")}
+          {...register("password")}
+        />
         <span className={s.span}>
           <a href={""} className={`${s.span} ${s.grayText} ${s.a}`}>
             Forgot Password
           </a>
         </span>
-        <Button type={"submit"} className={s.button} variant={"classic"}>
+        <Button type={"submit"} className={s.button} variant={"primary"}>
           Sign In
         </Button>
         <span className={s.whiteText}>{`Don't have an account?`}</span>
-        <a className={`${s.a} ${s.blueText}`} href={""}>
+        <Button as={"a"} variant={"text"} href={PATH.AUTH.REGISTRATION}>
           Sign Up
-        </a>
+        </Button>
       </Form.Root>
     </div>
   )

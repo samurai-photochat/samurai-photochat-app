@@ -5,11 +5,12 @@ import SelectCountry from "@/shared/ui/select/select"
 import Button from "@/shared/ui/button/button"
 import { useMeQuery } from "@/features/auth/api/authApi"
 import { PATH } from "@/shared/config/routes"
-
-const Path = {
-  login: PATH.AUTH.LOGIN,
-  Signup: PATH.AUTH.REGISTRATION,
-}
+import { Breakpoints, useBreakpoint } from "@/shared/hooks/useBreakpoint"
+import { BookmarkIcon, LogOutIcon, TrendingUpIcon } from "@/shared/assets/icons/components"
+import { DropdownMenu } from "@/shared/ui/DropdownMenu"
+import { Settings } from "@/shared/assets/icons/components/Settings"
+// import { selectIsLoggedIn } from "@/entities/user/userSlice"
+// import { useAppDispatch } from "@/app/hooks/useAppDispatch"
 
 export const Header = () => {
   // const dispatch = useAppDispatch()
@@ -18,6 +19,7 @@ export const Header = () => {
   // При необходмости вытащить параметр из Store используем selector напрямую(стока ниже!!!)
   const { data: user, isError } = useMeQuery()
   const isLoggedIn = !!user && !isError
+  const isNarrow = useBreakpoint(Breakpoints.narrow)
 
   return (
     <header className={s.header}>
@@ -26,19 +28,45 @@ export const Header = () => {
       {/* <p className={s.bell}>
         <Image src={outlineBell.src} alt="bell" width={24} height={24} />
       </p> */}
-      <p>
-        <SelectCountry />
-      </p>
-      {!isLoggedIn && (
-        <div className={s.menuButton}>
-          <Button as={"a"} href={Path.login} fullWidth variant="text" className={s.button}>
-            Log in
-          </Button>
-          <Button className={s.button} as={"a"} href={Path.Signup} variant="primary">
-            Sign up
-          </Button>
+      <div className={s.controls}>
+        <div className={s.selectWrapper}>
+          <SelectCountry />
         </div>
-      )}
+        {isNarrow ? (
+          <DropdownMenu align={"end"} sideOffset={6}>
+            {isLoggedIn && (
+              <Button as="a" className={s.menuButton}>
+                <Settings />
+                <span style={{ marginLeft: 8 }}>Profile Settings</span>
+              </Button>
+            )}
+            <Button as="a" className={s.menuButton}>
+              <TrendingUpIcon />
+              <span style={{ marginLeft: 8 }}>Statistics</span>
+            </Button>
+
+            <Button as="a" className={s.menuButton}>
+              <BookmarkIcon />
+              <span style={{ marginLeft: 8 }}>Favorites</span>
+            </Button>
+            <Button className={s.menuButton}>
+              <LogOutIcon />
+              <span style={{ marginLeft: 8 }}>Log Out</span>
+            </Button>
+          </DropdownMenu>
+        ) : (
+          !isLoggedIn && (
+            <div className={s.menuButton}>
+              <Button as={"a"} href={PATH.AUTH.LOGIN} fullWidth variant="text" className={s.button}>
+                Log in
+              </Button>
+              <Button className={s.button} as={"a"} href={PATH.AUTH.REGISTRATION} variant="primary">
+                Sign up
+              </Button>
+            </div>
+          )
+        )}
+      </div>
     </header>
   )
 }

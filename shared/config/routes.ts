@@ -2,8 +2,9 @@ export const PATH = {
   ROOT: "/",
 
   AUTH: {
-    REGISTRATION: "/auth/registration",
+    REGISTRATION: "/auth/signup",
     LOGIN: "/auth/signin",
+    LOGOUT: "/auth/signin",
     PRIVACY_POLICY: "/auth/privacy-policy",
     TERMS_OF_SERVICE: "/auth/terms-of-service",
     EMAIL_CONFIRMED: "/auth/email-confirmed",

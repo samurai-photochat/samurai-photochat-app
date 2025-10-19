@@ -1,0 +1,12 @@
+.zoom {
+  position: absolute;
+  bottom: calc(100% + 2px);
+  left: 0;
+  background: var(--color-dark-500);
+  padding: 17px 12px;
+  display: flex;
+}
+
+.zoomInput {
+  height: 2px;
+}

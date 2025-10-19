@@ -11,29 +11,30 @@ import {
 } from "@/shared/assets/icons/components"
 import { Button } from "@/shared/ui"
 import s from "./sidebar.module.css"
-import { useLogoutMutation, useMeQuery } from "@/features/auth/api/authApi"
-import LocalStorage from "@/shared/utils/localStorage/localStorage"
-import { useAppDispatch } from "@/app/hooks/useAppDispatch"
-import { setAppError } from "@/app/model/appSlice"
+import { useLogoutMutation } from "@/features/auth/api/authApi"
 import { PATH } from "@/shared/config/routes"
+import { Breakpoints, useBreakpoint } from "@/shared/hooks/useBreakpoint"
+import { PostSettingModal } from "@/features/posts/ui/StepsCreatePost/PostSettingModal"
+import { useState } from "react"
+import { useSelector } from "react-redux"
+import { selectCurrentUser } from "@/features/auth/model/authSlice"
 
 export default function Sidebar() {
   const [logoutUser] = useLogoutMutation()
-  const { refetch, data: user } = useMeQuery()
-  const dispatch = useAppDispatch()
 
-  const logoutHandler = () => {
-    logoutUser()
-      .unwrap()
-      .then(() => {
-        LocalStorage.removeToken()
-        refetch()
-      })
-      .catch((err) => {
-        dispatch(setAppError(err?.data?.messages?.[0]?.message || "Ошибка при выходе из аккаунта"))
-      })
+  const [isOpenPostSettingModal, setIsOpenPostSettingModal] = useState<boolean>(false)
+  const isNarrow = useBreakpoint(Breakpoints.narrow)
+
+  const logoutHandler = async () => {
+    await logoutUser()
+    window.localStorage.href = PATH.AUTH.LOGOUT
   }
 
+  const user = useSelector(selectCurrentUser)
+
+  if (!user) {
+    return null
+  }
   return (
     <div className={`${s.sidebar} regular-text-14`}>
       <ul className={s.list}>
@@ -44,7 +45,13 @@ export default function Sidebar() {
           </Button>
         </li>
         <li className={s.item}>
-          <Button variant="text" className={s.sidebarBtn}>
+          <Button
+            variant="text"
+            className={s.sidebarBtn}
+            onClick={() => {
+              setIsOpenPostSettingModal(true)
+            }}
+          >
             <PlusSquareIcon /> Create
           </Button>
         </li>
@@ -66,25 +73,33 @@ export default function Sidebar() {
             Search
           </Button>
         </li>
-        <li className={s.item}>
-          <Button variant="text" className={s.sidebarBtn}>
-            <TrendingUpIcon />
-            Statistics
-          </Button>
-        </li>
-        <li className={s.item}>
-          <Button variant="text" className={s.sidebarBtn}>
-            <BookmarkIcon />
-            Favorites
-          </Button>
-        </li>
-        <li className={s.item}>
-          <Button variant="text" className={s.sidebarBtn} onClick={logoutHandler}>
-            <LogOutIcon />
-            Log Out
-          </Button>
-        </li>
+        {!isNarrow && (
+          <>
+            <li className={s.item}>
+              <Button variant="text" className={s.sidebarBtn}>
+                <TrendingUpIcon />
+                Statistics
+              </Button>
+            </li>
+            <li className={s.item}>
+              <Button variant="text" className={s.sidebarBtn}>
+                <BookmarkIcon />
+                Favorites
+              </Button>
+            </li>
+            <li className={s.item}>
+              <Button variant="text" className={s.sidebarBtn} onClick={logoutHandler}>
+                <LogOutIcon />
+                Log Out
+              </Button>
+            </li>
+          </>
+        )}
       </ul>
+      <PostSettingModal
+        isOpenPostSettingModal={isOpenPostSettingModal}
+        setIsOpenPostSettingModalAction={setIsOpenPostSettingModal}
+      />
     </div>
   )
 }

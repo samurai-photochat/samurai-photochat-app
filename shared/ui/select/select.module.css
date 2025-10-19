@@ -47,3 +47,22 @@
   margin-right: 5px;
   vertical-align: middle;
 }
+
+.selectLabel {
+  margin: 0 6px;
+}
+
+@media (max-width: 500px) {
+  .selectLabel {
+    display: none;
+  }
+
+  .selectTrigger {
+    width: auto;
+    padding: 5px 8px;
+  }
+
+  .selectItem {
+    width: 180px;
+  }
+}

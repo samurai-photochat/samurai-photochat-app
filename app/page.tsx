@@ -1,39 +1,28 @@
-"use client"
+import { getTotalUsersCount, getLatestPosts } from "@/app/lib/serverActions"
+import { MainPhotos } from "@/widgets/mainPhotos"
+import { ClientAuthWrapper } from "@/features/auth/ui/AuthWrapper/ClientAuthWrapper"
 
-import { useGetTotalCountRegisteredUsersQuery, useGetUserProfileByIdQuery } from "@/app/api/publicUserApi"
-import { useMeQuery } from "@/features/auth/api/authApi"
-import Sidebar from "@/widgets/sidebar/sidebar"
+// Включаем ISR с ревалидацией каждые 60 секунд
+export const revalidate = 60
 
-export default function Home() {
-  const { data: totalCountData, isLoading: isCountLoading } = useGetTotalCountRegisteredUsersQuery()
+/**
+ * Главная страница приложения
+ * Серверный компонент с ISR для быстрой загрузки и SEO
+ * Публичный контент рендерится на сервере, авторизация проверяется на клиенте
+ */
+export default async function Home() {
+  // Получаем данные на сервере с ISR
+  const [totalCountData, postsData] = await Promise.all([
+    getTotalUsersCount().catch(() => ({ totalCount: 0 })),
+    getLatestPosts().catch(() => ({ items: [], pageSize: 4, totalCount: 0 })),
+  ])
 
-  const { data: user, isError, isLoading } = useMeQuery()
-
-  const totalCount = totalCountData?.totalCount
-
-  const {
-    data: profileData,
-    isLoading: isProfileLoading,
-    error: profileError,
-  } = useGetUserProfileByIdQuery({ userId: 1200 }, { skip: totalCount === undefined })
-
-  if (isLoading) return <div>...LoadingSpinner</div>
-
-  const isLoggedIn = !!user && !isError
-
-  if (isCountLoading) return <p>Загрузка количества пользователей...</p>
-  if (isProfileLoading) return <p>Загрузка профиля последнего пользователя...</p>
-  if (profileError) return <p>Ошибка при загрузке профиля</p>
+  const totalCount = totalCountData.totalCount
 
   return (
-    <div style={{ display: "flex" }}>
-      {isLoggedIn && <Sidebar />}
-      <div>
-        <h1>Непобедимые самураи</h1>
-
-        <h2>Всего пользователей зарегистрировано: {totalCount}</h2>
-        <h2>Имя последнего зарегистрировавшегося пользователя: {profileData?.userName}</h2>
-      </div>
-    </div>
+    <ClientAuthWrapper>
+      <h2 style={{ color: "var(--color-light-100)" }}>Всего пользователей зарегистрировано: {totalCount}</h2>
+      <MainPhotos initialPosts={postsData} />
+    </ClientAuthWrapper>
   )
 }

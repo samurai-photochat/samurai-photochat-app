@@ -1,0 +1,45 @@
+.label {
+  color: var(--color-light-900);
+  margin-top: 24px;
+}
+
+.textAreaBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 100%;
+  padding: 17px;
+}
+
+.editButton {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  padding: 6px 12px;
+}
+
+.text {
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  font-weight: var(--font-regular);
+}
+
+.buttonBox {
+  padding: 18px 0 0;
+  display: flex;
+  gap: 24px;
+  justify-content: end;
+}
+
+.modalButton {
+  width: 96px;
+}
+
+.title {
+  width: 972px;
+  position: absolute;
+  background-color: var(--color-dark-300);
+  z-index: 100;
+  top: 0;
+  left: 0;
+}
