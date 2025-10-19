@@ -30,7 +30,7 @@ export function ClientAuthWrapper({ children }: ClientAuthWrapperProps) {
   const isLoggedIn = !!user && !isError
 
   return (
-    <div style={{}}>
+    <div style={{ display: "flex" }}>
       {isLoggedIn && <Sidebar />}
       <div style={{ padding: "20px", margin: "0 auto" }}>{children}</div>
     </div>

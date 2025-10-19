@@ -38,6 +38,10 @@ export function MainPhotosClient({ children }: MainPhotosClientProps) {
             }
           }
         }}
+        style={{
+          width: "900px",
+          maxWidth: "100%",
+        }}
       >
         {children}
       </div>
