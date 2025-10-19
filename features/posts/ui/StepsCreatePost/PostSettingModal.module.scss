@@ -5,12 +5,12 @@
   align-items: center;
   justify-content: center;
   background-color: rgba(#0d0d0d, 0.6);
+  z-index: 100;
 }
 
 .window {
   min-width: 492px;
   width: min-content;
-  max-width: 100%;
   border: 1px solid var(--color-dark-100);
   background-color: var(--color-dark-300);
 }

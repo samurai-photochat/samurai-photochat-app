@@ -6,6 +6,7 @@ import { DropdownMenu } from "@/shared/ui/DropdownMenu"
 
 import s from "../ui/PostModal.module.scss"
 import { usePostDropdownMenuActions } from "@/features/posts/ui/PostModal/hooks"
+import { usePostModalContext } from "@/features/posts/ui/PostModal/context/PostModalContext"
 
 type PostContentHeaderProps = {
   post: Post
@@ -14,6 +15,8 @@ type PostContentHeaderProps = {
 }
 
 export const PostContentHeader = ({ post, isOwnPost, isAuth }: PostContentHeaderProps) => {
+  const { setEditMode, setDeleteMode } = usePostModalContext()
+
   const handleCopyLink = useCallback(() => {
     const link = `${window.location.origin}/posts/${post.id}`
     console.log("Ссылка скопирована:", link)
@@ -26,11 +29,16 @@ export const PostContentHeader = ({ post, isOwnPost, isAuth }: PostContentHeader
     alert("Follow")
   }
 
+  const handleEditMode = () => setEditMode(true)
+  const handleDeleteMode = () => setDeleteMode(true)
+
   // Получаем пункты меню из хука
   const menuItems = usePostDropdownMenuActions({
     isOwnPost,
     onCopyLink: handleCopyLink,
     onToggleFollow: handleToggleFollow,
+    onEdit: handleEditMode,
+    onDelete: handleDeleteMode,
   })
 
   return (
