@@ -43,7 +43,7 @@
 .textareaBlock {
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: flex-start;
   width: 100%;
 }
 
@@ -67,7 +67,7 @@
 
 .blockWords {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   width: 100%;
 }
 
@@ -89,7 +89,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: flex-start;
   padding-bottom: 6px;
 }
 
@@ -116,7 +116,7 @@
 .locationWrap {
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: flex-start;
   gap: 6px;
   padding-bottom: 14px;
 }

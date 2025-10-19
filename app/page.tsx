@@ -1,30 +1,28 @@
-"use client"
-
-import { useGetTotalCountRegisteredUsersQuery } from "@/app/api/publicUserApi"
-import { useMeQuery } from "@/features/auth/api/authApi"
-import Sidebar from "@/widgets/sidebar/sidebar"
+import { getTotalUsersCount, getLatestPosts } from "@/app/lib/serverActions"
 import { MainPhotos } from "@/widgets/mainPhotos"
+import { ClientAuthWrapper } from "@/features/auth/ui/AuthWrapper/ClientAuthWrapper"
 
-export default function Home() {
-  const { data: totalCountData, isLoading: isCountLoading } = useGetTotalCountRegisteredUsersQuery()
+// Включаем ISR с ревалидацией каждые 60 секунд
+export const revalidate = 60
 
-  const { data: user, isError, isLoading } = useMeQuery()
+/**
+ * Главная страница приложения
+ * Серверный компонент с ISR для быстрой загрузки и SEO
+ * Публичный контент рендерится на сервере, авторизация проверяется на клиенте
+ */
+export default async function Home() {
+  // Получаем данные на сервере с ISR
+  const [totalCountData, postsData] = await Promise.all([
+    getTotalUsersCount().catch(() => ({ totalCount: 0 })),
+    getLatestPosts().catch(() => ({ items: [], pageSize: 4, totalCount: 0 })),
+  ])
 
-  const totalCount = totalCountData?.totalCount
-
-  if (isLoading) return <div style={{ color: "var(--color-light-100)" }}>...LoadingSpinner</div>
-
-  const isLoggedIn = !!user && !isError
-
-  if (isCountLoading) return <p>Загрузка количества пользователей...</p>
+  const totalCount = totalCountData.totalCount
 
   return (
-    <div style={{}}>
-      {isLoggedIn && <Sidebar />}
-      <div style={{ padding: "20px", margin: "0 auto" }}>
-        <h2 style={{ color: "var(--color-light-100)" }}>Всего пользователей зарегистрировано: {totalCount}</h2>
-        <MainPhotos />
-      </div>
-    </div>
+    <ClientAuthWrapper>
+      <h2 style={{ color: "var(--color-light-100)" }}>Всего пользователей зарегистрировано: {totalCount}</h2>
+      <MainPhotos initialPosts={postsData} />
+    </ClientAuthWrapper>
   )
 }
