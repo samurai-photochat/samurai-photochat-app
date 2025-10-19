@@ -39,7 +39,7 @@ export default function Sidebar() {
     <div className={`${s.sidebar} regular-text-14`}>
       <ul className={s.list}>
         <li className={s.item}>
-          <Button variant="text" className={s.sidebarBtn}>
+          <Button as="a" href={`${PATH.ROOT}`} variant="text" className={s.sidebarBtn}>
             <HomeIcon />
             Feed
           </Button>
