@@ -29,7 +29,7 @@ export const PostContent = ({ post, isOwnPost, isAuth }: PostContentProps) => {
       onClose()
     } catch (error) {
       // Ошибка будет обработана через RTK Query middleware и отправлена в toast
-      console.error('Failed to delete post:', error)
+      console.error("Failed to delete post:", error)
     }
   }
 

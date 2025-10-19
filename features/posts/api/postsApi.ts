@@ -20,7 +20,7 @@ export const postsApi = baseApi.injectEndpoints({
       query: (postId) => ({
         url: `/posts/id/${postId}`,
       }),
-      providesTags: (result, error, postId) => [{ type: "Post", id: postId }],
+      providesTags: (_result, _error, postId) => [{ type: "Post", id: postId }],
     }),
     getPostsByParams: builder.query<PostsByParamsResponse, PostsQueryParams>({
       query: (arg) => {
@@ -61,7 +61,7 @@ export const postsApi = baseApi.injectEndpoints({
           params,
         }
       },
-      providesTags: (result, error, arg) => [{ type: "Post", id: `USER_${arg.userId}` }],
+      providesTags: (_result, _error, arg) => [{ type: "Post", id: `USER_${arg.userId}` }],
     }),
     getAllPosts: builder.query<AllPostsResponse, AllPostsRequest>({
       query: (arg) => {
