@@ -19,10 +19,18 @@ type PostContentProps = {
 export const PostContent = ({ post, isOwnPost, isAuth }: PostContentProps) => {
   const [deletePost, { isLoading: isDeletePostLoading }] = useDeletePostMutation()
 
-  const { deleteMode, setDeleteMode } = usePostModalContext()
+  const { deleteMode, setDeleteMode, onClose } = usePostModalContext()
 
   const deletePostHandler = async () => {
-    await deletePost({ postId: post.id })
+    try {
+      await deletePost({ postId: post.id, userId: post.ownerId }).unwrap()
+      setDeleteMode(false)
+      // Закрываем модальное окно после успешного удаления
+      onClose()
+    } catch (error) {
+      // Ошибка будет обработана через RTK Query middleware и отправлена в toast
+      console.error('Failed to delete post:', error)
+    }
   }
 
   return (
