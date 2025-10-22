@@ -1,0 +1,29 @@
+refactor: migrate to Feature-Sliced Design (FSD) architecture
+
+BREAKING CHANGE: Project structure reorganized according to FSD methodology
+
+Major changes:
+- Migrated app/{hooks,utils,model} → shared/lib
+- Migrated app/api → shared/api & entities/user
+- Created entities/ layer with user entity
+- Added Public API (index.ts) for all features
+- Updated ~30 import statements
+- Added comprehensive FSD documentation
+
+Benefits:
+- ✅ Clear separation of concerns
+- ✅ Enforced dependencies (layered architecture)
+- ✅ Feature isolation
+- ✅ Better maintainability & scalability
+
+Files changed:
+- Created: 15 files (shared/*, entities/*, docs/*)
+- Deleted: 9 files (app/hooks/*, app/utils/*, app/model/*)
+- Updated: ~25 files (import updates)
+
+Documentation:
+- docs/FSD_ARCHITECTURE.md
+- docs/REFACTORING_SUMMARY.md
+- CHANGELOG_FSD.md
+
+See CHANGELOG_FSD.md for detailed changes.

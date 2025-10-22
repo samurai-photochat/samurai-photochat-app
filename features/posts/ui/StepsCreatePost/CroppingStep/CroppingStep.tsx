@@ -4,9 +4,9 @@ import s from "./CroppingStep.module.scss"
 import { ResizingButton } from "@/features/posts/ui/CroppingButton/ResizingButton/ResizingButton"
 import { ZoomingButton } from "@/features/posts/ui/CroppingButton/ZoomingButton/ZoomingButton"
 import { LoadingButton } from "@/features/posts/ui/CroppingButton/LoadingButton/LoadingButton"
-import { useAppSelector } from "@/app/hooks/useAppSelector"
+import { useAppSelector } from "@/shared/lib/redux/useAppSelector"
 import { changeImageAC, deleteImageAC, selectImages } from "@/features/posts/model/postsSlice"
-import { useAppDispatch } from "@/app/hooks/useAppDispatch"
+import { useAppDispatch } from "@/shared/lib/redux/useAppDispatch"
 import { ImagesSlider } from "@/shared/ui/ImagesSlider/ImagesSlider"
 
 export type CanvasImage = {

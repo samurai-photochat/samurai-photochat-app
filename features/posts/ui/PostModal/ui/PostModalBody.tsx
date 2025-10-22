@@ -7,7 +7,7 @@ import { usePostModalContext } from "../context/PostModalContext"
 import s from "./PostModal.module.scss"
 import { PostEditModeContent } from "@/features/posts/ui/PostModal/postEditMode/PostEditModeContent"
 import { useEffect, useRef, useState } from "react"
-import { useOutsideClick } from "@/app/hooks/useOutsideClick"
+import { useOutsideClick } from "@/shared/lib/hooks/useOutsideClick"
 
 export const PostModalBody = () => {
   const {

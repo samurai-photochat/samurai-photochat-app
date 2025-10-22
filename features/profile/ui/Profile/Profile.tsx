@@ -1,5 +1,5 @@
 "use client"
-import { PublicProfileResponse } from "@/app/api/publicUserApi"
+import { PublicProfileResponse } from "@/entities/user"
 import { useMeQuery } from "@/features/auth/api/authApi"
 import s from "./Profile.module.scss"
 import Sidebar from "@/widgets/sidebar/sidebar"

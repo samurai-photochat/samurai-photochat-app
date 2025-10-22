@@ -1,7 +1,7 @@
 import { BaseQueryApi, FetchBaseQueryMeta, QueryReturnValue } from "@reduxjs/toolkit/query"
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query/react"
-import { setAppError } from "@/app/model/appSlice"
-import { isErrorWithMessages } from "@/app/utils/isErrorWithMessages"
+import { setAppError } from "@/shared/model/app/appSlice"
+import { isErrorWithMessages } from "@/shared/lib/api/isErrorWithMessages"
 
 export const handleError = (
   api: BaseQueryApi,

@@ -1,8 +1,8 @@
 "use client"
 
-import { useAppDispatch } from "@/app/hooks/useAppDispatch"
-import { useAppSelector } from "@/app/hooks/useAppSelector"
-import { selectError, setAppError } from "@/app/model/appSlice"
+import { useAppDispatch } from "@/shared/lib/redux/useAppDispatch"
+import { useAppSelector } from "@/shared/lib/redux/useAppSelector"
+import { selectError, setAppError } from "@/shared/model/app/appSlice"
 import { Dialog, DialogContent, DialogDescription, DialogClose, DialogTitle } from "@radix-ui/react-dialog"
 import s from "./alert.module.css"
 import Image from "next/image"

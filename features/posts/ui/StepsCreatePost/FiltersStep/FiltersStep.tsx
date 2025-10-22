@@ -1,10 +1,10 @@
 import { Filter } from "./Filter/Filter"
 import s from "./FiltersStep.module.scss"
-import { useAppSelector } from "@/app/hooks/useAppSelector"
+import { useAppSelector } from "@/shared/lib/redux/useAppSelector"
 import { changeImageAC, selectImages } from "@/features/posts/model/postsSlice"
 import { useState } from "react"
 import { ImagesSlider } from "@/shared/ui/ImagesSlider/ImagesSlider"
-import { useAppDispatch } from "@/app/hooks/useAppDispatch"
+import { useAppDispatch } from "@/shared/lib/redux/useAppDispatch"
 
 export type FilterTemplate = {
   id: number

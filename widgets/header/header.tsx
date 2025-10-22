@@ -10,7 +10,7 @@ import { BookmarkIcon, LogOutIcon, TrendingUpIcon } from "@/shared/assets/icons/
 import { DropdownMenu } from "@/shared/ui/DropdownMenu"
 import { Settings } from "@/shared/assets/icons/components/Settings"
 // import { selectIsLoggedIn } from "@/entities/user/userSlice"
-// import { useAppDispatch } from "@/app/hooks/useAppDispatch"
+// import { useAppDispatch } from "@/shared/lib/redux/useAppDispatch"
 
 export const Header = () => {
   // const dispatch = useAppDispatch()

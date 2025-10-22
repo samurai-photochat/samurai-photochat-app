@@ -1,6 +1,6 @@
 import { ReactNode, useRef, useState } from "react"
 import s from "./CroppingButton.module.css"
-import { useOutsideClick } from "@/app/hooks/useOutsideClick"
+import { useOutsideClick } from "@/shared/lib/hooks/useOutsideClick"
 
 type Props = {
   hidden: ReactNode

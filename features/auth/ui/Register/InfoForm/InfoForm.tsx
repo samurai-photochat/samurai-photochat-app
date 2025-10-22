@@ -8,8 +8,8 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { SignUpInputs, signUpSchema } from "@/shared/lib/signUpSchema/signUpSchema"
 import { ResendingEmailRequest } from "@/features/auth/api/authApi"
-import { setAppError } from "@/app/model/appSlice"
-import { useAppDispatch } from "@/app/hooks/useAppDispatch"
+import { setAppError } from "@/shared/model/app/appSlice"
+import { useAppDispatch } from "@/shared/lib/redux/useAppDispatch"
 
 type Props = {
   title: string
