@@ -1,5 +1,28 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## 🏗️ Architecture
+
+This project follows **[Feature-Sliced Design (FSD)](https://feature-sliced.design/)** methodology for code organization.
+
+📖 **[Read Full FSD Documentation](./docs/FSD_ARCHITECTURE.md)**
+
+### Quick Overview
+
+```
+├── app/          # Application layer (pages, layouts, providers)
+├── widgets/      # Composite UI blocks
+├── features/     # Business features (auth, posts, profile)
+├── entities/     # Business entities (user, post)
+└── shared/       # Reusable code (ui, api, hooks, utils)
+```
+
+### Key Principles
+
+- **Layered architecture**: Higher layers can import from lower layers only
+- **Public API**: Each slice exports through `index.ts`
+- **Isolation**: Features don't depend on each other
+- **Reusability**: Shared code has no business logic
+
 ## Getting Started
 
 ### Environment Variables
