@@ -1,2 +1,2 @@
-export { baseApi } from "./baseApi"
-export { baseQuery } from "./baseQuery"
+export { handleError } from "./handleError"
+export { isErrorWithMessages } from "./isErrorWithMessages"
