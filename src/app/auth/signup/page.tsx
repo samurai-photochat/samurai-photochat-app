@@ -1,10 +1,5 @@
-import { Suspense } from "react"
-import { SignUpContent } from "@/widgets/auth/ui"
+import { SignUpPage } from "@/pages/sign-up"
 
-export default function SignUpPage() {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <SignUpContent />
-    </Suspense>
-  )
+export default function SignUp() {
+  return <SignUpPage />
 }

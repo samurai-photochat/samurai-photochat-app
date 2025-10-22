@@ -1,5 +1,5 @@
-import PrivacyPolicy from "@/widgets/auth/ui/PrivacyPolicy/PrivacyPolicy"
+import { PrivacyPolicyPage } from "@/pages/privacy-policy"
 
-export default function PrivacyPolicyPage() {
-  return <PrivacyPolicy />
+export default function PrivacyPolicy() {
+  return <PrivacyPolicyPage />
 }

@@ -1,4 +1,5 @@
-import { SignIn } from "@/widgets/auth/ui"
-export default function SignInPage() {
-  return <SignIn />
+import { SignInPage } from "@/pages/sign-in"
+
+export default function SignIn() {
+  return <SignInPage />
 }

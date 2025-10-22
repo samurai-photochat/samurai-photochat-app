@@ -1,5 +1,5 @@
-import TermsOfService from "@/widgets/auth/ui/TermsOfService/TermsOfService"
+import { TermsOfServicePage } from "@/pages/terms-of-service"
 
-export default function TermsOfServicePage() {
-  return <TermsOfService />
+export default function TermsOfService() {
+  return <TermsOfServicePage />
 }

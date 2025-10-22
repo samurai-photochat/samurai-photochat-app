@@ -1,4 +1,4 @@
-import { Profile } from "@/features/profile/ui"
+import { ProfilePage } from "@/pages/profile"
 import { notFound } from "next/navigation"
 
 type Props = {
@@ -20,5 +20,5 @@ async function getUserProfile(userId: number) {
 export default async function UserProfile({ params }: Props) {
   const { userId } = await params
   const profileData = await getUserProfile(Number(userId))
-  return <Profile initialProfileData={profileData} userId={Number(userId)} />
+  return <ProfilePage initialProfileData={profileData} userId={Number(userId)} />
 }
