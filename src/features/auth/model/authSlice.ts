@@ -1,4 +1,4 @@
-import { AppRootState } from "@/app/store/store"
+import { AppRootState } from "@/shared/store/store"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { MeResponse } from "@/features/auth/api/authApi.types"
 

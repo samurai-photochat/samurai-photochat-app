@@ -1,4 +1,4 @@
-import { getTotalUsersCount, getLatestPosts } from "@/app/lib/serverActions"
+import { getTotalUsersCount, getLatestPosts } from "@/shared/api/server/serverActions"
 import { HomePage } from "@/pages/home"
 
 // Включаем ISR с ревалидацией каждые 60 секунд
