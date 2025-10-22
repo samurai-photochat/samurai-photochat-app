@@ -1,5 +1,6 @@
 import { getTotalUsersCount, getLatestPosts } from "@/shared/api/server/serverActions"
 import { HomePage } from "@/pages/home"
+import styles from "./page.module.css"
 
 // Включаем ISR с ревалидацией каждые 60 секунд
 export const revalidate = 60
@@ -18,5 +19,13 @@ export default async function Home() {
 
   const totalCount = totalCountData.totalCount
 
-  return <HomePage totalCount={totalCount} initialPosts={postsData} />
+  return (
+    <div className={styles.page}>
+      <main className={styles.main}>
+        <HomePage totalCount={totalCount} initialPosts={postsData} />
+      </main>
+      {/* При необходимости можно добавить CTA или футер ниже */}
+      <footer className={styles.footer} />
+    </div>
+  )
 }
