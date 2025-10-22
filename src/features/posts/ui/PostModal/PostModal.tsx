@@ -4,7 +4,7 @@ import * as Dialog from "@radix-ui/react-dialog"
 
 import { ReactNode, useMemo, Suspense } from "react"
 
-import { PostModalContextProvider } from "../context/PostModalContext"
+import { PostModalContextProvider } from "./context/PostModalContext"
 import { PostModalBody } from "./PostModalBody"
 import { CloseOutline } from "@/shared/assets/icons/components"
 

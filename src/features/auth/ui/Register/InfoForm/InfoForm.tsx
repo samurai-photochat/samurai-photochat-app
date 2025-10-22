@@ -6,10 +6,10 @@ import { Form } from "radix-ui"
 import { TextField } from "@/shared/ui/text-field/text-field"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { SignUpInputs, signUpSchema } from "@/shared/lib/signUpSchema/signUpSchema"
+import { SignUpInputs, signUpSchema } from "@/shared/schemas/signUpSchema"
 import { ResendingEmailRequest } from "@/features/auth/api/authApi"
-import { setAppError } from "@/shared/model/app/appSlice"
-import { useAppDispatch } from "@/shared/lib/redux/useAppDispatch"
+import { setAppError } from "@/shared/store/appSlice"
+import { useAppDispatch } from "@/shared/store/useAppDispatch"
 
 type Props = {
   title: string

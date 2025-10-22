@@ -2,7 +2,7 @@ import Image from "next/image"
 import voidImage from "@/shared/assets/svg/voidImage.svg"
 import Button from "@/shared/ui/button/button"
 import s from "./AddFotoStep.module.scss"
-import { useAppSelector } from "@/shared/lib/redux/useAppSelector"
+import { useAppSelector } from "@/shared/store/useAppSelector"
 import { selectImages } from "@/features/posts/model/postsSlice"
 
 type PropsOne = {

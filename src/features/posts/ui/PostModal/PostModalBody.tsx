@@ -1,13 +1,13 @@
 import { Loader } from "@/shared/ui/loader/Loader"
 
 import { PostModalImageSlider } from "./PostModalImageSlider"
-import { PostContent } from "../postViewMode/PostContent"
-import { usePostModalContext } from "../context/PostModalContext"
+import { PostContent } from "./postViewMode/PostContent"
+import { usePostModalContext } from "./context/PostModalContext"
 
 import s from "./PostModal.module.scss"
 import { PostEditModeContent } from "@/features/posts/ui/PostModal/postEditMode/PostEditModeContent"
 import { useEffect, useRef, useState } from "react"
-import { useOutsideClick } from "@/shared/lib/hooks/useOutsideClick"
+import { useOutsideClick } from "@/shared/hooks/useOutsideClick"
 
 export const PostModalBody = () => {
   const {

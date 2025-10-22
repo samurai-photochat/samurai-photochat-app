@@ -11,7 +11,7 @@ import {
   RegisterRequest,
   ResendingEmailRequest,
 } from "./authApi.types"
-import LocalStorage from "@/shared/utils/localStorage/localStorage"
+import LocalStorage from "@/shared/utils/localStorage"
 import { clearToken, clearCurrentUser, setCurrentUser, setToken } from "@/features/auth/model/authSlice"
 
 export const authApi = baseApi.injectEndpoints({

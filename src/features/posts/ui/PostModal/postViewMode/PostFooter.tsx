@@ -1,6 +1,6 @@
 import { Post } from "@/features/posts/api/postsApi.types"
 
-import s from "../ui/PostModal.module.scss"
+import s from "../PostModal.module.scss"
 
 type PostFooterProps = {
   post: Post

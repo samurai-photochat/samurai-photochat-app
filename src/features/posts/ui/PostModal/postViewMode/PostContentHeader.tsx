@@ -4,7 +4,7 @@ import { useCallback } from "react"
 import { Post } from "@/features/posts/api/postsApi.types"
 import { DropdownMenu } from "@/shared/ui/DropdownMenu"
 
-import s from "../ui/PostModal.module.scss"
+import s from "../PostModal.module.scss"
 import { usePostDropdownMenuActions } from "@/features/posts/ui/PostModal/hooks"
 import { usePostModalContext } from "@/features/posts/ui/PostModal/context/PostModalContext"
 

@@ -2,7 +2,7 @@
 import { LoginType, useLoginMutation } from "@/features/auth/api/authApi"
 
 import { useRouter } from "next/navigation"
-import LocalStorage from "@/shared/utils/localStorage/localStorage"
+import LocalStorage from "@/shared/utils/localStorage"
 import SignInForm from "@/features/auth/ui/SignIn/SignInForm"
 import { useState } from "react"
 

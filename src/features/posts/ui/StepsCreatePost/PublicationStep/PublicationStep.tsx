@@ -1,4 +1,4 @@
-import { useAppSelector } from "@/shared/lib/redux/useAppSelector"
+import { useAppSelector } from "@/shared/store/useAppSelector"
 import { useState } from "react"
 import { selectImages } from "@/features/posts/model/postsSlice"
 import { ImagesSlider } from "@/shared/ui/ImagesSlider/ImagesSlider"

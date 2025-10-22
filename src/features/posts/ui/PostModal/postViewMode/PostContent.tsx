@@ -3,7 +3,7 @@ import { Post } from "@/features/posts/api/postsApi.types"
 import { PostContentHeader } from "./PostContentHeader"
 import { PostFooter } from "./PostFooter"
 
-import s from "../ui/PostModal.module.scss"
+import s from "../PostModal.module.scss"
 import { Button } from "@/shared/ui"
 import { ModalWindow } from "@/features/auth/ui/Register/ModalWindow/ModalWindow"
 import React from "react"

@@ -1,7 +1,7 @@
 import { BaseQueryFn, FetchArgs, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query/react"
-import LocalStorage from "@/shared/utils/localStorage/localStorage"
-import { handleError } from "@/shared/lib/api/handleError"
+import LocalStorage from "@/shared/utils/localStorage"
+import { handleError } from "@/shared/api/handleError"
 
 const createBaseQuery = (skipAuth?: boolean) =>
   fetchBaseQuery({

@@ -2,7 +2,7 @@ import { useState } from "react"
 
 import { ImagesSlider } from "@/shared/ui/ImagesSlider/ImagesSlider"
 
-import { usePostModalContext } from "../context/PostModalContext"
+import { usePostModalContext } from "./context/PostModalContext"
 
 import s from "./PostModal.module.scss"
 
