@@ -24,7 +24,6 @@ export default async function Home() {
       <main className={styles.main}>
         <HomePage totalCount={totalCount} initialPosts={postsData} />
       </main>
-      {/* При необходимости можно добавить CTA или футер ниже */}
       <footer className={styles.footer} />
     </div>
   )
