@@ -12,7 +12,7 @@ export function ClientAuthWrapper({ children }: { children: ReactNode }) {
   return (
     <div style={{ display: "flex" }}>
       {isLoggedIn ? <Sidebar /> : null}
-      <div style={{ flex: 1, padding: "20px"}}>{children}</div>
+      <div style={{ flex: 1, padding: "20px" }}>{children}</div>
     </div>
   )
 }
