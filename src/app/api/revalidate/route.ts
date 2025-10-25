@@ -9,7 +9,7 @@ import { NextRequest, NextResponse } from "next/server"
  *
  * Опциональные параметры:
  * - path: путь для ревалидации (по умолчанию '/')
- * - tag: тег для ревалидации конкретных данных (users-count, latest-posts)
+ * - tag: тег для ревалидации конкретных данных (users-count, latest-posts, profile-<userId>)
  */
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams
@@ -25,7 +25,7 @@ export async function GET(request: NextRequest) {
   try {
     // Если указан тег, ревалидируем по тегу
     if (tag) {
-      revalidateTag(tag)
+      revalidateTag(tag, "max")
       return NextResponse.json({
         revalidated: true,
         type: "tag",

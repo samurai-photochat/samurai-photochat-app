@@ -1,20 +1,8 @@
 import { ProfilePage } from "@/pages/profile"
-import { notFound } from "next/navigation"
+import { getUserProfile } from "@/shared/api/server/serverActions"
 
 type Props = {
   params: Promise<{ userId: string }>
-}
-
-async function getUserProfile(userId: number) {
-  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
-
-  const response = await fetch(`${baseUrl}/public-user/profile/${userId}`, {
-    cache: "no-store",
-    next: { revalidate: 60 },
-  })
-  if (response.status === 404) return notFound()
-  if (!response.ok) throw new Error(`Failed to fetch profile: ${response.statusText}`)
-  return await response.json()
 }
 
 export default async function UserProfile({ params }: Props) {
