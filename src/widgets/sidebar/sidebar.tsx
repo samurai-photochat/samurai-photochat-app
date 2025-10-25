@@ -11,23 +11,31 @@ import {
 } from "@/shared/assets/icons/components"
 import { Button } from "@/shared/ui"
 import s from "./sidebar.module.css"
-import { useLogoutMutation } from "@/features/auth/api/authApi"
+import { useLogoutMutation, useMeQuery } from "@/features/auth/api/authApi"
 import { PATH } from "@/shared/config/routes"
 import { Breakpoints, useBreakpoint } from "@/shared/hooks/useBreakpoint"
 import { PostSettingModal } from "@/features/posts/ui/StepsCreatePost/PostSettingModal"
 import { useState } from "react"
 import { useSelector } from "react-redux"
 import { selectCurrentUser } from "@/features/auth/model/authSlice"
+import { Modal } from "@/shared/ui/modal/Modal"
+import { LogoutContent } from "@/features/auth/ui/Logout/LogoutContent"
 
 export default function Sidebar() {
   const [logoutUser] = useLogoutMutation()
+  // const {data: user} = useMeQuery()
 
   const [isOpenPostSettingModal, setIsOpenPostSettingModal] = useState<boolean>(false)
+  const [isOpenLogoutModal, setIsOpenLogoutModal] = useState<boolean>(false)
   const isNarrow = useBreakpoint(Breakpoints.narrow)
 
   const logoutHandler = async () => {
     await logoutUser()
     window.location.href = PATH.AUTH.LOGOUT
+  }
+
+  const onCloseLogoutModal = () => {
+    setIsOpenLogoutModal(false)
   }
 
   const user = useSelector(selectCurrentUser)
@@ -88,7 +96,7 @@ export default function Sidebar() {
               </Button>
             </li>
             <li className={s.item}>
-              <Button variant="text" className={s.sidebarBtn} onClick={logoutHandler}>
+              <Button variant="text" className={s.sidebarBtn} onClick={() => setIsOpenLogoutModal(true)}>
                 <LogOutIcon />
                 Log Out
               </Button>
@@ -100,6 +108,9 @@ export default function Sidebar() {
         isOpenPostSettingModal={isOpenPostSettingModal}
         setIsOpenPostSettingModalAction={setIsOpenPostSettingModal}
       />
+      <Modal open={isOpenLogoutModal} onClose={onCloseLogoutModal} email={user.email}>
+        <LogoutContent onClose={onCloseLogoutModal} logoutHandler={logoutHandler} />
+      </Modal>
     </div>
   )
 }
