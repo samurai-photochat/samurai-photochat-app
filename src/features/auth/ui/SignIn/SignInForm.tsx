@@ -10,9 +10,10 @@ import { useForm } from "react-hook-form"
 import { LoginInputs, loginSchema } from "@/shared/schemas/loginSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useState } from "react"
-import { TextField } from "@/shared/ui/text-field/text-field"
+import { TextField } from "@/shared/ui/TextField"
 import { Button } from "@/shared/ui"
 import { PATH } from "@/shared/config/routes"
+import { PasswordField } from "@/shared/ui/PasswordField/PasswordField"
 
 type Props = {
   submitAction: ({ email, password }: { email: string; password: string }, reset: () => void) => void
@@ -31,7 +32,10 @@ export default function SignInForm({ submitAction, error = "" }: Props) {
   })
   const [passwordType, setPasswordType] = useState("password")
   const onSubmit = (data: LoginInputs) => {
-    submitAction(data, reset)
+    submitAction(data, () => {
+      reset()
+      setPasswordType("password")
+    })
   }
   const providers = [
     { name: "Google", icon: googleIcon, href: "" },
@@ -49,10 +53,8 @@ export default function SignInForm({ submitAction, error = "" }: Props) {
           ))}
         </div>
         <TextField label={"Email"} errorMessage={errors.email?.message} {...register("email")} />
-        <TextField
+        <PasswordField
           type={passwordType}
-          password
-          label={"Password"}
           errorMessage={errors.password?.message || error}
           iconAction={() => setPasswordType(passwordType === "password" ? "text" : "password")}
           {...register("password")}

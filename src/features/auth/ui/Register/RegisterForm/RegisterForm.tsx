@@ -5,7 +5,7 @@ import Image from "next/image"
 import s from "./RegisterForm.module.css"
 import googleIcon from "@/shared/assets/img/google-icon.png"
 import gitHubIcon from "@/shared/assets/img/github-icon.png"
-import { TextField } from "@/shared/ui/text-field/text-field"
+import { TextField } from "@/shared/ui/TextField"
 import { Button } from "@/shared/ui"
 import { Controller, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -14,6 +14,7 @@ import { UserType } from "@/features/auth/api/authApi"
 import { useState } from "react"
 import Checkbox from "@/shared/ui/checkbox/checkbox"
 import { PATH } from "@/shared/config/routes"
+import { PasswordField } from "@/shared/ui/PasswordField/PasswordField"
 
 type Props = {
   submitAction: (user: UserType, reset: () => void) => void
@@ -55,17 +56,14 @@ export const RegisterForm = ({ submitAction }: Props) => {
       </div>
       <TextField label={"Username"} errorMessage={errors.userName?.message} {...register("userName")} />
       <TextField label={"Email"} errorMessage={errors.email?.message} {...register("email")} />
-      <TextField
+      <PasswordField
         type={passwordType}
-        password
-        label={"Password"}
         errorMessage={errors.password?.message}
-        iconAction={() => setPasswordType(passwordType === "password" ? "text" : "password")}
         {...register("password")}
+        iconAction={() => setPasswordType(passwordType === "password" ? "text" : "password")}
       />
-      <TextField
+      <PasswordField
         type={passwordType}
-        password
         label={"Password confirmation"}
         errorMessage={errors.confirmPassword?.message}
         iconAction={() => setPasswordType(passwordType === "password" ? "text" : "password")}
