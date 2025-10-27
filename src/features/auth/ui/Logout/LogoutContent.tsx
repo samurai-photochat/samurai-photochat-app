@@ -1,6 +1,6 @@
 import Button from "@/shared/ui/button/button"
 import React from "react"
-import s from "./LogoutContent.module.css"
+import s from "./LogoutContent.module.scss"
 
 type Props = {
   logoutHandler: () => void

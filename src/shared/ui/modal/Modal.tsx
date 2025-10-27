@@ -2,7 +2,7 @@ import { Dialog } from "radix-ui"
 import Image from "next/image"
 import CloseIcon from "@/shared/assets/svg/Close.svg"
 
-import s from "./Modal.module.css"
+import s from "./Modal.module.scss"
 import { ComponentPropsWithoutRef } from "react"
 
 type Props = {
