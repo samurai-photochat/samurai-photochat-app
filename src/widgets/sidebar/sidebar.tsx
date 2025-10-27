@@ -27,7 +27,7 @@ export default function Sidebar() {
 
   const logoutHandler = async () => {
     await logoutUser()
-    window.localStorage.href = PATH.AUTH.LOGOUT
+    window.location.href = PATH.AUTH.LOGOUT
   }
 
   const user = useSelector(selectCurrentUser)
