@@ -1,24 +1,30 @@
-import { ChangeEvent } from "react"
+import { ChangeEvent, HTMLProps } from "react"
 import s from "./textarea.module.scss"
 
-type Props = {
-  max: number
-  text: string
-  setText: (text: string) => void
+interface Props extends HTMLProps<HTMLTextAreaElement> {
+  // max: number
+  label?: string
+  text?: string
+  setText?: (text: string) => void
 }
-export const Textarea = ({ max, text, setText }: Props) => {
+export const Textarea = ({ label, text, setText, onChange, maxLength, ...rest }: Props) => {
   // const [text, setText] = useState(started)
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const next = e.currentTarget.value
-    if (next.length <= max) {
-      setText(next)
+    if (!maxLength || next.length <= maxLength) {
+      setText?.(next)
     } else {
-      //   дописать
+      onChange?.(e)
     }
   }
   return (
     <div className={s.content}>
+      {label && (
+        <label htmlFor="message" className={s.label}>
+          {label}
+        </label>
+      )}
       <textarea
         value={text}
         // placeholder={started}
@@ -26,9 +32,10 @@ export const Textarea = ({ max, text, setText }: Props) => {
         id="message"
         name="message"
         className={s.textarea}
+        {...rest}
       ></textarea>
       <div className={s.blockWords}>
-        <label className={s.manyWords}>{`${text.length}/${max}`}</label>
+        {maxLength && <label className={s.manyWords}>{`${text?.length}/${maxLength}`}</label>}
       </div>
     </div>
   )

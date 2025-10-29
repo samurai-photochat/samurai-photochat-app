@@ -24,12 +24,12 @@ export const PublicationStep = ({ description, setDescription }: Props) => {
             <div className={s.userFhoto}>{/* фото User */}</div>
             <h3 className={s.userURL}>URLUser</h3>
           </div>
-          <div className={s.textareaBlock}>
-            <label htmlFor="message" className={s.label}>
-              Add publication descriptions
-            </label>
-            <Textarea max={500} text={description} setText={setDescription} />
-          </div>
+          <Textarea
+            label={"Add publication descriptions"}
+            maxLength={500}
+            text={description}
+            setText={setDescription}
+          />
         </div>
         <div className={s.bottomContentWrap}>
           <div className={s.inputLocationWrap}>

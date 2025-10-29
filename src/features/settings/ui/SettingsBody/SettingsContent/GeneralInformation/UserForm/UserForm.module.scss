@@ -1,0 +1,20 @@
+.inputsContainer {
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  gap: 24px;
+  color: var(--color-light-100);
+
+  input {
+    width: 100%;
+  }
+}
+
+.location{
+  display: flex;
+  gap: 24px;
+}
+
+.select {
+  width: 100%;
+}

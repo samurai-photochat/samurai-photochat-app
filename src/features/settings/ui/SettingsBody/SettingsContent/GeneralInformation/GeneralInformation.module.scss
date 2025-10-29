@@ -1,0 +1,16 @@
+.infoBox {
+  display: flex;
+  padding: 24px 0;
+  gap: 30px;
+  justify-content: space-between;
+}
+
+.line {
+  border-color: var(--color-dark-300);
+  margin-bottom: 24px;
+}
+
+.submitButton {
+  display: flex;
+  margin-left: auto;
+}
