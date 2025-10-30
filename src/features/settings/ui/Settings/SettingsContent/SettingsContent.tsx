@@ -1,5 +1,5 @@
-import { SettingsSectionType } from "@/features/settings/ui/SettingsBody/types"
-import { GeneralInformation } from "@/features/settings/ui/SettingsBody/SettingsContent/GeneralInformation"
+import { SettingsSectionType } from "@/features/settings/ui/Settings/types"
+import { GeneralInformation } from "@/features/settings/ui/Settings/SettingsContent/GeneralInformation"
 
 type Props = {
   sectionType: SettingsSectionType

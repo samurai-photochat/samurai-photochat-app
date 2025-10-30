@@ -16,16 +16,14 @@ export const Profile = ({ userId, initialProfileData }: ProfileProps) => {
 
   return (
     <div className={s.profile}>
-      <div className={s.content}>
-        <UserInfo
-          username={initialProfileData?.userName}
-          aboutMe={initialProfileData?.aboutMe}
-          avatars={initialProfileData?.avatars}
-          userMetadata={initialProfileData?.userMetadata}
-          isOwner={isOwner}
-        />
-        <PostsGrid isOwner={isOwner} userId={userId} />
-      </div>
+      <UserInfo
+        username={initialProfileData?.userName}
+        aboutMe={initialProfileData?.aboutMe}
+        avatars={initialProfileData?.avatars}
+        userMetadata={initialProfileData?.userMetadata}
+        isOwner={isOwner}
+      />
+      <PostsGrid isOwner={isOwner} userId={userId} />
     </div>
   )
 }

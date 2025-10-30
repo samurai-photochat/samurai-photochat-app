@@ -42,36 +42,34 @@ export default function SignInForm({ submitAction, error = "" }: Props) {
     { name: "GitHub", icon: githubIcon, href: "" },
   ]
   return (
-    <div className={s.page}>
-      <Form.Root className={s.form} onSubmit={handleSubmit(onSubmit)}>
-        <h1 className={s.h1}>Sign In</h1>
-        <div className={s.iconRow}>
-          {providers.map(({ name, icon, href }) => (
-            <a key={name} href={href}>
-              <Image src={icon} alt={name} />
-            </a>
-          ))}
-        </div>
-        <TextField label={"Email"} errorMessage={errors.email?.message} {...register("email")} />
-        <PasswordField
-          type={passwordType}
-          errorMessage={errors.password?.message || error}
-          iconAction={() => setPasswordType(passwordType === "password" ? "text" : "password")}
-          {...register("password")}
-        />
-        <span className={s.span}>
-          <a href={""} className={`${s.span} ${s.grayText} ${s.a}`}>
-            Forgot Password
+    <Form.Root className={s.form} onSubmit={handleSubmit(onSubmit)}>
+      <h1 className={s.h1}>Sign In</h1>
+      <div className={s.iconRow}>
+        {providers.map(({ name, icon, href }) => (
+          <a key={name} href={href}>
+            <Image src={icon} alt={name} />
           </a>
-        </span>
-        <Button type={"submit"} className={s.button} variant={"primary"}>
-          Sign In
-        </Button>
-        <span className={s.whiteText}>{`Don't have an account?`}</span>
-        <Button as={"a"} variant={"text"} href={PATH.AUTH.REGISTRATION}>
-          Sign Up
-        </Button>
-      </Form.Root>
-    </div>
+        ))}
+      </div>
+      <TextField label={"Email"} errorMessage={errors.email?.message} {...register("email")} />
+      <PasswordField
+        type={passwordType}
+        errorMessage={errors.password?.message || error}
+        iconAction={() => setPasswordType(passwordType === "password" ? "text" : "password")}
+        {...register("password")}
+      />
+      <span className={s.span}>
+        <a href={""} className={`${s.span} ${s.grayText} ${s.a}`}>
+          Forgot Password
+        </a>
+      </span>
+      <Button type={"submit"} className={s.button} variant={"primary"}>
+        Sign In
+      </Button>
+      <span className={s.whiteText}>{`Don't have an account?`}</span>
+      <Button as={"a"} variant={"text"} href={PATH.AUTH.REGISTRATION}>
+        Sign Up
+      </Button>
+    </Form.Root>
   )
 }

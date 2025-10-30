@@ -1,6 +1,7 @@
+"use client"
 import s from "./GeneralInformation.module.scss"
 import { UserForm } from "@/features/settings/ui"
-import { Avatar } from "@/features/settings/ui/SettingsBody/SettingsContent/GeneralInformation/Avatar"
+import { Avatar } from "@/features/settings/ui/Settings/SettingsContent/GeneralInformation/Avatar"
 import { Button } from "@/shared/ui"
 import { useGetProfileQuery, useUpdateProfileMutation } from "@/features/profile/api/profileApi"
 import { useEffect, useState } from "react"
@@ -29,7 +30,7 @@ export const GeneralInformation = () => {
   return (
     <>
       <div className={s.infoBox}>
-        <Avatar />
+        <Avatar avatar={data?.avatars[0].url} />
         <UserForm data={data} setError={setIsInvalid} submitAction={updateInformation} />
       </div>
       <hr className={s.line} />

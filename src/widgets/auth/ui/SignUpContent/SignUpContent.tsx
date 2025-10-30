@@ -47,7 +47,7 @@ function SignUpContentInner() {
   const closeModal = () => setIsModalClose(true)
 
   return (
-    <div className={s.SignUpContent}>
+    <>
       {!codeParams ? (
         <>
           <RegisterForm submitAction={submitAction} />
@@ -59,10 +59,10 @@ function SignUpContentInner() {
           </ModalWindow>
         </>
       ) : (
-        // В зависимости от  действительности ссылки, будет отображаться нужная фича
+        // В зависимости от действительности ссылки, будет отображаться нужная фича
         <Confirmation islinkExpiration={islinkExpiration} />
       )}
-    </div>
+    </>
   )
 }
 
