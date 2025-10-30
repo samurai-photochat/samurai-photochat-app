@@ -11,7 +11,7 @@ import {
 } from "@/shared/assets/icons/components"
 import { Button } from "@/shared/ui"
 import s from "./sidebar.module.css"
-import { useLogoutMutation, useMeQuery } from "@/features/auth/api/authApi"
+import { useLogoutMutation } from "@/features/auth/api/authApi"
 import { PATH } from "@/shared/config/routes"
 import { Breakpoints, useBreakpoint } from "@/shared/hooks/useBreakpoint"
 import { PostSettingModal } from "@/features/posts/ui/StepsCreatePost/PostSettingModal"
@@ -23,7 +23,6 @@ import { LogoutContent } from "@/features/auth/ui/Logout/LogoutContent"
 
 export default function Sidebar() {
   const [logoutUser] = useLogoutMutation()
-  // const {data: user} = useMeQuery()
 
   const [isOpenPostSettingModal, setIsOpenPostSettingModal] = useState<boolean>(false)
   const [isOpenLogoutModal, setIsOpenLogoutModal] = useState<boolean>(false)

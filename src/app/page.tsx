@@ -1,8 +1,6 @@
-/* <<<<<<<<<<<<<<  ✨ Windsurf Command 🌟 >>>>>>>>>>>>>>>> */
 import { getTotalUsersCount, getLatestPosts } from "@/shared/api/server/serverActions"
 import { HomePage } from "@/pages/home"
 import styles from "./page.module.css"
-import { ClientAuthWrapper } from "@/features/auth/ui/AuthWrapper/ClientAuthWrapper"
 
 // Включаем ISR с ревалидацией каждые 60 секунд
 export const revalidate = 60
@@ -17,11 +15,9 @@ export default async function Home() {
 
   return (
     <div className={styles.page}>
-      <ClientAuthWrapper>
-        <main className={styles.main}>
-          <HomePage totalCount={totalCount} initialPosts={postsData} />
-        </main>
-      </ClientAuthWrapper>
+      <main className={styles.main}>
+        <HomePage totalCount={totalCount} initialPosts={postsData} />
+      </main>
       <footer className={styles.footer} />
     </div>
   )

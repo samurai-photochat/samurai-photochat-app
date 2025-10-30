@@ -1,6 +1,7 @@
 .page {
   min-height: calc(90svh - 20px);
   font-family: var(--font-sans), serif;
+  width: 100%;
 }
 
 .main {

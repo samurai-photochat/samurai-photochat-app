@@ -18,7 +18,7 @@ export const Modal = ({ open, onClose, email, children, ...rest }: Props) => (
       <Dialog.Content className={s.content}>
         <Dialog.Title className={s.title}>Log Out</Dialog.Title>
         <Dialog.Description className={s.description}>
-          Are you really want to log out of your account "<b>{email}</b>"?
+          Are you sure you want to log out of your account &ldquo;<strong>{email}</strong>&rdquo;?
         </Dialog.Description>
 
         {children}

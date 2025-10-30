@@ -3,7 +3,7 @@ import NextImage from "next/image"
 import Button from "@/shared/ui/button/button"
 import CloseIcon from "@/shared/assets/svg/Close.svg"
 import ArrowBackIcon from "@/shared/assets/svg/arrow-back.svg"
-import { useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { AddFotoStep } from "./AddFotoStep/AddFotoStep"
 import { CanvasImage, CroppingStep } from "./CroppingStep/CroppingStep"
 import { FilterStep } from "./FiltersStep/FiltersStep"
@@ -121,7 +121,7 @@ export const PostSettingModal = ({ isOpenPostSettingModal, setIsOpenPostSettingM
   }
 
   // Работа с Steps
-  // переход на след. шаг
+  // переход на след. шаг.
   const goNextStep = () => {
     if (currentStep < totalSteps - 1) {
       setCurrentStep((s) => s + 1)
@@ -153,7 +153,7 @@ export const PostSettingModal = ({ isOpenPostSettingModal, setIsOpenPostSettingM
     goNextStep()
   }
 
-  const setFilters = () => {
+  const setFilters = useCallback(() => {
     images.forEach((image, index) => {
       const { file, url, zoom, scale, filter } = image
       const canvas = canvasRef.current
@@ -209,7 +209,7 @@ export const PostSettingModal = ({ isOpenPostSettingModal, setIsOpenPostSettingM
         }, mimeType)
       }
     })
-  }
+  }, [images, dispatch])
 
   useEffect(() => {
     if (images.length === 0) {
@@ -221,7 +221,7 @@ export const PostSettingModal = ({ isOpenPostSettingModal, setIsOpenPostSettingM
     if (currentStep === 3) {
       setFilters()
     }
-  }, [currentStep])
+  }, [currentStep, setFilters])
 
   return (
     isOpenPostSettingModal && (

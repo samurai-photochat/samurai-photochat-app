@@ -2,8 +2,8 @@ import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import "./globals.css"
 import { StoreProvider } from "@/shared/providers"
-import { Header } from "@/widgets/header/header"
 import { Alert } from "@/features/alert/alert"
+import { ClientAuthWrapper } from "@/features/auth/ui/AuthWrapper/ClientAuthWrapper"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,10 +29,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <StoreProvider>
-          <Header />
-          {children}
-          {/* Alert для вывода ошибок */}
-          <Alert />
+          <ClientAuthWrapper>
+            {children}
+            {/* Alert для вывода ошибок */}
+            <Alert />
+          </ClientAuthWrapper>
         </StoreProvider>
       </body>
     </html>
