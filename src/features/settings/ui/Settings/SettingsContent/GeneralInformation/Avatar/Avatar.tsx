@@ -1,7 +1,8 @@
+"use client"
 import s from "./Avatar.module.scss"
 import Image from "next/image"
-import voidImage from "@/shared/assets/svg/voidImage.svg"
 import { Button } from "@/shared/ui"
+import voidImage from "@/shared/assets/svg/voidImage.svg"
 
 type Props = {
   avatar?: string
