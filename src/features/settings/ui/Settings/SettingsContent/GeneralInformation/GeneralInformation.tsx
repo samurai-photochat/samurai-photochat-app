@@ -30,7 +30,7 @@ export const GeneralInformation = () => {
   return (
     <>
       <div className={s.infoBox}>
-        <Avatar avatar={data?.avatars[0].url} />
+        <Avatar avatar={data?.avatars[0]?.url} />
         <UserForm data={data} setError={setIsInvalid} submitAction={updateInformation} />
       </div>
       <hr className={s.line} />
