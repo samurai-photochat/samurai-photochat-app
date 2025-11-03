@@ -32,10 +32,6 @@ export const SidebarItem = ({
   const isLink = as === "a" && typeof href === "string"
   const isActive = isLink ? pathname === href : active
 
-  console.log(pathname)
-  console.log(isLink)
-  console.log(isActive)
-
   const content = (
     <Button
       as={isLink ? "span" : as}
