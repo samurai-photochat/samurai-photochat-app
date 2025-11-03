@@ -2,12 +2,19 @@
 import {
   SearchIcon,
   HomeIcon,
+  HomeActive,
   PlusSquareIcon,
+  PlusSquareActive,
   PersonIcon,
+  PersonActive,
   MessageCircleIcon,
+  MessageActive,
   TrendingUpIcon,
   BookmarkIcon,
+  BookmarkActive,
   LogOutIcon,
+  TrendingActive,
+  LogOutActive,
 } from "@/shared/assets/icons/components"
 import { Button } from "@/shared/ui"
 import s from "./sidebar.module.css"
@@ -20,6 +27,7 @@ import { useSelector } from "react-redux"
 import { selectCurrentUser } from "@/features/auth/model/authSlice"
 import { Modal } from "@/shared/ui/modal/Modal"
 import { LogoutContent } from "@/features/auth/ui/Logout/LogoutContent"
+import { SidebarItem } from "./sidebarItem"
 
 export default function Sidebar() {
   const [logoutUser] = useLogoutMutation()
@@ -42,14 +50,25 @@ export default function Sidebar() {
   if (!user) {
     return null
   }
+
   return (
     <div className={`${s.sidebar} regular-text-14`}>
       <ul className={s.list}>
         <li className={s.item}>
-          <Button as="a" href={`${PATH.ROOT}`} variant="text" className={s.sidebarBtn}>
+          {/* <Button as="a" href={`${PATH.ROOT}`} variant="text" className={s.sidebarBtn}>
             <HomeIcon />
             Feed
-          </Button>
+          </Button> */}
+          <SidebarItem
+            as="a"
+            href={`${PATH.ROOT}`}
+            variant="text"
+            className={s.sidebarBtn}
+            icon={<HomeIcon />}
+            activeIcon={<HomeActive />}
+          >
+            Feed
+          </SidebarItem>
         </li>
         <li className={s.item}>
           <Button
@@ -61,44 +80,119 @@ export default function Sidebar() {
           >
             <PlusSquareIcon /> Create
           </Button>
+
+          {/* <SidebarItem
+            onClick={() => {
+              setIsOpenPostSettingModal(true)
+            }}
+            href={`${PATH.USER.FAVORITES}`}
+            variant="text"
+            className={s.sidebarBtn}
+            active={isOpenPostSettingModal}
+            icon={<PlusSquareIcon />}
+            activeIcon={<PlusSquareActive />}
+          >
+            Create
+          </SidebarItem> */}
         </li>
         <li className={s.item}>
-          <Button variant="text" as="a" href={`${PATH.USER.PROFILE}/${user?.userId}`} className={s.sidebarBtn}>
+          {/* <Button variant="text" as="a" href={`${PATH.USER.PROFILE}/${user?.userId}`} className={s.sidebarBtn}>
             <PersonIcon />
             My Profile
-          </Button>
+          </Button> */}
+          <SidebarItem
+            as="a"
+            href={`${PATH.USER.PROFILE}/${user?.userId}`}
+            variant="text"
+            className={s.sidebarBtn}
+            icon={<PersonIcon />}
+            activeIcon={<PersonActive />}
+          >
+            My Profile
+          </SidebarItem>
         </li>
         <li className={s.item}>
-          <Button variant="text" className={s.sidebarBtn}>
+          {/* <Button variant="text" as="a" href={`${PATH.USER.MESSENGER}`} className={s.sidebarBtn}>
             <MessageCircleIcon />
             Messenger
-          </Button>
+          </Button> */}
+          <SidebarItem
+            as="a"
+            href={`${PATH.USER.MESSENGER}`}
+            variant="text"
+            className={s.sidebarBtn}
+            icon={<MessageCircleIcon />}
+            activeIcon={<MessageActive />}
+          >
+            Messenger
+          </SidebarItem>
         </li>
         <li className={s.item}>
-          <Button variant="text" className={s.sidebarBtn}>
+          {/* <Button variant="text" as="a" href={`${PATH.USER.SEARCH}`} className={s.sidebarBtn}>
             <SearchIcon />
             Search
-          </Button>
+          </Button> */}
+          <SidebarItem
+            as="a"
+            href={`${PATH.USER.SEARCH}`}
+            variant="text"
+            className={s.sidebarBtn}
+            icon={<SearchIcon />}
+            activeIcon={<SearchIcon />}
+          >
+            Search
+          </SidebarItem>
         </li>
         {!isNarrow && (
           <>
             <li className={s.item}>
-              <Button variant="text" className={s.sidebarBtn}>
+              {/* <Button variant="text" as="a" href={`${PATH.USER.STATISTICS}`} className={s.sidebarBtn}>
                 <TrendingUpIcon />
                 Statistics
-              </Button>
+              </Button> */}
+              <SidebarItem
+                as="a"
+                href={`${PATH.USER.STATISTICS}`}
+                variant="text"
+                className={s.sidebarBtn}
+                icon={<TrendingUpIcon />}
+                activeIcon={<TrendingActive />}
+              >
+                Statistics
+              </SidebarItem>
             </li>
             <li className={s.item}>
-              <Button variant="text" className={s.sidebarBtn}>
+              {/* <Button variant="text" as="a" href={`${PATH.USER.FAVORITES}`} className={s.sidebarBtn}>
                 <BookmarkIcon />
                 Favorites
-              </Button>
+              </Button> */}
+              <SidebarItem
+                as="a"
+                href={`${PATH.USER.FAVORITES}`}
+                variant="text"
+                className={s.sidebarBtn}
+                icon={<BookmarkIcon />}
+                activeIcon={<BookmarkActive />}
+              >
+                Favorites
+              </SidebarItem>
             </li>
             <li className={s.item}>
-              <Button variant="text" className={s.sidebarBtn} onClick={() => setIsOpenLogoutModal(true)}>
+              {/* <Button variant="text" className={s.sidebarBtn} onClick={() => setIsOpenLogoutModal(true)}>
                 <LogOutIcon />
                 Log Out
-              </Button>
+              </Button> */}
+              <SidebarItem
+                onClick={() => setIsOpenLogoutModal(true)}
+                href={`${PATH.USER.FAVORITES}`}
+                variant="text"
+                className={s.sidebarBtn}
+                active={isOpenLogoutModal}
+                icon={<LogOutIcon />}
+                activeIcon={<LogOutActive />}
+              >
+                Log Out
+              </SidebarItem>
             </li>
           </>
         )}
