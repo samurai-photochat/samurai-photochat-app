@@ -1,8 +1,6 @@
 import { Button } from "@/shared/ui"
-import { ButtonProps } from "@/shared/ui/button/button"
 import { usePathname } from "next/navigation"
-import { ElementType, ReactNode } from "react"
-import s from "./sidebar.module.css"
+import s from "./sidebar.module.scss"
 import Link from "next/link"
 
 export type SidebarItemProps = {

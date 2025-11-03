@@ -17,7 +17,7 @@ import {
   LogOutActive,
 } from "@/shared/assets/icons/components"
 import { Button } from "@/shared/ui"
-import s from "./sidebar.module.css"
+import s from "./sidebar.module.scss"
 import { useLogoutMutation } from "@/features/auth/api/authApi"
 import { PATH } from "@/shared/config/routes"
 import { Breakpoints, useBreakpoint } from "@/shared/hooks/useBreakpoint"
@@ -55,56 +55,29 @@ export default function Sidebar() {
     <div className={`${s.sidebar} regular-text-14`}>
       <ul className={s.list}>
         <li className={s.item}>
-          {/* <Button as="a" href={`${PATH.ROOT}`} variant="text" className={s.sidebarBtn}>
-            <HomeIcon />
-            Feed
-          </Button> */}
-          <SidebarItem
-            as="a"
-            href={`${PATH.ROOT}`}
-            variant="text"
-            className={s.sidebarBtn}
-            icon={<HomeIcon />}
-            activeIcon={<HomeActive />}
-          >
+          <SidebarItem as="a" href={`${PATH.ROOT}`} variant="text" icon={<HomeIcon />} activeIcon={<HomeActive />}>
             Feed
           </SidebarItem>
         </li>
         <li className={s.item}>
-          <Button
-            variant="text"
-            className={s.sidebarBtn}
-            onClick={() => {
-              setIsOpenPostSettingModal(true)
-            }}
-          >
-            <PlusSquareIcon /> Create
-          </Button>
-
-          {/* <SidebarItem
+          <SidebarItem
             onClick={() => {
               setIsOpenPostSettingModal(true)
             }}
             href={`${PATH.USER.FAVORITES}`}
             variant="text"
-            className={s.sidebarBtn}
             active={isOpenPostSettingModal}
             icon={<PlusSquareIcon />}
             activeIcon={<PlusSquareActive />}
           >
             Create
-          </SidebarItem> */}
+          </SidebarItem>
         </li>
         <li className={s.item}>
-          {/* <Button variant="text" as="a" href={`${PATH.USER.PROFILE}/${user?.userId}`} className={s.sidebarBtn}>
-            <PersonIcon />
-            My Profile
-          </Button> */}
           <SidebarItem
             as="a"
             href={`${PATH.USER.PROFILE}/${user?.userId}`}
             variant="text"
-            className={s.sidebarBtn}
             icon={<PersonIcon />}
             activeIcon={<PersonActive />}
           >
@@ -112,15 +85,10 @@ export default function Sidebar() {
           </SidebarItem>
         </li>
         <li className={s.item}>
-          {/* <Button variant="text" as="a" href={`${PATH.USER.MESSENGER}`} className={s.sidebarBtn}>
-            <MessageCircleIcon />
-            Messenger
-          </Button> */}
           <SidebarItem
             as="a"
             href={`${PATH.USER.MESSENGER}`}
             variant="text"
-            className={s.sidebarBtn}
             icon={<MessageCircleIcon />}
             activeIcon={<MessageActive />}
           >
@@ -128,15 +96,10 @@ export default function Sidebar() {
           </SidebarItem>
         </li>
         <li className={s.item}>
-          {/* <Button variant="text" as="a" href={`${PATH.USER.SEARCH}`} className={s.sidebarBtn}>
-            <SearchIcon />
-            Search
-          </Button> */}
           <SidebarItem
             as="a"
             href={`${PATH.USER.SEARCH}`}
             variant="text"
-            className={s.sidebarBtn}
             icon={<SearchIcon />}
             activeIcon={<SearchIcon />}
           >
@@ -146,15 +109,10 @@ export default function Sidebar() {
         {!isNarrow && (
           <>
             <li className={s.item}>
-              {/* <Button variant="text" as="a" href={`${PATH.USER.STATISTICS}`} className={s.sidebarBtn}>
-                <TrendingUpIcon />
-                Statistics
-              </Button> */}
               <SidebarItem
                 as="a"
                 href={`${PATH.USER.STATISTICS}`}
                 variant="text"
-                className={s.sidebarBtn}
                 icon={<TrendingUpIcon />}
                 activeIcon={<TrendingActive />}
               >
@@ -162,15 +120,10 @@ export default function Sidebar() {
               </SidebarItem>
             </li>
             <li className={s.item}>
-              {/* <Button variant="text" as="a" href={`${PATH.USER.FAVORITES}`} className={s.sidebarBtn}>
-                <BookmarkIcon />
-                Favorites
-              </Button> */}
               <SidebarItem
                 as="a"
                 href={`${PATH.USER.FAVORITES}`}
                 variant="text"
-                className={s.sidebarBtn}
                 icon={<BookmarkIcon />}
                 activeIcon={<BookmarkActive />}
               >
@@ -178,11 +131,11 @@ export default function Sidebar() {
               </SidebarItem>
             </li>
             <li className={s.item}>
-              {/* <Button variant="text" className={s.sidebarBtn} onClick={() => setIsOpenLogoutModal(true)}>
+              <Button variant="text" className={s.sidebarBtn} onClick={() => setIsOpenLogoutModal(true)}>
                 <LogOutIcon />
                 Log Out
-              </Button> */}
-              <SidebarItem
+              </Button>
+              {/* <SidebarItem
                 onClick={() => setIsOpenLogoutModal(true)}
                 href={`${PATH.USER.FAVORITES}`}
                 variant="text"
@@ -192,7 +145,7 @@ export default function Sidebar() {
                 activeIcon={<LogOutActive />}
               >
                 Log Out
-              </SidebarItem>
+              </SidebarItem> */}
             </li>
           </>
         )}
