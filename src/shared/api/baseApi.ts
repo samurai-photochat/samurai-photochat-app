@@ -3,7 +3,7 @@ import { baseQuery } from "@/shared/api/baseQuery"
 
 export const baseApi = createApi({
   reducerPath: "baseApi",
-  tagTypes: ["Auth", "User", "Post"],
+  tagTypes: ["Auth", "User", "Post", "Profile"],
   baseQuery: baseQuery,
   endpoints: () => ({}),
 })

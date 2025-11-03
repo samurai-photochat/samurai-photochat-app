@@ -30,3 +30,7 @@ export type Avatar = {
   fileSize: number
   createdAt?: string
 }
+
+export type UploadAvatarResponse = {
+  avatars: Avatar[]
+}

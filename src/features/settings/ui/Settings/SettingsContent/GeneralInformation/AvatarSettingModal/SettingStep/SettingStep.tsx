@@ -1,45 +1,57 @@
 "use client"
 import { useRef } from "react"
 import s from "./SettingStep.module.scss"
-import NextImage from "next/image"
-
-export type CanvasImage = {
-  file: File
-  url: string
-  filter: string
-  zoom: number
-  scale: number
-  preview: string
-} | null
+import { useCanvas } from "@/features/settings/ui/Settings/SettingsContent/GeneralInformation/AvatarSettingModal/useCanvas/useCanvas"
+import { Button } from "@/shared/ui"
+import { useUploadAvatarMutation } from "@/features/profile/api/profileApi"
+import { useAppDispatch } from "@/shared/store/useAppDispatch"
+import { baseApi } from "@/shared/api/baseApi"
 
 type Props = {
-  image: CanvasImage
+  file: File
+  url: string
+  onClose: () => void
 }
 
-export const SettingStap = ({ image }: Props) => {
-  //   const images = useAppSelector(selectImages)
+export const SettingStep = ({ file, url, onClose }: Props) => {
   const ref = useRef<HTMLHeadingElement | null>(null)
 
-  if (image === null) {
-    return <></>
+  const { canvasRef, handleWheel, handlePointerUp, handlePointerMove, handlePointerDown, generateEditedFile } =
+    useCanvas({
+      imageUrl: url,
+      file,
+    })
+
+  const [uploadAvatar, { isLoading }] = useUploadAvatarMutation()
+
+  const dispatch = useAppDispatch()
+
+  const uploadAvatarHandler = async () => {
+    generateEditedFile().then((res) => {
+      if (res) {
+        const formData = new FormData()
+        formData.append("file", file)
+        uploadAvatar(formData).then(() => {
+          dispatch(baseApi.util.invalidateTags(["Profile"]))
+          onClose()
+        })
+      }
+    })
   }
 
   return (
     <div ref={ref} className={s.content}>
-      <div className={s.imageWrapper}>
-        <div className={s.fon} />
-        <NextImage
-          src={image.url}
-          alt={``}
-          width={1000}
-          height={1000}
-          style={{
-            width: "332px",
-            height: "340px",
-          }}
-          className={s.image}
-        />
-      </div>
+      <canvas
+        ref={canvasRef}
+        className={s.image}
+        onWheel={handleWheel}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+      />
+      <Button disabled={isLoading} className={s.button} onClick={uploadAvatarHandler}>
+        Save
+      </Button>
     </div>
   )
 }
