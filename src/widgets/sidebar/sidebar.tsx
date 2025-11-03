@@ -14,7 +14,6 @@ import {
   BookmarkActive,
   LogOutIcon,
   TrendingActive,
-  LogOutActive,
 } from "@/shared/assets/icons/components"
 import { Button } from "@/shared/ui"
 import s from "./sidebar.module.scss"
