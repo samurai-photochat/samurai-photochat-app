@@ -5,7 +5,6 @@
   align-items: center;
   justify-content: center;
   background-color: rgba(#0d0d0d, 0.6);
-  z-index: 100;
 }
 
 .window {
@@ -23,11 +22,13 @@
 }
 
 .content {
+  position: relative;
   border-top: 1px solid var(--color-dark-100);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 24px 24px 0;
 }
 
 .header {
@@ -53,12 +54,25 @@
 }
 
 .buttonBox {
-  padding: 18px 0 0;
+  margin-bottom: 36px;
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
 }
 
-.modalWindow {
-  width: 384px;
+.error {
+  position: relative;
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.errorText {
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  padding: 6px 16px;
+  background: var(--color-danger-900);
+  border: 1px solid var(--color-danger-500);
+  color: var(--color-light-100);
+  text-align: center;
 }

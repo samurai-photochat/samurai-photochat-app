@@ -20,18 +20,18 @@
   }
 }
 
-.year{
+.year {
   cursor: pointer;
   background: transparent;
   border-color: transparent;
   color: var(--color-light-100);
   border-radius: 16px;
 
-  &:hover{
+  &:hover {
     background: var(--color-accent-900);
   }
 
-  &:active{
+  &:active {
     background: var(--color-accent-700);
   }
 }

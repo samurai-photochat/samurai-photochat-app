@@ -3,14 +3,14 @@
   justify-content: space-around;
   color: var(--color-light-900);
 
-  span{
+  span {
     padding: 8px;
     width: calc(100% / 7);
     text-align: center;
   }
 }
 
-.monthDays{
+.monthDays {
   display: grid;
   width: 100%;
   text-align: center;
@@ -26,28 +26,28 @@
     border-color: transparent;
     border-radius: 16px;
 
-    &:hover{
+    &:hover {
       background: var(--color-accent-900);
     }
 
-    &:active{
+    &:active {
       background: var(--color-accent-700);
     }
 
-    &:not(.dayOfCurrentMonth){
+    &:not(.dayOfCurrentMonth) {
       color: inherit;
     }
   }
 }
 
-.dayOfCurrentMonth{
+.dayOfCurrentMonth {
   color: var(--color-light-100);
 }
 
-.currentDay{
+.currentDay {
   color: var(--color-accent-500);
 }
 
-.weekend{
+.weekend {
   color: var(--color-danger-300);
 }

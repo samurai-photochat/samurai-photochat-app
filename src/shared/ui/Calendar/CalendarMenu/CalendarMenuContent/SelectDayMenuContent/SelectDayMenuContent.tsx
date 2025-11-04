@@ -23,7 +23,7 @@ export const SelectDayMenuContent = ({
 
   useEffect(() => {
     setDaysOfMonth()
-  }, [month])
+  }, [month, setDaysOfMonth])
 
   return (
     <>

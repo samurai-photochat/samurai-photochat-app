@@ -4,7 +4,7 @@ import { UserForm } from "@/features/settings/ui"
 import { Avatar } from "@/features/settings/ui/Settings/SettingsContent/GeneralInformation/Avatar"
 import { Button } from "@/shared/ui"
 import { useGetProfileQuery, useUpdateProfileMutation } from "@/features/profile/api/profileApi"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { UpdateProfileRequest } from "@/features/profile/api/profile.types"
 import { useDispatch } from "react-redux"
 import { setAppSuccess } from "@/shared/store/appSlice"
@@ -23,14 +23,10 @@ export const GeneralInformation = () => {
     dispatch(setAppSuccess({ success: "Your settings are saved!" }))
   }
 
-  useEffect(() => {
-    console.log(data)
-  }, [data])
-
   return (
     <>
       <div className={s.infoBox}>
-        <Avatar avatar={data?.avatars[0].url} />
+        <Avatar avatar={data?.avatars[0]?.url} />
         <UserForm data={data} setError={setIsInvalid} submitAction={updateInformation} />
       </div>
       <hr className={s.line} />

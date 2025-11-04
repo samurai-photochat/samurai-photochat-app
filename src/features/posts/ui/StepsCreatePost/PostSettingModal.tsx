@@ -11,10 +11,10 @@ import { PublicationStep } from "./PublicationStep/PublicationStep"
 import { useAppDispatch } from "@/shared/store/useAppDispatch"
 import { addImageAC, addPostAC, changeImageAC, clearImagesAC, selectImages } from "@/features/posts/model/postsSlice"
 import { useAppSelector } from "@/shared/store/useAppSelector"
-import { ModalWindow } from "@/features/auth/ui/Register/ModalWindow/ModalWindow"
 import { useOutsideClick } from "@/shared/hooks/useOutsideClick"
 import s from "./PostSettingModal.module.scss"
 import { useCreatePostMutation, useUploadImagesMutation } from "@/features/posts/api/postsApi"
+import { ModalWindow } from "@/shared/ui/ModalWindow"
 
 // Шаги добавления поста
 const steps = [
@@ -137,7 +137,7 @@ export const PostSettingModal = ({ isOpenPostSettingModal, setIsOpenPostSettingM
   const renderStep = () => {
     switch (currentStep) {
       case 0:
-        return <AddFotoStep handle={addImage} openDraft={openDraft} />
+        return <AddFotoStep draft={true} handle={addImage} openDraft={openDraft} />
       case 1:
         return <CroppingStep addImageAction={addImage} />
       case 2:
@@ -259,35 +259,39 @@ export const PostSettingModal = ({ isOpenPostSettingModal, setIsOpenPostSettingM
           )}
           <div className={s.content}>{renderStep()}</div>
         </div>
-        <ModalWindow isOpen={isOpenModal} title={"Close"} isClose={closeModal}>
-          <p className={s.text}>
-            Do you really want to close the creation of a publication?
-            <br /> If you close everything will be deleted
-          </p>
-          <div className={s.buttonBox}>
-            <Button
-              variant="outlined"
-              className={s.button}
-              onClick={() => {
-                dispatch(clearImagesAC())
-                closeModal()
-                setIsOpenPostSettingModalAction(false)
-              }}
-            >
-              Discard
-            </Button>
-            <Button
-              className={s.button}
-              onClick={() => {
-                closeModal()
-                setIsOpenPostSettingModalAction(false)
-                setCurrentStep(0)
-              }}
-            >
-              Save draft
-            </Button>
-          </div>
-        </ModalWindow>
+        <ModalWindow
+          title={"Close"}
+          open={isOpenModal}
+          onClose={closeModal}
+          className={s.modalWindow}
+          description={
+            <span>
+              Do you really want to close the creation of a publication?
+              <br /> If you close everything will be deleted
+            </span>
+          }
+          buttonsContent={{
+            buttons: [
+              {
+                title: "Discard",
+                onClick: () => {
+                  dispatch(clearImagesAC())
+                  closeModal()
+                  setIsOpenPostSettingModalAction(false)
+                },
+              },
+              {
+                title: "Save draft",
+                onClick: () => {
+                  closeModal()
+                  setIsOpenPostSettingModalAction(false)
+                  setCurrentStep(0)
+                },
+              },
+            ],
+            className: s.buttonBox,
+          }}
+        />
       </div>
     )
   )
