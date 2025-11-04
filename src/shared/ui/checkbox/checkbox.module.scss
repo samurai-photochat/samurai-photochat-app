@@ -55,7 +55,7 @@
       display: none;
     }
 
-    && + .span {
+    & + .span {
       color: var(--color-light-900);
     }
   }
