@@ -1,11 +1,11 @@
 import React, { useState } from "react"
 import { Checkbox } from "radix-ui"
 import Image from "next/image"
-import s from "./checkbox.module.css"
-import SelectedIcon from "@/shared/assets/svg/checkbox/Property 1=Default Selected.svg"
-import UnSelectedIcon from "@/shared/assets/svg/checkbox/Property 1=Default Unselected.svg"
-import DisabledSelectedIcon from "@/shared/assets/svg/checkbox/Property 1=Disabled Selected.svg"
-import DisabledUnSelectedIcon from "@/shared/assets/svg/checkbox/Property 1=Disabled Unselected.svg"
+import s from "./checkbox.module.scss"
+import SelectedIcon from "@/shared/assets/svg/checkbox/checkbox-default-selected.svg"
+import UnSelectedIcon from "@/shared/assets/svg/checkbox/checkbox-default-unselected.svg"
+import DisabledSelectedIcon from "@/shared/assets/svg/checkbox/checkbox-disabled-selected.svg"
+import DisabledUnSelectedIcon from "@/shared/assets/svg/checkbox/checkbox-disabled-unselected.svg"
 
 type CheckboxProps = {
   id?: string
