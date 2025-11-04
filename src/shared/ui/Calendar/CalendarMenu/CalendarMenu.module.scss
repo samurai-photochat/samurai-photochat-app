@@ -1,4 +1,4 @@
-.menu{
+.menu {
   background: var(--color-dark-500);
   padding: 16px 24px;
   border: 1px solid var(--color-dark-300);
@@ -10,13 +10,13 @@
   color: var(--color-light-100);
 }
 
-.header{
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.monthAndYear{
+.monthAndYear {
   font-weight: var(--font-bold);
   border: none;
   background: none;
@@ -24,11 +24,11 @@
   cursor: pointer;
 }
 
-.arrows{
+.arrows {
   display: flex;
 }
 
-.arrow{
+.arrow {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,7 +39,7 @@
   background-color: var(--color-dark-300);
   cursor: pointer;
 
-  &:active{
+  &:active {
     background-color: var(--color-dark-100);
   }
 }

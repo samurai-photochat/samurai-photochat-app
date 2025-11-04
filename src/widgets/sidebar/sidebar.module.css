@@ -47,6 +47,11 @@
   }
 }
 
+.modalButtons {
+    display: flex;
+    justify-content: flex-end;
+}
+
 @media (width <= 1250px) {
   .sidebar {
     position: fixed;

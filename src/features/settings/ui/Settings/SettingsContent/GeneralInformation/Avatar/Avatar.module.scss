@@ -21,11 +21,11 @@
   max-width: 100%;
 }
 
-.avatarButton{
+.avatarButton {
   padding: 6px 24px;
 }
 
-.deleteButton{
+.deleteButton {
   cursor: pointer;
   position: absolute;
   top: 16px;
@@ -35,15 +35,26 @@
   background: var(--color-danger-500);
   width: 24px;
   height: 24px;
-  &:before, &:after {
+  &:before,
+  &:after {
     content: "";
     position: absolute;
     left: 3px;
     top: 7px;
-    width:10px;
+    width: 10px;
     height: 2px;
     background: var(--color-light-100);
   }
-  &:before {transform: rotate(45deg);}
-  &:after {transform: rotate(-45deg);}
+  &:before {
+    transform: rotate(45deg);
+  }
+  &:after {
+    transform: rotate(-45deg);
+  }
+}
+
+.modalButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 24px;
 }

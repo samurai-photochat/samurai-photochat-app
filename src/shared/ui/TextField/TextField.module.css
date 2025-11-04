@@ -10,7 +10,7 @@
 
 .label {
   font-size: var(--text-sm);
-    color: var(--color-light-900);
+  color: var(--color-light-900);
 }
 
 .inputContainer {
@@ -103,5 +103,5 @@
 }
 
 .required {
-    color: var(--color-danger-500);
+  color: var(--color-danger-500);
 }

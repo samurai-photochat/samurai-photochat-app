@@ -1,4 +1,4 @@
-.box{
+.box {
   display: flex;
   flex-direction: column;
   cursor: pointer !important;
@@ -11,7 +11,7 @@
   border: 1px solid var(--color-light-100);
   border-top: none;
 
-  & + .select input{
+  & + .select input {
     outline-color: transparent !important;
     border: 1px solid var(--color-light-100) !important;
   }

@@ -8,13 +8,15 @@ import { useState } from "react"
 import { useDeleteAvatarMutation } from "@/features/profile/api/profileApi"
 import { useAppDispatch } from "@/shared/store/useAppDispatch"
 import { baseApi } from "@/shared/api/baseApi"
+import { ModalWindow } from "@/shared/ui/ModalWindow"
 
 type Props = {
   avatar?: string
 }
 
 export const Avatar = ({ avatar }: Props) => {
-  const [isOpenAvatartSettingModal, setIsOpenAvatarSettingModal] = useState<boolean>(false)
+  const [isOpenAvatarSettingModal, setIsOpenAvatarSettingModal] = useState<boolean>(false)
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false)
   const [deleteAvatar, { isLoading }] = useDeleteAvatarMutation()
   const dispatch = useAppDispatch()
 
@@ -37,7 +39,21 @@ export const Avatar = ({ avatar }: Props) => {
               className={s.avatar}
               style={avatar ? { borderRadius: "100%" } : {}}
             />
-            <button disabled={isLoading} className={s.deleteButton} onClick={deleteAvatarHandler}></button>)
+            <button className={s.deleteButton} onClick={() => setIsOpenDeleteModal(true)}></button>
+            )
+            <ModalWindow
+              title={"Delete Photo"}
+              open={isOpenDeleteModal}
+              onClose={() => setIsOpenDeleteModal(false)}
+              description={<span>Are you sure you want to delete the photo?</span>}
+              buttonsContent={{
+                buttons: [
+                  { title: "Yes", onClick: deleteAvatarHandler, disabled: isLoading },
+                  { title: "No", onClick: () => setIsOpenDeleteModal(false) },
+                ],
+                className: s.modalButtons,
+              }}
+            />
           </>
         ) : (
           <Image src={voidImage} alt={"void image"} className={s.avatar}></Image>
@@ -53,7 +69,7 @@ export const Avatar = ({ avatar }: Props) => {
         Select Profile Photo
       </Button>
       <AvatarSettingModal
-        isOpenAvatarSettingModal={isOpenAvatartSettingModal}
+        isOpenAvatarSettingModal={isOpenAvatarSettingModal}
         setIsOpenAvatarSettingModalAction={setIsOpenAvatarSettingModal}
       />
     </div>

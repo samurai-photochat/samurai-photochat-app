@@ -9,6 +9,7 @@ import { PostModalBody } from "./PostModalBody"
 import { CloseOutline } from "@/shared/assets/icons/components"
 
 import s from "./PostModal.module.scss"
+import { VisuallyHidden } from "radix-ui"
 
 type PostModalProps = {
   isOpen: boolean
@@ -32,6 +33,9 @@ export const PostModal = ({ isOpen, postId, onClose }: PostModalProps) => {
           {/*onOpenChange={(next) => !next && onClose()}>*/}
           <Dialog.Portal>
             <Dialog.Overlay className={s.overlay} />
+            <VisuallyHidden.Root>
+              <Dialog.Title>Hidden Dialog Title</Dialog.Title>
+            </VisuallyHidden.Root>
             <Dialog.Content className={s.contentWrapper}>
               <Dialog.Close className={s.closeButton} aria-label="Закрыть">
                 <div onClick={onClose}>

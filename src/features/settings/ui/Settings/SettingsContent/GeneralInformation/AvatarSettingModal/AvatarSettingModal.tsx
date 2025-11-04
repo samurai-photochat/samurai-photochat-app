@@ -21,18 +21,25 @@ type AvatarType = {
 export const AvatarSettingModal = ({ isOpenAvatarSettingModal, setIsOpenAvatarSettingModalAction }: Props) => {
   //   локальное сохранение аватарки
   const [avatar, setAvatar] = useState<AvatarType | null>(null)
+  const [error, setError] = useState("")
   //   добавление файла
   const addImage = (e: ChangeEvent<HTMLInputElement> | null) => {
     if (e?.target?.files) {
       const file = e.target.files[0]
-      const url = URL.createObjectURL(file)
-      const avatar: AvatarType = { file, url }
-      setAvatar(avatar)
+      if (file.type === "image/jpeg" || file.type === "image/png") {
+        if (file.size < 1024 * 1024 * 10) {
+          const url = URL.createObjectURL(file)
+          const avatar: AvatarType = { file, url }
+          setError("")
+          setAvatar(avatar)
+        } else setError("Photo size must be less than 10 MB!")
+      } else setError("The format of the uploaded photo must be\n" + "PNG and JPEG")
     }
   }
   //   ЗАКРЫТИЕ МОДАЛЬНОГО ОКНА
   //   закрытие модального окна AvatarSettingModal
   const onClose = useCallback(() => {
+    setError("")
     setAvatar(null)
     setIsOpenAvatarSettingModalAction(false)
   }, [setIsOpenAvatarSettingModalAction])
@@ -70,6 +77,14 @@ export const AvatarSettingModal = ({ isOpenAvatarSettingModal, setIsOpenAvatarSe
                 </Button>
               </div>
               <div className={s.content}>
+                {error && (
+                  <div className={s.error}>
+                    <span className={s.errorText}>
+                      <strong>Error! </strong>
+                      {error}
+                    </span>
+                  </div>
+                )}
                 {avatar === null ? (
                   <AddFotoStep handle={addImage} openDraft={() => {}} />
                 ) : (

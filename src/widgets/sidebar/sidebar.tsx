@@ -18,11 +18,10 @@ import { PostSettingModal } from "@/features/posts/ui/StepsCreatePost/PostSettin
 import { useState } from "react"
 import { useSelector } from "react-redux"
 import { selectCurrentUser } from "@/features/auth/model/authSlice"
-import { Modal } from "@/shared/ui/modal/Modal"
-import { LogoutContent } from "@/features/auth/ui/Logout/LogoutContent"
+import { ModalWindow } from "@/shared/ui/ModalWindow"
 
 export default function Sidebar() {
-  const [logoutUser] = useLogoutMutation()
+  const [logoutUser, { isLoading }] = useLogoutMutation()
 
   const [isOpenPostSettingModal, setIsOpenPostSettingModal] = useState<boolean>(false)
   const [isOpenLogoutModal, setIsOpenLogoutModal] = useState<boolean>(false)
@@ -107,9 +106,23 @@ export default function Sidebar() {
         isOpenPostSettingModal={isOpenPostSettingModal}
         setIsOpenPostSettingModalAction={setIsOpenPostSettingModal}
       />
-      <Modal open={isOpenLogoutModal} onClose={onCloseLogoutModal} email={user.email}>
-        <LogoutContent onClose={onCloseLogoutModal} logoutHandler={logoutHandler} />
-      </Modal>
+      <ModalWindow
+        title={"Log Out"}
+        open={isOpenLogoutModal}
+        onClose={onCloseLogoutModal}
+        description={
+          <span>
+            Are you sure you want to log out of your account &ldquo;<strong>{user.email}</strong>&rdquo;?
+          </span>
+        }
+        buttonsContent={{
+          buttons: [
+            { title: "Yes", onClick: logoutHandler, disabled: isLoading },
+            { title: "No", onClick: onCloseLogoutModal },
+          ],
+          className: s.modalButtons,
+        }}
+      />
     </div>
   )
 }
