@@ -1,29 +1,26 @@
 "use client"
 import { useGetUserPostsPaginationInfiniteQuery } from "@/features/posts/api/postsApi"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
 import Image from "next/image"
 import s from "./PostsGrid.module.scss"
-import { PostModal } from "@/features/posts/ui"
+
 type PostsGridProps = {
   isOwner: boolean
   userId: number
 }
 
 export const PostsGrid = ({ isOwner, userId }: PostsGridProps) => {
+  const router = useRouter()
+  const searchParams = useSearchParams()
   const { data, isFetching, isFetchingNextPage, fetchNextPage, hasNextPage } = useGetUserPostsPaginationInfiniteQuery({
     userId,
   })
 
-  const [selectedPostId, setSelectedPostId] = useState<number | null>(null)
-  const [isModalOpen, setIsModalOpen] = useState(false)
-
   const handleOpenPost = (postId: number) => {
-    setSelectedPostId(postId)
-    setIsModalOpen(true)
-  }
-  const handleCloseModal = () => {
-    setIsModalOpen(false)
-    setSelectedPostId(null)
+    const params = new URLSearchParams(searchParams.toString())
+    params.set("postId", String(postId))
+    router.push(`?${params.toString()}`, { scroll: false })
   }
 
   const loadRef = useRef<HTMLDivElement>(null)
@@ -68,7 +65,6 @@ export const PostsGrid = ({ isOwner, userId }: PostsGridProps) => {
           />
         </div>
       ))}
-      <PostModal isOpen={isModalOpen} postId={selectedPostId} onClose={handleCloseModal} />
       <div ref={loadRef} style={{ height: 1 }} />
       {isFetchingNextPage && <div>Loading...</div>}
     </div>

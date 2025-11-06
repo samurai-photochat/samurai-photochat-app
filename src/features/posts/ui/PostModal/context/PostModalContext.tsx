@@ -40,6 +40,7 @@ type PostModalProviderProps = {
   isOpen: boolean
   children: ReactNode
   onDismiss: () => void
+  initialPost?: Post | null
 }
 
 // Создаем контекст для модального окна поста
@@ -65,7 +66,13 @@ export const usePostModalContext = () => {
  * Управляет состоянием модального окна, загрузкой данных поста и синхронизацией с URL
  */
 //todo: сделать закрытие мадалки после успешного удаления и без ошибок
-export const PostModalContextProvider = ({ postId, isOpen, children, onDismiss }: PostModalProviderProps) => {
+export const PostModalContextProvider = ({
+  postId,
+  isOpen,
+  children,
+  onDismiss,
+  initialPost,
+}: PostModalProviderProps) => {
   const router = useRouter()
   const searchParams = useSearchParams()
   // Флаг для контроля момента начала загрузки данных поста
@@ -78,22 +85,25 @@ export const PostModalContextProvider = ({ postId, isOpen, children, onDismiss }
   const actualPostId = postId ?? Number(searchParams.get("postId")) ?? null
 
   // Загружаем данные поста с помощью RTK Query
-  // skip: true предотвращает загрузку, пока модальное окно не открыто или нет ID поста
+  // skip: true предотвращает загрузку, если есть initialPost или модальное окно не открыто
   const {
-    data: post,
+    data: fetchedPost,
     isFetching,
     isLoading,
   } = useGetPostByIdQuery(actualPostId ?? 0, {
-    skip: !isOpen || !actualPostId || !shouldFetch,
+    skip: !isOpen || !actualPostId || !shouldFetch || !!initialPost,
   })
+
+  // Используем initialPost если он есть, иначе fetchedPost
+  const post = initialPost ?? fetchedPost
   // Получаем данные текущего пользователя для проверки владения постом
   const { data: me } = useMeQuery()
   useEffect(() => {
-    if (isOpen && actualPostId) {
+    // Загружаем данные только если нет initialPost
+    if (isOpen && actualPostId && !initialPost) {
       setShouldFetch(true)
-      debugger
     }
-  }, [isOpen, actualPostId])
+  }, [isOpen, actualPostId, initialPost])
 
   // Эффект для сброса флага загрузки при закрытии модального окна
   // Это помогает избежать ненужных запросов к API
@@ -141,7 +151,8 @@ export const PostModalContextProvider = ({ postId, isOpen, children, onDismiss }
       post: post ?? null,
       isOpen,
       isOwnPost,
-      isLoading: isLoading || isFetching, // Объединяем оба флага загрузки
+      // Если есть initialPost, не показываем загрузку
+      isLoading: initialPost ? false : isLoading || isFetching,
       onClose: handleClose,
       isAuth,
       editMode,
@@ -164,6 +175,7 @@ export const PostModalContextProvider = ({ postId, isOpen, children, onDismiss }
       title,
       deleteMode,
       setDeleteMode,
+      initialPost,
     ]
   )
 

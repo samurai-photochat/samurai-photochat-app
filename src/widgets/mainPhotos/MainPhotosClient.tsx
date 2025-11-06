@@ -1,7 +1,7 @@
 "use client"
 
-import { useState, ReactNode } from "react"
-import { PostModal } from "@/features/posts/ui/PostModal"
+import { ReactNode } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
 
 type MainPhotosClientProps = {
   children: ReactNode
@@ -9,20 +9,16 @@ type MainPhotosClientProps = {
 
 /**
  * Клиентская обёртка для MainPhotos
- * Управляет состоянием модального окна и обработкой кликов
+ * Управляет навигацией при клике на пост
  */
 export function MainPhotosClient({ children }: MainPhotosClientProps) {
-  const [selectedPostId, setSelectedPostId] = useState<number | null>(null)
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const router = useRouter()
+  const searchParams = useSearchParams()
 
   const handleOpenPost = (postId: number) => {
-    setSelectedPostId(postId)
-    setIsModalOpen(true)
-  }
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false)
-    setSelectedPostId(null)
+    const params = new URLSearchParams(searchParams.toString())
+    params.set("postId", String(postId))
+    router.push(`?${params.toString()}`, { scroll: false })
   }
 
   return (
@@ -45,9 +41,6 @@ export function MainPhotosClient({ children }: MainPhotosClientProps) {
       >
         {children}
       </div>
-
-      {/* Модальное окно с постом */}
-      <PostModal isOpen={isModalOpen} postId={selectedPostId} onClose={handleCloseModal} />
     </>
   )
 }

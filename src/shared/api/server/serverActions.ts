@@ -38,3 +38,14 @@ export async function getUserProfile(userId: number) {
   if (!response.ok) throw new Error(`Failed to fetch profile: ${response.statusText}`)
   return await response.json()
 }
+
+export async function getPostById(postId: number) {
+  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
+
+  const response = await fetch(`${baseUrl}/posts/id/${postId}`, {
+    next: { revalidate: 60, tags: [`post-${postId}`] },
+  })
+  if (response.status === 404) return notFound()
+  if (!response.ok) throw new Error(`Failed to fetch post: ${response.statusText}`)
+  return await response.json()
+}
