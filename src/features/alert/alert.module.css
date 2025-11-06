@@ -11,8 +11,10 @@
   background-color: var(--color-success-900);
   border: 1px solid var(--color-success-500);
   border-radius: 2px;
+
   /* 🔒 OVERFLOW HIDDEN: Обрезаем прогресс-бар по границам контейнера */
   overflow: hidden;
+  z-index: 10000;
 }
 
 .error {
@@ -62,7 +64,7 @@
   left: 0;
   width: 100%;
   height: 4px;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgb(0 0 0 / 20%);
   overflow: hidden;
   border-radius: 0 0 2px 2px;
 }
@@ -76,7 +78,7 @@
     var(--color-success-500) 100%
   );
   transition: width 50ms linear;
-  border-radius: 0 0 2px 0;
+  border-radius: 0 0 2px;
 }
 
 /* 🔴 ПРОГРЕСС-БАР ДЛЯ ОШИБОК: Красный градиент для toast с ошибками */
