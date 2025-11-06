@@ -3,10 +3,10 @@ import { Textarea } from "@/shared/ui/textarea/textarea"
 import { Button } from "@/shared/ui"
 import { useUpdatePostMutation } from "@/features/posts/api/postsApi"
 import React, { useEffect, useState } from "react"
-import { ModalWindow } from "@/features/auth/ui/Register/ModalWindow/ModalWindow"
 import { usePostModalContext } from "@/features/posts/ui/PostModal/context/PostModalContext"
 import s from "./PostEditModeContent.module.scss"
 import { PostContentHeader } from "@/features/posts/ui/PostModal/postViewMode"
+import { ModalWindow } from "@/shared/ui/ModalWindow"
 
 type Props = {
   post: Post
@@ -38,33 +38,31 @@ export const PostEditModeContent = ({ post, openModal, closeModal }: Props) => {
       <Button variant={"primary"} className={s.editButton} onClick={changePostHandler} disabled={isUpdatePostLoading}>
         Save Changes
       </Button>
-      <ModalWindow isOpen={openModal} title={"Close"} isClose={closeModal}>
-        <p className={s.text}>
-          Do you really want to close the edition of the publication?
-          <br /> If you close changes won’t be saved
-        </p>
-        <div className={s.buttonBox}>
-          <Button
-            variant="outlined"
-            className={s.modalButton}
-            onClick={() => {
-              setEditMode(false)
-              setTitle("")
-              closeModal()
-            }}
-          >
-            Yes
-          </Button>
-          <Button
-            className={s.modalButton}
-            onClick={() => {
-              closeModal()
-            }}
-          >
-            No
-          </Button>
-        </div>
-      </ModalWindow>
+      <ModalWindow
+        title={"Close"}
+        open={openModal}
+        onClose={closeModal}
+        description={
+          <span>
+            Do you really want to close the edition of the publication?
+            <br /> If you close changes won’t be saved
+          </span>
+        }
+        buttonsContent={{
+          buttons: [
+            {
+              title: "Yes",
+              onClick: () => {
+                setEditMode(false)
+                setTitle("")
+                closeModal()
+              },
+            },
+            { title: "No", onClick: closeModal },
+          ],
+          className: s.buttonBox,
+        }}
+      />
     </div>
   )
 }

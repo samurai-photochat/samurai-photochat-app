@@ -1,0 +1,45 @@
+.menu {
+  background: var(--color-dark-500);
+  padding: 16px 24px;
+  border: 1px solid var(--color-dark-300);
+  width: 300px;
+  font-size: var(--text-md);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: var(--color-light-100);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.monthAndYear {
+  font-weight: var(--font-bold);
+  border: none;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.arrows {
+  display: flex;
+}
+
+.arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 100%;
+  border-color: transparent;
+  background-color: var(--color-dark-300);
+  cursor: pointer;
+
+  &:active {
+    background-color: var(--color-dark-100);
+  }
+}

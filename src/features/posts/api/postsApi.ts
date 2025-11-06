@@ -5,7 +5,6 @@ import {
   AllPostsRequest,
   AllPostsResponse,
   CreatePostRequest,
-  UploadImagesRequest,
   UploadImagesResponse,
   UserPostsPaginationRequest,
   UserPostsPaginationResponse,
@@ -88,7 +87,7 @@ export const postsApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["Post"], // Инвалидируем все списки постов после создания
     }),
-    uploadImages: builder.mutation<UploadImagesResponse, UploadImagesRequest>({
+    uploadImages: builder.mutation<UploadImagesResponse, FormData>({
       query: (formData) => {
         return {
           url: `posts/image`,

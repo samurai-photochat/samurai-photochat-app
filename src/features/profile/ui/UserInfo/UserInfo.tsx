@@ -4,6 +4,7 @@ import { Username } from "@/features/profile/ui/UserInfo/Username"
 import { Stats } from "@/features/profile/ui/UserInfo/Stats"
 import { AboutMe } from "@/features/profile/ui/UserInfo/AboutMe"
 import Button from "@/shared/ui/button/button"
+import { PATH } from "@/shared/config/routes"
 
 type Avatar = { url?: string }
 
@@ -35,7 +36,7 @@ export const UserInfo = ({ username, aboutMe, avatars, userMetadata, isOwner }: 
           <div className={s.titleRow}>
             <Username username={username} />
             {isOwner ? (
-              <Button className={s.actionBtn} type="button">
+              <Button as={"a"} className={s.actionBtn} type="button" href={`${PATH.USER.SETTINGS}`}>
                 Profile Settings
               </Button>
             ) : null}

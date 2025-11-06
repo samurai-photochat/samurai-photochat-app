@@ -1,0 +1,53 @@
+.weekDays {
+  display: flex;
+  justify-content: space-around;
+  color: var(--color-light-900);
+
+  span {
+    padding: 8px;
+    width: calc(100% / 7);
+    text-align: center;
+  }
+}
+
+.monthDays {
+  display: grid;
+  width: 100%;
+  text-align: center;
+  justify-content: space-between;
+  grid-template-columns: repeat(7, 1fr);
+  grid-row: 1/ 7;
+  color: var(--color-light-900);
+
+  > button {
+    padding: 4px 0;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    border-radius: 16px;
+
+    &:hover {
+      background: var(--color-accent-900);
+    }
+
+    &:active {
+      background: var(--color-accent-700);
+    }
+
+    &:not(.dayOfCurrentMonth) {
+      color: inherit;
+    }
+  }
+}
+
+.dayOfCurrentMonth {
+  color: var(--color-light-100);
+}
+
+.currentDay {
+  color: var(--color-accent-500);
+}
+
+.weekend {
+  color: var(--color-danger-300);
+}

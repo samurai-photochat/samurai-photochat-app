@@ -18,7 +18,6 @@ export type {
   AllPostsRequest,
   AllPostsResponse,
   CreatePostRequest,
-  UploadImagesRequest,
   UploadImagesResponse,
   UserPostsPaginationRequest,
   UserPostsPaginationResponse,

@@ -1,38 +1,44 @@
 import { ComponentProps } from "react"
-import s from "./text-field.module.css"
-import { EyeIcon } from "@/shared/assets/icons/components"
-import { SearchIcon } from "@/shared/assets/icons/components"
+import s from "./TextField.module.css"
 import * as React from "react"
-import { EyeOffIcon } from "@/shared/assets/icons/components"
 
-type TextFieldProps = {
+export type TextFieldProps = {
   label?: string
-  search?: boolean
-  password?: boolean
   errorMessage?: string | undefined
   iconAction?: () => void
+  className?: string
+  startIcon?: React.ReactNode | null
+  endIcon?: React.ReactNode | null
+  required?: boolean
 } & ComponentProps<"input">
 
 export const TextField = ({
   label,
-  search,
-  password,
-  type = password ? "password" : "text",
+  type = "text",
   disabled,
   errorMessage,
   iconAction,
+  className = "",
+  startIcon = null,
+  endIcon = null,
+  required = false,
   ...rest
 }: TextFieldProps) => {
-  const dataIconStart = search ? "start" : ""
-  const dataIconEnd = password ? "end" : ""
+  const dataIconStart = startIcon ? "start" : ""
+  const dataIconEnd = endIcon ? "end" : ""
   const dataIcon = dataIconStart + dataIconEnd
   const error = !!errorMessage
 
   return (
-    <div className={s.box + (disabled ? " " + s.disabled : "")}>
-      {label && <label className={s.label}>{label}</label>}
+    <div className={s.box + (disabled ? " " + s.disabled : "") + (className ? " " + className : "")}>
+      {label && (
+        <label className={s.label}>
+          {label}
+          {required && <span className={s.required}>*</span>}
+        </label>
+      )}
       <div className={s.inputContainer}>
-        {search && <span className={s.iconStart}>{<SearchIcon />}</span>}
+        {dataIconStart && <span className={s.iconStart}>{startIcon}</span>}
         <input
           type={type}
           className={s.input + (error ? " " + s.error : "")}
@@ -40,9 +46,9 @@ export const TextField = ({
           data-icon={dataIcon}
           {...rest}
         />
-        {password && (
+        {dataIconEnd && (
           <span className={s.iconEnd} onClick={iconAction}>
-            {type === "password" ? <EyeOffIcon /> : <EyeIcon />}
+            {endIcon}
           </span>
         )}
       </div>
