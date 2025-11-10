@@ -99,38 +99,6 @@ Available tags:
 - `latest-posts` - latest 4 posts on homepage
 - `profile-<userId>` - specific user profile data (e.g., `profile-123`)
 
-## 🧪 Testing
-
-This project uses **Vitest** and **MSW (Mock Service Worker)** for testing ISR/SSR functionality.
-
-### Run Tests
-
-```bash
-# Run all tests
-npm test
-
-# Run with UI interface
-npm run test:ui
-
-# Run in watch mode
-npm run test:watch
-
-# Run with coverage
-npm run test:coverage
-
-# Run specific test suites
-npm run test:isr          # ISR tests only
-npm run test:ssr          # SSR tests only
-npm run test:revalidation # Revalidation tests only
-```
-
-### Test Coverage
-
-- ✅ **45 tests** covering ISR, SSR, and Revalidation
-- ✅ **15 ISR tests** - static generation, caching, error handling
-- ✅ **9 SSR tests** - server rendering, data fetching, performance
-- ✅ **20 Revalidation tests** - on-demand, tag-based, security
-
 📖 **[Read Full Testing Documentation](./docs/testing-plan-isr-ssr.md)**
 
 ## Learn More
