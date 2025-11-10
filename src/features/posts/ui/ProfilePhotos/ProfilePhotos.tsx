@@ -1,8 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
 import Image from "next/image"
-import { PostModal } from "@/features/posts/ui/PostModal"
 import styles from "./MainPhotos.module.scss"
 import { Post } from "@/features/posts/api/postsApi.types"
 
@@ -11,17 +10,13 @@ type Props = {
 }
 
 export const ProfilePhotos = ({ posts }: Props) => {
-  const [selectedPostId, setSelectedPostId] = useState<number | null>(null)
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const router = useRouter()
+  const searchParams = useSearchParams()
 
   const handleOpenPost = (postId: number) => {
-    setSelectedPostId(postId)
-    setIsModalOpen(true)
-  }
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false)
-    setSelectedPostId(null)
+    const params = new URLSearchParams(searchParams.toString())
+    params.set("postId", String(postId))
+    router.push(`?${params.toString()}`, { scroll: false })
   }
 
   return (
@@ -47,9 +42,6 @@ export const ProfilePhotos = ({ posts }: Props) => {
           ))}
         </div>
       </div>
-
-      {/* Модальное окно с постом */}
-      <PostModal isOpen={isModalOpen} postId={selectedPostId} onClose={handleCloseModal} />
     </>
   )
 }
