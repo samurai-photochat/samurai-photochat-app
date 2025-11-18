@@ -7,7 +7,7 @@ import { Dialog, DialogContent, DialogDescription, DialogClose, DialogTitle } fr
 import s from "./alert.module.css"
 import Image from "next/image"
 import Close from "@/shared/assets/svg/Close.svg"
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState, useRef, useCallback } from "react"
 
 export const Alert = () => {
   // alert для вывода ошибок или сообщений(внутрених)
@@ -29,7 +29,7 @@ export const Alert = () => {
   const startTimeRef = useRef<number>(0)
   const remainingTimeRef = useRef<number>(0)
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     dispatch(setAppError({ error: null }))
     dispatch(setAppSuccess({ success: "" }))
     // Сброс прогресса при закрытии
@@ -38,7 +38,7 @@ export const Alert = () => {
     // Очистка рефов
     if (progressIntervalRef.current) clearInterval(progressIntervalRef.current)
     if (autoCloseTimerRef.current) clearTimeout(autoCloseTimerRef.current)
-  }
+  }, [dispatch])
 
   // 🖱️ ОБРАБОТЧИКИ НАВЕДЕНИЯ: Управление паузой таймера
   const handleMouseEnter = () => {
@@ -81,7 +81,7 @@ export const Alert = () => {
         if (autoCloseTimerRef.current) clearTimeout(autoCloseTimerRef.current)
       }
     }
-  }, [error, success, autoCloseTime])
+  }, [error, success, autoCloseTime, handleClose])
 
   // ⏸️ УПРАВЛЕНИЕ ПАУЗОЙ: Останавливаем/возобновляем таймеры при наведении
   useEffect(() => {
@@ -123,16 +123,12 @@ export const Alert = () => {
       if (progressIntervalRef.current) clearInterval(progressIntervalRef.current)
       if (autoCloseTimerRef.current) clearTimeout(autoCloseTimerRef.current)
     }
-  }, [isPaused])
+  }, [isPaused, error, success, autoCloseTime, handleClose])
 
   const className = s.container + (error ? " " + s.error : "")
   return (
     <Dialog open={!!(error || success)} onOpenChange={handleClose}>
-      <DialogContent
-        className={className}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
+      <DialogContent className={className} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         <div className={s.block}>
           <DialogTitle />
           <DialogDescription className={s.text}>{error || success}</DialogDescription>
@@ -142,10 +138,7 @@ export const Alert = () => {
         </div>
         {/* 📊 ПРОГРЕСС-БАР: Визуальный индикатор оставшегося времени жизни toast */}
         <div className={s.progressBar}>
-          <div
-            className={s.progressFill}
-            style={{ width: `${progress}%` }}
-          />
+          <div className={s.progressFill} style={{ width: `${progress}%` }} />
         </div>
       </DialogContent>
     </Dialog>
