@@ -14,13 +14,7 @@ export default defineConfig({
       provider: "v8",
       reporter: ["text", "json", "html"],
       include: ["src/**/*.{ts,tsx}"],
-      exclude: [
-        "src/**/*.test.{ts,tsx}",
-        "src/**/*.spec.{ts,tsx}",
-        "src/__tests__/**",
-        "src/**/*.d.ts",
-        "src/**/types.ts",
-      ],
+      exclude: ["src/**/*.test.{ts,tsx}", "src/**/*.spec.{ts,tsx}", "src/**/*.d.ts", "src/**/types.ts"],
     },
   },
   resolve: {

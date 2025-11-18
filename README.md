@@ -29,7 +29,7 @@ This project follows **[Feature-Sliced Design (FSD)](https://feature-sliced.desi
 
 Create a `.env.local` file in the root directory with the following variables:
 
-```env
+```env  
 # API Configuration
 NEXT_PUBLIC_API_BASE_URL=https://your-api-url.com
 
