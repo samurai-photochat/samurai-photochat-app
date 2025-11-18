@@ -14,9 +14,6 @@
     "test:ui": "vitest --ui",
     "test:watch": "vitest --watch",
     "test:coverage": "vitest --coverage",
-    "test:isr": "vitest run __tests__/integration/isr",
-    "test:ssr": "vitest run __tests__/integration/ssr",
-    "test:revalidation": "vitest run __tests__/integration/revalidation",
     "test:jest": "jest",
     "test:jest:watch": "jest --watch",
     "test:jest:coverage": "jest --coverage"
