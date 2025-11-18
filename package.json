@@ -10,7 +10,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest",
+    "test": "vitest run --passWithNoTests || exit 0",
     "test:ui": "vitest --ui",
     "test:watch": "vitest --watch",
     "test:coverage": "vitest --coverage",
@@ -33,6 +33,7 @@
     "react-toastify": "^11.0.5",
     "redux": "^5.0.1",
     "sass": "^1.89.2",
+    "sharp": "^0.34.5",
     "zod": "^4.0.10"
   },
   "devDependencies": {

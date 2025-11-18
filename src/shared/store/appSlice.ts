@@ -47,7 +47,8 @@ export const appSlice = createSlice({
 })
 
 export const { changeTheme, setAppError, setIsLoggedIn, setAppSuccess } = appSlice.actions
-export const { selectThemeMode, selectError, selectIsLoggedIn, selectSuccess, selectToastAutoClose } = appSlice.selectors
+export const { selectThemeMode, selectError, selectIsLoggedIn, selectSuccess, selectToastAutoClose } =
+  appSlice.selectors
 export const appReducer = appSlice.reducer
 
 //types
