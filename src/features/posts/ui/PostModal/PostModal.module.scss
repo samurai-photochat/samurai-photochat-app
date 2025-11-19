@@ -1,0 +1,159 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+}
+
+.contentWrapper {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.content {
+  border-radius: 12px;
+  background: var(--color-dark-300);
+  border: 1px solid var(--color-dark-100);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  max-height: 564px;
+}
+
+.closeButton {
+  position: absolute;
+  top: -34px;
+  right: -34px;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--color-light-100);
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    transform 0.15s ease-out,
+    opacity 0.2s ease;
+  will-change: transform;
+
+  &:hover {
+    opacity: 0.7;
+    transform: scale(1.3);
+  }
+
+  &:active {
+    transform: scale(1.1);
+  }
+
+  svg {
+    width: 32px !important;
+    height: 32px !important;
+    transition: inherit;
+  }
+}
+
+.container {
+  display: flex;
+  width: min(972px, 90vw);
+  min-height: 400px;
+  height: 564px;
+  background-color: var(--color-dark-300);
+  border: 1px solid var(--color-dark-100);
+  color: var(--color-light-100);
+}
+
+.imageWrapper {
+  //flex: 1;
+  position: relative;
+  background-color: var(--color-dark-700);
+}
+
+.mainContentWrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background-color: var(--color-dark-400);
+  padding: 7px;
+  gap: 16px;
+}
+
+.scrollArea {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.commentsPlaceholder {
+  padding: 16px;
+  border: 1px dashed var(--color-dark-100);
+  border-radius: 8px;
+  text-align: center;
+  color: var(--color-light-500);
+}
+
+.footer {
+  margin-top: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ownerInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ownerAvatarPlaceholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-dark-300);
+}
+
+.footerSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-dark-100);
+  color: var(--color-light-500);
+}
+
+.likesRow {
+  font-weight: 600;
+}
+
+.dateRow {
+  font-size: 0.875rem;
+}
+
+.title {
+  color: var(--color-light-100);
+  margin: 12px 24px;
+  font-size: var(--text-xl);
+}
+
+.buttonBox {
+  display: flex;
+  gap: 24px;
+  justify-content: end;
+}
+
+.modalButton {
+  width: 96px;
+}
+
+.text {
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  font-weight: var(--font-regular);
+}

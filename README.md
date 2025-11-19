@@ -1,12 +1,35 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## 🏗️ Architecture
+
+This project follows **[Feature-Sliced Design (FSD)](https://feature-sliced.design/)** methodology for code organization.
+
+📖 **[Read Full FSD Documentation](./docs/FSD_ARCHITECTURE.md)**
+
+### Quick Overview
+
+```
+├── app/          # Application layer (pages, layouts, providers)
+├── widgets/      # Composite UI blocks
+├── features/     # Business features (auth, posts, profile)
+├── entities/     # Business entities (user, post)
+└── shared/       # Reusable code (ui, api, hooks, utils)
+```
+
+### Key Principles
+
+- **Layered architecture**: Higher layers can import from lower layers only
+- **Public API**: Each slice exports through `index.ts`
+- **Isolation**: Features don't depend on each other
+- **Reusability**: Shared code has no business logic
+
 ## Getting Started
 
 ### Environment Variables
 
 Create a `.env.local` file in the root directory with the following variables:
 
-```env
+```env  
 # API Configuration
 NEXT_PUBLIC_API_BASE_URL=https://your-api-url.com
 
@@ -65,12 +88,18 @@ curl "http://localhost:3000/api/revalidate?secret=your_secret_token&path=/profil
 
 # Revalidate by tag
 curl "http://localhost:3000/api/revalidate?secret=your_secret_token&tag=latest-posts"
+
+# Revalidate specific user profile
+curl "http://localhost:3000/api/revalidate?secret=your_secret_token&tag=profile-123"
 ```
 
 Available tags:
 
 - `users-count` - total registered users count
 - `latest-posts` - latest 4 posts on homepage
+- `profile-<userId>` - specific user profile data (e.g., `profile-123`)
+
+📖 **[Read Full Testing Documentation](./docs/testing-plan-isr-ssr.md)**
 
 ## Learn More
 

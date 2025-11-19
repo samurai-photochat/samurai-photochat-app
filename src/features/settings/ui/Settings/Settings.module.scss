@@ -1,0 +1,26 @@
+.container {
+  width: 972px;
+  margin: 0 auto;
+  padding: 36px 24px 24px;
+}
+
+.sections {
+  display: flex;
+  width: 100%;
+}
+
+.section {
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-radius: 0;
+  border-width: 2px;
+  padding: 6px 0;
+  width: 25%;
+}
+
+@media (min-width: 1440px) {
+  .container {
+    width: 1440px;
+  }
+}

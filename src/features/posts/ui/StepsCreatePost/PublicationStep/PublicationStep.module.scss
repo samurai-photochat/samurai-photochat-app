@@ -1,0 +1,129 @@
+.content {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  width: 972px;
+}
+
+.photo {
+  width: 490px;
+  height: 503px;
+}
+
+.canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.PublicationBlock {
+  width: calc(100% - 492px);
+  //height: 503px;
+}
+
+.headerBlock {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.userFhoto {
+  width: 36px;
+  height: 36px;
+  background-color: aqua;
+  border-radius: 50%;
+}
+
+.userURL {
+  color: var(--color-light-100);
+  margin: 0;
+}
+
+.label {
+  color: var(--color-light-900);
+}
+
+.textarea {
+  width: 100% !important;
+  height: 120px !important;
+  resize: none;
+  background-color: var(--color-dark-500);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-light-900);
+  padding: 6px 12px;
+  border: 1px solid var(--color-dark-100);
+  border-radius: 2px;
+}
+
+.blockWords {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.manyWords {
+  color: var(--color-light-900);
+  align-content: end;
+}
+
+.topContentWrap {
+  padding: 24px;
+  border-bottom: 1px solid #4c4c4c;
+}
+
+.bottomContentWrap {
+  padding: 24px;
+}
+
+.inputLocationWrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-bottom: 6px;
+}
+
+.span {
+  position: absolute;
+  right: 12px;
+  top: 43px;
+  transform: translateY(-50%);
+}
+
+.locationInput {
+  width: 100%;
+  background-color: transparent;
+  padding: 6px 12px;
+  color: #fff;
+  font-weight: 400;
+  line-height: 24px;
+  font-size: 16px;
+  border: 1px solid var(--color-dark-100);
+  border-radius: 2px;
+  box-shadow: none;
+}
+
+.locationWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding-bottom: 14px;
+}
+
+.mainLocation {
+  color: #fff;
+  font-weight: 400;
+  line-height: 24px;
+  font-size: 16px;
+}
+
+.subLocation {
+  color: #8d9094;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+}

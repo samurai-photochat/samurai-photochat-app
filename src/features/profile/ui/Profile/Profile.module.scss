@@ -1,0 +1,13 @@
+.profile {
+  background-color: var(--color-dark-700);
+  color: var(--color-light-100);
+  flex: 1;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 2rem;
+  width: 0;
+  min-width: 0;
+  overflow-x: hidden;
+}

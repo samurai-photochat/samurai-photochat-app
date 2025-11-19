@@ -1,0 +1,22 @@
+.profileStats {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(0.5rem, 6vw, 10rem);
+  font-family: "Inter", sans-serif;
+}
+
+.statsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.statsCount {
+  padding: clamp(0.3rem, 1.5vw, 0.5rem) 0;
+}
+
+.statsLabel,
+.statsCount {
+  font-size: clamp(0.75rem, 1.8vw, 0.9rem);
+}
