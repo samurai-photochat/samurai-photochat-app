@@ -20,6 +20,10 @@ export const PATH = {
     STATISTICS: "/statistics",
     FAVORITES: "/favorites",
     SETTINGS: "/settings",
+    GENERAL_INFORMATION: "/settings/general-information",
+    DEVICES: "/settings/devices",
+    ACCOUNT_MANAGEMENT: "/settings/account-management",
+    MY_PAYMENTS: "/settings/my-payments",
   },
 
   ADMIN: {

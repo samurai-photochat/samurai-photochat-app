@@ -28,6 +28,10 @@
   display: flex;
   gap: 24px;
   justify-content: end;
+
+  button {
+    min-width: 96px;
+  }
 }
 
 .modalButton {
