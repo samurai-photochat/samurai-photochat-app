@@ -2,15 +2,20 @@
 import { SettingsSection } from "@/features/settings/ui/Settings/types"
 import { Button } from "@/shared/ui"
 import s from "./Settings.module.scss"
-import { SettingsContent } from "@/features/settings/ui/Settings/SettingsContent"
-import { useState } from "react"
+import { ReactNode, useState } from "react"
+import Link from "next/link"
+import { PATH } from "@/shared/config/routes"
 
-export const Settings = () => {
+type Props = {
+  children: ReactNode
+}
+
+export const Settings = ({ children }: Props) => {
   const sections: SettingsSection[] = [
-    { type: "general-information", title: "General information" },
-    { type: "devices", title: "Devices" },
-    { type: "account-management", title: "Account Management" },
-    { type: "my-payments", title: "My payments" },
+    { type: "general-information", title: "General information", path: PATH.USER.GENERAL_INFORMATION },
+    { type: "devices", title: "Devices", path: PATH.USER.DEVICES },
+    { type: "account-management", title: "Account Management", path: PATH.USER.ACCOUNT_MANAGEMENT },
+    { type: "my-payments", title: "My payments", path: PATH.USER.MY_PAYMENTS },
   ]
 
   const [sectionType, setSectionType] = useState(sections[0].type)
@@ -23,6 +28,8 @@ export const Settings = () => {
           }
           return (
             <Button
+              as={Link}
+              href={section.path}
               variant={"outlined"}
               key={section.type}
               onClick={onClickHandler}
@@ -42,7 +49,7 @@ export const Settings = () => {
           )
         })}
       </div>
-      <SettingsContent sectionType={sectionType} />
+      {children}
     </div>
   )
 }
