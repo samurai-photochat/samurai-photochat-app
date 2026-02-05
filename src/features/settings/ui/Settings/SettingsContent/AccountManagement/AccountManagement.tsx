@@ -5,9 +5,15 @@ import s from "./AccountManagement.module.scss"
 import { PayPalIcon } from "@/shared/assets/icons/components/PayPalIcon"
 import { StripeIcon } from "@/shared/assets/icons/components/StripeIcon"
 import { ModalWindow } from "@/shared/ui/ModalWindow"
-import { useCreateSubscriptionMutation } from "@/features/settings/api/settingsApi"
+import {
+  useCreateSubscriptionMutation,
+  useGetSubscriptionQuery,
+  useCanceledAutoRenewalMutation,
+  useRenewAutoRenewalMutation,
+} from "@/features/settings/api/settingsApi"
 import { PaymentType, TypeSubscription } from "@/features/settings/api/settingsApi.types"
 import { useSearchParams } from "next/navigation"
+import { CurrentSubscription } from "./CurrentSubscription/CurrentSubscription"
 
 export const AccountManagement = () => {
   const accountTypeOptions: RadioOption[] = [
@@ -23,6 +29,16 @@ export const AccountManagement = () => {
 
   const [createSubscription, { isLoading }] = useCreateSubscriptionMutation()
 
+  // =========================
+  // Отмена автоплатежа
+  const [canceledSubscription] = useCanceledAutoRenewalMutation()
+  // Включение автоплатежа
+  const [renewSubscription] = useRenewAutoRenewalMutation()
+  // Получение действующих подписок
+  const { data: subscription, error } = useGetSubscriptionQuery()
+  console.log("data :", subscription)
+  // =========================
+  console.log(subscription)
   const [selectedAccountType, setSelectedAccountType] = useState(accountTypeOptions[0].value)
   const [selectedTypeSubscription, setSelectedTypeSubscription] = useState(typeSubscriptionOptions[0].value)
   const [selectedPaymentType, setSelectedPaymentType] = useState("CREDIT_CARD")
@@ -31,6 +47,7 @@ export const AccountManagement = () => {
   const success = searchParams.get("success")
   const [openPaymentModal, setOpenPaymentModal] = useState(false)
   const [openInfoModal, setOpenInfoModal] = useState(true)
+  const [openInfoModalTwo, setOpenInfoModalTwo] = useState(false)
 
   const accountTypeChange = (value: string) => {
     setSelectedAccountType(value)
@@ -38,6 +55,18 @@ export const AccountManagement = () => {
 
   const typeSubscriptionChange = (value: string) => {
     setSelectedTypeSubscription(value)
+  }
+
+  const cheakBoxHandler = () => {
+    if (subscription?.hasAutoRenewal) {
+      canceledSubscription().then(() => {
+        setOpenInfoModalTwo(true)
+      })
+    } else {
+      renewSubscription().then(() => {
+        setOpenInfoModalTwo(true)
+      })
+    }
   }
 
   const createPaymentHandler = () => {
@@ -61,6 +90,33 @@ export const AccountManagement = () => {
       />
       {selectedAccountType === "BUSINESS" && (
         <>
+          {/* ========================= */}
+          <CurrentSubscription
+            date={subscription?.data[0]?.endDateOfSubscription}
+            autoRenewal={subscription?.hasAutoRenewal}
+            handler={() => {
+              cheakBoxHandler()
+            }}
+          />
+          {/* Для проверки */}
+          <ModalWindow
+            title={"Auto-Renewal"}
+            open={openInfoModalTwo}
+            onClose={() => setOpenInfoModalTwo(false)}
+            description={subscription?.hasAutoRenewal ? "Renew auto renewal" : "Cancel auto renewal"}
+            buttonsContent={{
+              buttons: [
+                {
+                  title: "OK",
+                  onClick: () => {
+                    setOpenInfoModalTwo(false)
+                  },
+                },
+              ],
+              className: s.infoButtons,
+            }}
+          />
+          {/* ========================= */}
           <RadioGroup
             options={typeSubscriptionOptions}
             name={"costs"}
