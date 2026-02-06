@@ -36,9 +36,7 @@ export const AccountManagement = () => {
   const [renewSubscription] = useRenewAutoRenewalMutation()
   // Получение действующих подписок
   const { data: subscription, error } = useGetSubscriptionQuery()
-  console.log("data :", subscription)
   // =========================
-  console.log(subscription)
   const [selectedAccountType, setSelectedAccountType] = useState(accountTypeOptions[0].value)
   const [selectedTypeSubscription, setSelectedTypeSubscription] = useState(typeSubscriptionOptions[0].value)
   const [selectedPaymentType, setSelectedPaymentType] = useState("CREDIT_CARD")
@@ -47,7 +45,6 @@ export const AccountManagement = () => {
   const success = searchParams.get("success")
   const [openPaymentModal, setOpenPaymentModal] = useState(false)
   const [openInfoModal, setOpenInfoModal] = useState(true)
-  const [openInfoModalTwo, setOpenInfoModalTwo] = useState(false)
 
   const accountTypeChange = (value: string) => {
     setSelectedAccountType(value)
@@ -56,19 +53,15 @@ export const AccountManagement = () => {
   const typeSubscriptionChange = (value: string) => {
     setSelectedTypeSubscription(value)
   }
-
+  // =========================
   const cheakBoxHandler = () => {
     if (subscription?.hasAutoRenewal) {
-      canceledSubscription().then(() => {
-        setOpenInfoModalTwo(true)
-      })
+      canceledSubscription()
     } else {
-      renewSubscription().then(() => {
-        setOpenInfoModalTwo(true)
-      })
+      renewSubscription()
     }
   }
-
+  // =========================
   const createPaymentHandler = () => {
     createSubscription({
       typeSubscription: selectedTypeSubscription as TypeSubscription,
@@ -96,24 +89,6 @@ export const AccountManagement = () => {
             autoRenewal={subscription?.hasAutoRenewal}
             handler={() => {
               cheakBoxHandler()
-            }}
-          />
-          {/* Для проверки */}
-          <ModalWindow
-            title={"Auto-Renewal"}
-            open={openInfoModalTwo}
-            onClose={() => setOpenInfoModalTwo(false)}
-            description={subscription?.hasAutoRenewal ? "Renew auto renewal" : "Cancel auto renewal"}
-            buttonsContent={{
-              buttons: [
-                {
-                  title: "OK",
-                  onClick: () => {
-                    setOpenInfoModalTwo(false)
-                  },
-                },
-              ],
-              className: s.infoButtons,
             }}
           />
           {/* ========================= */}

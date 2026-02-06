@@ -38,7 +38,7 @@ export const CurrentSubscription = (props: Props) => {
           })}`}</span>
         </div>
       </div>
-      <CustomCheckbox checked={checket} label="Auto-Renewal" onChange={handler} />
+      <CustomCheckbox checked={checket} label="Auto-Renewal" onChange={handler} disabled={autoRenewal === undefined} />
     </div>
   )
 }
