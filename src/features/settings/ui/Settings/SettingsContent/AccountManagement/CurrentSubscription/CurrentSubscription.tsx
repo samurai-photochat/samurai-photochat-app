@@ -9,7 +9,6 @@ type Props = {
 
 export const CurrentSubscription = (props: Props) => {
   const { date, autoRenewal, handler } = props
-
   // Проверка на undefined
   const newDate = date ? new Date(Date.parse(date)) : new Date()
   const checket = autoRenewal ? autoRenewal : false

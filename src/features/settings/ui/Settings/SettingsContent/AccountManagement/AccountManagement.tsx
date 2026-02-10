@@ -14,6 +14,7 @@ import {
 import { PaymentType, TypeSubscription } from "@/features/settings/api/settingsApi.types"
 import { useSearchParams } from "next/navigation"
 import { CurrentSubscription } from "./CurrentSubscription/CurrentSubscription"
+import { boolean } from "zod"
 
 export const AccountManagement = () => {
   const accountTypeOptions: RadioOption[] = [
@@ -36,6 +37,8 @@ export const AccountManagement = () => {
   const [renewSubscription] = useRenewAutoRenewalMutation()
   // Получение действующих подписок
   const { data: subscription, error } = useGetSubscriptionQuery()
+  // Проверка автоплатежа
+  console.log("Запрос", subscription?.hasAutoRenewal)
   // =========================
   const [selectedAccountType, setSelectedAccountType] = useState(accountTypeOptions[0].value)
   const [selectedTypeSubscription, setSelectedTypeSubscription] = useState(typeSubscriptionOptions[0].value)
@@ -56,9 +59,13 @@ export const AccountManagement = () => {
   // =========================
   const cheakBoxHandler = () => {
     if (subscription?.hasAutoRenewal) {
-      canceledSubscription()
+      canceledSubscription().then(() => {
+        setSelectedAccountType(accountTypeOptions[0].value)
+      })
+      // Обработка ошибок ?
     } else {
       renewSubscription()
+      // Обработка ошибок ?
     }
   }
   // =========================
