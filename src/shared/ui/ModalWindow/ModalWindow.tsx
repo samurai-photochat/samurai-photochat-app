@@ -5,6 +5,7 @@ import CloseIcon from "@/shared/assets/svg/Close.svg"
 import s from "./ModalWindow.module.scss"
 import { ComponentPropsWithoutRef, ReactNode } from "react"
 import { Button } from "@/shared/ui"
+import Checkbox from "@/shared/ui/checkbox/checkbox"
 
 type ButtonType = {
   title: string
@@ -17,15 +18,31 @@ type ButtonsContent = {
   className?: string
 }
 
+type CheckBoxContent = {
+  title: string
+  onChange: (checked: boolean) => void
+  className?: string
+}
+
 type Props = {
   title: string
   open: boolean
   onClose: () => void
   description: ReactNode
   buttonsContent: ButtonsContent
+  checkBoxContent?: CheckBoxContent
 } & ComponentPropsWithoutRef<"div">
 
-export const ModalWindow = ({ title, open, onClose, description, buttonsContent, className, ...rest }: Props) => {
+export const ModalWindow = ({
+  title,
+  open,
+  onClose,
+  description,
+  buttonsContent,
+  className,
+  checkBoxContent,
+  ...rest
+}: Props) => {
   const { buttons, className: buttonsClassname } = buttonsContent
   return (
     <Dialog.Root open={open} onOpenChange={onClose} {...rest}>
@@ -35,6 +52,12 @@ export const ModalWindow = ({ title, open, onClose, description, buttonsContent,
           <Dialog.Title className={s.title}>{title}</Dialog.Title>
           <Dialog.Description className={s.description}>{description}</Dialog.Description>
           <div className={s.buttons + " " + buttonsClassname}>
+            {checkBoxContent && (
+              <div className={s.checkbox}>
+                <Checkbox onChange={checkBoxContent.onChange} />
+                {checkBoxContent.title}
+              </div>
+            )}
             {buttons.map((button, index) => (
               <Button
                 disabled={button.disabled}

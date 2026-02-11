@@ -43,7 +43,7 @@ import { PublicProfileResponse } from "@/entities/user"
 // ✅ Верно
 import { useLoginMutation } from "@/features/auth"
 import { useGetUserProfileByIdQuery } from "@/entities/user"
-import { Button } from "@/shared/ui"
+import { Button } from "@/shared/AccountManagement"
 
 // ❌ Неверно
 import { useLoginMutation } from "@/features/auth/api/authApi"
@@ -57,7 +57,7 @@ import { useLoginMutation } from "@/features/auth/api/authApi"
 // features/auth/index.ts
 export * from "./api/authApi"
 export { authSlice, authReducer } from "./model/authSlice"
-export * from "./ui"
+export * from "./AccountManagement"
 ```
 
 Внутренние детали, которые не предназначены для внешнего использования, не экспортируем в `index.ts`.

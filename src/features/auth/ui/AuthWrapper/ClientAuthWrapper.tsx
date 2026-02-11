@@ -1,4 +1,4 @@
-// src/features/auth/ui/AuthWrapper/ClientAuthWrapper.tsx (клиентский)
+// src/features/auth/AccountManagement/AuthWrapper/ClientAuthWrapper.tsx (клиентский)
 "use client"
 
 import { useMeQuery } from "@/features/auth/api/authApi"
