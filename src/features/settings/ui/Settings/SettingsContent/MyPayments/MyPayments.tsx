@@ -1,5 +1,5 @@
 import { PaymentsTable } from "@/features/settings/ui/Settings/SettingsContent/MyPayments/PaymentsTable"
-import { useGetMyPaymentsQuery } from "@/features/settings/api/subscriptionsApi"
+import { useGetMyPaymentsQuery } from "@/features/settings/api/settingsApi"
 
 export const MyPayments = () => {
   const { data, isLoading } = useGetMyPaymentsQuery()

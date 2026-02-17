@@ -2,7 +2,9 @@ import { baseApi } from "@/shared/api/baseApi"
 import {
   CreateSubscriptionRequest,
   CreateSubscriptionResponse,
+  GetCostOfPaymentResponse,
   GetSubscriptionRequest,
+  PaymentResponse,
 } from "@/features/settings/api/settingsApi.types"
 
 export const settingsApi = baseApi.injectEndpoints({
@@ -17,6 +19,18 @@ export const settingsApi = baseApi.injectEndpoints({
     getSubscription: builder.query<GetSubscriptionRequest, void>({
       query: () => ({
         url: "subscriptions/current-payment-subscriptions",
+        method: "GET",
+      }),
+    }),
+    getCostOfPayment: builder.query<GetCostOfPaymentResponse, void>({
+      query: () => ({
+        url: "subscriptions/cost-of-payment-subscriptions",
+        method: "GET",
+      }),
+    }),
+    getMyPayments: builder.query<PaymentResponse, void>({
+      query: () => ({
+        url: "subscriptions/my-payments",
         method: "GET",
       }),
     }),
@@ -38,6 +52,8 @@ export const settingsApi = baseApi.injectEndpoints({
 export const {
   useCreateSubscriptionMutation,
   useGetSubscriptionQuery,
+  useGetMyPaymentsQuery,
+  useGetCostOfPaymentQuery,
   useCanceledAutoRenewalMutation,
   useRenewAutoRenewalMutation,
 } = settingsApi

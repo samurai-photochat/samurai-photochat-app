@@ -1,6 +1,6 @@
 "use client"
 import { RadioGroup, RadioOption } from "@/shared/ui/RadioGroup"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import s from "./AccountManagement.module.scss"
 import { PayPalIcon } from "@/shared/assets/icons/components/PayPalIcon"
 import { StripeIcon } from "@/shared/assets/icons/components/StripeIcon"
@@ -10,11 +10,12 @@ import {
   useGetSubscriptionQuery,
   useCanceledAutoRenewalMutation,
   useRenewAutoRenewalMutation,
+  useGetCostOfPaymentQuery,
+  useGetMyPaymentsQuery,
 } from "@/features/settings/api/settingsApi"
-import { PaymentType, TypeSubscription } from "@/features/settings/api/settingsApi.types"
+import { PaymentType, SubscriptionType } from "@/features/settings/api/settingsApi.types"
 import { useSearchParams } from "next/navigation"
 import { CurrentSubscription } from "./CurrentSubscription/CurrentSubscription"
-import { boolean } from "zod"
 
 export const AccountManagement = () => {
   const accountTypeOptions: RadioOption[] = [
@@ -22,11 +23,11 @@ export const AccountManagement = () => {
     { value: "BUSINESS", label: "Business" },
   ]
 
-  const typeSubscriptionOptions: RadioOption[] = [
+  const [typeSubscriptionOptions, setTypeSubscriptionOptions] = useState([
     { value: "DAY", label: "$10 per 1 Day" },
     { value: "WEEKLY", label: "$50 per 7 Day" },
     { value: "MONTHLY", label: "$100 per month" },
-  ]
+  ] as RadioOption[])
 
   const [createSubscription, { isLoading }] = useCreateSubscriptionMutation()
 
@@ -36,9 +37,9 @@ export const AccountManagement = () => {
   // Включение автоплатежа
   const [renewSubscription] = useRenewAutoRenewalMutation()
   // Получение действующих подписок
-  const { data: subscription, error } = useGetSubscriptionQuery()
-  // Проверка автоплатежа
-  console.log("Запрос", subscription?.hasAutoRenewal)
+  const { data: subscription } = useGetSubscriptionQuery()
+  const { data: costData } = useGetCostOfPaymentQuery()
+  const { data: myPayments } = useGetMyPaymentsQuery()
   // =========================
   const [selectedAccountType, setSelectedAccountType] = useState(accountTypeOptions[0].value)
   const [selectedTypeSubscription, setSelectedTypeSubscription] = useState(typeSubscriptionOptions[0].value)
@@ -57,7 +58,7 @@ export const AccountManagement = () => {
     setSelectedTypeSubscription(value)
   }
   // =========================
-  const cheakBoxHandler = () => {
+  const checkBoxHandler = () => {
     if (subscription?.hasAutoRenewal) {
       canceledSubscription().then(() => {
         setSelectedAccountType(accountTypeOptions[0].value)
@@ -71,7 +72,7 @@ export const AccountManagement = () => {
   // =========================
   const createPaymentHandler = () => {
     createSubscription({
-      typeSubscription: selectedTypeSubscription as TypeSubscription,
+      typeSubscription: selectedTypeSubscription as SubscriptionType,
       paymentType: selectedPaymentType as PaymentType,
       amount: 0,
       baseUrl: window.location.href,
@@ -79,6 +80,25 @@ export const AccountManagement = () => {
       if (res.data) window.location.href = res.data.url
     })
   }
+
+  useEffect(() => {
+    if (costData) {
+      setTypeSubscriptionOptions(
+        costData.data.map((cost) => ({
+          value: `${cost.typeDescription}`,
+          label: `$${cost.amount} per ${cost.typeDescription === "DAY" ? "1 Day" : cost.typeDescription === "WEEKLY" ? "7 Day" : "month"}`,
+        }))
+      )
+      //setSelectedTypeSubscription(typeSubscriptionOptions[0].value)
+    }
+  }, [costData])
+  useEffect(() => {
+    if (myPayments) {
+      setSelectedAccountType("BUSINESS")
+      setSelectedTypeSubscription(myPayments[0].subscriptionType)
+    }
+  }, [myPayments])
+
   return (
     <div className={s.container}>
       <RadioGroup
@@ -95,7 +115,7 @@ export const AccountManagement = () => {
             date={subscription?.data[0]?.endDateOfSubscription}
             autoRenewal={subscription?.hasAutoRenewal}
             handler={() => {
-              cheakBoxHandler()
+              checkBoxHandler()
             }}
           />
           {/* ========================= */}

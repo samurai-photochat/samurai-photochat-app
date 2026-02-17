@@ -1,7 +1,7 @@
 "use client"
 
 import s from "./PaymentsTable.module.scss"
-import { Payment } from "@/features/settings/api/subscriptionsApi.types"
+import { Payment } from "@/features/settings/api/settingsApi.types"
 import { useState } from "react"
 import { PaymentsSlider } from "@/shared/ui/PaymentsSlider"
 
