@@ -6,6 +6,7 @@ import s from "./ModalWindow.module.scss"
 import { ComponentPropsWithoutRef, ReactNode } from "react"
 import { Button } from "@/shared/ui"
 import Checkbox from "@/shared/ui/checkbox/checkbox"
+import { createPortal } from "react-dom"
 
 type ButtonType = {
   title: string
@@ -44,7 +45,7 @@ export const ModalWindow = ({
   ...rest
 }: Props) => {
   const { buttons, className: buttonsClassname } = buttonsContent
-  return (
+  return createPortal(
     <Dialog.Root open={open} onOpenChange={onClose} {...rest}>
       <Dialog.Portal>
         <Dialog.Overlay className={s.overlay} />
@@ -76,6 +77,7 @@ export const ModalWindow = ({
           </Dialog.Close>
         </Dialog.Content>
       </Dialog.Portal>
-    </Dialog.Root>
+    </Dialog.Root>,
+    document.body
   )
 }

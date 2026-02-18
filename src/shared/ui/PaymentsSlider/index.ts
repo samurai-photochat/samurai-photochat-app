@@ -1,0 +1,1 @@
+export { PaymentsSlider } from "./PaymentsSlider"
