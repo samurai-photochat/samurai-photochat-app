@@ -81,6 +81,19 @@ export const AccountManagement = () => {
   }
   return (
     <div className={s.container}>
+      {/* ========================= */}
+      {selectedAccountType === "BUSINESS" && (
+        <>
+          <CurrentSubscription
+            date={subscription?.data[0]?.endDateOfSubscription}
+            autoRenewal={subscription?.hasAutoRenewal}
+            handler={() => {
+              cheakBoxHandler()
+            }}
+          />
+        </>
+      )}
+      {/* ========================= */}
       <RadioGroup
         options={accountTypeOptions}
         name={"account-type"}
@@ -90,15 +103,6 @@ export const AccountManagement = () => {
       />
       {selectedAccountType === "BUSINESS" && (
         <>
-          {/* ========================= */}
-          <CurrentSubscription
-            date={subscription?.data[0]?.endDateOfSubscription}
-            autoRenewal={subscription?.hasAutoRenewal}
-            handler={() => {
-              cheakBoxHandler()
-            }}
-          />
-          {/* ========================= */}
           <RadioGroup
             options={typeSubscriptionOptions}
             name={"costs"}
