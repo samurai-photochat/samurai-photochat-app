@@ -1,5 +1,10 @@
 import { AccountManagement } from "@/features/settings/ui/Settings/SettingsContent/AccountManagement"
+import { Suspense } from "react"
 
 export const AccountManagementPage = () => {
-  return <AccountManagement />
+  return (
+    <Suspense fallback={<div>Loading search bar...</div>}>
+      <AccountManagement />
+    </Suspense>
+  )
 }

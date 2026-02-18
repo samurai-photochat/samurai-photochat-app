@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useRef } from "react"
+import { ReactNode } from "react"
 import { useRadioGroup } from "./RadioGroup.context"
 import s from "./RadioGroup.module.scss"
 
