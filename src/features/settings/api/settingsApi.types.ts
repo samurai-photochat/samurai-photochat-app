@@ -1,5 +1,5 @@
 export type CreateSubscriptionRequest = {
-  typeSubscription: TypeSubscription
+  typeSubscription: SubscriptionType
   paymentType: PaymentType
   amount: number
   baseUrl: string
@@ -21,6 +21,25 @@ export type GetSubscriptionRequest = {
   hasAutoRenewal: boolean
 }
 
-export type TypeSubscription = "MONTHLY" | "DAY" | "WEEKLY"
+export type GetCostOfPaymentResponse = {
+  data: {
+    amount: number
+    typeDescription: SubscriptionType
+  }[]
+}
+
+export type Payment = {
+  userId: number
+  subscriptionId: string
+  dateOfPayment: Date
+  endDateOfSubscription: Date
+  price: number
+  subscriptionType: SubscriptionType
+  paymentType: PaymentType
+}
+
+export type PaymentResponse = Payment[]
+
+export type SubscriptionType = "MONTHLY" | "DAY" | "WEEKLY"
 
 export type PaymentType = "STRIPE" | "PAYPAL" | "CREDIT_CARD"

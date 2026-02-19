@@ -23,6 +23,7 @@
     "@radix-ui/themes": "^3.2.1",
     "@reduxjs/toolkit": "^2.8.2",
     "clsx": "^2.1.1",
+    "jwt-decode": "^4.0.0",
     "next": "16.1.5",
     "next-auth": "5.0.0-beta.30",
     "react": "^19.0.0",
