@@ -34,8 +34,7 @@ export async function GET(request: NextRequest) {
     // 1) Если передан тег — сбрасываем кэш всех данных, помеченных этим тегом.
     //    Полезно, когда список страниц подписан на общий тег (например, "posts").
     if (tag) {
-      revalidateTag(tag)
-      // Возвращаем понятный ответ с метаданными для диагностики
+      revalidateTag(tag, "fetch")
       return NextResponse.json({
         revalidated: true,
         type: "tag",
@@ -44,10 +43,7 @@ export async function GET(request: NextRequest) {
       })
     }
 
-    // 2) Если тег не указан — ревалидируем конкретный путь страницы.
-    //    Это сбросит кэш и инициирует пере сборку страницы по данному пути.
-    //    Второй аргумент не используем, дефолтного поведения достаточно.
-    revalidatePath(path)
+    revalidatePath(path, "page")
     return NextResponse.json({
       revalidated: true,
       type: "path",
