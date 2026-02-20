@@ -1,5 +1,5 @@
-import { SettingsPage } from "@/pages/settings"
+import { GeneralInformationPage } from "@/pages/settings/general-information"
 
 export default function Settings() {
-  return <SettingsPage />
+  return <GeneralInformationPage />
 }

@@ -72,20 +72,12 @@
 /* 🎬 АНИМАЦИЯ ПРОГРЕСС-БАРА: Заполнение, которое уменьшается со временем */
 .progressFill {
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    var(--color-success-300) 0%,
-    var(--color-success-500) 100%
-  );
+  background: linear-gradient(90deg, var(--color-success-300) 0%, var(--color-success-500) 100%);
   transition: width 50ms linear;
   border-radius: 0 0 2px;
 }
 
 /* 🔴 ПРОГРЕСС-БАР ДЛЯ ОШИБОК: Красный градиент для toast с ошибками */
 .error .progressFill {
-  background: linear-gradient(
-    90deg,
-    var(--color-danger-300) 0%,
-    var(--color-danger-500) 100%
-  );
+  background: linear-gradient(90deg, var(--color-danger-300) 0%, var(--color-danger-500) 100%);
 }

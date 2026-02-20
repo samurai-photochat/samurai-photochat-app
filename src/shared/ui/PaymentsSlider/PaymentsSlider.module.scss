@@ -1,0 +1,111 @@
+.sliderContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 0;
+  color: #fff;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.navButton {
+  background: transparent;
+  border: 1px solid #333;
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+
+  &:hover:not(:disabled) {
+    background-color: #1a1a1a;
+    border-color: #555;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.pageNumbers {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.pageButton {
+  background: transparent;
+  border: 1px solid #333;
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+
+  &:hover:not(:disabled) {
+    background-color: #1a1a1a;
+    border-color: #555;
+  }
+
+  &.active {
+    background-color: #fff;
+    color: #000;
+    border-color: #fff;
+    font-weight: 600;
+  }
+
+  &.ellipsis {
+    border: none;
+    cursor: default;
+    padding: 0 4px;
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}
+
+.perPage {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+
+  select {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    color: #fff;
+    padding: 6px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    min-width: 60px;
+
+    &:hover {
+      border-color: #555;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: #fff;
+    }
+
+    option {
+      background-color: #1a1a1a;
+      color: #fff;
+    }
+  }
+}
